@@ -132,6 +132,7 @@ export async function POST(request: Request) {
         startTime: run.createdAt.toISOString(),
         endTime: run.completedAt?.toISOString() ?? new Date().toISOString(),
         totalTokens: 0,
+        totalCost: 0,
       },
     };
 

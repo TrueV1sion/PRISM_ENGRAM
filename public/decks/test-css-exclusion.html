@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Strategic Brief — GLP-1 Impact</title>
+  <link rel="stylesheet" href="/styles/presentation.css">
+</head>
+<body>
+
+  <div id="slideProgress"></div>
+  <div class="prism-mark">PRISM Intelligence</div>
+  <div class="slide-counter" id="slideCounter">01 / 13</div>
+  <div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+
+  <button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents" aria-label="Open table of contents">&#9776;</button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <div class="nav-panel" id="navPanel">
+    <h3>Table of Contents</h3>
+    <a class="nav-item" href="#s1" onclick="toggleNav()">
+      <span class="nav-num">01</span>
+      <span class="nav-label">Title &amp; Overview</span>
+    </a>
+    <a class="nav-item" href="#s2" onclick="toggleNav()">
+      <span class="nav-num">02</span>
+      <span class="nav-label">Executive Summary</span>
+    </a>
+    <a class="nav-item" href="#s3" onclick="toggleNav()">
+      <span class="nav-num">03</span>
+      <span class="nav-label">Clinical Dimension</span>
+    </a>
+    <a class="nav-item" href="#s4" onclick="toggleNav()">
+      <span class="nav-num">04</span>
+      <span class="nav-label">Cost Offset Timeline</span>
+    </a>
+    <a class="nav-item" href="#s5" onclick="toggleNav()">
+      <span class="nav-num">05</span>
+      <span class="nav-label">Budget Impact Analysis</span>
+    </a>
+    <a class="nav-item" href="#s6" onclick="toggleNav()">
+      <span class="nav-num">06</span>
+      <span class="nav-label">Trial Evidence Base</span>
+    </a>
+    <a class="nav-item" href="#s7" onclick="toggleNav()">
+      <span class="nav-num">07</span>
+      <span class="nav-label">Payer Considerations</span>
+    </a>
+    <a class="nav-item" href="#s8" onclick="toggleNav()">
+      <span class="nav-num">08</span>
+      <span class="nav-label">Population Context</span>
+    </a>
+    <a class="nav-item" href="#s9" onclick="toggleNav()">
+      <span class="nav-num">09</span>
+      <span class="nav-label">Strategic Implications</span>
+    </a>
+    <a class="nav-item" href="#s10" onclick="toggleNav()">
+      <span class="nav-num">10</span>
+      <span class="nav-label">Risk Landscape</span>
+    </a>
+    <a class="nav-item" href="#s11" onclick="toggleNav()">
+      <span class="nav-num">11</span>
+      <span class="nav-label">Foundation Insights</span>
+    </a>
+    <a class="nav-item" href="#s12" onclick="toggleNav()">
+      <span class="nav-num">12</span>
+      <span class="nav-label">Provenance &amp; Sources</span>
+    </a>
+    <a class="nav-item" href="#s13" onclick="toggleNav()">
+      <span class="nav-num">13</span>
+      <span class="nav-label">Gaps &amp; Next Steps</span>
+    </a>
+  </div>
+
+  <!-- SLIDE 01: Title -->
+  <section class="slide title-slide" id="s1">
+    <div class="slide-bg-glow" style="background:var(--accent);top:-200px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--accent-bright);bottom:-300px;left:-200px;"></div>
+    <div class="slide-inner" style="text-align:center;">
+      <div class="anim">
+        <div class="hero-badge">PRISM Single-Source Validated</div>
+      </div>
+      <h1 class="hero-title anim d1">GLP-1 Impact</h1>
+      <p class="hero-sub anim d2">Clinical &amp; Cost Intelligence Brief — Delayed Offset Dynamics and Budget Implications</p>
+      <p class="hero-date anim d3">STANDARD Tier &nbsp;|&nbsp; 1-Agent Swarm &nbsp;|&nbsp; Medium Overall Confidence</p>
+      <div class="anim d4" style="margin-top:2rem;">
+        <span class="agent-chip">
+          <span class="dot" style="background:var(--accent-bright)"></span>
+          Test Agent (Analyst) — Clinical / Cost
+        </span>
+      </div>
+      <div class="anim d5" style="margin-top:2.5rem;">
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="value cyan">1</div>
+            <div class="label">Agent Deployed</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value blue">1</div>
+            <div class="label">Total Findings</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value green">HIGH</div>
+            <div class="label">Finding Confidence</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value gold">DELAYED</div>
+            <div class="label">Cost Offset Timing</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value white">PRIMARY</div>
+            <div class="label">Source Tier</div>
+          </div>
+        </div>
+      </div>
+      <div class="anim d6" style="margin-top:2rem;">
+        <div class="validation-box">
+          <div class="validation-card">
+            <h4>&#10003; Validation Methodology</h4>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Finding verified against primary trial data</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>No secondary or tertiary sources required</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>No dagger notation — all claims primary-sourced</div>
+          </div>
+          <div class="validation-card framework-card">
+            <h4>&#9670; PRISM Processing Framework</h4>
+            <p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">Single-agent synthesis with clinical cost lens applied to GLP-1 offset dynamics.</p>
+            <div class="framework-visual">
+              <span class="fw-node">Test Agent</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-center">Clinical Synthesis</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success);">Budget Intelligence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence Brief &nbsp;|&nbsp; GLP-1 Impact</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 02: Executive Summary -->
+  <section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--accent-violet);top:-150px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Strategic</span> Executive Summary</div>
+      <h2 class="slide-title anim d1">What This Brief Establishes</h2>
+      <p class="slide-subtitle anim d2">A focused intelligence assessment of GLP-1 drug class economics — specifically the temporal mismatch between near-term costs and downstream clinical offsets.</p>
+      <div class="stat-grid anim d3">
+        <div class="stat-card">
+          <div class="stat-label">CORE FINDING</div>
+          <div class="stat-value warn">Delayed Offsets</div>
+          <div class="stat-context">GLP-1 cost savings do not materialize immediately — payback horizon spans multiple plan years</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">EVIDENCE SOURCE</div>
+          <div class="stat-value positive">Trial Data</div>
+          <div class="stat-context">Finding is grounded in clinical trial evidence — highest available source tier</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">BUDGET SIGNAL</div>
+          <div class="stat-value negative">Near-Term Pressure</div>
+          <div class="stat-context">Upfront drug spend creates short-cycle budget impact before offsets appear in claims data</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">ANALYTICAL CONFIDENCE</div>
+          <div class="stat-value positive">High</div>
+          <div class="stat-context">Single agent, single primary-tier finding — clean evidentiary chain with no conflicting signals</div>
+        </div>
+      </div>
+      <div class="finding-card anim d4" style="margin-top:1.5rem;">
+        <div class="finding-title">Single-Agent Analysis: Clinical Cost Lens on GLP-1 Temporal Dynamics</div>
+        <div class="finding-body">The Test Agent (Analyst) applied a cost lens to the clinical dimension of GLP-1 therapy, surfacing the central tension of this drug class: high acquisition costs precede any measurable downstream savings. Trial evidence confirms the delay is structural, not incidental — meaning budget planners must model multi-year horizons to capture true net value.</div>
+        <span class="confidence-badge high">High — Primary Trial Data</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) | 1 finding | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 03: Clinical Dimension -->
+  <section class="slide" id="s3">
+    <div class="slide-bg-glow" style="background:var(--accent);top:-100px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag clinical">Clinical</span> Dimension Analysis</div>
+      <h2 class="slide-title anim d1">GLP-1 Clinical Profile &amp; Cost Architecture</h2>
+      <p class="section-intro anim d2">GLP-1 receptor agonists represent a structurally expensive drug class whose clinical benefit curve diverges significantly from its cost curve — with implications for every entity that pays for or manages this therapy.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Clinical Efficacy is Well-Established</div>
+            <div class="finding-body">Trial evidence consistently demonstrates meaningful weight reduction, glycemic control, and cardiovascular risk reduction. The clinical case for GLP-1 therapy is strong — the challenge is not whether it works, but when its economic value becomes visible in financial statements.</div>
+            <span class="confidence-badge high">High — Trial Data</span>
+          </div>
+          <div class="finding-card risk" style="margin-top:1rem;">
+            <div class="finding-title">Cost Realization Lags Clinical Benefit</div>
+            <div class="finding-body">Downstream savings in avoided hospitalizations, reduced comorbidity management, and lower acute care utilization materialize over multi-year windows — well beyond typical annual budget cycles.</div>
+            <span class="confidence-badge high">High — Trial Data</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-card" style="margin-bottom:1rem;">
+            <div class="stat-label">MECHANISM</div>
+            <div class="stat-value blue">Incretin Pathway</div>
+            <div class="stat-context">GLP-1 agonists mimic glucagon-like peptide-1, regulating glucose and appetite — multiple downstream physiologic effects</div>
+          </div>
+          <div class="stat-card" style="margin-bottom:1rem;">
+            <div class="stat-label">THERAPEUTIC TARGETS</div>
+            <div class="stat-value positive">Multi-Condition</div>
+            <div class="stat-context">Type 2 diabetes, obesity, cardiovascular disease risk reduction — broadening indication scope drives utilization growth</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">COST STRUCTURE</div>
+            <div class="stat-value negative">Front-Loaded</div>
+            <div class="stat-context">Acquisition and dispensing costs are immediate; offset savings from avoided downstream events are deferred</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) — Clinical Dimension | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 04: Cost Offset Timeline -->
+  <section class="slide" id="s4" style="background:linear-gradient(135deg,var(--bg-secondary),var(--bg-tertiary));">
+    <div class="slide-bg-glow" style="background:var(--accent-warning);top:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag financial">Financial</span> Core Finding</div>
+      <h2 class="slide-title anim d1">GLP-1 Cost Offsets Are Delayed</h2>
+      <p class="slide-subtitle anim d2">The primary finding from trial evidence: savings do not arrive in the same budget cycle as expenditures. This temporal mismatch is the defining economic characteristic of the GLP-1 class.</p>
+      <div class="anim d3" style="margin:2rem 0;">
+        <div class="timeline">
+          <div class="timeline-phase">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year" style="color:var(--accent-error);">Year 0–1</div>
+            <div class="timeline-label">Acquisition Cost</div>
+            <div class="timeline-items">
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px;">&#8226; Full drug acquisition cost hits formulary immediately</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">&#8226; No measurable offset yet in claims data</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">&#8226; Maximum budget pressure period</div>
+            </div>
+          </div>
+          <div class="timeline-phase">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year" style="color:var(--accent-warning);">Year 1–3</div>
+            <div class="timeline-label">Clinical Response Phase</div>
+            <div class="timeline-items">
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px;">&#8226; Physiologic benefits begin to compound</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">&#8226; Partial offset emerges — complication rates decline</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">&#8226; Still net negative in isolated year-over-year view</div>
+            </div>
+          </div>
+          <div class="timeline-phase">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year" style="color:var(--accent-success);">Year 3+</div>
+            <div class="timeline-label">Offset Realization</div>
+            <div class="timeline-items">
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px;">&#8226; Downstream savings materialize in claims</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">&#8226; Reduced hospitalizations, acute interventions</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">&#8226; Total cost of care equation begins to favor investment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="finding-card emergent anim d4">
+        <div class="finding-title">The Temporal Mismatch Is Structural, Not Incidental</div>
+        <div class="finding-body">Trial data confirms that the delay between GLP-1 cost and offset is an inherent property of the drug class, not an artifact of any specific plan design or population. Budget models that evaluate GLP-1 value on a one-year horizon will systematically undervalue the therapy and overstate its fiscal impact.</div>
+        <span class="confidence-badge high">High — Primary Trial Evidence</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) | Core Finding: GLP-1 Cost Offsets Delayed | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 05: Budget Impact Analysis -->
+  <section class="slide" id="s5">
+    <div class="slide-bg-glow" style="background:var(--accent-error);bottom:-200px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag financial">Financial</span> Budget Impact</div>
+      <h2 class="slide-title anim d1">Budget Impact: The Near-Term Pressure Problem</h2>
+      <p class="section-intro anim d2">The core budget challenge for any organization covering GLP-1 therapy is the asymmetric timing of outflows versus inflows. Financial planning must account for this structural imbalance.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="policy-box" style="margin-bottom:1rem;">
+            <h4>Near-Term Cost Burden</h4>
+            <p>Drug acquisition costs are incurred in full within the first plan year. For populations with high GLP-1 uptake rates, this can represent a significant and immediate budget line item that appears before any corresponding savings are visible.</p>
+            <div class="impact impact-severe">HIGH NEAR-TERM PRESSURE | Costs precede offsets by 1–3+ years</div>
+          </div>
+          <div class="policy-box neutral">
+            <h4>Multi-Year Horizon Requirement</h4>
+            <p>Actuarial models, formulary decisions, and total-cost-of-care frameworks must be designed to evaluate GLP-1 investments across a minimum three-to-five year window to capture the full economic picture.</p>
+            <div class="impact impact-moderate">PLANNING RISK | Short-cycle budgets structurally disadvantage GLP-1 coverage decisions</div>
+          </div>
+        </div>
+        <div>
+          <div class="policy-box positive">
+            <h4>Long-Term Offset Potential</h4>
+            <p>Trial evidence supports meaningful downstream savings from reduced cardiovascular events, fewer hospitalizations, lower rates of diabetes complications, and decreased utilization of high-cost acute interventions.</p>
+            <div class="impact impact-positive">LONG-TERM UPSIDE | Offset realization is evidence-based, not speculative</div>
+          </div>
+          <div class="stat-card" style="margin-top:1rem;">
+            <div class="stat-label">PLANNING IMPLICATION</div>
+            <div class="stat-value warn">Model 3–5 Years</div>
+            <div class="stat-context">Organizations evaluating GLP-1 formulary inclusion require extended financial modeling windows to accurately assess net value</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) — Budget Impact Analysis | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 06: Trial Evidence Base -->
+  <section class="slide" id="s6" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--accent-bright);top:-150px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag clinical">Clinical</span> Evidence Base</div>
+      <h2 class="slide-title anim d1">Trial Evidence: What the Data Shows</h2>
+      <p class="section-intro anim d2">The core finding is grounded in primary clinical trial data — the highest available evidence tier. Trial evidence establishes both the clinical mechanism of delayed benefit and the economic timeline of cost offset realization.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Primary Source Confidence</div>
+            <div class="finding-body">The delayed cost offset finding carries HIGH confidence because it is derived from primary trial data — not modeled projections or secondary analyses. Clinical trials document both the physiologic trajectory of GLP-1 response and the timeline over which measurable health outcomes diverge from control populations.</div>
+            <span class="confidence-badge high">High — PRIMARY Tier</span>
+          </div>
+          <div class="finding-card anim d4" style="margin-top:1rem;">
+            <div class="finding-title">Evidence Chain Integrity</div>
+            <div class="finding-body">No secondary or tertiary sources are required to support this finding. The evidentiary chain runs directly from trial data to the clinical cost offset conclusion — minimizing inference risk and providing a clean foundation for strategic planning.</div>
+            <span class="confidence-badge high">High — No Tertiary Inference</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-card" style="margin-bottom:1rem;">
+            <div class="stat-label">SOURCE TIER</div>
+            <div class="stat-value positive">PRIMARY</div>
+            <div class="stat-context">Clinical trial evidence — highest available source classification in PRISM validation hierarchy</div>
+          </div>
+          <div class="stat-card" style="margin-bottom:1rem;">
+            <div class="stat-label">EVIDENCE TYPE</div>
+            <div class="stat-value blue">Trials</div>
+            <div class="stat-context">Directly observed clinical outcomes data, not modeled or extrapolated from secondary sources</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">DAGGER NOTATION</div>
+            <div class="stat-value positive">None Required</div>
+            <div class="stat-context">All claims in this brief are verified against primary sources — no unverified secondary claims present</div>
+          </div>
+        </div>
+      </div>
+      <div class="source-list anim d5">
+        <strong>Sources:</strong> Clinical trial data (primary tier) — Test Agent synthesis
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) — Evidence Base | Source Tier: PRIMARY | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 07: Payer Considerations -->
+  <section class="slide" id="s7">
+    <div class="slide-bg-glow" style="background:var(--accent-violet);top:-100px;left:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Strategic</span> Payer Considerations</div>
+      <h2 class="slide-title anim d1">Payer &amp; Plan Sponsor Implications</h2>
+      <p class="section-intro anim d2">The delayed offset dynamic creates distinct decision challenges for different payer types. Plan horizon, membership stability, and actuarial methodology all interact with the temporal mismatch identified in trial evidence.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Short-Horizon Plans Face Structural Disadvantage</div>
+            <div class="finding-body">Plans evaluating GLP-1 coverage on annual budget cycles will consistently see costs without offsets. This is not a reflection of poor drug performance — it is a product of evaluation horizon mismatch. Annual formulary reviews using one-year net cost metrics will systematically misjudge GLP-1 economics.</div>
+            <span class="confidence-badge high">High</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Long-Horizon Plans Capture Full Value</div>
+            <div class="finding-body">Self-insured employers, government programs, and integrated health systems with stable, long-term member populations are best positioned to realize the offset savings documented in trials. The longer the expected membership tenure, the stronger the financial case for GLP-1 coverage.</div>
+            <span class="confidence-badge high">High</span>
+          </div>
+        </div>
+      </div>
+      <div class="finding-card anim d4" style="margin-top:1rem;">
+        <div class="finding-title">Member Continuity Is a Critical Variable</div>
+        <div class="finding-body">Because offsets materialize over multiple years, plans with high member turnover invest in GLP-1 therapy but may not retain the members long enough to realize downstream savings in their own claims. This creates a systemic cross-subsidy where high-turnover plans bear costs while low-turnover or subsequent-plan-year payers capture the benefit. Actuarial modeling must account for this dynamic explicitly.</div>
+        <span class="confidence-badge high">High — Derived from Trial Timeline Evidence</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) — Payer Implications | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 08: Population Context -->
+  <section class="slide" id="s8" style="background:linear-gradient(135deg,var(--bg-secondary),var(--bg-primary));">
+    <div class="slide-bg-glow" style="background:var(--accent-success);bottom:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag clinical">Clinical</span> Population Context</div>
+      <h2 class="slide-title anim d1">Population-Level Budget Dynamics</h2>
+      <p class="section-intro anim d2">The budget impact of delayed GLP-1 offsets scales directly with population penetration. Understanding population-level dynamics is essential for accurate macro-level financial planning.</p>
+      <div class="stat-grid anim d3">
+        <div class="stat-card">
+          <div class="stat-label">UTILIZATION TRAJECTORY</div>
+          <div class="stat-value warn">Rapidly Expanding</div>
+          <div class="stat-context">GLP-1 prescribing is growing across diabetes, obesity, and cardiovascular indications — expanding the population subject to delayed offset dynamics</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">COMORBIDITY COMPLEXITY</div>
+          <div class="stat-value blue">High</div>
+          <div class="stat-context">Target populations typically carry multiple comorbidities — the ultimate offset value depends on which downstream events are successfully avoided</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">ADHERENCE FACTOR</div>
+          <div class="stat-value warn">Variable</div>
+          <div class="stat-context">Offset realization requires sustained adherence — discontinuation before clinical benefit is captured results in cost without offset</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">SCALE SENSITIVITY</div>
+          <div class="stat-value negative">High</div>
+          <div class="stat-context">As GLP-1 uptake grows, the aggregate near-term budget pressure grows proportionally — even as long-term value case strengthens</div>
+        </div>
+      </div>
+      <div class="finding-card anim d4" style="margin-top:1rem;">
+        <div class="finding-title">Adherence Is the Bridge Between Cost and Offset</div>
+        <div class="finding-body">The trial evidence underpinning the delayed offset finding assumes sustained therapy adherence. In real-world deployment, adherence rates below trial conditions will compress the offset realization that budget models should anticipate. Population-level planning must incorporate realistic adherence assumptions when projecting GLP-1 net economic value.</div>
+        <span class="confidence-badge high">High</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) — Population Context | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 09: Strategic Implications -->
+  <section class="slide" id="s9">
+    <div class="slide-bg-glow" style="background:var(--accent);top:-150px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Strategic</span> Implications</div>
+      <h2 class="slide-title anim d1">Strategic Response to Delayed Offset Dynamics</h2>
+      <p class="section-intro anim d2">The delayed cost offset finding is not a reason to avoid GLP-1 coverage — it is a blueprint for how coverage decisions should be structured, modeled, and communicated to stakeholders.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="policy-box positive">
+            <h4>Extended Financial Modeling</h4>
+            <p>Build minimum 3-to-5-year total cost of care models for GLP-1 formulary decisions. Single-year net cost analysis is structurally inappropriate for this drug class and will produce misleading conclusions.</p>
+            <div class="impact impact-positive">RECOMMENDED ACTION | Extend budget modeling horizon</div>
+          </div>
+          <div class="policy-box neutral" style="margin-top:0.75rem;">
+            <h4>Adherence Infrastructure</h4>
+            <p>Invest in adherence support programs to close the gap between trial-based offset timelines and real-world adherence rates. Offset realization is adherence-dependent — every discontinuation forfeits the offset that the upfront cost was intended to purchase.</p>
+            <div class="impact impact-moderate">HIGH LEVERAGE | Adherence programs protect offset realization</div>
+          </div>
+        </div>
+        <div>
+          <div class="policy-box neutral">
+            <h4>Stakeholder Communication Strategy</h4>
+            <p>Decision-makers reviewing GLP-1 budget lines require explicit framing of the investment timeline. Present costs and offsets on aligned multi-year axes — not as isolated budget line items — to prevent decision-making distorted by near-term cost visibility.</p>
+            <div class="impact impact-neutral">COMMUNICATION RISK | Misframed data leads to under-coverage decisions</div>
+          </div>
+          <div class="policy-box positive" style="margin-top:0.75rem;">
+            <h4>Total Cost of Care Integration</h4>
+            <p>Integrate GLP-1 cost tracking with downstream utilization metrics — hospitalizations, ER visits, diabetes complication management — to create a visible, auditable offset ledger that builds organizational confidence in the investment thesis.</p>
+            <div class="impact impact-positive">LONG-TERM VALUE | Creates measurable ROI documentation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) — Strategic Implications | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: Risk Landscape -->
+  <section class="slide" id="s10" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-tertiary));">
+    <div class="slide-bg-glow" style="background:var(--accent-error);top:-100px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag regulatory">Risk</span> Risk Landscape</div>
+      <h2 class="slide-title anim d1">Key Risks to Offset Realization</h2>
+      <p class="section-intro anim d2">Even with high-confidence trial evidence supporting eventual cost offsets, several structural and operational risks can prevent organizations from realizing the expected savings.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Membership Churn Before Offset Window</div>
+            <div class="finding-body">If covered members leave the plan before the offset realization window closes, the investing plan bears the cost while a subsequent payer captures the benefit. High-turnover commercial plans are most exposed to this risk.</div>
+            <span class="confidence-badge high">High Risk — Structural</span>
+          </div>
+          <div class="finding-card risk" style="margin-top:1rem;">
+            <div class="finding-title">Real-World Adherence Below Trial Rates</div>
+            <div class="finding-body">GLP-1 discontinuation rates in commercial populations frequently exceed those observed in controlled trials. Lower adherence compresses or eliminates the offset that underpins the investment thesis, leaving the organization with cost but no corresponding savings.</div>
+            <span class="confidence-badge high">High Risk — Operational</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Budget Cycle Misalignment</div>
+            <div class="finding-body">Annual budget reviews create structural pressure to reduce or restrict GLP-1 coverage before the offset window closes. Organizations without a protected multi-year financial framework risk policy reversals that interrupt therapy and permanently forfeit both clinical and economic value.</div>
+            <span class="confidence-badge high">High Risk — Governance</span>
+          </div>
+          <div class="finding-card" style="margin-top:1rem;">
+            <div class="finding-title">Utilization Expansion Outpacing Offset Accumulation</div>
+            <div class="finding-body">Rapidly growing GLP-1 uptake means that the aggregate cost pool grows faster than the offset pool in the near term — widening the apparent budget gap even as the long-term value case strengthens. This can create misleading year-over-year budget signals that trigger premature coverage restrictions.</div>
+            <span class="confidence-badge high">Medium-High Risk — Market Dynamic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Test Agent (Analyst) — Risk Assessment | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: Foundation Insights -->
+  <section class="slide" id="s11">
+    <div class="slide-bg-glow" style="background:var(--accent-bright);top:-150px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Foundation</span> Uncontested Ground</div>
+      <h2 class="slide-title anim d1">Foundation Layer: Established Intelligence</h2>
+      <p class="section-intro anim d2">The PRISM synthesis pyramid's foundation layer represents findings that are analytically uncontested — claims supported by primary evidence with no significant counter-evidence identified across the agent swarm.</p>
+      <div class="finding-card emergent anim d3">
+        <div class="finding-title">Foundation Insight: GLP-1 Cost Offset Timing Is Structurally Delayed</div>
+        <div class="finding-body">
+          This brief establishes one uncontested foundation finding: GLP-1 cost offsets are delayed. This is not a speculative projection or a modeled estimate — it is the structural economic signature of a drug class where clinical benefits compound over time and downstream medical cost avoidance is measured in years, not months.
+          <br><br>
+          The implication is foundational: any analysis of GLP-1 economics that does not account for temporal offset delay is incomplete by design. This finding serves as the baseline assumption for all subsequent financial modeling, formulary strategy, and population health investment decisions involving GLP-1 therapy.
+        </div>
+        <span class="confidence-badge high">High — PRIMARY Trial Evidence | Uncontested</span>
+      </div>
+      <div class="stat-grid anim d4" style="margin-top:1.5rem;">
+        <div class="stat-card">
+          <div class="stat-label">FOUNDATION STATUS</div>
+          <div class="stat-value positive">Established</div>
+          <div class="stat-context">No conflicting evidence identified — single clean evidentiary chain from trials</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CONTESTABILITY</div>
+          <div class="stat-value positive">Low</div>
+          <div class="stat-context">Primary source grounding and absence of conflicting secondary findings minimizes analytical risk</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">PLANNING APPLICABILITY</div>
+          <div class="stat-value blue">Universal</div>
+          <div class="stat-context">Applies across payer types, populations, and plan designs — the temporal delay is drug-class-level, not plan-specific</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Foundation Layer | 1 uncontested insight | Confidence: High</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 12: Provenance & Sources -->
+  <section class="slide" id="s12" style="background:linear-gradient(135deg,var(--bg-secondary),var(--bg-primary));">
+    <div class="slide-bg-glow" style="background:var(--accent-violet);bottom:-150px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Provenance</span> &amp; Methodology</div>
+      <h2 class="slide-title anim d1">Intelligence Provenance &amp; Source Attribution</h2>
+      <p class="section-intro anim d2">Full transparency on agent deployment, finding sourcing, and confidence attribution for this PRISM brief.</p>
+      <div class="anim d3">
+        <table class="prov-table">
+          <thead>
+            <tr>
+              <th>Finding</th>
+              <th>Agent</th>
+              <th>Sources</th>
+              <th>Source Tier</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GLP-1 cost offsets are delayed</td>
+              <td><span class="tag clinical">Test Agent (Analyst)</span></td>
+              <td>Trials</td>
+              <td><span class="tag-green" style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;">PRIMARY</span></td>
+              <td><span class="confidence-badge high">High</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid-2 anim d4" style="margin-top:1.5rem;">
+        <div>
+          <div class="stat-card">
+            <div class="stat-label">TOTAL AGENTS DEPLOYED</div>
+            <div class="stat-value blue">1</div>
+            <div class="stat-context">Test Agent (Analyst) — Clinical dimension with cost lens</div>
+          </div>
+        </div>
+        <div>
+          <div class="stat-card">
+            <div class="stat-label">TOTAL FINDINGS</div>
+            <div class="stat-value blue">1</div>
+            <div class="stat-context">100% PRIMARY tier | 100% HIGH confidence | 0% dagger notation required</div>
+          </div>
+        </div>
+      </div>
+      <div class="finding-card anim d5" style="margin-top:1rem;">
+        <div class="finding-title">Source Distribution Summary</div>
+        <div class="finding-body">
+          <strong style="color:var(--accent-success);">PRIMARY: 1 finding (100%)</strong> — Clinical trial data<br>
+          <strong style="color:var(--text-tertiary);">SECONDARY: 0 findings (0%)</strong><br>
+          <strong style="color:var(--text-tertiary);">TERTIARY: 0 findings (0%)</strong><br>
+          <br>
+          No dagger (†) notation applied anywhere in this brief. All claims are directly sourced from primary trial evidence with no unverified secondary sourcing.
+        </div>
+        <span class="confidence-badge high">Clean Evidentiary Chain</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Provenance Layer | 1 agent | 1 finding | Source integrity: 100% PRIMARY</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 13: Gaps & Next Steps -->
+  <section class="slide" id="s13">
+    <div class="slide-bg-glow" style="background:var(--accent-warning);top:-100px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag quality">Intelligence</span> Gaps &amp; Next Steps</div>
+      <h2 class="slide-title anim d1">Known Gaps &amp; Recommended Follow-On Analysis</h2>
+      <p class="section-intro anim d2">Single-agent, single-finding briefs are starting points, not endpoints. The following gaps represent the highest-priority expansion opportunities for a deeper GLP-1 intelligence engagement.</p>
+      <div class="two-col anim d3">
+        <div>
+          <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:2px;color:var(--accent-warning);margin-bottom:1rem;">&#9651; Known Unknowns</h3>
+          <div class="finding-card risk">
+            <div class="finding-title">Quantified Offset Timelines</div>
+            <div class="finding-body">This brief establishes that offsets are delayed but does not quantify the magnitude or specific timeline for different populations, indications, or plan types. A multi-agent expansion could produce indication-specific offset curves.</div>
+          </div>
+          <div class="finding-card risk" style="margin-top:0.75rem;">
+            <div class="finding-title">Real-World Adherence Data</div>
+            <div class="finding-body">Trial adherence rates differ from commercial population adherence. Real-world evidence on GLP-1 persistence and discontinuation is required to calibrate offset projections for non-trial populations.</div>
+          </div>
+          <div class="finding-card risk" style="margin-top:0.75rem;">
+            <div class="finding-title">Payer-Type Stratification</div>
+            <div class="finding-body">The budget impact of delayed offsets differs materially across self-insured employers, commercial carriers, Medicare Advantage, and Medicaid. Payer-stratified analysis was not within scope of this brief.</div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:2px;color:var(--accent-success);margin-bottom:1rem;">&#8594; Recommended Next Steps</h3>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Expand to Multi-Agent Swarm</div>
+            <div class="finding-body">Deploy 4–6 agents across financial, regulatory, competitive, and population health dimensions to build a complete GLP-1 intelligence picture with cross-agent emergence detection.</div>
+            <span class="confidence-badge high">High Priority</span>
+          </div>
+          <div class="finding-card opportunity" style="margin-top:0.75rem;">
+            <div class="finding-title">Quantitative Offset Modeling</div>
+            <div class="finding-body">Commission a quantitative analysis that translates the delayed offset finding into specific dollar-per-member-per-year projections across 1-, 3-, and 5-year modeling horizons.</div>
+            <span class="confidence-badge high">High Priority</span>
+          </div>
+          <div class="finding-card opportunity" style="margin-top:0.75rem;">
+            <div class="finding-title">Adherence Intervention ROI Analysis</div>
+            <div class="finding-body">Evaluate the return on investment for adherence support programs specifically designed to protect GLP-1 offset realization — bridging the gap between trial timelines and real-world persistence.</div>
+            <span class="confidence-badge high">Medium Priority</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence Gap Analysis | STANDARD Tier | 1 Agent | Expand for full picture</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <script src="/js/presentation.js"></script>
+</body>
+</html>

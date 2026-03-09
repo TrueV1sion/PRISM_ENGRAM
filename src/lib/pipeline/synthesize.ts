@@ -440,7 +440,7 @@ Revise your synthesis to address these weaknesses while maintaining the quality 
 
 Call the submit_synthesis tool with your complete synthesis.`;
 
-  const response = await client.messages.create({
+  const synthStream = client.messages.stream({
     model: MODELS.SYNTHESIZE,
     max_tokens: 16000,
     thinking: EXTENDED_THINKING,
@@ -455,9 +455,10 @@ Call the submit_synthesis tool with your complete synthesis.`;
           getSynthesisResultJsonSchema() as Anthropic.Messages.Tool.InputSchema,
       },
     ],
-    tool_choice: { type: "tool" as const, name: "submit_synthesis" },
+    tool_choice: { type: "auto" as const },
     messages: [{ role: "user", content: userPrompt }],
   });
+  const response = await synthStream.finalMessage();
 
   // Extract synthesis from tool_use response
   const toolUseBlock = response.content.find(
@@ -569,7 +570,7 @@ Call submit_synthesis with the complete result.`;
     message: "Running cross-cluster meta-synthesis...",
   });
 
-  const response = await client.messages.create({
+  const metaStream = client.messages.stream({
     model: MODELS.SYNTHESIZE,
     max_tokens: 16000,
     thinking: EXTENDED_THINKING,
@@ -583,9 +584,10 @@ Call submit_synthesis with the complete result.`;
           getSynthesisResultJsonSchema() as Anthropic.Messages.Tool.InputSchema,
       },
     ],
-    tool_choice: { type: "tool" as const, name: "submit_synthesis" },
+    tool_choice: { type: "auto" as const },
     messages: [{ role: "user", content: metaPrompt }],
   });
+  const response = await metaStream.finalMessage();
 
   const toolUseBlock = response.content.find(
     (block): block is Anthropic.Messages.ToolUseBlock =>
@@ -689,7 +691,7 @@ As the PRISM Quality Critic, identify:
 Return your revisions -- specific, actionable items for improving the synthesis.
 Call submit_critic_review with your assessment.`;
 
-  const response = await client.messages.create({
+  const criticStream = client.messages.stream({
     model: MODELS.CRITIC,
     max_tokens: 8192,
     system: [
@@ -709,6 +711,7 @@ Call submit_critic_review with your assessment.`;
     tool_choice: { type: "tool" as const, name: "submit_critic_review" },
     messages: [{ role: "user", content: criticPrompt }],
   });
+  const response = await criticStream.finalMessage();
 
   const toolUseBlock = response.content.find(
     (block): block is Anthropic.Messages.ToolUseBlock =>

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Strategic Brief — MA Margin Pressure & Healthcare IT Positioning</title>
+  <link rel="stylesheet" href="/styles/presentation.css">
+</head>
+<body>
+
+  <div id="slideProgress"></div>
+  <div class="prism-mark">PRISM Intelligence</div>
+  <div class="slide-counter" id="slideCounter">01 / 18</div>
+  <div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+
+  <button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents" aria-label="Open table of contents">&#9776;</button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <div class="nav-panel" id="navPanel">
+    <h3>Table of Contents</h3>
+
+    <a class="nav-item" href="#s1" onclick="toggleNav()">
+      <span class="nav-num">01</span>
+      <span class="nav-label">Strategic Brief Title</span>
+    </a>
+    <a class="nav-item" href="#s2" onclick="toggleNav()">
+      <span class="nav-num">02</span>
+      <span class="nav-label">Intelligence Map</span>
+    </a>
+    <a class="nav-item" href="#s3" onclick="toggleNav()">
+      <span class="nav-num">03</span>
+      <span class="nav-label">Executive Summary</span>
+    </a>
+
+    <h3 style="margin-top:16px;">MA Margin Mechanics</h3>
+    <a class="nav-item" href="#s4" onclick="toggleNav()">
+      <span class="nav-num">04</span>
+      <span class="nav-label">Rate-Cost Gap & V28</span>
+    </a>
+    <a class="nav-item" href="#s5" onclick="toggleNav()">
+      <span class="nav-num">05</span>
+      <span class="nav-label">Stars Cliff & Utilization</span>
+    </a>
+
+    <h3 style="margin-top:16px;">Inovalon Intelligence</h3>
+    <a class="nav-item" href="#s6" onclick="toggleNav()">
+      <span class="nav-num">06</span>
+      <span class="nav-label">Inovalon Company Deep Dive</span>
+    </a>
+    <a class="nav-item" href="#s7" onclick="toggleNav()">
+      <span class="nav-num">07</span>
+      <span class="nav-label">Competitive Landscape</span>
+    </a>
+    <a class="nav-item" href="#s8" onclick="toggleNav()">
+      <span class="nav-num">08</span>
+      <span class="nav-label">Growth Demand Vectors</span>
+    </a>
+
+    <h3 style="margin-top:16px;">Strategic Tensions</h3>
+    <a class="nav-item" href="#s9" onclick="toggleNav()">
+      <span class="nav-num">09</span>
+      <span class="nav-label">Headwind vs. Tailwind</span>
+      <span class="nav-tag">TENSION</span>
+    </a>
+    <a class="nav-item" href="#s10" onclick="toggleNav()">
+      <span class="nav-num">10</span>
+      <span class="nav-label">Platform Moat vs. Liability</span>
+      <span class="nav-tag">TENSION</span>
+    </a>
+
+    <h3 style="margin-top:16px;">Emergent Intelligence</h3>
+    <a class="nav-item" href="#s11" onclick="toggleNav()">
+      <span class="nav-num">11</span>
+      <span class="nav-label">The Regulatory Demand Pump</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s12" onclick="toggleNav()">
+      <span class="nav-num">12</span>
+      <span class="nav-label">Dual Consolidation Mirror</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s13" onclick="toggleNav()">
+      <span class="nav-num">13</span>
+      <span class="nav-label">Goldilocks Paradox</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s14" onclick="toggleNav()">
+      <span class="nav-num">14</span>
+      <span class="nav-label">2026 Supercritical Convergence</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s15" onclick="toggleNav()">
+      <span class="nav-num">15</span>
+      <span class="nav-label">The Cliff-Edge Economy</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+
+    <h3 style="margin-top:16px;">Synthesis & Gaps</h3>
+    <a class="nav-item" href="#s16" onclick="toggleNav()">
+      <span class="nav-num">16</span>
+      <span class="nav-label">2026 Strategic Timeline</span>
+    </a>
+    <a class="nav-item" href="#s17" onclick="toggleNav()">
+      <span class="nav-num">17</span>
+      <span class="nav-label">Provenance & Confidence</span>
+    </a>
+    <a class="nav-item" href="#s18" onclick="toggleNav()">
+      <span class="nav-num">18</span>
+      <span class="nav-label">Intelligence Gaps & Next Steps</span>
+    </a>
+  </div>
+
+  <!-- SLIDE 01 — TITLE -->
+  <section class="slide title-slide" id="s1">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-200px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-300px;left:-200px;"></div>
+    <div class="slide-inner" style="text-align:center;">
+      <div class="anim">
+        <div class="hero-badge">PRISM Multi-Source Validated — 4-Agent Swarm</div>
+      </div>
+      <h1 class="hero-title anim d1">MA Margin Pressure &amp;<br>Healthcare IT Positioning</h1>
+      <p class="hero-sub anim d2">Strategic impact of Medicare Advantage compression on payer dynamics, vendor competition, and Inovalon's market position in healthcare technology</p>
+      <p class="hero-date anim d3">Q1 2025 | 4-Agent Extended Swarm | MEDIUM Confidence Validated Synthesis</p>
+      <div class="anim d4" style="margin-top:2rem; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-bright)"></span>MA Margin Analyst</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-success)"></span>Inovalon Specialist</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-violet)"></span>HIT Competitive Analyst</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-warning)"></span>Growth Futurist</span>
+      </div>
+      <div class="hero-stats anim d5" style="margin-top:2.5rem;">
+        <div class="hero-stat">
+          <div class="value red">300–500 bps</div>
+          <div class="label">Rate-Cost Structural Gap</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value gold">$40–50 PMPM</div>
+          <div class="label">V28 Headwind at Full Phase-In</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value orange">$10–15B</div>
+          <div class="label">QBP Revenue at Risk Industry-Wide</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value cyan">$7.3B</div>
+          <div class="label">Inovalon LBO Valuation</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value purple">5</div>
+          <div class="label">Emergent Insights Detected</div>
+        </div>
+      </div>
+      <div class="validation-box anim d6">
+        <div class="validation-card">
+          <h4>&#10003; Validation Methodology</h4>
+          <div class="val-row"><span class="val-icon green">&#10003;</span>CMS V28 Final Rule &amp; rate announcements verified (Primary)</div>
+          <div class="val-row"><span class="val-icon green">&#10003;</span>Payer earnings disclosures cross-referenced (Humana, UHG, Elevance)</div>
+          <div class="val-row"><span class="val-icon green">&#10003;</span>Inovalon FY2021 10-K as last confirmed public financial baseline</div>
+          <div class="val-row"><span class="val-icon green">&#10003;</span>Evidence weighting: 13 PRIMARY, 19 SECONDARY sources; 0 TERTIARY</div>
+        </div>
+        <div class="validation-card framework-card">
+          <h4>&#9670; PRISM Processing Framework</h4>
+          <p style="font-size:10px;color:var(--text-secondary);margin-bottom:8px;">4-agent synthesis across financial, domain, competitive, and futures lenses</p>
+          <div class="framework-visual">
+            <span class="fw-node">MA Margin</span>
+            <span class="fw-node">Inovalon</span>
+            <span class="fw-node">HIT Competitive</span>
+            <span class="fw-node">Growth Futurist</span>
+            <span class="fw-arrow">&#8594;</span>
+            <span class="fw-center">Cross-Agent Synthesis</span>
+            <span class="fw-arrow">&#8594;</span>
+            <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success);">5 Emergent Insights</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence | 4-Agent Extended Swarm | 32 Total Findings</span>
+      <span>Overall Confidence: MEDIUM — Inovalon post-take-private opacity constraint applied</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 02 — TABLE OF CONTENTS -->
+  <section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;right:-150px;"></div>
+    <div class="slide-inner">
+      <h2 class="slide-title anim">Executive <span style="color:var(--accent);">Intelligence Map</span></h2>
+      <p class="section-intro anim d1">18-slide analysis spanning Medicare Advantage margin mechanics, Inovalon's strategic position, competitive dynamics, five emergent insights, and 2026 inflection point intelligence.</p>
+      <div class="grid-3 anim d2">
+        <div>
+          <h3 class="toc-group-header">MA Margin &amp; Payer Dynamics</h3>
+          <a class="nav-item toc-item" href="#s4"><span class="nav-num">04</span><span class="nav-label">Rate-Cost Gap &amp; V28 Mechanics</span></a>
+          <a class="nav-item toc-item" href="#s5"><span class="nav-num">05</span><span class="nav-label">Stars Cliff &amp; Utilization Surge</span></a>
+          <h3 class="toc-group-header" style="margin-top:16px;">Inovalon &amp; Competitive</h3>
+          <a class="nav-item toc-item" href="#s6"><span class="nav-num">06</span><span class="nav-label">Inovalon Company Deep Dive</span></a>
+          <a class="nav-item toc-item" href="#s7"><span class="nav-num">07</span><span class="nav-label">HIT Competitive Landscape</span></a>
+          <a class="nav-item toc-item" href="#s8"><span class="nav-num">08</span><span class="nav-label">Growth Demand Vectors</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Strategic Tensions</h3>
+          <a class="nav-item toc-item" href="#s9"><span class="nav-num">09</span><span class="nav-label">Headwind vs. Tailwind</span></a>
+          <a class="nav-item toc-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Platform Moat vs. Liability</span></a>
+          <h3 class="toc-group-header" style="margin-top:16px;">Emergent Intelligence</h3>
+          <a class="nav-item toc-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">Regulatory Demand Pump</span></a>
+          <a class="nav-item toc-item" href="#s12"><span class="nav-num">12</span><span class="nav-label">Dual Consolidation Mirror</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Emergent Intelligence (cont.)</h3>
+          <a class="nav-item toc-item" href="#s13"><span class="nav-num">13</span><span class="nav-label">Goldilocks Paradox</span></a>
+          <a class="nav-item toc-item" href="#s14"><span class="nav-num">14</span><span class="nav-label">2026 Supercritical Convergence</span></a>
+          <a class="nav-item toc-item" href="#s15"><span class="nav-num">15</span><span class="nav-label">The Cliff-Edge Economy</span></a>
+          <h3 class="toc-group-header" style="margin-top:16px;">Synthesis &amp; Gaps</h3>
+          <a class="nav-item toc-item" href="#s16"><span class="nav-num">16</span><span class="nav-label">2026 Strategic Timeline</span></a>
+          <a class="nav-item toc-item" href="#s17"><span class="nav-num">17</span><span class="nav-label">Provenance &amp; Confidence</span></a>
+          <a class="nav-item toc-item" href="#s18"><span class="nav-num">18</span><span class="nav-label">Intelligence Gaps &amp; Next Steps</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence | Table of Contents</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 03 — EXECUTIVE SUMMARY -->
+  <section class="slide" id="s3">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-150px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Synthesis</span> Executive Summary</div>
+      <h2 class="slide-title anim d1">Five Findings That Reframe<br>the Conventional Narrative</h2>
+      <p class="section-intro anim d2">MA margin pressure is simultaneously destroying payer financial health and creating structural demand for healthcare technology — but only for specific categories. The analysis inverts three conventional assumptions.</p>
+      <div class="grid-2 anim d3">
+        <div class="emergence-card">
+          <h4>&#9650; INVERTED: Customer Distress &#8800; Vendor Revenue Decline</h4>
+          <p>CMS regulatory actions (V28, Stars, RADV, CMS-0057-F) simultaneously compress payer margins AND create mandatory technology spending. Inovalon is <strong>procyclical with regulatory intensity</strong>, not countercyclical with payer financial health.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>&#9650; CONFIRMED: Bifurcated Technology Demand</h4>
+          <p>ROI-positive tools (risk adjustment, Stars, compliance automation) see <strong>increased or maintained spending</strong>. Discretionary tools (experimental AI, broad population health) face cuts. Both are true simultaneously for different categories.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>&#9650; INVERTED: Mid-Tier Vendor Position as Stable</h4>
+          <p>The mid-tier independent vendor position is <strong>structurally unstable</strong>. Parallel payer and vendor consolidation create a binary choice: become one of 3–5 mega-vendors or be acquired. No stable mid-tier persists.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>&#9650; CONFIRMED: 2026 as Supercritical Year</h4>
+          <p>Five independently identified timelines — V28 full phase-in, CMS-0057-F deadline, Nordic Capital exit window, utilization normalization, MA repricing cycle — <strong>converge on 2026</strong> as the year of peak pain and peak opportunity simultaneously.</p>
+        </div>
+      </div>
+      <div class="stat-grid anim d5" style="margin-top:1.5rem;">
+        <div class="stat-card">
+          <div class="stat-label">FOUNDATION FACTS</div>
+          <div class="stat-value">8</div>
+          <div class="stat-context">Uncontested across all agents</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CONVERGENCE POINTS</div>
+          <div class="stat-value positive">4</div>
+          <div class="stat-context">Independent evidence trails</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">TENSIONS PRESERVED</div>
+          <div class="stat-value warn">3</div>
+          <div class="stat-context">Genuine strategic uncertainty</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">EMERGENT INSIGHTS</div>
+          <div class="stat-value" style="color:var(--accent-violet);">5</div>
+          <div class="stat-context">Multi-agent only findings</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Synthesis Layer | All 4 Agents | 5-Layer Intelligence Pyramid</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 04 — MA MARGIN: RATE-COST GAP & V28 -->
+  <section class="slide" id="s4">
+    <div class="slide-bg-glow" style="background:var(--accent-error);top:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag financial">Financial</span> MA Margin Pressure Mechanics — Dimension 1</div>
+      <h2 class="slide-title anim d1">The Structural Revenue-to-Cost Gap<br>&amp; V28 Compounding Headwind</h2>
+      <p class="section-intro anim d2">CMS 2024 rate increases materially trail medical cost trends, creating a foundational ~300–500 bps gap. Layered over this is the V28 risk model transition — a multi-year revenue restructuring event affecting plans most dependent on HCC capture strategies.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Rate-Cost Gap: ~300–500 bps Structural Compression</div>
+            <div class="finding-body">CMS 2024 MA Rate Announcement delivered +3.32% benchmark increase. Major payers reported medical cost trends of 6–8% in 2024. No efficiency program or supplemental benefit trim can fully offset this structural gap without significant membership repricing or utilization management investment. Humana and regional pure-plays face existential pressure — repricing cycles will extend into 2025–2026 bids.</div>
+            <span class="confidence-badge high">High — CMS Rate Announcement (Primary)</span>
+          </div>
+          <div class="finding-card risk">
+            <div class="finding-title">V28 Phase-In: $40–50 PMPM Headwind at Full Implementation</div>
+            <div class="finding-body">CMS finalized V28 eliminating or reducing weights for ~2,200 ICD-10 codes. Phase-in: 33%/67%/100% across 2024/2025/2026. The incremental headwind grows each year. Plans with aggressive HCC capture strategies — regional pure-plays and dual-eligible specialists — face the steepest revenue cliff. Humana disclosed $400–500M specific impact. Actuarial projections (Oliver Wyman, Milliman) corroborate the 3–5% average risk score reduction estimate.</div>
+            <span class="confidence-badge high">High — CMS V28 Final Rule + Humana Disclosure (Primary)</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-grid" style="margin-bottom:1rem;">
+            <div class="stat-card">
+              <div class="stat-label">RATE-COST GAP</div>
+              <div class="stat-value negative">300–500 bps</div>
+              <div class="stat-context">Primary structural compression driver 2024–2025</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">V28 RISK SCORE REDUCTION</div>
+              <div class="stat-value negative">3–5%</div>
+              <div class="stat-context">Gross reduction; partial rate normalization expected</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">V28 PMPM HEADWIND</div>
+              <div class="stat-value negative">$40–50</div>
+              <div class="stat-context">At 100% implementation in 2026</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">HUMANA V28 IMPACT</div>
+              <div class="stat-value negative">$400–500M</div>
+              <div class="stat-context">Specific payer disclosure (Primary)</div>
+            </div>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Technology Demand Implication: Forced Re-Tooling Cycle</div>
+            <div class="finding-body">V28 creates acute demand for risk adjustment optimization — coding accuracy, retrospective chart review, prospective care gap closure. Plans <em>cannot</em> cut risk adjustment technology spend because revenue loss exceeds tool cost. This is the central mechanism of the Regulatory Demand Pump emergence.</div>
+            <span class="confidence-badge high">High — Multi-agent convergence (4 independent trails)</span>
+          </div>
+        </div>
+      </div>
+      <div class="source-list anim d5">
+        <strong>Sources:</strong>
+        <a href="https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats/ratebooks-and-supporting-data" target="_blank">CMS 2024 MA Rate Announcement</a> |
+        <a href="https://www.cms.gov/files/document/2024-announcement.pdf" target="_blank">CMS V28 Final Rule</a> |
+        Humana Q3 2023 Earnings Disclosure |
+        Oliver Wyman &amp; Milliman Actuarial Projections
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>MA Margin Analyst | 5 findings | Confidence: 0.85</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 05 — MA MARGIN: STARS CLIFF & UTILIZATION -->
+  <section class="slide" id="s5">
+    <div class="slide-bg-glow" style="background:var(--accent-warning);top:-150px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag financial">Financial</span> MA Margin Pressure Mechanics — Dimension 2</div>
+      <h2 class="slide-title anim d1">Star Ratings Cliff, GLP-1 Surge<br>&amp; Supplemental Benefit Unwind</h2>
+      <p class="section-intro anim d2">Star Ratings function as a binary revenue cliff — not a gradient. Combined with GLP-1 cost exposure and the unwinding supplemental benefit arms race, the margin environment for pure-play MA operators has become structurally hostile.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">$10–15B in Quality Bonus Payments at Risk Industry-Wide</div>
+            <div class="finding-body">CMS methodology changes reduced 4.0+ Star contracts from ~73% of enrollment in 2023 to ~57% in 2024. The 4.0 Star threshold functions as a binary cliff: losing 4-Star status triggers a 400–500 bps revenue swing. Individual plans face 100–300 bps margin swings per Star event. Lower-starred plans must charge higher premiums or cut benefits — creating adverse selection risk.</div>
+            <span class="confidence-badge high">High — CMS Star Ratings Methodology (Primary)</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Supplemental Benefit Reversal: Adverse Selection Risk</div>
+            <div class="finding-body">Supplemental benefit cost inflation added ~100–200 bps MLR pressure as plans over-expanded OTC, dental, vision, and food benefits during 2021–2023. Benefit costs ran 15–25% above initial actuarial assumptions. Mass benefit cuts in 2025 will generate membership churn — healthier members shop away, worsening risk pool composition.</div>
+            <span class="confidence-badge medium">Medium — CMS SSBCI Data + Payer Actuarial Reports (Secondary)</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">GLP-1 Cost Exposure: 200–400 bps Pharmacy Headwind</div>
+            <div class="finding-body">GLP-1 agonist utilization accelerating pharmacy spend by an estimated 200–400 bps of premium revenue annually. Diabetes and obesity indications create open-ended cost exposure not adequately priced into 2024–2025 bids. Net clinical offset (reduced cardiovascular events per SELECT trial) is genuinely uncertain — longitudinal Medicare data is 3–5 years from maturity. This creates strong demand for pharmacy adherence analytics and prior authorization optimization.</div>
+            <span class="confidence-badge medium">Medium — Express Scripts 2024 Drug Trend + CMS Part D PUF (Secondary)</span>
+          </div>
+          <div class="stat-grid" style="margin-top:1rem;">
+            <div class="stat-card">
+              <div class="stat-label">PURE-PLAY COMBINED PRESSURE</div>
+              <div class="stat-value negative">800–1,200 bps</div>
+              <div class="stat-context">All vectors simultaneous — non-linear compounding possible</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">STARS ENROLLMENT SHIFT</div>
+              <div class="stat-value negative">73% → 57%</div>
+              <div class="stat-context">4.0+ Star contracts 2023 vs. 2024</div>
+            </div>
+          </div>
+          <div class="policy-box">
+            <h4>Payer Archetype: Regional Pure-Play (e.g., Humana)</h4>
+            <p>Faces all five pressure vectors simultaneously: rate-cost gap + V28 + Stars methodology + supplemental benefit reversal + GLP-1 exposure. Humana county exits in 2025 are the visible manifestation.</p>
+            <div class="impact impact-severe">SEVERE | 800–1,200 bps combined compression</div>
+          </div>
+          <div class="policy-box positive">
+            <h4>Payer Archetype: National Diversified (e.g., UHG, Elevance)</h4>
+            <p>Partially offsets through vertical integration, commercial cross-subsidy, and internal analytics capabilities.</p>
+            <div class="impact impact-moderate">MODERATE | Partially offset — diversification advantage</div>
+          </div>
+        </div>
+      </div>
+      <div class="source-list anim d5">
+        <strong>Sources:</strong>
+        <a href="https://www.cms.gov/medicare/health-plans/healthplansgeninfo/Downloads/2024-star-ratings-fact-sheet.pdf" target="_blank">CMS 2024 Star Ratings Fact Sheet</a> |
+        Express Scripts 2024 Drug Trend Report |
+        CMS Part D PUF Data
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>MA Margin Analyst | 5 findings | Confidence: 0.75</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 06 — INOVALON DEEP DIVE -->
+  <section class="slide" id="s6">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-100px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag clinical">Domain</span> Inovalon Company Deep Dive</div>
+      <h2 class="slide-title anim d1">The ONE Platform, the LBO Constraint,<br>&amp; the Data Moat Question</h2>
+      <p class="section-intro anim d2">Inovalon's strategic position rests on three pillars: a vertically integrated SaaS platform, a proprietary data registry of exceptional scale, and a PE ownership structure that simultaneously enables operational flexibility and imposes financial constraint. Post-take-private financial opacity materially limits confidence.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">ONE Platform: Vertically Integrated SaaS Stack (SaaS/DaaS Transformation Completed Jan 2025)</div>
+            <div class="finding-body">Integrates risk adjustment, quality/HEDIS measurement, pharmacy analytics, clinical analytics, and data connectivity in cloud-native architecture. MORE2 Registry: 97 billion medical events, 454 million unique lives. Platform consolidation strategy creates switching costs and cross-sell leverage — if plans are under budget pressure, integration economies favor platform consolidation over point-solution proliferation.</div>
+            <span class="confidence-badge high">High — Inovalon Product Documentation (Primary)</span>
+          </div>
+          <div class="finding-card risk">
+            <div class="finding-title">$7.3B LBO: ~$4–4.5B Debt Creates Financial Constraint</div>
+            <div class="finding-body">Nordic Capital closed acquisition Feb 2022 at $41/share. Estimated $250–300M annual interest expense at 2022–2023 rates at ~5.5–6x EBITDA leverage. This constrains R&amp;D investment capacity and M&amp;A firepower — creating the 'Too Leveraged to Invest' leg of the Goldilocks Paradox. Nordic's typical hold period: 5–7 years, implying 2027–2029 exit window.</div>
+            <span class="confidence-badge high">High — Nordic Capital Announcement + SEC LBO Filings (Primary)</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">Last Known Revenue: ~$796M FY2021 (20% CAGR 2018–2021)<span class="source-unverified" title="Post-take-private financial performance unverified">†</span></div>
+            <div class="finding-body">If 14–20% CAGR continued post-take-private, FY2024 revenue would be ~$1.1–1.3B. However, MA margin pressures beginning 2022–2024 likely slowed trajectory. Any slowdown below 10% CAGR stresses Nordic's return model and debt service capacity. All post-FY2021 figures are extrapolation only.</div>
+            <span class="confidence-badge medium">Medium — Inovalon FY2021 10-K (Primary); Forward extrapolation unverified</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Data Moat: Real But Eroding Under Commoditization Pressure</div>
+            <div class="finding-body">20+ years of data assembly covering 330M+ patient lives, 64B+ medical events constitutes genuine competitive differentiation. However, newer data aggregators, claims clearinghouses, and EHR-integrated analytics platforms are closing the gap. Inovalon must continuously invest in data depth (clinical, pharmacy, SDOH) and AI/ML sophistication — investment constrained by LBO debt service.</div>
+            <span class="confidence-badge medium">Medium — Inovalon SEC Filings + KLAS Research (Secondary)</span>
+          </div>
+          <div class="stat-grid" style="margin-top:1rem;">
+            <div class="stat-card">
+              <div class="stat-label">MORE2 REGISTRY</div>
+              <div class="stat-value cyan">97B</div>
+              <div class="stat-context">Medical events | 454M unique lives</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">INTEREST EXPENSE EST.</div>
+              <div class="stat-value negative">$250–300M</div>
+              <div class="stat-context">Annual — constrains R&amp;D and M&amp;A<span class="source-unverified" title="Estimated from LBO structure; not publicly disclosed">†</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="source-list anim d5">
+        <strong>Sources:</strong>
+        <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=INVA&type=10-K&dateb=&owner=include&count=40" target="_blank">Inovalon FY2021 10-K (SEC)</a> |
+        Nordic Capital Press Release (Aug 2021) |
+        KLAS Research Healthcare Analytics 2024
+      </div>
+      <div class="dagger-footnote">† Source: forward extrapolation from FY2021 public baseline — post-take-private financial performance not verified; all post-2022 figures are estimates</div>
+    </div>
+    <div class="slide-footer">
+      <span>Inovalon Intelligence Specialist | 5 findings | Confidence: 0.65 (opacity constraint)</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 07 — HIT COMPETITIVE LANDSCAPE -->
+  <section class="slide" id="s7">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-150px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Strategic</span> Healthcare IT Competitive Landscape</div>
+      <h2 class="slide-title anim d1">The Big Four Oligopoly, Capital Asymmetry,<br>&amp; the Change Healthcare Structural Shift</h2>
+      <p class="section-intro anim d2">The MA-focused health IT vendor landscape has consolidated into a 'Big Four' oligopoly with meaningfully asymmetric capital positions. The February 2024 Change Healthcare breach created a structural competitive realignment that benefits independent vendors — but only if they can capture the opportunity before Optum rebuilds trust.</p>
+      <div class="anim d3">
+        <table class="prov-table compact-table">
+          <thead>
+            <tr>
+              <th>Vendor</th>
+              <th>Ownership / Capital</th>
+              <th>Primary Strength</th>
+              <th>Key Threat to Inovalon</th>
+              <th>Threat Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Optum / Change Healthcare</strong></td>
+              <td>UHG (public) — captive resources</td>
+              <td>15B transactions/yr; 1-in-3 patient records</td>
+              <td>Vertical integration, scale moat, AI Marketplace (June 2025)</td>
+              <td><span class="threat-meter"><span class="threat-dot active-red"></span><span class="threat-dot active-red"></span><span class="threat-dot active-red"></span><span class="threat-dot active-red"></span><span class="threat-dot active-red"></span></span></td>
+            </tr>
+            <tr>
+              <td><strong>Cotiviti</strong></td>
+              <td>KKR + Veritas (~$11B, 2024)</td>
+              <td>180+ payer clients; all top-25 health plans</td>
+              <td>Superior capital; deeper payment accuracy; 2.2x Inovalon's implied valuation</td>
+              <td><span class="threat-meter"><span class="threat-dot active-red"></span><span class="threat-dot active-red"></span><span class="threat-dot active-red"></span><span class="threat-dot active-red"></span><span class="threat-dot"></span></span></td>
+            </tr>
+            <tr>
+              <td><strong>Epic / Oracle Health</strong></td>
+              <td>Epic (private); Oracle (public)</td>
+              <td>EHR workflow integration; clinical data depth</td>
+              <td>EHR platform expansion into payer analytics; commoditizes basic HEDIS measurement</td>
+              <td><span class="threat-meter"><span class="threat-dot active-orange"></span><span class="threat-dot active-orange"></span><span class="threat-dot active-orange"></span><span class="threat-dot"></span><span class="threat-dot"></span></span></td>
+            </tr>
+            <tr>
+              <td><strong>Apixio / AI-Native Challengers</strong></td>
+              <td>PE-backed; niche</td>
+              <td>NLP/ML chart review; unstructured clinical data</td>
+              <td>V28 complexity increases demand for AI-native approaches; erodes incumbent margins in specific niches</td>
+              <td><span class="threat-meter"><span class="threat-dot active-yellow"></span><span class="threat-dot active-yellow"></span><span class="threat-dot active-yellow"></span><span class="threat-dot"></span><span class="threat-dot"></span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="two-col anim d4" style="margin-top:1.5rem;">
+        <div class="finding-card opportunity">
+          <div class="finding-title">Change Healthcare Breach: Structural Competitive Tailwind</div>
+          <div class="finding-body">February 2024 ALPHV BlackCat ransomware attack impacted 94% of hospitals, 192.7M individuals. Created lasting payer demand for vendor diversification away from Optum's ecosystem. Non-UHG payers have structural incentives to use neutral platforms (Inovalon, Cotiviti) for risk adjustment and quality analytics. The conflict-of-interest dynamic (sharing data with a competing insurer's subsidiary) accelerates this shift.</div>
+          <span class="confidence-badge high">High — AHA Fact Sheet + DOJ Filings (Primary)</span>
+        </div>
+        <div class="finding-card risk">
+          <div class="finding-title">Capital Asymmetry: Inovalon at a Structural Disadvantage</div>
+          <div class="finding-body">KKR's $11B Cotiviti recapitalization — roughly 2.2x Inovalon's implied $7.3B valuation — signals dramatically asymmetric investment capacity. Cotiviti can outspend on acquisitions, product investment, and talent. Inovalon must differentiate on platform breadth, cloud-native architecture, or vertical depth rather than financial firepower. This is the 'Too Leveraged to Invest' constraint with a specific competitive face.</div>
+          <span class="confidence-badge high">High — KKR/Cotiviti Transaction Announcement (Primary)</span>
+        </div>
+      </div>
+      <div class="source-list anim d5">
+        <strong>Sources:</strong>
+        <a href="https://www.aha.org/fact-sheets/2024-change-healthcare-cyberattack" target="_blank">AHA Change Healthcare Fact Sheet</a> |
+        KLAS Research Big Four Vendor Analysis |
+        KKR/Cotiviti Definitive Agreement (Feb 2024) |
+        Black Book Research 2025 Survey
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>HIT Competitive Landscape Analyst | 5 findings | Confidence: 0.75</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 08 — GROWTH DEMAND VECTORS -->
+  <section class="slide" id="s8">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-200px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag quality">Futurist</span> Technology Demand Vectors &amp; Growth Opportunities</div>
+      <h2 class="slide-title anim d1">Five Demand Vectors — Ranked by<br>Urgency and Inovalon Positioning Strength</h2>
+      <p class="section-intro anim d2">MA margin compression creates bifurcated technology demand. These five vectors represent where spending is protected or growing — ordered by near-term urgency and Inovalon's current competitive positioning.</p>
+      <div class="anim d3">
+        <div class="bar-row">
+          <div class="bar-label" style="font-size:11px;min-width:220px;">1. Risk Adjustment / V28 Re-tooling</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:92%;background:linear-gradient(90deg,var(--accent-success),var(--inov-cerulean));">
+              <span class="bar-fill-value">$4–6B TAM | Inovalon: STRONG | Urgency: CRITICAL 2024–2026</span>
+            </div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="font-size:11px;min-width:220px;">2. Stars / HEDIS Quality Analytics</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:82%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sky));">
+              <span class="bar-fill-value">$500–800 PMPY at stake | Inovalon: STRONG (native HEDIS origins)</span>
+            </div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="font-size:11px;min-width:220px;">3. Admin Automation (Prior Auth, Claims)</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:75%;background:linear-gradient(90deg,var(--accent-warning),var(--accent-error));">
+              <span class="bar-fill-value">$8–12B TAM | Inovalon: WEAK — largest white-space gap</span>
+            </div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="font-size:11px;min-width:220px;">4. AI Clinical Decision Support</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:55%;background:linear-gradient(90deg,var(--accent-violet),var(--inov-cerulean));">
+              <span class="bar-fill-value">$3–5B TAM | Inovalon: MODERATE — payer-side advantage only</span>
+            </div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="font-size:11px;min-width:220px;">5. Value-Based Care Enablement</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:48%;background:linear-gradient(90deg,var(--inov-jade),var(--inov-cerulean));">
+              <span class="bar-fill-value">$5–8B TAM | Inovalon: MODERATE — needs contract mgmt capabilities</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="two-col anim d4" style="margin-top:1.5rem;">
+        <div class="finding-card opportunity">
+          <div class="finding-title">CMS-0057-F: The Immovable Demand Trigger</div>
+          <div class="finding-body">Prior authorization API mandate creates a January 2026 binary compliance deadline — mandatory spend regardless of budget environment. This is the strongest 'spend-through-compression' vector and represents Inovalon's largest white-space gap. Competitors Availity, Cohere Health, and Change Healthcare/Optum hold stronger prior auth positions. Inovalon must build or acquire capabilities before this window closes.</div>
+          <span class="confidence-badge high">High — CMS-0057-F Final Rule (Primary)</span>
+        </div>
+        <div class="finding-card opportunity">
+          <div class="finding-title">Mid-Market 'Land &amp; Expand': Highest-ROI Growth Pathway</div>
+          <div class="finding-body">Mid-market MA plans (200K–2M members) lack sophisticated internal IT organizations and prefer integrated platforms for cost efficiency. This is Inovalon's strategic sweet spot. 'Land and expand' within existing risk adjustment and Stars relationships into broader multi-domain platform contracts offers the highest near-term growth ROI. Go-private status may enable gain-share and PMPM outcome-based pricing unavailable to public-market peers.</div>
+          <span class="confidence-badge medium">Medium — KLAS/Black Book Segmentation + Growth Futurist Analysis (Secondary)</span>
+        </div>
+      </div>
+      <div class="source-list anim d5">
+        <strong>Sources:</strong>
+        <a href="https://www.cms.gov/priorities/key-initiatives/burden-reduction/access-prior-authorization/cms-0057-f" target="_blank">CMS-0057-F Final Rule</a> |
+        Mordor Intelligence Payment Integrity Market Report |
+        Definitive Healthcare Payer IT Survey 2024 |
+        McKinsey 'The Gathering Storm in US Health Insurance'
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Growth Opportunity Futurist | 5 findings | Confidence: 0.72</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 09 — TENSION: HEADWIND VS. TAILWIND -->
+  <section class="slide" id="s9">
+    <div class="slide-bg-glow" style="background:var(--accent-warning);top:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(245,230,187,0.15);color:var(--accent-warning);">Tension</span> Strategic Tension — RESOLVED via Bifurcation</div>
+      <h2 class="slide-title anim d1">MA Margin Pressure:<br>Technology Demand Headwind vs. Tailwind?</h2>
+      <p class="section-intro anim d2">This is the most consequential interpretive question in the analysis. Both sides are right — for different spending categories. The resolution has direct implications for product portfolio prioritization and revenue forecasting.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity" style="height:auto;">
+            <div class="finding-title" style="color:var(--accent-success);">&#8593; TAILWIND: ROI-Positive Categories</div>
+            <div class="finding-body">
+              <strong>Agent support:</strong> Growth Futurist, HIT Competitive Analyst<br><br>
+              Payers must invest more in ROI-positive analytics tools to defend shrinking revenue. Historical post-ACA precedent shows health IT spending INCREASED during margin compression. V28-driven demand acceleration confirmed in KLAS/Black Book surveys. Payer earnings disclosures show maintained or increased analytics spending in 2024.<br><br>
+              <strong>Protected categories:</strong> Risk adjustment, Stars analytics, RADV audit defense, CMS-0057-F compliance automation
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card risk" style="height:auto;">
+            <div class="finding-title" style="color:var(--accent-error);">&#8595; HEADWIND: Discretionary Categories</div>
+            <div class="finding-body">
+              <strong>Agent support:</strong> MA Margin Analyst, Inovalon Specialist<br><br>
+              Payers facing 300–500+ bps compression cut all discretionary spending. Payer CFO commentary explicitly targets technology cost reduction. Humana's 800–1,200 bps combined pressure requires broad cost reduction programs that sweep beyond just 'nice-to-have' tools.<br><br>
+              <strong>Vulnerable categories:</strong> Experimental AI, broad population health monitoring, innovation labs, VBC enablement pilots, clinical analytics expansion
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="inovalon-header anim d4" style="margin-top:1.5rem;">
+        <h3>Resolution: BIFURCATION — Both Are True for Different Categories</h3>
+        <p style="font-size:13px;color:var(--text-secondary);">For Inovalon specifically: <strong style="color:var(--accent-success);">EXISTING revenue</strong> in core risk adjustment and Stars analytics is compression-proof. <strong style="color:var(--accent-error);">GROWTH RATE</strong> into adjacent segments (admin automation, VBC platforms) is compression-vulnerable. The strategic implication is direct portfolio prioritization: defend core, selectively invest in adjacencies with clear ROI bridges (CMS-0057-F prior auth has a binary deadline; VBC enablement does not).</p>
+      </div>
+      <div class="stat-grid anim d5" style="margin-top:1rem;">
+        <div class="stat-card">
+          <div class="stat-label">COMPRESSION-PROOF SPEND</div>
+          <div class="stat-value positive">&#8593; Maintained or Growing</div>
+          <div class="stat-context">Risk adjustment, Stars, compliance automation</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">COMPRESSION-VULNERABLE SPEND</div>
+          <div class="stat-value negative">&#8595; Reduced</div>
+          <div class="stat-context">Innovation labs, experimental AI, broad pop health</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">BIFURCATION EVIDENCE</div>
+          <div class="stat-value" style="color:var(--accent-violet);">4</div>
+          <div class="stat-context">Independent evidence trails confirming this pattern</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Synthesis Tension Layer | MA Margin Analyst + Growth Futurist + HIT Analyst + Inovalon Specialist</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 10 — TENSION: PLATFORM MOAT vs. LIABILITY -->
+  <section class="slide" id="s10">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);bottom:-200px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(245,230,187,0.15);color:var(--accent-warning);">Tension</span> Strategic Tension — RESOLVED via Market Segmentation</div>
+      <h2 class="slide-title anim d1">Inovalon's Platform Breadth:<br>Competitive Moat or Complexity Liability?</h2>
+      <p class="section-intro anim d2">The platform vs. best-of-breed debate resolves cleanly once the customer segment is specified. Both positions are correct — for different buyer archetypes. This is not a contradiction; it is a segmentation insight with direct go-to-market implications.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title" style="color:var(--accent-success);">&#8635; Platform Breadth = MOAT (Mid-Market)</div>
+            <div class="finding-body">
+              <strong>Agent support:</strong> Growth Futurist, Inovalon Specialist<br><br>
+              Mid-market MA plans (200K–2M members) lack sophisticated internal IT organizations. They prefer integrated platforms for simplicity and cost efficiency — reducing vendor management complexity and enabling cross-module data leverage (risk adjustment informing Stars, Stars informing quality). SaaS platform completion in January 2025 enables these cross-module integrations. MORE2 Registry network effects create genuine switching costs.<br><br>
+              <strong>Implication: This is Inovalon's strategic sweet spot.</strong>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title" style="color:var(--accent-error);">&#9650; Platform Breadth = LIABILITY (Large Plans)</div>
+            <div class="finding-body">
+              <strong>Agent support:</strong> HIT Competitive Analyst<br><br>
+              Large national payers (UHG, Elevance, CVS) have internal analytics teams and prefer best-of-breed point solutions they integrate themselves. Maintaining breadth disperses R&amp;D investment across modules rather than achieving depth leadership. Cotiviti's focused depth strategy in payment accuracy is gaining share. EHR platform vendors (Epic, Oracle Health) are expanding into analytics with deep single-domain capabilities.<br><br>
+              <strong>Implication: Large-plan tier requires module depth strategy, not platform pitch.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="inovalon-header anim d4" style="margin-top:1.5rem;">
+        <h3>Resolution: Segment-Specific Strategy Required</h3>
+        <p style="font-size:13px;color:var(--text-secondary);">Lead with <strong style="color:var(--accent-success);">platform breadth in mid-market</strong> — the white-space opportunity is primarily addressable here. Compete on <strong style="color:var(--accent-bright);">module depth (risk adjustment, Stars)</strong> at the large-plan tier where best-of-breed wins. Do not apply a single go-to-market narrative across both segments.</p>
+      </div>
+      <div class="two-col anim d5" style="margin-top:1rem;">
+        <div class="policy-box positive">
+          <h4>Mid-Market Strategy (200K–2M members)</h4>
+          <p>Lead with ONE Platform integration economics. Emphasize cross-module data leverage and reduction in total vendor count. PMPM pricing enables gain-share structures.</p>
+          <div class="impact impact-positive">OPPORTUNITY | Platform breadth is the differentiator</div>
+        </div>
+        <div class="policy-box neutral">
+          <h4>Large-Plan Strategy (2M+ members)</h4>
+          <p>Compete on risk adjustment and Stars module depth. Position against Cotiviti on cloud-native architecture and V28 model readiness. Lead with specific ROI metrics, not platform pitch.</p>
+          <div class="impact impact-neutral">DEFEND | Depth leadership required to hold position</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Synthesis Tension Layer | Growth Futurist + Inovalon Specialist + HIT Competitive Analyst</span>
+      <span>PRISM Strategic Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 11 — EMERGENCE: REGULATORY DEMAND PUMP -->
+  <section class="slide emergent-slide" id="s11">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-100px;right:-100px;"></div>
+    <div class="slide-inner" style="position:relative;">
+      <div class="emergent-number anim">01</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag" style="background:rgba(89,221,253,0.15);color:var(--accent-bright);">Emergent</span> Multi-Agent Only Insight #1</div>
+        <h2 class="slide-title anim d1">The Regulatory Demand Pump</h2>
+        <p class="slide-subtitle anim d2">Every CMS regulatory action simultaneously destroys payer margins AND creates mandatory technology spending — making Inovalon procyclical with regulatory intensity, not countercyclical with payer financial health.</p>
+        <div class="grid-2 anim d3">
+          <div class="finding-card emergent">
+            <div class="finding-title">The Pump Mechanism: Margin Destruction = Technology Demand Creation</div>
+            <div class="finding-body">
+              V28 reduces risk score revenue → creates risk adjustment re-tooling demand<br>
+              Star methodology changes eliminate QBP revenue → creates quality analytics demand<br>
+              CMS-0057-F imposes compliance costs → creates interoperability platform demand<br>
+              RADV audit expansion increases financial risk → creates audit defense demand<br><br>
+              <strong>Each regulatory action has two sides. Conventional analysis sees only one.</strong>
+            </div>
+            <span class="confidence-badge high">High — CMS V28 + RADV + CMS-0057-F (Primary)</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">V28 DEMAND TRIGGER</div>
+              <div class="stat-value cyan">Forced Upgrade</div>
+              <div class="stat-context">Plans cannot cut risk adjustment spend — revenue loss exceeds tool cost</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">CMS-0057-F TRIGGER</div>
+              <div class="stat-value cyan">Binary Deadline</div>
+              <div class="stat-context">January 2026 compliance deadline — mandatory spend regardless of budget</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">STARS TRIGGER</div>
+              <div class="stat-value cyan">Cliff Defense</div>
+              <div class="stat-context">$500–800 PMPY at stake per 4-Star threshold crossing</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">RADV TRIGGER</div>
+              <div class="stat-value cyan">Audit Defense</div>
+              <div class="stat-context">RADV extrapolation rule creates open-ended financial liability</div>
+            </div>
+          </div>
+        </div>
+        <div class="emergent-why anim d4">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">The MA Margin Analyst quantified the margin-destruction side of each regulatory action. The Growth Futurist modeled the technology-demand-creation side. The HIT Competitive Analyst mapped which vendors capture the resulting demand. The Inovalon Specialist connected regulatory impacts to specific product capabilities. No single agent analyzed both the cost side and the compensating demand side simultaneously — each saw only one side of the pump mechanism. The structural pattern becomes visible only when all four analytical lenses are overlaid. <strong>Evidence quality:

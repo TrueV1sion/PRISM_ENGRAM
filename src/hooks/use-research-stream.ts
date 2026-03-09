@@ -13,7 +13,7 @@
  * Returns a state object that drives the Research Canvas UI.
  */
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 // ─── Types ──────────────────────────────────────────────────
 
@@ -129,25 +129,30 @@ export function useResearchStream() {
     const findingIdRef = useRef(0);
 
     const startStream = useCallback((query: string, runId: string, urgency: string = "balanced") => {
+        // Guard: prevent re-triggering while already streaming
+        if (eventSourceRef.current) {
+            console.warn("[PRISM] startStream called while already streaming — ignoring");
+            return;
+        }
+
         // Reset state
         setState({ ...INITIAL_STATE, runId, isStreaming: true, phase: "think", phaseMessage: "Decomposing strategic question..." });
         findingIdRef.current = 0;
 
-        // Close existing connection
-        if (eventSourceRef.current) {
-            eventSourceRef.current.close();
-        }
-
         const params = new URLSearchParams({ query, runId, urgency });
-        const es = new EventSource(`/api/pipeline/stream?${params}`);
+        const url = `/api/pipeline/stream?${params}`;
+        console.log("[PRISM] startStream called, connecting to:", url);
+        const es = new EventSource(url);
         eventSourceRef.current = es;
+
+        es.onopen = () => console.log("[PRISM] SSE connection opened");
 
         // Phase changes
         es.addEventListener("phase_change", (e) => {
             const data = JSON.parse(e.data);
             setState(prev => ({
                 ...prev,
-                phase: data.phase as StreamPhase,
+                phase: (data.phase as string).toLowerCase() as StreamPhase,
                 phaseMessage: data.message,
             }));
         });
@@ -293,14 +298,21 @@ export function useResearchStream() {
             }));
         });
 
-        // Quality report
+        // Quality report (enriched with full QA system data)
         es.addEventListener("quality_report", (e) => {
             const data = JSON.parse(e.data);
+            const report: QualityReport = {
+                overallScore: data.overallScore ?? 0,
+                grade: data.grade ?? "?",
+                provenanceCompleteness: data.provenanceCompleteness ?? 0,
+                warningCount: data.warningCount ?? 0,
+                criticalWarnings: data.criticalWarnings ?? [],
+            };
             setState(prev => ({
                 ...prev,
                 phase: "qa",
-                phaseMessage: `Quality assessment: ${data.grade || "Scoring..."}`,
-                quality: data.grade ? data : prev.quality,
+                phaseMessage: `Quality assessment: Grade ${report.grade} (${report.overallScore}%)`,
+                quality: report,
             }));
         });
 
@@ -322,13 +334,18 @@ export function useResearchStream() {
                 },
             }));
             es.close();
+            eventSourceRef.current = null;
         });
 
-        // Error
+        // Error (custom server-sent error event from the pipeline)
+        // NOTE: Native connection errors also fire this listener but with no data.
+        // We only handle actual server-sent errors here — onerror handles connection issues.
         es.addEventListener("error", (e) => {
-            // Check if it's a custom error event or SSE connection error
+            const messageEvent = e as MessageEvent;
+            // Only handle if this is a server-sent error event (has data)
+            if (!messageEvent.data) return;
             try {
-                const data = JSON.parse((e as MessageEvent).data);
+                const data = JSON.parse(messageEvent.data);
                 setState(prev => ({
                     ...prev,
                     phase: "error",
@@ -336,34 +353,30 @@ export function useResearchStream() {
                     error: data.error,
                     isStreaming: false,
                 }));
+                es.close();
+                eventSourceRef.current = null;
             } catch {
-                // Connection error — SSE couldn't establish or was rejected (e.g. 500)
-                if (es.readyState === EventSource.CLOSED) {
-                    setState(prev => ({
-                        ...prev,
-                        phase: "error",
-                        phaseMessage: "Connection to pipeline failed",
-                        error: prev.error || "Pipeline connection failed. Check that ANTHROPIC_API_KEY is set in .env and the server is running.",
-                        isStreaming: false,
-                    }));
-                }
+                // Couldn't parse — ignore, let onerror handle it
             }
         });
 
-        es.onerror = () => {
-            if (es.readyState === EventSource.CLOSED) {
-                setState(prev => {
-                    // Only set error if we haven't already completed
-                    if (prev.phase === "complete" || prev.phase === "error") return prev;
-                    return {
-                        ...prev,
-                        phase: "error",
-                        phaseMessage: "Connection lost",
-                        error: prev.error || "Pipeline connection lost. Check server logs for details.",
-                        isStreaming: false,
-                    };
-                });
-            }
+        es.onerror = (err) => {
+            console.error("[PRISM] SSE connection error:", err, "readyState:", es.readyState);
+            // ALWAYS close to prevent native EventSource auto-reconnect
+            // which would re-hit the SSE endpoint and start a new pipeline run.
+            es.close();
+            eventSourceRef.current = null;
+            setState(prev => {
+                // Only set error if we haven't already completed
+                if (prev.phase === "complete" || prev.phase === "error") return prev;
+                return {
+                    ...prev,
+                    phase: "error",
+                    phaseMessage: "Connection lost",
+                    error: prev.error || "Pipeline connection lost. Check server logs for details.",
+                    isStreaming: false,
+                };
+            });
         };
     }, []);
 
@@ -379,6 +392,16 @@ export function useResearchStream() {
         stopStream();
         setState(INITIAL_STATE);
     }, [stopStream]);
+
+    // Cleanup: close SSE connection on unmount to prevent leaked connections
+    useEffect(() => {
+        return () => {
+            if (eventSourceRef.current) {
+                eventSourceRef.current.close();
+                eventSourceRef.current = null;
+            }
+        };
+    }, []);
 
     // HITL actions
     const setFindingAction = useCallback((findingId: string, action: StreamFinding["action"]) => {

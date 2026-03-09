@@ -7,8 +7,12 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient() {
-    const dbPath = path.join(process.cwd(), "prisma", "dev.db");
-    const adapter = new PrismaBetterSqlite3({ url: `file:${dbPath}` });
+    const defaultDbPath = path.join(process.cwd(), "prisma", "dev.db");
+    const connectionUrl = process.env.DATABASE_URL || `file:${defaultDbPath}`;
+
+    // PrismaBetterSqlite3 expects a URL object or string but in SQLite we can just pass the prisma client
+    // Note: the original code passed { url: file... }.
+    const adapter = new PrismaBetterSqlite3({ url: connectionUrl });
     return new PrismaClient({ adapter });
 }
 

@@ -40,6 +40,7 @@ export interface DeployInput {
   agents: ConstructedAgent[];
   blueprint: Blueprint;
   emitEvent: (event: PipelineEvent) => void;
+  signal?: AbortSignal;
 }
 
 export interface DeployOutput {
@@ -54,6 +55,31 @@ export interface AgentDeployResult {
   result: AgentResult | null;
   error?: string;
   warnings: string[];
+}
+
+// ─── Normalize AI Output ─────────────────────────────────────
+// AI models frequently return enum values in mixed case (e.g. "Primary" instead of "PRIMARY").
+// Normalize before Zod validation to prevent spurious failures.
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function normalizeAgentOutput(data: any): void {
+  if (!data || typeof data !== "object") return;
+
+  // Default missing arrays
+  if (!Array.isArray(data.minorityViews)) data.minorityViews = [];
+  if (!Array.isArray(data.gaps)) data.gaps = [];
+  if (!Array.isArray(data.signals)) data.signals = [];
+  if (!Array.isArray(data.toolsUsed)) data.toolsUsed = [];
+
+  // Normalize findings
+  if (Array.isArray(data.findings)) {
+    for (const f of data.findings) {
+      if (typeof f.sourceTier === "string") f.sourceTier = f.sourceTier.toUpperCase();
+      if (typeof f.confidence === "string") f.confidence = f.confidence.toUpperCase();
+      if (typeof f.evidenceType === "string") f.evidenceType = f.evidenceType.toLowerCase();
+      if (!Array.isArray(f.tags)) f.tags = [];
+    }
+  }
 }
 
 // ─── AgentResult JSON Schema for submit_findings tool ────────
@@ -79,7 +105,7 @@ function getAgentResultJsonSchema(): Record<string, unknown> {
  * CRITIC-FACTUAL always runs last, after all other agents.
  */
 export async function deploy(input: DeployInput): Promise<DeployOutput> {
-  const { agents, blueprint, emitEvent } = input;
+  const { agents, blueprint, emitEvent, signal } = input;
 
   const mcpManager = getMCPManager();
   await mcpManager.initialize();
@@ -98,6 +124,10 @@ export async function deploy(input: DeployInput): Promise<DeployOutput> {
   let agentResults: AgentResult[];
 
   if (useWaves) {
+    // Check abort before starting wave execution
+    if (signal?.aborted) {
+      return { agentResults: [] };
+    }
     agentResults = await executeTwoWaves(
       regularAgents,
       blueprint,
@@ -105,6 +135,10 @@ export async function deploy(input: DeployInput): Promise<DeployOutput> {
       mcpManager,
     );
   } else {
+    // Check abort before starting parallel execution
+    if (signal?.aborted) {
+      return { agentResults: [] };
+    }
     // Standard parallel execution for MICRO/STANDARD
     agentResults = await executeParallel(
       regularAgents,
@@ -117,7 +151,7 @@ export async function deploy(input: DeployInput): Promise<DeployOutput> {
 
   let criticResult: AgentResult | undefined;
 
-  if (criticAgents.length > 0) {
+  if (criticAgents.length > 0 && !signal?.aborted) {
     const criticAgent = criticAgents[0];
 
     // Build the top 10 claims from all agent findings for verification
@@ -479,6 +513,9 @@ async function executeAgent(
           : [];
         submitFindingsInput.gaps = [...existingGaps, ...mcpGaps];
       }
+
+      // Normalize AI output — models frequently return enum values in mixed case
+      normalizeAgentOutput(submitFindingsInput);
 
       const result = AgentResultSchema.parse(submitFindingsInput);
       return result;

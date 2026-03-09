@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRISM Strategic Brief — GLP-1 Impact on Payer MLR 2026</title>
+<style>
+:root {
+  --inov-navy: #003D79;
+  --inov-cerulean: #4E84C4;
+  --inov-sky: #59DDFD;
+  --inov-midnight: #001E3C;
+  --inov-jade: #00E49F;
+  --inov-sand: #F5E6BB;
+  --inov-violet: #6C6CFF;
+  --inov-cloud: #F4F0EA;
+  --bg-primary: #0a0b10;
+  --bg-secondary: #10121a;
+  --bg-tertiary: #181b26;
+  --bg-elevated: #1e2130;
+  --bg-card: rgba(30,33,48,0.85);
+  --text-primary: #f0f2f8;
+  --text-secondary: #a0a8c0;
+  --text-tertiary: #5c6480;
+  --accent: #4E84C4;
+  --accent-bright: #59DDFD;
+  --accent-success: #00E49F;
+  --accent-warning: #F5E6BB;
+  --accent-error: #ff5c5c;
+  --accent-violet: #6C6CFF;
+  --border: rgba(78,132,196,0.12);
+  --border-bright: rgba(89,221,253,0.25);
+  --chart-1: #003D79; --chart-2: #4E84C4; --chart-3: #59DDFD;
+  --chart-4: #001E3C; --chart-5: #00E49F; --chart-6: #F5E6BB;
+  --chart-7: #6C6CFF; --chart-8: #F4F0EA;
+  --text-xs: clamp(0.65rem,0.6rem + 0.2vw,0.8rem);
+  --text-sm: clamp(0.8rem,0.74rem + 0.3vw,1rem);
+  --text-base: clamp(1rem,0.92rem + 0.4vw,1.2rem);
+  --text-lg: clamp(1.2rem,1.1rem + 0.5vw,1.5rem);
+  --text-xl: clamp(1.5rem,1.35rem + 0.65vw,1.9rem);
+  --text-2xl: clamp(1.9rem,1.7rem + 0.85vw,2.5rem);
+  --text-3xl: clamp(2.4rem,2.1rem + 1.1vw,3.2rem);
+  --text-hero: clamp(3.2rem,2.8rem + 1.6vw,4.5rem);
+  --ease-out-expo: cubic-bezier(0.16,1,0.3,1);
+  --ease-out-quart: cubic-bezier(0.25,1,0.5,1);
+  --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+  --dur-fast: 200ms;
+  --dur-normal: 350ms;
+  --dur-slow: 600ms;
+  --dur-cinematic: 1000ms;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+html{scroll-snap-type:y mandatory;overflow-y:scroll;scroll-behavior:smooth;background:var(--bg-primary);}
+
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:var(--text-primary);background:var(--bg-primary);line-height:1.6;}
+
+.slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;padding:3rem 5vw;overflow:hidden;}
+
+.slide-inner{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:2;}
+
+.slide-bg-glow{position:absolute;width:600px;height:600px;border-radius:50%;filter:blur(120px);opacity:0.08;z-index:0;pointer-events:none;}
+
+/* Fixed UI */
+#slideProgress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--inov-navy),var(--inov-cerulean),var(--inov-sky));z-index:100;transition:width 0.3s var(--ease-out-quart);width:0%;}
+
+.prism-mark{position:fixed;top:1.5rem;left:2rem;font-size:var(--text-xs);font-weight:700;letter-spacing:0.25em;color:var(--accent);z-index:100;text-transform:uppercase;}
+
+.slide-counter{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:1001;font-size:11px;color:var(--text-tertiary);letter-spacing:2px;font-weight:600;background:rgba(10,11,16,0.85);padding:4px 14px;border-radius:20px;border:1px solid var(--border);backdrop-filter:blur(8px);opacity:0;transition:opacity 0.3s;}
+
+.slide-counter.visible{opacity:1;}
+
+.slide-nav-hint{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);z-index:1001;font-size:10px;color:var(--text-tertiary);letter-spacing:1px;text-align:center;opacity:0;transition:opacity 1s;pointer-events:none;}
+
+.slide-nav-hint.show{opacity:0.6;}
+
+/* Nav Panel */
+.nav-toggle{position:fixed;top:20px;right:20px;z-index:1000;width:44px;height:44px;border-radius:50%;background:rgba(78,132,196,0.15);border:1px solid rgba(78,132,196,0.3);color:var(--accent);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;backdrop-filter:blur(12px);transition:all 0.3s;}
+.nav-toggle:hover{background:rgba(78,132,196,0.3);transform:scale(1.05);}
+
+.nav-panel{position:fixed;top:0;right:-340px;width:320px;height:100vh;background:rgba(10,11,16,0.97);border-left:1px solid var(--border);z-index:999;transition:right 0.35s ease;overflow-y:auto;padding:70px 20px 30px;backdrop-filter:blur(20px);}
+.nav-panel.open{right:0;}
+.nav-panel h3{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:all 0.2s;text-decoration:none;margin-bottom:2px;color:var(--text-primary);}
+.nav-item:hover{background:rgba(78,132,196,0.1);}
+.nav-item .nav-num{font-size:10px;color:var(--text-tertiary);min-width:24px;font-weight:700;}
+.nav-item .nav-label{font-size:12.5px;color:var(--text-primary);font-weight:500;}
+.nav-item .nav-tag{font-size:8px;color:var(--accent-warning);font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+
+.nav-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:998;display:none;}
+.nav-overlay.open{display:block;}
+
+/* Animations */
+.anim{opacity:0;transform:translateY(24px);transition:opacity var(--dur-slow) var(--ease-out-expo),transform var(--dur-slow) var(--ease-out-expo);}
+.anim.visible{opacity:1;transform:translateY(0);}
+.anim.d1{transition-delay:100ms;}
+.anim.d2{transition-delay:200ms;}
+.anim.d3{transition-delay:300ms;}
+.anim.d4{transition-delay:400ms;}
+.anim.d5{transition-delay:500ms;}
+.anim.d6{transition-delay:600ms;}
+.anim.d7{transition-delay:700ms;}
+
+/* Typography */
+.eyebrow{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:0.2em;color:var(--text-tertiary);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;}
+
+.slide-title{font-size:var(--text-3xl);font-weight:700;line-height:1.15;background:linear-gradient(135deg,var(--text-primary) 0%,var(--accent-bright) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;}
+
+.slide-subtitle{font-size:var(--text-sm);color:var(--text-secondary);max-width:700px;margin-bottom:1.5rem;line-height:1.7;}
+
+.section-intro{font-size:13.5px;line-height:1.7;max-width:800px;margin-bottom:20px;color:var(--text-secondary);}
+
+/* Tags */
+.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
+.tag-red{background:rgba(255,92,92,0.15);color:var(--accent-error);}
+.tag-green{background:rgba(0,228,159,0.15);color:var(--accent-success);}
+.tag-blue{background:rgba(78,132,196,0.15);color:var(--accent);}
+.tag-orange{background:rgba(249,115,22,0.15);color:#f97316;}
+.tag-purple{background:rgba(108,108,255,0.15);color:var(--accent-violet);}
+.tag-gold{background:rgba(245,230,187,0.15);color:var(--accent-warning);}
+.tag-cyan{background:rgba(89,221,253,0.15);color:var(--accent-bright);}
+
+.financial{background:rgba(0,228,159,0.15);color:var(--accent-success);}
+.regulatory{background:rgba(255,92,92,0.15);color:var(--accent-error);}
+.clinical{background:rgba(89,221,253,0.15);color:var(--accent-bright);}
+.strategic{background:rgba(108,108,255,0.15);color:var(--accent-violet);}
+.analytical{background:rgba(78,132,196,0.15);color:var(--accent);}
+
+/* Agent Chip */
+.agent-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:var(--text-xs);font-weight:600;background:rgba(255,255,255,0.04);border:1px solid var(--border);margin:3px;}
+.agent-chip .dot{width:6px;height:6px;border-radius:50%;display:inline-block;}
+
+/* Confidence Badge */
+.confidence-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:9.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;}
+.confidence-badge.high{background:rgba(0,228,159,0.15);color:var(--accent-success);}
+.confidence-badge.medium{background:rgba(245,230,187,0.15);color:var(--accent-warning);}
+.confidence-badge.low{background:rgba(255,92,92,0.15);color:var(--accent-error);}
+
+/* Stat Cards */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:1rem;}
+
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;backdrop-filter:blur(12px);transition:transform 0.2s;position:relative;}
+.stat-card:hover{transform:translateY(-2px);}
+.stat-label{font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-tertiary);margin-bottom:0.5rem;font-weight:700;}
+.stat-value{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;line-height:1;margin-bottom:0.4rem;}
+.stat-value.negative{color:var(--accent-error);}
+.stat-value.positive{color:var(--accent-success);}
+.stat-value.warn{color:var(--accent-warning);}
+.stat-value.blue{color:var(--accent);}
+.stat-value.cyan{color:var(--accent-bright);}
+.stat-value.purple{color:var(--accent-violet);}
+.stat-context{font-size:11px;color:var(--text-secondary);line-height:1.5;}
+
+/* Finding Cards */
+.finding-card{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin-bottom:1rem;backdrop-filter:blur(8px);}
+.finding-card.emergent{border-left-color:var(--accent-bright);}
+.finding-card.risk{border-left-color:var(--accent-error);}
+.finding-card.opportunity{border-left-color:var(--accent-success);}
+.finding-card.warn{border-left-color:var(--accent-warning);}
+.finding-card.purple{border-left-color:var(--accent-violet);}
+.finding-title{font-size:13.5px;font-weight:700;color:var(--text-primary);margin-bottom:6px;line-height:1.4;}
+.finding-body{font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:8px;}
+
+/* Policy Box */
+.policy-box{background:rgba(255,92,92,0.05);border:1px solid rgba(255,92,92,0.2);border-radius:10px;padding:12px 16px;margin:6px 0;}
+.policy-box.positive{background:rgba(0,228,159,0.05);border-color:rgba(0,228,159,0.2);}
+.policy-box.neutral{background:rgba(78,132,196,0.05);border-color:rgba(78,132,196,0.2);}
+.policy-box h4{font-size:11.5px;font-weight:700;color:var(--text-primary);margin-bottom:4px;}
+.policy-box p{font-size:11px;color:var(--text-secondary);line-height:1.5;margin-bottom:5px;}
+.impact{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;margin-top:5px;}
+.impact-severe{color:var(--accent-error);}
+.impact-moderate{color:var(--accent-warning);}
+.impact-positive{color:var(--accent-success);}
+.impact-neutral{color:var(--accent);}
+
+/* Comparison Bars */
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.bar-label{font-size:11.5px;color:var(--text-secondary);min-width:120px;font-weight:600;text-align:right;}
+.bar-track{flex:1;height:28px;background:rgba(255,255,255,0.04);border-radius:4px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ease-out-expo);display:flex;align-items:center;border-radius:4px;}
+.bar-fill.animate{transform:scaleX(1);}
+.bar-fill-value{font-size:10.5px;font-weight:700;color:rgba(255,255,255,0.9);padding-left:10px;white-space:nowrap;}
+
+/* Two Column */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:16px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px;}
+.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-top:16px;}
+
+/* Emergent Slide */
+.emergent-slide{background:linear-gradient(135deg,var(--bg-primary) 0%,rgba(89,221,253,0.03) 100%);}
+.emergent-number{font-size:var(--text-hero);font-weight:900;color:rgba(89,221,253,0.07);position:absolute;top:-20px;left:-10px;line-height:1;pointer-events:none;z-index:0;}
+.emergent-content{position:relative;z-index:2;}
+.emergent-why{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:12px;padding:1.5rem;margin-top:1.5rem;}
+.emergent-why-label{font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--accent-bright);font-weight:700;margin-bottom:8px;}
+
+/* Emergence Card */
+.emergence-card{background:linear-gradient(135deg,rgba(108,108,255,0.08),rgba(78,132,196,0.08));border:1px solid rgba(108,108,255,0.3);border-radius:14px;padding:20px;margin:8px 0;}
+.emergence-card h4{color:var(--accent-violet);font-size:14px;margin-bottom:8px;font-weight:700;line-height:1.4;}
+.emergence-card p{font-size:12px;color:var(--text-secondary);line-height:1.6;}
+
+/* Timeline */
+.timeline{display:flex;align-items:flex-start;gap:0;position:relative;margin-top:2rem;}
+.timeline::before{content:'';position:absolute;top:20px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent-error),var(--accent-warning),var(--accent-success));z-index:0;}
+.timeline-phase{flex:1;padding-top:40px;padding-right:16px;position:relative;z-index:1;}
+.timeline-dot{position:absolute;top:12px;left:0;width:18px;height:18px;border-radius:50%;border:2px solid var(--bg-primary);}
+.timeline-year{font-size:12px;font-weight:800;margin-bottom:4px;}
+.timeline-label{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:8px;}
+.timeline-items{font-size:11px;color:var(--text-secondary);line-height:1.7;}
+
+/* Provenance Table */
+.prov-table{width:100%;border-collapse:collapse;font-size:11.5px;}
+.prov-table th{background:rgba(78,132,196,0.1);color:var(--text-secondary);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);}
+.prov-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary);vertical-align:top;}
+.prov-table tr:hover td{background:rgba(78,132,196,0.04);}
+
+/* Threat Meter */
+.threat-meter{display:flex;gap:3px;align-items:center;}
+.threat-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.1);}
+.threat-dot.active-red{background:var(--accent-error);}
+.threat-dot.active-orange{background:#f97316;}
+.threat-dot.active-yellow{background:var(--accent-warning);}
+.threat-dot.active-green{background:var(--accent-success);}
+.threat-dot.active-blue{background:var(--accent);}
+
+/* Timeline Bar */
+.timeline-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;margin-top:5px;background:rgba(255,255,255,0.05);}
+.timeline-segment{height:100%;}
+.tl-done{background:var(--accent-success);}
+.tl-active{background:var(--accent-warning);}
+.tl-pending{background:rgba(255,255,255,0.1);}
+.pipeline-caption{font-size:9.5px;color:var(--text-tertiary);margin:3px 0 0;}
+
+/* Quote Block */
+.quote-block{border-left:3px solid var(--accent-warning);padding:10px 18px;margin:10px 0;background:rgba(245,230,187,0.05);border-radius:0 8px 8px 0;font-style:italic;color:var(--text-primary);font-size:13px;}
+.quote-attr{font-style:normal;font-size:11px;color:var(--text-secondary);margin-top:4px;}
+
+/* Slide Footer */
+.slide-footer{position:absolute;bottom:16px;left:40px;right:40px;display:flex;justify-content:space-between;font-size:10px;color:var(--text-tertiary);border-top:1px solid var(--border);padding-top:8px;}
+
+/* Source List */
+.source-list{margin-top:8px;font-size:9.5px;color:var(--text-tertiary);line-height:1.8;}
+.source-list a{color:var(--text-tertiary);text-decoration:none;font-size:9.5px;border-bottom:1px dotted rgba(78,132,196,0.3);}
+.source-list a:hover{color:var(--accent);}
+
+/* Source Unverified */
+.source-unverified{color:var(--accent-warning);font-size:0.75em;vertical-align:super;cursor:help;opacity:0.85;}
+.dagger-footnote{position:absolute;bottom:32px;left:5vw;right:5vw;font-size:9px;color:var(--text-tertiary);font-style:italic;border-top:1px solid var(--border);padding-top:6px;}
+
+/* Inovalon Header Banner */
+.inov-header{background:linear-gradient(135deg,rgba(78,132,196,0.1),rgba(0,228,159,0.1));border:1px solid rgba(78,132,196,0.2);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;}
+.inov-header h3{color:var(--accent);margin-bottom:4px;font-size:16px;}
+.inov-header p{font-size:12px;color:var(--text-secondary);}
+
+/* Hero Stats */
+.hero-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;max-width:1100px;margin:0 auto;}
+.hero-stat{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:22px 14px;text-align:center;transition:transform 0.2s;}
+.hero-stat:hover{transform:translateY(-2px);}
+.hero-stat .value{font-size:clamp(18px,2.5vw,26px);font-weight:800;margin-bottom:4px;}
+.hero-stat .label{font-size:10px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1.5px;line-height:1.4;}
+
+/* Hero Title */
+.hero-title{font-size:var(--text-3xl);font-weight:800;line-height:1.1;background:linear-gradient(135deg,#fff 0%,var(--inov-sky) 60%,var(--inov-cerulean) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;}
+.hero-sub{font-size:var(--text-base);color:var(--text-secondary);max-width:700px;margin:0 auto 0.75rem;line-height:1.6;}
+.hero-date{font-size:var(--text-xs);color:var(--text-tertiary);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;background:rgba(89,221,253,0.1);border:1px solid rgba(89,221,253,0.25);color:var(--accent-bright);margin-bottom:1.5rem;}
+
+/* Validation Box */
+.validation-box{display:flex;gap:16px;max-width:1100px;margin:24px auto 0;text-align:left;}
+.validation-card{flex:1;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:14px 18px;}
+.validation-card h4{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--accent-success);margin-bottom:8px;font-weight:700;}
+.validation-card.framework-card h4{color:var(--accent-violet);}
+.val-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11px;color:var(--text-secondary);}
+.val-icon{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;}
+.val-icon.green{background:rgba(0,228,159,0.2);color:var(--accent-success);}
+.val-icon.blue{background:rgba(78,132,196,0.2);color:var(--accent);}
+.framework-visual{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.fw-node{background:rgba(108,108,255,0.1);border:1px solid rgba(108,108,255,0.3);border-radius:6px;padding:3px 8px;font-size:9px;color:var(--accent-violet);font-weight:600;}
+.fw-arrow{color:var(--text-tertiary);font-size:10px;}
+.fw-center{background:linear-gradient(135deg,rgba(108,108,255,0.2),rgba(78,132,196,0.2));border:1px solid rgba(108,108,255,0.4);border-radius:8px;padding:4px 12px;font-size:10px;color:var(--text-primary);font-weight:700;}
+
+/* TOC */
+.toc-group-header{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);font-weight:700;}
+.toc-item{border:1px solid var(--border);border-radius:8px;margin-bottom:6px;display:flex;align-items:center;gap:10px;padding:9px 12px;text-decoration:none;color:var(--text-primary);transition:all 0.2s;}
+.toc-item:hover{background:rgba(78,132,196,0.1);border-color:rgba(78,132,196,0.3);}
+.toc-num{font-size:10px;color:var(--text-tertiary);min-width:22px;font-weight:700;}
+.toc-label{font-size:12px;color:var(--text-secondary);font-weight:500;}
+
+/* Compact Table */
+.compact-table{width:100%;border-collapse:collapse;font-size:11.5px;}
+.compact-table th{background:rgba(78,132,196,0.08);color:var(--text-secondary);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:9px 10px;text-align:left;border-bottom:1px solid var(--border);}
+.compact-table td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary);vertical-align:middle;}
+.compact-table tr:hover td{background:rgba(78,132,196,0.04);}
+
+/* Color utilities */
+.red{color:var(--accent-error);}
+.orange{color:#f97316;}
+.blue{color:var(--accent);}
+.green{color:var(--accent-success);}
+.purple{color:var(--accent-violet);}
+.gold{color:var(--accent-warning);}
+.white{color:var(--text-primary);}
+.cyan{color:var(--accent-bright);}
+.highlight{color:var(--text-primary);font-weight:600;}
+
+/* Card color variants */
+.card-accent{border-left:3px solid var(--accent-error);}
+.card-blue{border-left:3px solid var(--accent);}
+.card-green{border-left:3px solid var(--accent-success);}
+.card-gold{border-left:3px solid var(--accent-warning);}
+.card-purple{border-left:3px solid var(--accent-violet);}
+.card-cyan{border-left:3px solid var(--accent-bright);}
+
+/* Tension Box */
+.tension-col{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
+.tension-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.tension-col ul{padding-left:14px;}
+.tension-col li{font-size:12px;color:var(--text-secondary);margin-bottom:8px;line-height:1.5;}
+.resolution-box{background:rgba(108,108,255,0.06);border:1px solid rgba(108,108,255,0.2);border-radius:10px;padding:14px;margin-top:16px;}
+.resolution-box h4{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-violet);margin-bottom:6px;font-weight:700;}
+.resolution-box p{font-size:12px;color:var(--text-secondary);line-height:1.6;}
+
+/* SVG Charts */
+.chart-container{position:relative;width:100%;}
+.bar-chart .bar{transform-origin:bottom;transform:scaleY(0);transition:transform 0.7s var(--ease-out-expo),opacity 0.3s;}
+.bar-chart.is-visible .bar{transform:scaleY(1);}
+.bar-chart .bar:nth-child(1){transition-delay:0.05s;}
+.bar-chart .bar:nth-child(2){transition-delay:0.15s;}
+.bar-chart .bar:nth-child(3){transition-delay:0.25s;}
+.bar-chart .bar:nth-child(4){transition-delay:0.35s;}
+.bar-chart .bar:nth-child(5){transition-delay:0.45s;}
+.bar-chart .bar:hover{opacity:0.8;}
+
+.line-chart .clip-rect{transition:width 1.5s var(--ease-out-expo);}
+.line-chart.is-visible .clip-rect{width:520px;}
+.line-chart .data-point{transform:scale(0);transition:transform 0.4s var(--ease-spring);}
+.line-chart.is-visible .data-point{transform:scale(1);transition-delay:1.3s;}
+
+.stat-number{font-size:clamp(32px,5vw,56px);font-weight:800;color:var(--accent-bright);line-height:1;}
+.stat-suffix{font-size:clamp(20px,3vw,32px);font-weight:700;color:var(--accent-bright);}
+.stat-eyebrow{display:block;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-tertiary);margin-bottom:4px;}
+.stat-trend{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin-top:6px;}
+.stat-trend.positive{background:rgba(0,228,159,0.15);color:var(--accent-success);}
+.stat-trend.negative{background:rgba(255,92,92,0.15);color:var(--accent-error);}
+.stat-trend.neutral{background:rgba(78,132,196,0.15);color:var(--accent);}
+
+/* Gap items */
+.gap-item{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:10px;}
+.gap-item h4{font-size:12px;font-weight:700;color:var(--text-primary);margin-bottom:4px;}
+.gap-item p{font-size:11px;color:var(--text-secondary);line-height:1.5;}
+.gap-severity{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;border-radius:4px;margin-bottom:6px;}
+.gap-critical{background:rgba(255,92,92,0.15);color:var(--accent-error);}
+.gap-important{background:rgba(245,230,187,0.15);color:var(--accent-warning);}
+.gap-methodological{background:rgba(78,132,196,0.15);color:var(--accent);}
+
+/* Scenario Matrix Table */
+.scenario-table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:12px;}
+.scenario-table th{background:rgba(78,132,196,0.1);padding:10px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-secondary);border-bottom:1px solid var(--border);}
+.scenario-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary);}
+.scenario-table .bull{color:var(--accent-success);font-weight:700;}
+.scenario-table .base{color:var(--accent-warning);font-weight:700;}
+.scenario-table .bear{color:var(--accent-error);font-weight:700;}
+.scenario-table tr:hover td{background:rgba(78,132,196,0.04);}
+
+/* Gradient text spans */
+.grad-cyan{background:linear-gradient(135deg,var(--text-primary),var(--accent-bright));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.grad-red{background:linear-gradient(135deg,var(--text-primary),var(--accent-error));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.grad-green{background:linear-gradient(135deg,var(--text-primary),var(--accent-success));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.grad-violet{background:linear-gradient(135deg,var(--text-primary),var(--accent-violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* Lob risk badge */
+.lob-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;margin:3px;}
+
+/* Summary number blocks */
+.big-number-block{text-align:center;padding:16px 12px;}
+.big-number-block .num{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1;}
+.big-number-block .sublabel{font-size:10px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;}
+
+/* Responsive */
+@media (max-width:1024px){
+  .slide{padding:40px 30px;}
+  .hero-stats{grid-template-columns:repeat(3,1fr);}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+  .validation-box{flex-direction:column;}
+  .two-col{grid-template-columns:1fr;}
+  .nav-toggle{top:12px;right:12px;}
+}
+@media (max-width:768px){
+  .two-col{grid-template-columns:1fr;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .timeline{flex-direction:column;}
+  .slide-footer{left:20px;right:20px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- Fixed UI -->
+<div id="slideProgress"></div>
+<div class="prism-mark">PRISM Intelligence</div>
+<div class="slide-counter" id="slideCounter">01 / 17</div>
+<div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Spacebar to navigate &#8595;</div>
+
+<!-- Navigation Panel -->
+<button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents">&#9776;</button>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+<div class="nav-panel" id="navPanel">
+  <h3>Table of Contents</h3>
+  <a class="nav-item" href="#s1" onclick="toggleNav()"><span class="nav-num">01</span><span class="nav-label">Title &amp; Overview</span></a>
+  <a class="nav-item" href="#s2" onclick="toggleNav()"><span class="nav-num">02</span><span class="nav-label">Intelligence Map</span></a>
+  <a class="nav-item" href="#s3" onclick="toggleNav()"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+  <a class="nav-item" href="#s4" onclick="toggleNav()"><span class="nav-num">04</span><span class="nav-label">GLP-1 Pricing &amp; Net Costs</span></a>
+  <a class="nav-item" href="#s5" onclick="toggleNav()"><span class="nav-num">05</span><span class="nav-label">MLR Impact Modeling</span></a>
+  <a class="nav-item" href="#s6" onclick="toggleNav()"><span class="nav-num">06</span><span class="nav-label">Scenario Matrix</span></a>
+  <a class="nav-item" href="#s7" onclick="toggleNav()"><span class="nav-num">07</span><span class="nav-label">Repricing &amp; UM Levers</span></a>
+  <a class="nav-item" href="#s8" onclick="toggleNav()"><span class="nav-num">08</span><span class="nav-label">Tension Points</span></a>
+  <a class="nav-item" href="#s9" onclick="toggleNav()"><span class="nav-num">09</span><span class="nav-label">Emergent: Max Exposure Window</span><span class="nav-tag">KEY</span></a>
+  <a class="nav-item" href="#s10" onclick="toggleNav()"><span class="nav-num">10</span><span class="nav-label">Emergent: MA Triple Squeeze</span><span class="nav-tag">KEY</span></a>
+  <a class="nav-item" href="#s11" onclick="toggleNav()"><span class="nav-num">11</span><span class="nav-label">Emergent: Obesity Paradox</span><span class="nav-tag">KEY</span></a>
+  <a class="nav-item" href="#s12" onclick="toggleNav()"><span class="nav-num">12</span><span class="nav-label">Emergent: Compounding Collision</span><span class="nav-tag">KEY</span></a>
+  <a class="nav-item" href="#s13" onclick="toggleNav()"><span class="nav-num">13</span><span class="nav-label">Strategic Timeline</span></a>
+  <a class="nav-item" href="#s14" onclick="toggleNav()"><span class="nav-num">14</span><span class="nav-label">Critical Unknowns</span></a>
+  <a class="nav-item" href="#s15" onclick="toggleNav()"><span class="nav-num">15</span><span class="nav-label">Provenance &amp; Confidence</span></a>
+  <a class="nav-item" href="#s16" onclick="toggleNav()"><span class="nav-num">16</span><span class="nav-label">Payer Action Playbook</span></a>
+  <a class="nav-item" href="#s17" onclick="toggleNav()"><span class="nav-num">17</span><span class="nav-label">Gaps &amp; Next Steps</span></a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 01 — TITLE
+═══════════════════════════════════════════════════ -->
+<section class="slide" id="s1" style="background:linear-gradient(160deg,#0a0b10 0%,#0d1520 60%,#0a0b10 100%);text-align:center;">
+  <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-150px;right:-100px;"></div>
+  <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-200px;left:-150px;opacity:0.05;"></div>
+  <div class="slide-inner">
+    <div class="anim"><div class="hero-badge">&#9670; PRISM Multi-Source Validated · MEDIUM Confidence</div></div>
+    <h1 class="hero-title anim d1">GLP-1 Drugs &amp; Payer MLR<br>Impact in 2026</h1>
+    <p class="hero-sub anim d2">Quantitative pressure analysis across Medicare Advantage, Commercial, and Medicaid lines of business — pricing dynamics, net cost exposure, scenario modeling, and emergent systemic risks.</p>
+    <p class="hero-date anim d3">2025 Strategic Intelligence Brief · 2-Agent Swarm · PRIMARY &amp; SECONDARY Sources</p>
+    <div class="anim d4" style="margin-top:1.5rem;">
+      <span class="agent-chip"><span class="dot" style="background:var(--accent-bright)"></span>GLP-1 Pricing &amp; Economics</span>
+      <span class="agent-chip"><span class="dot" style="background:var(--accent-success)"></span>MLR Financial Modeling</span>
+    </div>
+    <div class="hero-stats anim d5" style="margin-top:2.5rem;">
+      <div class="hero-stat">
+        <div class="value" style="color:var(--accent-error);">+100–150<span style="font-size:16px;"> bps</span></div>
+        <div class="label">Commercial Fully-Insured Base Case</div>
+      </div>
+      <div class="hero-stat">
+        <div class="value" style="color:var(--accent-error);">+80–120<span style="font-size:16px;"> bps</span></div>
+        <div class="label">MA Base Case (Repricing Constrained)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="value" style="color:var(--accent-warning);">$900–$1,350</div>
+        <div class="label">GLP-1 WAC/Month (List Price Range)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="value" style="color:var(--accent-bright);">2026</div>
+        <div class="label">Maximum Exposure Window — All Mitigants Immature</div>
+      </div>
+      <div class="hero-stat">
+        <div class="value" style="color:var(--accent-error);">90.4%</div>
+        <div class="label">Humana MA MLR Baseline (2024 10-K)</div>
+      </div>
+    </div>
+    <div class="validation-box anim d6">
+      <div class="validation-card">
+        <h4>&#10003; Validation Methodology</h4>
+        <div class="val-row"><span class="val-icon green">&#10003;</span>PRIMARY sources: CMS rulemaking, manufacturer 10-Ks, IRA statutory text, UHG/Humana/CVS/Aetna 10-Ks</div>
+        <div class="val-row"><span class="val-icon green">&#10003;</span>SECONDARY sources: IQVIA market data, KFF analysis, MedPAC reports, Mercer employer surveys</div>
+        <div class="val-row"><span class="val-icon blue">&#9673;</span>Net rebate amounts confidential — ranges from secondary analysis; bps estimates MEDIUM confidence</div>
+        <div class="val-row"><span class="val-icon blue">&#9673;</span>Critic revision applied: compounding migration estimate illustrative; MA solvency a stress test scenario</div>
+      </div>
+      <div class="validation-card framework-card">
+        <h4>&#9670; PRISM Processing Framework</h4>
+        <p style="font-size:10px;color:var(--text-secondary);margin-bottom:8px;">5-layer intelligence pyramid: Foundation → Convergence → Tension → Emergence → Gaps</p>
+        <div class="framework-visual">
+          <span class="fw-node">GLP-1 Pricing</span>
+          <span class="fw-node">MLR Modeling</span>
+          <span class="fw-arrow">&#8594;</span>
+          <span class="fw-center">Cross-Agent Synthesis</span>
+          <span class="fw-arrow">&#8594;</span>
+          <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success);">4 Emergent Insights</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 02 — TABLE OF CONTENTS
+═══════════════════════════════════════════════════ -->
+<section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+  <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;left:-100px;"></div>
+  <div class="slide-inner">
+    <h2 class="slide-title anim">Executive <span style="color:var(--accent)">Intelligence Map</span></h2>
+    <p class="section-intro anim d1">17-slide analysis spanning GLP-1 pricing dynamics, MLR scenario modeling, 4 emergent insights, and strategic action frameworks for 2026 payer planning.</p>
+    <div class="grid-3 anim d2">
+      <div>
+        <h3 class="toc-group-header">Foundation &amp; Dimensions</h3>
+        <a class="toc-item" href="#s3"><span class="toc-num">03</span><span class="toc-label">Executive Summary &amp; Key Signals</span></a>
+        <a class="toc-item" href="#s4"><span class="toc-num">04</span><span class="toc-label">GLP-1 Pricing, Rebates &amp; Net Costs</span></a>
+        <a class="toc-item" href="#s5"><span class="toc-num">05</span><span class="toc-label">MLR Impact Modeling &amp; LOB Baselines</span></a>
+        <a class="toc-item" href="#s6"><span class="toc-num">06</span><span class="toc-label">Scenario Matrix by Line of Business</span></a>
+        <a class="toc-item" href="#s7"><span class="toc-num">07</span><span class="toc-label">Repricing Levers &amp; UM Response</span></a>
+        <a class="toc-item" href="#s8"><span class="toc-num">08</span><span class="toc-label">Tension Points &amp; Resolutions</span></a>
+      </div>
+      <div>
+        <h3 class="toc-group-header">Emergent Insights</h3>
+        <a class="toc-item" href="#s9"><span class="toc-num">09</span><span class="toc-label">&#9670; 2026 Maximum Exposure Window</span></a>
+        <a class="toc-item" href="#s10"><span class="toc-num">10</span><span class="toc-label">&#9670; MA Triple Squeeze</span></a>
+        <a class="toc-item" href="#s11"><span class="toc-num">11</span><span class="toc-label">&#9670; Obesity Coverage Paradox</span></a>
+        <a class="toc-item" href="#s12"><span class="toc-num">12</span><span class="toc-label">&#9670; Compounding Timing Collision</span></a>
+      </div>
+      <div>
+        <h3 class="toc-group-header">Strategy &amp; Methodology</h3>
+        <a class="toc-item" href="#s13"><span class="toc-num">13</span><span class="toc-label">Strategic Relief Timeline 2026–2031+</span></a>
+        <a class="toc-item" href="#s14"><span class="toc-num">14</span><span class="toc-label">Critical Unknowns &amp; Model Limits</span></a>
+        <a class="toc-item" href="#s15"><span class="toc-num">15</span><span class="toc-label">Provenance &amp; Confidence Audit</span></a>
+        <a class="toc-item" href="#s16"><span class="toc-num">16</span><span class="toc-label">Payer Action Playbook</span></a>
+        <a class="toc-item" href="#s17"><span class="toc-num">17</span><span class="toc-label">Gaps &amp; Recommended Next Steps</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 03 — EXECUTIVE SUMMARY
+═══════════════════════════════════════════════════ -->
+<section class="slide" id="s3" style="background:var(--bg-primary);">
+  <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-100px;right:-200px;"></div>
+  <div class="slide-inner">
+    <div class="eyebrow anim"><span class="tag analytical">Synthesis</span> Executive Summary</div>
+    <h2 class="slide-title anim d1">GLP-1s Will Move the Needle — <span class="grad-red">No Payer Escapes Neutral</span></h2>
+    <p class="slide-subtitle anim d2">Convergent finding from both analytical agents: every line of business faces a minimum +30–50 bps MLR headwind in 2026. The question is magnitude, not direction.</p>
+    <div class="stat-grid anim d3">
+      <div class="stat-card">
+        <div class="stat-label">Commercial Fully-Insured Base Case</div>
+        <div class="stat-value negative">+100–150 bps</div>
+        <div class="stat-context">Net MLR after repricing &amp; UM. Gross exposure 150–350 bps before mitigation.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Medicare Advantage Base Case</div>
+        <div class="stat-value negative">+80–120 bps</div>
+        <div class="stat-context">Only 15–25% repricing ability vs. CMS benchmarks. Humana already at 90.4%.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">MA Bear Case (CMS Obesity Mandate)</div>
+        <div class="stat-value negative">+180–280 bps</div>
+        <div class="stat-context">Triggers CMS financial review at 93%+ MLR for stressed plans.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Medicaid MCO Base Case</div>
+        <div class="stat-value warn">+50–90 bps</div>
+        <div class="stat-context">State PDLs restrict access but rate-setting lags create unpriced demand shocks.</div>
+      </div>
+    </div>
+    <div class="grid-2 anim d4" style="margin-top:1.25rem;">
+      <div class="finding-card emergent">
+        <div class="finding-title">&#9670; Foundation Consensus: 2026 Has No Relief Valve</div>
+        <div class="finding-body">Biosimilars arrive 2031+. IRA negotiated price effective 2027. Clinical offsets require 2–5 years. Premium repricing lags 12–18 months. CMS regulatory adjustment lags 2–3 years. Every mitigating mechanism is simultaneously immature in 2026.</div>
+        <span class="confidence-badge high">High — Dual Agent Convergence</span>
+      </div>
+      <div class="finding-card risk">
+        <div class="finding-title">&#9888; Uncontested: Obesity Indication Costs ~2× Diabetes Net Price</div>
+        <div class="finding-body">Commercial rebate leverage for obesity (Wegovy/Zepbound OB indication) yields only 20–35% off WAC vs. 40–55% for diabetes. Any payer expanding obesity coverage without dedicated rebate negotiation faces immediate ~150–250 bps MLR deterioration for covered population.</div>
+        <span class="confidence-badge high">High — Primary Source (CMS MDRP + Manufacturer Disclosures)</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Synthesis Layer — Foundation + Convergence | 16 findings | Confidence: 0.75</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE 04 — GLP-1 PRICING AGENT
+═══════════════════════════════════════════════════ -->
+<section class="slide" id="s4" style="background:var(--bg-secondary);">
+  <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-150px;left:-100px;"></div>
+  <div class="slide-inner">
+    <div class="eyebrow anim"><span class="tag financial">Financial</span> GLP-1 Pricing &amp; Economics Agent · 8 Findings</div>
+    <h2 class="slide-title anim d1">True Net Cost Exposure: <span class="grad-green">WAC Is Not the Story</span></h2>
+    <p class="slide-subtitle anim d2">List prices anchor gross-to-net calculations, but actual payer cost exposure depends on indication, channel, and rebate leverage. The 2× diabetes/obesity differential is the critical cost driver.</p>
+    <div class="two-col anim d3">
+      <div>
+        <div class="finding-card opportunity">
+          <div class="finding-title">WAC Range 2024–2025: $900–$1,350/Month</div>
+          <div class="finding-body">Wegovy (semaglutide OB) WAC ~$1,349/mo. Zepbound (tirzepatide) ~$1,060/mo. Ozempic (semaglutide DM) ~$935/mo. Net-after-rebate: <span class="highlight">$270–$800/mo depending on channel and indication.</span></div>
+          <span class="confidence-badge high">High — Manufacturer Disclosures / CMS</span>
+        </div>
+        <div class="finding-card warn">
+          <div class="finding-title">Obesity Rebates ~Half of Diabetes Rebates</div>
+          <div class="finding-body">Commercial diabetes GLP-1s: 40–55% off WAC. Obesity indications: 20–35% off WAC (limited formulary competition). Effective net: <span class="red">~$1,012/mo for obesity vs. ~$500/mo for diabetes</span> — a 2× differential that directly drives payer coverage hesitancy.</div>
+          <span class="confidence-badge medium">Medium — IQVIA / Secondary Analysis</span>
+        </div>
+        <div class="finding-card risk">
+          <div class="finding-title">IRA Catastrophic Tier: 4× Per-Beneficiary Plan Liability</div>
+          <div class="finding-body">Pre-IRA plan sponsor liability in catastrophic phase: 15%. Post-IRA (2025): 60%. A Medicare beneficiary on Wegovy now generates <span class="red">$7,200–$9,600/year in plan sponsor catastrophic liability</span> vs. $1,800–$2,400 pre-IRA.</div>
+          <span class="confidence-badge high">High — IRA Statutory Text / CMS 2025 Part D Final Rule</span>
+        </div>
+      </div>
+      <div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1rem;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-tertiary);margin-bottom:12px;font-weight:700;">NET COST BY INDICATION (EST.)</div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:10px;">Ozempic DM</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:42%;background:linear-gradient(90deg,var(--accent-success),#00b87a);">
+                <span class="bar-fill-value">~$500/mo net</span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-

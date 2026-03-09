@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Strategic Brief — Inovalon Market Position & Competitive Intelligence</title>
+  <link rel="stylesheet" href="/styles/presentation.css">
+</head>
+<body>
+
+  <div id="slideProgress"></div>
+  <div class="prism-mark">PRISM Intelligence</div>
+  <div class="slide-counter" id="slideCounter">01 / 18</div>
+  <div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+
+  <button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents" aria-label="Open table of contents">&#9776;</button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <div class="nav-panel" id="navPanel">
+    <h3>Table of Contents</h3>
+
+    <a class="nav-item" href="#s1" onclick="toggleNav()">
+      <span class="nav-num">01</span>
+      <span class="nav-label">Executive Brief</span>
+      <span class="nav-tag">TITLE</span>
+    </a>
+    <a class="nav-item" href="#s2" onclick="toggleNav()">
+      <span class="nav-num">02</span>
+      <span class="nav-label">Intelligence Map</span>
+    </a>
+    <a class="nav-item" href="#s3" onclick="toggleNav()">
+      <span class="nav-num">03</span>
+      <span class="nav-label">Executive Summary</span>
+    </a>
+
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);padding:10px 12px 4px;margin-top:6px;">Company &amp; Platform</div>
+    <a class="nav-item" href="#s4" onclick="toggleNav()">
+      <span class="nav-num">04</span>
+      <span class="nav-label">Inovalon Company Deep Dive</span>
+    </a>
+    <a class="nav-item" href="#s5" onclick="toggleNav()">
+      <span class="nav-num">05</span>
+      <span class="nav-label">ONE® Platform &amp; Data Moat</span>
+    </a>
+
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);padding:10px 12px 4px;margin-top:6px;">Market Dynamics</div>
+    <a class="nav-item" href="#s6" onclick="toggleNav()">
+      <span class="nav-num">06</span>
+      <span class="nav-label">Healthcare IT Market Dynamics</span>
+    </a>
+    <a class="nav-item" href="#s7" onclick="toggleNav()">
+      <span class="nav-num">07</span>
+      <span class="nav-label">Growth Vectors &amp; Opportunities</span>
+    </a>
+
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);padding:10px 12px 4px;margin-top:6px;">PE &amp; Financial Strategy</div>
+    <a class="nav-item" href="#s8" onclick="toggleNav()">
+      <span class="nav-num">08</span>
+      <span class="nav-label">PE Ownership &amp; Financial Structure</span>
+    </a>
+    <a class="nav-item" href="#s9" onclick="toggleNav()">
+      <span class="nav-num">09</span>
+      <span class="nav-label">Exit Strategy &amp; Scenarios</span>
+    </a>
+
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);padding:10px 12px 4px;margin-top:6px;">Tension &amp; Emergence</div>
+    <a class="nav-item" href="#s10" onclick="toggleNav()">
+      <span class="nav-num">10</span>
+      <span class="nav-label">MA Market Tension</span>
+    </a>
+    <a class="nav-item" href="#s11" onclick="toggleNav()">
+      <span class="nav-num">11</span>
+      <span class="nav-label">Emergent: PE Timing Doom Loop</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s12" onclick="toggleNav()">
+      <span class="nav-num">12</span>
+      <span class="nav-label">Emergent: Regulatory Treadmill</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s13" onclick="toggleNav()">
+      <span class="nav-num">13</span>
+      <span class="nav-label">Emergent: Acquirer Paradox</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s14" onclick="toggleNav()">
+      <span class="nav-num">14</span>
+      <span class="nav-label">Emergent: Data Moat Three Tiers</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);padding:10px 12px 4px;margin-top:6px;">Strategic Outlook</div>
+    <a class="nav-item" href="#s15" onclick="toggleNav()">
+      <span class="nav-num">15</span>
+      <span class="nav-label">Strategic Timeline</span>
+    </a>
+    <a class="nav-item" href="#s16" onclick="toggleNav()">
+      <span class="nav-num">16</span>
+      <span class="nav-label">Competitive Landscape</span>
+    </a>
+    <a class="nav-item" href="#s17" onclick="toggleNav()">
+      <span class="nav-num">17</span>
+      <span class="nav-label">Provenance &amp; Confidence</span>
+    </a>
+    <a class="nav-item" href="#s18" onclick="toggleNav()">
+      <span class="nav-num">18</span>
+      <span class="nav-label">Gaps &amp; Next Steps</span>
+    </a>
+  </div>
+
+  <!-- SLIDE 01: TITLE -->
+  <section class="slide title-slide" id="s1">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-200px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-300px;left:-200px;"></div>
+    <div class="slide-inner" style="text-align:center;">
+      <div class="anim">
+        <div class="hero-badge">PRISM Multi-Source Validated · EXTENDED Tier · 3-Agent Swarm</div>
+      </div>
+      <h1 class="hero-title anim d1">Inovalon: Market Position,<br>Competitive Landscape &amp; Growth</h1>
+      <p class="hero-sub anim d2">A multi-agent intelligence synthesis across company fundamentals, market dynamics, and PE financial strategy — with emergent insights visible only through cross-agent synthesis.</p>
+      <p class="hero-date anim d3">2024 Analysis Window · 3-Agent Swarm · MEDIUM Overall Confidence · 24 Verified Findings</p>
+      <div class="anim d3" style="margin-top:1.5rem;">
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-bright)"></span>Inovalon Entity Researcher</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-success)"></span>Healthcare IT Market Futurist</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-violet)"></span>PE Transaction Analyst</span>
+      </div>
+      <div class="anim d4" style="margin-top:2rem;">
+        <div class="hero-stats" style="grid-template-columns:repeat(5,1fr);">
+          <div class="hero-stat">
+            <div class="value red">$7.3B</div>
+            <div class="label">Take-Private Valuation</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value cyan">$35–45B</div>
+            <div class="label">2024 Addressable TAM</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value gold">33.8M</div>
+            <div class="label">MA Enrollees (2024)</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value orange">~$260M</div>
+            <div class="label">Est. Annual Debt Service</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value green">5</div>
+            <div class="label">Emergent Insights Found</div>
+          </div>
+        </div>
+      </div>
+      <div class="anim d5" style="margin-top:1.5rem;">
+        <div class="validation-box">
+          <div class="validation-card">
+            <h4>&#10003; Validation Methodology</h4>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>SEC filings &amp; Nordic Capital press releases corroborate acquisition fundamentals</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>KFF, CBO, MedPAC primary data anchor MA enrollment projections</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Source Independence Test applied to all CONVERGENCE layer findings</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Post-privatization claims explicitly discounted — MEDIUM confidence ceiling</div>
+          </div>
+          <div class="validation-card framework-card">
+            <h4>&#9670; PRISM Processing Framework</h4>
+            <p style="font-size:10px;color:var(--text-secondary);margin-bottom:8px;">3-agent swarm with 5-layer synthesis pyramid — Foundation → Convergence → Tension → Emergence → Gap</p>
+            <div class="framework-visual">
+              <span class="fw-node">RESEARCHER-DOMAIN</span>
+              <span class="fw-node">FUTURIST</span>
+              <span class="fw-node">ANALYST-FINANCIAL</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-center">Cross-Agent Synthesis</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success);">5 Emergent Insights</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence · Extended Brief · 3-Agent Swarm</span>
+      <span>Overall Confidence: MEDIUM · Post-Privatization Gap Acknowledged</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 02: TABLE OF CONTENTS -->
+  <section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;left:-100px;opacity:0.06;"></div>
+    <div class="slide-inner">
+      <h2 class="slide-title anim">Executive <span style="color:var(--accent);">Intelligence Map</span></h2>
+      <p class="section-intro anim d1">18-slide analysis spanning company fundamentals, market dynamics, PE financial strategy, and five emergent cross-agent insights. Navigate using arrow keys, spacebar, or the menu above.</p>
+      <div class="grid-3 anim d2">
+        <div>
+          <h3 class="toc-group-header" style="color:var(--accent-bright);">Company &amp; Platform</h3>
+          <a class="nav-item toc-item" href="#s3"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+          <a class="nav-item toc-item" href="#s4"><span class="nav-num">04</span><span class="nav-label">Company Deep Dive</span></a>
+          <a class="nav-item toc-item" href="#s5"><span class="nav-num">05</span><span class="nav-label">ONE® Platform &amp; Data Moat</span></a>
+          <h3 class="toc-group-header" style="color:var(--accent-success);margin-top:1.5rem;">Market Dynamics</h3>
+          <a class="nav-item toc-item" href="#s6"><span class="nav-num">06</span><span class="nav-label">Healthcare IT Market</span></a>
+          <a class="nav-item toc-item" href="#s7"><span class="nav-num">07</span><span class="nav-label">Growth Vectors</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header" style="color:var(--accent-violet);">PE &amp; Financial Strategy</h3>
+          <a class="nav-item toc-item" href="#s8"><span class="nav-num">08</span><span class="nav-label">PE Ownership &amp; Structure</span></a>
+          <a class="nav-item toc-item" href="#s9"><span class="nav-num">09</span><span class="nav-label">Exit Strategy &amp; Scenarios</span></a>
+          <h3 class="toc-group-header" style="color:var(--accent-warning);margin-top:1.5rem;">Tensions</h3>
+          <a class="nav-item toc-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">MA Market Tension</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header" style="color:var(--accent-bright);">Emergent Insights</h3>
+          <a class="nav-item toc-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">PE Doom Loop</span><span class="nav-tag">EMERGE</span></a>
+          <a class="nav-item toc-item" href="#s12"><span class="nav-num">12</span><span class="nav-label">Regulatory Treadmill</span><span class="nav-tag">EMERGE</span></a>
+          <a class="nav-item toc-item" href="#s13"><span class="nav-num">13</span><span class="nav-label">Acquirer Paradox</span><span class="nav-tag">EMERGE</span></a>
+          <a class="nav-item toc-item" href="#s14"><span class="nav-num">14</span><span class="nav-label">Data Moat Three Tiers</span><span class="nav-tag">EMERGE</span></a>
+          <h3 class="toc-group-header" style="color:var(--text-secondary);margin-top:1.5rem;">Strategic Outlook</h3>
+          <a class="nav-item toc-item" href="#s15"><span class="nav-num">15</span><span class="nav-label">Strategic Timeline</span></a>
+          <a class="nav-item toc-item" href="#s16"><span class="nav-num">16</span><span class="nav-label">Competitive Landscape</span></a>
+          <a class="nav-item toc-item" href="#s17"><span class="nav-num">17</span><span class="nav-label">Provenance</span></a>
+          <a class="nav-item toc-item" href="#s18"><span class="nav-num">18</span><span class="nav-label">Gaps &amp; Next Steps</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence · Table of Contents</span>
+      <span>18 Slides · 5 Emergent Insights · MEDIUM Confidence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 03: EXECUTIVE SUMMARY -->
+  <section class="slide" id="s3">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-cyan">Synthesis</span> Executive Summary</div>
+      <h2 class="slide-title anim d1">Five Emergent Insights Reframe<br>Inovalon's Strategic Position</h2>
+      <p class="section-intro anim d2">Multi-agent synthesis reveals structural forces invisible to single-lens analysis. The headline finding: PE financial engineering, regulatory economics, and a technology paradigm shift have converged into self-reinforcing traps that may permanently alter Inovalon's exit valuation trajectory.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="emergence-card">
+            <h4>01. The PE Timing Doom Loop</h4>
+            <p>Rising debt service (~$260M/yr), CMS revenue compression, and GenAI investment requirements have converged into a self-reinforcing value trap. Cost-cutting preserves EBITDA but widens the competitive AI gap — which lowers eventual exit value — which incentivizes further cost-cutting.</p>
+          </div>
+          <div class="emergence-card" style="margin-top:12px;">
+            <h4>02. The Regulatory Treadmill</h4>
+            <p>CMS mandates simultaneously create Inovalon's demand floor and constrain its growth ceiling — reframing the company from 'high-growth SaaS' to 'compliance infrastructure.' Compliance utilities trade at 4–6x EBITDA vs. growth SaaS at 15–25x, potentially invalidating the original $7.3B acquisition thesis.</p>
+          </div>
+          <div class="emergence-card" style="margin-top:12px;">
+            <h4>03. The Strategic Acquirer Paradox</h4>
+            <p>The highest-premium exit paths (Optum, CVS/Aetna, Elevance) would destroy the multi-payer data neutrality being acquired. Competing payers would exit the dataset, degrading the longitudinal asset. This reflexive value destruction constrains viable buyers to lower-multiple non-payer strategics or secondary PE.</p>
+          </div>
+        </div>
+        <div>
+          <div class="emergence-card">
+            <h4>04. Data Moat Three-Tier Defensibility</h4>
+            <p>Data defensibility operates on three tiers: Tier 1 (raw volume) is commoditizing via TEFCA/QHIN; Tier 2 (longitudinal linkage) is Inovalon's current position but increasingly contested; Tier 3 (real-time clinical+claims via FHIR) is the emerging winner-take-most layer. PE constraints may be freezing Inovalon at Tier 2 while competitors build Tier 3.</p>
+          </div>
+          <div class="emergence-card" style="margin-top:12px;">
+            <h4>05. Privatization Opacity as Competitive Liability</h4>
+            <p>In the 2022–2024 AI arms race, Inovalon's post-privatization silence has transformed from strategic shield to competitive liability. Visible capability signaling attracts AI talent, secures pharma partnerships, and retains health plan clients evaluating vendor AI roadmaps. Complete opacity during the GenAI revolution is interpreted as stagnation.</p>
+          </div>
+          <div class="stat-grid" style="margin-top:12px;">
+            <div class="stat-card">
+              <div class="stat-label">Foundation Findings</div>
+              <div class="stat-value">8</div>
+              <div class="stat-context">Uncontested, all-agent corroborated</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Convergence Signals</div>
+              <div class="stat-value">5</div>
+              <div class="stat-context">Independent evidence paths</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Active Tensions</div>
+              <div class="stat-value">5</div>
+              <div class="stat-context">Preserved for decision-makers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Synthesis · All 3 Agents · 5-Layer Intelligence Pyramid</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 04: INOVALON COMPANY DEEP DIVE -->
+  <section class="slide" id="s4">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-150px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-blue">RESEARCHER-DOMAIN</span> Company &amp; Platform Deep Dive</div>
+      <h2 class="slide-title anim d1">Inovalon: $7.3B Take-Private &amp;<br>Platform Architecture</h2>
+      <p class="section-intro anim d2">Nordic Capital's acquisition of Inovalon in November 2022 marked one of the largest healthcare technology privatizations in recent history, removing the company from public reporting and creating a fundamental intelligence gap from Q1 2022 forward.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">$7.3B Take-Private at ~9.8x Trailing Revenue</div>
+            <div class="finding-body">Nordic Capital acquired Inovalon (NASDAQ: INVA) in November 2022 in an all-cash transaction, transitioning from public to private ownership. At ~9.8x FY2021 revenue of $744M, the deal priced in significant SaaS premium expectations. Post-close, Inovalon ceased all SEC reporting, eliminating quarterly financial transparency.</div>
+            <span class="confidence-badge high">High — SEC Filings &amp; Press Releases</span>
+          </div>
+          <div class="finding-card" style="margin-top:12px;">
+            <div class="finding-title">Revenue Concentration: ~70–75% Medicare Advantage</div>
+            <div class="finding-body">Pre-privatization SEC filings confirm heavy concentration in health plan/managed care clients, primarily Medicare Advantage sponsors including major Blues plans and national managed care organizations. This creates deep annual cycle entrenchment (Stars/risk adjustment) alongside significant customer concentration risk.</div>
+            <span class="confidence-badge high">High — Pre-Privatization 10-K Filings</span>
+          </div>
+          <div class="finding-card opportunity" style="margin-top:12px;">
+            <div class="finding-title">Leadership Transition Signals PE Operational Pivot</div>
+            <div class="finding-body">Keith Dunleavy, MD (founder/CEO since 1998) stepped down as CEO post-acquisition, retaining Executive Chairman role initially. CEO transitions in PE-backed healthcare IT consistently signal shift from organic/visionary growth to operational efficiency, margin expansion, and add-on M&A execution.</div>
+            <span class="confidence-badge medium">Medium — Secondary Sources</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">FY2021 Revenue</div>
+              <div class="stat-value positive">$744M</div>
+              <div class="stat-context">+31% YoY — last public filing</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Pre-Deal EBITDA Margin</div>
+              <div class="stat-value warn">15–18%</div>
+              <div class="stat-context">Adjusted — structurally thin</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Revenue Growth CAGR</div>
+              <div class="stat-value positive">28–31%</div>
+              <div class="stat-context">2019–2021 public period</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Acquisition Premium</div>
+              <div class="stat-value negative">~90%</div>
+              <div class="stat-context">vs. pre-announcement trading</div>
+            </div>
+          </div>
+          <div class="finding-card risk" style="margin-top:12px;">
+            <div class="finding-title">Intelligence Gap: Q1 2022 Onward</div>
+            <div class="finding-body">All post-privatization assessments rely on secondary/tertiary sources, extrapolations from 2.5+ year-old data, and proxy signals (LinkedIn workforce trends, trade press inference, competitor activity). This is not a minor gap — it is the dominant source of analytical uncertainty for every forward-looking finding in this brief.</div>
+            <span class="confidence-badge low">Structural — Affects All Post-2022 Claims</span>
+          </div>
+          <div class="source-list">
+            <strong>Sources:</strong>
+            <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=INVA" target="_blank">SEC EDGAR (Inovalon 10-K/10-Q)</a> |
+            <a href="https://www.nordiccapital.com" target="_blank">Nordic Capital Press Release</a> |
+            <a href="https://www.businesswire.com" target="_blank">BusinessWire Acquisition Announcement</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Inovalon Entity Researcher (RESEARCHER-DOMAIN) | 8 findings | Confidence: HIGH/MEDIUM mix</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 05: ONE PLATFORM & DATA MOAT -->
+  <section class="slide" id="s5">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);bottom:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-cyan">RESEARCHER-DOMAIN</span> Platform Architecture</div>
+      <h2 class="slide-title anim d1">ONE® Platform: 68B Medical Events<br>Across 330M+ Patient Lives</h2>
+      <p class="section-intro anim d2">The ONE® Platform is a cloud-native SaaS infrastructure spanning four analytically distinct but platform-integrated capability domains, anchored by a 20+ year longitudinal multi-payer dataset claimed as the core competitive moat.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card emergent">
+            <div class="finding-title">Four Integrated Capability Domains</div>
+            <div class="finding-body">
+              <strong style="color:var(--accent);">1. Risk Adjustment (RSVP)</strong> — Real-time supplemental HCC coding, retrospective risk score optimization, directly tied to MA annual risk cycle.<br><br>
+              <strong style="color:var(--accent);">2. Quality Measures / HEDIS / Stars</strong> — NCQA-certified HEDIS analytics, Star Ratings optimization, embedded in plan annual quality cycle.<br><br>
+              <strong style="color:var(--accent);">3. Pharmacy Adherence</strong> — Part D adherence measures (~25% of Stars score), GLP-1 and specialty drug adherence, PBM-side analytics.<br><br>
+              <strong style="color:var(--accent);">4. RWE / Life Sciences</strong> — Claims-based real-world evidence for pharma, longitudinal multi-payer database, FDA-adjacent regulatory use cases.
+            </div>
+            <span class="confidence-badge high">High — Pre-Privatization Corporate Disclosures</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">Ability Network: Provider-Side Connectivity Layer</div>
+            <div class="finding-body">The $1.2B Ability Network acquisition (2017) added provider-side eligibility verification, claims submission, and EHR data ingestion — capabilities that differentiate Inovalon from pure-play analytics competitors. Whether full technical integration into ONE® Platform has been achieved post-privatization is unverifiable and is a critical strategic unknown (see Tier 3 emergence analysis).</div>
+            <span class="confidence-badge medium">Medium — Secondary Sources · Integration Status Unknown</span>
+          </div>
+          <div class="finding-card" style="margin-top:12px;">
+            <div class="finding-title">Net Dollar Retention &gt;115% — Contested</div>
+            <div class="finding-body">Company-reported pre-privatization NDR above 115% supports the platform cross-sell narrative (primary source). KLAS independent research suggests looser product coupling than management characterizations (secondary source). Truth likely varies by segment — enterprise MA plans may integrate multiple modules while mid-market uses single solutions.</div>
+            <span class="confidence-badge medium">Medium — CONTESTED · Primary vs. Secondary Conflict</span>
+          </div>
+          <div class="bar-row anim d4" style="margin-top:16px;">
+            <div class="bar-label">Risk Adjustment / RSVP</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:75%;background:linear-gradient(90deg,var(--inov-navy),var(--inov-cerulean));">
+                <span class="bar-fill-value">~75% est. revenue weight</span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-row anim d4">
+            <div class="bar-label">Quality / HEDIS / Stars</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:55%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sky));">
+                <span class="bar-fill-value">Critical MA plan workflow</span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-row anim d4">
+            <div class="bar-label">Pharmacy Adherence</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:40%;background:linear-gradient(90deg,var(--inov-jade),var(--inov-sky));">
+                <span class="bar-fill-value">25% of Stars score exposure</span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-row anim d4">
+            <div class="bar-label">RWE / Life Sciences</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:25%;background:linear-gradient(90deg,var(--inov-violet),var(--inov-cerulean));">
+                <span class="bar-fill-value">Credible but not leading</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Inovalon Entity Researcher (RESEARCHER-DOMAIN) | Platform Architecture | Confidence: HIGH</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 06: HEALTHCARE IT MARKET DYNAMICS -->
+  <section class="slide" id="s6">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);top:-200px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-green">FUTURIST</span> Market Dynamics</div>
+      <h2 class="slide-title anim d1">$35–45B TAM Growing at 15–18% CAGR<br>With Medicare Advantage as Core Engine</h2>
+      <p class="section-intro anim d2">The healthcare analytics market relevant to Inovalon's core segments is large, structurally growing, and policy-anchored — driven by MA enrollment expansion, value-based care proliferation, and CMS program mandates creating compliance-forced buying events.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">MA Enrollment: 33.8M (2024) → 40–45M (2028)</div>
+            <div class="finding-body">Medicare Advantage now covers 51% of total Medicare beneficiaries — up from 24.4M in 2019. CBO and MedPAC projections point to 40–45M by 2028 (5–7% annual growth). Each new MA enrollee generates incremental HCC coding, HEDIS measurement, and Stars reporting workload — a structural, policy-anchored demand tailwind largely independent of Inovalon's competitive actions.</div>
+            <span class="confidence-badge high">High — KFF MA 2024 Fact Sheet (Primary)</span>
+          </div>
+          <div class="finding-card" style="margin-top:12px;">
+            <div class="finding-title">Three Hard Regulatory Deadlines Creating Forced Buying Events</div>
+            <div class="finding-body">
+              <strong style="color:var(--accent-warning);">1. CMS RADV Extrapolation (fully effective 2025)</strong> — Plans face expanded audit liability, driving compliance analytics demand.<br>
+              <strong style="color:var(--accent-warning);">2. SDOH Documentation Requirement (2026)</strong> — MA encounter data Z-code mandate creates new analytics layer.<br>
+              <strong style="color:var(--accent-warning);">3. Transparency in Coverage (phased 2023–2024)</strong> — Personal cost estimator mandates completed phased rollout.
+            </div>
+            <span class="confidence-badge medium">Medium — CMS Regulatory Calendar</span>
+          </div>
+          <div class="policy-box" style="margin-top:12px;">
+            <h4>CMS V28 Risk Model Transition (2024–2026)</h4>
+            <p>Reduces per-member HCC risk score values by an estimated 15–25% over the 3-year transition period. Risk adjustment vendors face compressed per-unit revenue even as compliance workload increases.</p>
+            <div class="impact impact-severe">HIGH IMPACT | Compression of risk adjustment unit economics</div>
+          </div>
+        </div>
+        <div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">Healthcare Analytics TAM (2024)</div>
+              <div class="stat-value positive">$35–45B</div>
+              <div class="stat-context">CAGR 15–18% → $65–80B by 2028</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">GenAI Healthcare TAM (2028)</div>
+              <div class="stat-value warn">$8–15B</div>
+              <div class="stat-context">Inovalon right-to-win: MEDIUM</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">RWE / Life Sciences TAM</div>
+              <div class="stat-value warn">$3–6B</div>
+              <div class="stat-context">CAGR 15–22% · Inovalon: credible</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">SDOH Analytics TAM</div>
+              <div class="stat-value">$0.5–1.5B</div>
+              <div class="stat-context">2024 · accelerating 2026–2028</div>
+            </div>
+          </div>
+          <div class="finding-card risk" style="margin-top:12px;">
+            <div class="finding-title">GenAI: $8–15B TAM but Inovalon's Right-to-Win is MEDIUM at Best</div>
+            <div class="finding-body">Value concentration is in ambient documentation, prior auth automation, and clinical decision support — areas where Inovalon's data assets are relevant but current product portfolio shows limited direct exposure. Zero public GenAI product launches from Inovalon since August 2022 vs. 15+ competitor deployments in HCC coding AI, CDI, and clinical documentation.</div>
+            <span class="confidence-badge medium">Medium — Rock Health, CB Insights (Secondary)</span>
+          </div>
+          <div class="source-list">
+            <strong>Sources:</strong>
+            <a href="https://www.kff.org/medicare/fact-sheet/medicare-advantage-2024-spotlight-first-look/" target="_blank">KFF MA 2024 Fact Sheet</a> |
+            <a href="https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats" target="_blank">CMS MA Enrollment Data</a> |
+            <a href="https://rockhealth.com" target="_blank">Rock Health 2023 Funding Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Healthcare IT Market Futurist (FUTURIST) | 8 findings | Confidence: HIGH/MEDIUM</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 07: GROWTH VECTORS -->
+  <section class="slide" id="s7">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-200px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-green">FUTURIST</span> Growth Vectors</div>
+      <h2 class="slide-title anim d1">Value-Based Care as Highest Right-to-Win<br>Growth Vector — RWE as Credible But Constrained</h2>
+      <p class="section-intro anim d2">Multi-agent convergence identifies VBC enablement as Inovalon's strongest organic growth opportunity, while RWE/life sciences presents a credible but structurally challenged alternative. SDOH is a 2026–2028 compliance-driven add-on, not a standalone opportunity.</p>
+      <div class="grid-3 anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Value-Based Care Enablement<br><span style="color:var(--accent-success);font-size:12px;">HIGHEST RIGHT-TO-WIN</span></div>
+            <div class="finding-body">VBC TAM: $6–12B at 18–25% CAGR. Payer-side data access is a structural advantage — Inovalon's longitudinal claims database enables risk stratification, network design, and member attribution. CMS goal: 100% of Traditional Medicare in accountable care by 2030 is the most important long-range demand driver. Aligns with PE cross-sell ARPU expansion thesis.</div>
+            <span class="confidence-badge medium">Medium — AHIP, HCCI, MSSP Data</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">RWE / Life Sciences<br><span style="color:var(--accent-warning);font-size:12px;">CREDIBLE BUT NOT LEADING</span></div>
+            <div class="finding-body">$3–6B TAM, 15–22% CAGR. Inovalon has differentiated longitudinal multi-payer claims database — but IQVIA controls ~60% market share, pharma buyers increasingly demand EMR/registry-based datasets (not claims-only), and Inovalon lacks specialty disease depth (oncology, rare disease). RWE could represent $100–300M revenue by 2028 with targeted investment.</div>
+            <span class="confidence-badge medium">Medium — IQVIA 2023 Global Medicines Report</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">SDOH Integration<br><span style="color:var(--text-secondary);font-size:12px;">COMPLIANCE ADD-ON (2026–2028)</span></div>
+            <div class="finding-body">$500M–1.5B TAM (sub-scale today). CMS finalized SDOH quality measures in 2024 Medicare Physician Fee Schedule; Z-code documentation mandate effective 2026. Right-to-win: MODERATE if integrated into existing Stars/quality workflows, LOW as standalone SDOH vendor. Revenue potential limited — compliance layer, not premium analytics.</div>
+            <span class="confidence-badge medium">Medium — CMS-1784-F Rule (Primary)</span>
+          </div>
+        </div>
+      </div>
+      <div class="anim d4" style="margin-top:16px;">
+        <div class="inovalon-header">
+          <h3>Cross-Agent Convergence: VBC as Highest-Confidence Growth Thesis</h3>
+          <p style="font-size:12px;color:var(--text-secondary);">FUTURIST (TAM/CAGR sizing) + RESEARCHER-DOMAIN (care management capabilities documented) + ANALYST-FINANCIAL (cross-sell ARPU expansion aligns with PE thesis) — three independent evidence paths reach the same conclusion, passing the Source Independence Test.</p>
+        </div>
+      </div>
+      <div class="anim d4">
+        <div class="two-col">
+          <div>
+            <div class="policy-box positive">
+              <h4>ACO/MSSP Acceleration</h4>
+              <p>2024 MSSP payment rule increases savings rates for lower-benchmarked ACOs, accelerating ACO formation. Each new ACO participant represents incremental population health analytics demand — largely TAM-additive for Inovalon's existing capabilities.</p>
+              <div class="impact impact-positive">OPPORTUNITY | CMS-anchored demand expansion through 2030</div>
+            </div>
+          </div>
+          <div>
+            <div class="policy-box">
+              <h4>RWE Market Bifurcation Risk</h4>
+              <p>Claims-RWE (Inovalon, Optum, IBM Watson legacy) vs. EMR/registry-RWE (Flatiron, Komodo Health, Veeva). Pharma buyers increasingly demand the latter for specialty/oncology indications. Inovalon risks commoditization in claims-RWE without EMR linkage.</p>
+              <div class="impact impact-moderate">WATCH | Veradigm or similar EMR partnership potentially critical</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Healthcare IT Market Futurist (FUTURIST) + RESEARCHER-DOMAIN Convergence | Confidence: MEDIUM</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 08: PE OWNERSHIP & FINANCIAL STRUCTURE -->
+  <section class="slide" id="s8">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-purple">ANALYST-FINANCIAL</span> PE Ownership &amp; Financial Structure</div>
+      <h2 class="slide-title anim d1">~$3.5–4.5B LBO Debt, ~$200–260M Annual<br>Interest Burden — Classic Growth-at-Scale Thesis</h2>
+      <p class="section-intro anim d2">Nordic Capital paid ~9.8x trailing revenue on a structurally thin EBITDA margin business, requiring either significant revenue growth or material margin expansion to generate acceptable IRR. The debt service burden likely exceeds pre-deal EBITDA, creating acute free cash flow pressure.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Debt Service Likely Exceeds Pre-Deal EBITDA <span class="source-unverified" title="Inferred from PE LBO modeling — actual debt structure not publicly disclosed">†</span></div>
+            <div class="finding-body">At typical PE take-private leverage (50–65% debt, ~4.5–6x EBITDA), the ~$3.5–4.5B estimated debt load implies $200–260M annual interest expense. Pre-deal adjusted EBITDA was ~$130–155M — creating an entity-level cash flow deficit requiring rapid EBITDA expansion to $300M+ or PIK debt structures. This is the financial foundation of the doom loop thesis.</div>
+            <span class="confidence-badge medium">Medium — PE Transaction Modeling (Inferred)</span>
+          </div>
+          <div class="finding-card" style="margin-top:12px;">
+            <div class="finding-title">Nordic Capital Playbook: Bolt-On M&amp;A, Not Greenfield R&amp;D</div>
+            <div class="finding-body">Nordic Capital's demonstrated healthcare IT investment pattern (Symplr, Advancit, Inpriva) centers on platform consolidation through bolt-on M&amp;A, workforce optimization, and cross-selling to existing customer bases. In a high-rate environment (2022–2024), debt-funded M&amp;A becomes significantly more expensive, potentially constraining this primary value-creation lever.</div>
+            <span class="confidence-badge medium">Medium — Nordic Capital Portfolio Analysis (Secondary)</span>
+          </div>
+          <div class="finding-card risk" style="margin-top:12px;">
+            <div class="finding-title">Post-Acquisition Workforce Reductions Constrain R&amp;D Capacity <span class="source-unverified" title="Inferred from LinkedIn aggregate workforce trend data — not officially disclosed by Inovalon">†</span></div>
+            <div class="finding-body">LinkedIn aggregate data (directional only) suggests technical workforce reductions post-privatization. Zero confirmed public GenAI product launches 2022–2024. This evidence convergence — from three independent agent perspectives — is the strongest signal of investment constraint. However: absence of announcements ≠ absence of capability. Inovalon may have undisclosed AI capabilities in development.</div>
+            <span class="confidence-badge medium">Medium — LinkedIn Data (Proxy Signal, Unverified)</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">Acquisition Multiple</div>
+              <div class="stat-value negative">~9.8x</div>
+              <div class="stat-context">FY2021 trailing revenue</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Estimated Debt Load</div>
+              <div class="stat-value negative">$3.5–4.5B</div>
+              <div class="stat-context">~50-65% of EV (inferred)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Annual Interest Burden</div>
+              <div class="stat-value negative">~$260M</div>
+              <div class="stat-context">Post-rate-hike estimate</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Pre-Deal EBITDA</div>
+              <div class="stat-value warn">~$130–155M</div>
+              <div class="stat-context">Adjusted — 15–18% margin</div>
+            </div>
+          </div>
+          <div class="finding-card opportunity" style="margin-top:12px;">
+            <div class="finding-title">PE Enabler Minority View</div>
+            <div class="finding-body">The alternative thesis — that PE ownership enables long-term investment free from quarterly scrutiny — is supported by historical precedent of successful PE-backed healthcare IT transformations. Nordic Capital's operational discipline focus may improve unit economics for a 2027–2029 accelerated investment phase. Evidence weight: MINORITY VIEW (1 of 3 agents vs. majority constraint narrative).</div>
+            <span class="confidence-badge low">Low Confidence — Minority View</span>
+          </div>
+          <div class="dagger-footnote">† Source: PE transaction modeling / LinkedIn aggregate data — primary source not verified. Actual debt structure and workforce figures not publicly disclosed.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PE Healthcare IT Transaction Analyst (ANALYST-FINANCIAL) | 8 findings | Confidence: MEDIUM</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 09: EXIT STRATEGY & SCENARIOS -->
+  <section class="slide" id="s9">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);bottom:-200px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-purple">ANALYST-FINANCIAL</span> Exit Strategy</div>
+      <h2 class="slide-title anim d1">2026–2028 Exit Window Most Probable —<br>Three Scenarios, Each With Critical Barriers</h2>
+      <p class="section-intro anim d2">Comparable PE healthcare IT transactions (Cotiviti, Netsmart, Truven, Zelis) show median hold periods of 4–7 years with exit multiples of 5–10x revenue, implying a 2025–2028 harvest window. But each exit pathway faces structural barriers specific to Inovalon's position.</p>
+      <div class="grid-3 anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Scenario A: Near-Term Strategic Sale (2026–2028)</div>
+            <div class="finding-body">Most likely exit modality based on comparable transactions. Strategic buyers: Oracle Health, non-payer HIT platforms, or secondary PE. Requirements: EBITDA expansion to $350M+, multiple recovery to 6–8x revenue, overcoming the Strategic Acquirer Paradox (Slide 13). Healthcare IT M&amp;A recovery cycle projected for 2026–2027 aligns with Fund X vintage timing.</div>
+            <span class="confidence-badge medium">Medium — PE Comparable Analysis</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">Scenario B: Extended Hold (2028–2031)</div>
+            <div class="finding-body">Allows time to close GenAI capability gap, mature EBITDA to $400M+, and await interest rate normalization. Increases LP patience pressure and fund J-curve drag. Requires Nordic Capital Fund X to manage LP expectations for a 10+ year hold — unusual but not unprecedented for platform-building strategies. Higher eventual multiple but uncertain whether AI gap is closable.</div>
+            <span class="confidence-badge medium">Medium — Fund Structure Analysis</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Scenario C: Distressed Exit / Secondary PE (2025–2027) <span class="source-unverified" title="Scenario inferred from debt modeling — cannot be confirmed without actual covenant and maturity data">†</span></div>
+            <div class="finding-body">Cannot be ruled out if debt covenants tighten, refinancing fails, or EBITDA expansion misses targets. Secondary PE sale at 0.7–1.0x MOIC (below original investment). UHG/Optum acquisition faces significant FTC antitrust scrutiny given existing dominant analytics position. CVS/Aetna or Elevance acquisition triggers the Acquirer Paradox.</div>
+            <span class="confidence-badge low">Low Confidence — Distressed Scenario</span>
+          </div>
+        </div>
+      </div>
+      <div class="anim d4" style="margin-top:16px;">
+        <div class="two-col">
+          <div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;font-weight:600;">COMPARABLE TRANSACTION BENCHMARKS</div>
+            <div class="bar-row">
+              <div class="bar-label" style="font-size:11px;">Cotiviti (Veritas, 2018)</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:60%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sky));">
+                  <span class="bar-fill-value">~6x rev · flat return · 3yr hold</span>
+                </div>
+              </div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label" style="font-size:11px;">Change Healthcare (Blackstone, 2019)</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:75%;background:linear-gradient(90deg,var(--inov-jade),var(--inov-sky));">
+                  <span class="bar-fill-value">~5.5x rev · strategic sale UHG</span>
+                </div>
+              </div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label" style="font-size:11px;">Netsmart (GI Partners, 2016)</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:50%;background:linear-gradient(90deg,var(--inov-violet),var(--inov-cerulean));">
+                  <span class="bar-fill-value">~4x rev · secondary PE exit</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="policy-box neutral">
+              <h4>Robust Strategy Across All Scenarios</h4>
+              <p>Maximize EBITDA through operational efficiency while preserving minimum viable R&amp;D investment to maintain competitive positioning. The acquirer paradox constrains premium buyers — optimize for secondary PE or non-payer strategic acquirer economics, not payer acquirer premium.</p>
+              <div class="impact impact-neutral">STRATEGIC IMPERATIVE | Platform stickiness &gt; growth narrative for exit</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dagger-footnote">† Distressed exit scenario sourced from PE financial modeling — actual covenant terms, maturity schedule, and PIK provisions not publicly disclosed.</div>
+    </div>
+    <div class="slide-footer">
+      <span>PE Healthcare IT Transaction Analyst (ANALYST-FINANCIAL) | Exit Modeling | Confidence: MEDIUM</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: MA MARKET TENSION -->
+  <section class="slide" id="s10">
+    <div class="slide-bg-glow" style="background:var(--inov-sand);top:-200px;left:-150px;opacity:0.1;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-gold">Tension Point</span> Medicare Advantage Market Dynamics</div>
+      <h2 class="slide-title anim d1">Volume Up, Margin Down: The MA<br>Volume–Compression Paradox</h2>
+      <p class="section-intro anim d2">Medicare Advantage enrollment growth and CMS-driven unit economics compression coexist as simultaneous forces on Inovalon's core business. This is not a contradiction to resolve — it is the fundamental tension defining Inovalon's revenue trajectory through 2028. Three scenario branches emerge; no single outcome can be determined without 2–3 years of post-V28 market data.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent-success);margin-bottom:10px;">SIDE A: Volume Tailwind (FUTURIST + RESEARCHER-DOMAIN)</div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">MA Enrollment Growth as Durable TAM Expander</div>
+            <div class="finding-body">33.8M → 40–45M enrollees by 2028 creates a structural per-member demand tailwind. Historical analytics spend correlation with member count expansion supports volume dominance. VBC proliferation requires more analytics per member, not less. Each new MA enrollee generates incremental HCC coding, HEDIS measurement, and Stars workload regardless of per-unit compression.</div>
+          </div>
+          <div class="finding-card opportunity" style="margin-top:12px;">
+            <div class="finding-title">Complexity as Demand Accelerator</div>
+            <div class="finding-body">V28 transition increases model complexity — plans require more sophisticated risk adjustment analytics to navigate the new coding environment, not less. RADV audit expansion creates additional compliance workload. Regulatory complexity is paradoxically both a compression driver and a demand accelerator for analytics vendors.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent-error);margin-bottom:10px;">SIDE B: Compression Dominates (RESEARCHER-DOMAIN + ANALYST-FINANCIAL)</div>
+          <div class="finding-card risk">
+            <div class="finding-title">V28 + Rate Cuts = Net TAM Stagnation</div>
+            <div class="finding-body">V28 reduces per-member HCC value by estimated 15–25% over 2024–2026 transition. CMS rate cuts compress plan margins — analytically budgets are discretionary relative to medical costs. Plan consolidation reduces analytics vendor client count (fewer plans, each spending less per member). MedPAC estimates $54B/year MA overpayment — regulatory pressure to cut persists long-term.</div>
+          </div>
+          <div class="finding-card risk" style="margin-top:12px;">
+            <div class="finding-title">Plan Consolidation Reduces Client Diversification</div>
+            <div class="finding-body">MA market concentration among top 5 plans (UHG, CVS/Aetna, Elevance, Humana, Centene) means fewer, more powerful buyers with greater negotiating leverage. If 2–3 top-10 plans internalize analytics (as Humana has done with CenterWell), Inovalon's revenue base could face non-linear decline — not gradual erosion.</div>
+          </div>
+        </div>
+      </div>
+      <div class="anim d4" style="margin-top:16px;">
+        <div class="emergent-why">
+          <div class="emergent-why-label">Resolution Framework: Three Scenario Branches</div>
+          <div class="finding-body">
+            <strong style="color:var(--accent-success);">(A) Volume Dominates</strong> — Net TAM grows but decelerates to 8–12% vs. 15–18% headline CAGR.&nbsp;&nbsp;
+            <strong style="color:var(--accent-warning);">(B) Compression Dominates</strong> — Plan consolidation pressures pricing; TAM growth stagnates at 3–6%.&nbsp;&nbsp;
+            <strong style="color:var(--accent-bright);">(C) Bifurcation</strong> — Large sophisticated plans increase analytics spend to navigate complexity; smaller plans exit MA entirely.&nbsp;&nbsp;
+            <strong style="color:var(--text-primary);">Robust strategy across all: deepen enterprise plan relationships and increase switching costs through platform integration.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>FUTURIST + RESEARCHER-DOMAIN + ANALYST-FINANCIAL | Tension: Unresolvable Without Post-V28 Data</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: EMERGENT #1 — PE DOOM LOOP -->
+  <section class="slide emergent-slide" id="s11">
+    <div class="slide-bg-glow" style="background:var(--accent-error);top:-200px;right:-200px;opacity:0.12;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">01</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-cyan">Emergent Insight · Algorithm: cross_agent_theme_mining</span></div>
+        <h2 class="slide-title anim d1">The PE Timing Trap —<br>A

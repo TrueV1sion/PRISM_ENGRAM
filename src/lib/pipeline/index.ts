@@ -16,6 +16,18 @@ export { synthesize, type SynthesizeInput } from "./synthesize";
 export { verify, type VerifyInput, type VerifyOutput } from "./verify";
 export { present, type PresentInput } from "./present";
 export { refine, type RefineInput, type RefineOutput } from "./refine";
+export {
+  runQualityAssurance,
+  getQualityGateSystem,
+  buildProvenanceChain,
+  scoreOutput,
+  aggregateWarnings,
+  QualityGateSystem,
+  type QualityAssuranceReport,
+  type ProvenanceReport,
+  type QualityScoreReport,
+  type QualityWarning,
+} from "./quality-assurance";
 
 // Shared Memory Bus (used by deploy for wave execution)
 export { MemoryBus } from "./memory-bus";

@@ -24,7 +24,7 @@ export interface SettingsState {
 }
 
 export const DEFAULT_SETTINGS: SettingsState = {
-    primaryModel: "claude-sonnet-4-20250514",
+    primaryModel: "claude-sonnet-4-6",
     fallbackModel: "gpt-4o",
     temperature: 0.3,
     maxTokens: 8192,

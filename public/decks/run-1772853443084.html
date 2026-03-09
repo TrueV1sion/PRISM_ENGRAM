@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Strategic Brief — Inovalon Market Position & Growth Analysis</title>
+  <link rel="stylesheet" href="/styles/presentation.css">
+</head>
+<body>
+
+  <div id="slideProgress"></div>
+  <div class="prism-mark">PRISM Intelligence</div>
+  <div class="slide-counter" id="slideCounter">01 / 18</div>
+  <div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+
+  <button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents" aria-label="Open table of contents">&#9776;</button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <div class="nav-panel" id="navPanel">
+    <h3>Table of Contents</h3>
+    <a class="nav-item" href="#s1" onclick="toggleNav()"><span class="nav-num">01</span><span class="nav-label">Title — Strategic Intelligence Brief</span></a>
+    <a class="nav-item" href="#s2" onclick="toggleNav()"><span class="nav-num">02</span><span class="nav-label">Intelligence Map</span></a>
+    <a class="nav-item" href="#s3" onclick="toggleNav()"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+    <a class="nav-item" href="#s4" onclick="toggleNav()"><span class="nav-num">04</span><span class="nav-label">Entity & Strategic Profile</span></a>
+    <a class="nav-item" href="#s5" onclick="toggleNav()"><span class="nav-num">05</span><span class="nav-label">Healthcare IT Market Dynamics</span></a>
+    <a class="nav-item" href="#s6" onclick="toggleNav()"><span class="nav-num">06</span><span class="nav-label">Regulatory Environment</span></a>
+    <a class="nav-item" href="#s7" onclick="toggleNav()"><span class="nav-num">07</span><span class="nav-label">Convergence Layer</span></a>
+    <a class="nav-item" href="#s8" onclick="toggleNav()"><span class="nav-num">08</span><span class="nav-label">Strategic Tensions</span></a>
+    <a class="nav-item" href="#s9" onclick="toggleNav()"><span class="nav-num">09</span><span class="nav-label">Emergence: Temporal Convergence</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s10" onclick="toggleNav()"><span class="nav-num">10</span><span class="nav-label">Emergence: PE Exit Binary</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s11" onclick="toggleNav()"><span class="nav-num">11</span><span class="nav-label">Emergence: Switching-Cost Multiplier</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s12" onclick="toggleNav()"><span class="nav-num">12</span><span class="nav-label">Emergence: Demand Paradox</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s13" onclick="toggleNav()"><span class="nav-num">13</span><span class="nav-label">Emergence: PA Product Gap</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s14" onclick="toggleNav()"><span class="nav-num">14</span><span class="nav-label">Emergence: TEFCA Moat Paradox</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s15" onclick="toggleNav()"><span class="nav-num">15</span><span class="nav-label">Competitive Landscape</span></a>
+    <a class="nav-item" href="#s16" onclick="toggleNav()"><span class="nav-num">16</span><span class="nav-label">Strategic Timeline</span></a>
+    <a class="nav-item" href="#s17" onclick="toggleNav()"><span class="nav-num">17</span><span class="nav-label">Provenance & Confidence</span></a>
+    <a class="nav-item" href="#s18" onclick="toggleNav()"><span class="nav-num">18</span><span class="nav-label">Gaps & Intelligence Boundaries</span></a>
+  </div>
+
+  <!-- SLIDE 01 — TITLE -->
+  <section class="slide title-slide" id="s1">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-200px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-300px;left:-200px;"></div>
+    <div class="slide-inner" style="text-align:center;">
+      <div class="anim">
+        <div class="hero-badge">PRISM Multi-Source Validated &mdash; EXTENDED Tier</div>
+      </div>
+      <h1 class="hero-title anim d1">Inovalon Strategic Intelligence Brief</h1>
+      <p class="hero-sub anim d2">Market Position, Competitive Landscape &amp; Growth Opportunities in Healthcare Technology</p>
+      <p class="hero-date anim d3">2026 Analysis &nbsp;|&nbsp; 3-Agent Swarm &nbsp;|&nbsp; MEDIUM Confidence &nbsp;|&nbsp; 24 Validated Findings</p>
+      <div class="anim d4" style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-bright)"></span>Inovalon Intelligence Agent</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-success)"></span>Healthcare IT Market Analyst</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-warning)"></span>Regulatory Environment Scanner</span>
+      </div>
+      <div class="anim d5" style="margin-top:2.5rem;">
+        <div class="hero-stats" style="grid-template-columns:repeat(5,1fr);">
+          <div class="hero-stat">
+            <div class="value cyan">$7.3B</div>
+            <div class="label">PE Take-Private Valuation</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value green">397M</div>
+            <div class="label">Patient Lives in Dataset</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value blue">85%</div>
+            <div class="label">HEDIS Population Coverage</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value gold">$20B+</div>
+            <div class="label">US Healthcare Analytics SAM</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value" style="color:var(--accent-error);">2026&ndash;28</div>
+            <div class="label">Critical PE Exit Window</div>
+          </div>
+        </div>
+      </div>
+      <div class="anim d6" style="margin-top:2rem;">
+        <div class="validation-box">
+          <div class="validation-card">
+            <h4>&#10003; Validation Methodology</h4>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>14 PRIMARY sources confirmed (SEC filings, CMS rulemakings, NCQA, KFF)</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>10 SECONDARY sources triangulated across agents</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Source independence tested on all convergent findings</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Post-take-private financial opacity explicitly disclosed</div>
+          </div>
+          <div class="validation-card framework-card">
+            <h4>&#9670; PRISM Processing Framework</h4>
+            <p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">3-agent parallel synthesis with 5-layer intelligence pyramid and emergence detection.</p>
+            <div class="framework-visual">
+              <span class="fw-node">Domain</span>
+              <span class="fw-node">Market</span>
+              <span class="fw-node">Regulatory</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-center">Cross-Agent Synthesis</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success);">6 Emergences</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 02 — TABLE OF CONTENTS -->
+  <section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;left:-100px;"></div>
+    <div class="slide-inner">
+      <h2 class="slide-title anim">Executive <span style="color:var(--accent);">Intelligence Map</span></h2>
+      <p class="section-intro anim d1">18-slide analysis spanning entity profile, market dynamics, regulatory environment, strategic tensions, and six multi-agent emergences invisible to single-lens analysis.</p>
+      <div class="grid-3 anim d2">
+        <div>
+          <h3 class="toc-group-header">Foundation Analysis</h3>
+          <a class="nav-item toc-item" href="#s3"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+          <a class="nav-item toc-item" href="#s4"><span class="nav-num">04</span><span class="nav-label">Entity &amp; Strategic Profile</span></a>
+          <a class="nav-item toc-item" href="#s5"><span class="nav-num">05</span><span class="nav-label">Healthcare IT Market Dynamics</span></a>
+          <a class="nav-item toc-item" href="#s6"><span class="nav-num">06</span><span class="nav-label">Regulatory Environment</span></a>
+          <a class="nav-item toc-item" href="#s7"><span class="nav-num">07</span><span class="nav-label">Multi-Agent Convergence</span></a>
+          <a class="nav-item toc-item" href="#s8"><span class="nav-num">08</span><span class="nav-label">Strategic Tensions</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Emergent Intelligence</h3>
+          <a class="nav-item toc-item" href="#s9"><span class="nav-num">09</span><span class="nav-label">Temporal Convergence</span><span class="nav-tag">&#9670;</span></a>
+          <a class="nav-item toc-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">PE Exit Binary Narrative</span><span class="nav-tag">&#9670;</span></a>
+          <a class="nav-item toc-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">Switching-Cost Multiplier</span><span class="nav-tag">&#9670;</span></a>
+          <a class="nav-item toc-item" href="#s12"><span class="nav-num">12</span><span class="nav-label">Demand Paradox</span><span class="nav-tag">&#9670;</span></a>
+          <a class="nav-item toc-item" href="#s13"><span class="nav-num">13</span><span class="nav-label">PA Product Gap</span><span class="nav-tag">&#9670;</span></a>
+          <a class="nav-item toc-item" href="#s14"><span class="nav-num">14</span><span class="nav-label">TEFCA Moat Paradox</span><span class="nav-tag">&#9670;</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Strategic Synthesis</h3>
+          <a class="nav-item toc-item" href="#s15"><span class="nav-num">15</span><span class="nav-label">Competitive Landscape</span></a>
+          <a class="nav-item toc-item" href="#s16"><span class="nav-num">16</span><span class="nav-label">Strategic Timeline</span></a>
+          <a class="nav-item toc-item" href="#s17"><span class="nav-num">17</span><span class="nav-label">Provenance &amp; Confidence</span></a>
+          <a class="nav-item toc-item" href="#s18"><span class="nav-num">18</span><span class="nav-label">Gaps &amp; Intelligence Boundaries</span></a>
+        </div>
+      </div>
+      <div class="anim d4" style="margin-top:1.5rem;padding:12px 20px;background:rgba(108,108,255,0.08);border:1px solid rgba(108,108,255,0.25);border-radius:10px;font-size:12px;color:var(--text-secondary);">
+        <strong style="color:var(--accent-violet);">&#9670; EMERGENCE NOTATION:</strong> Slides 09&ndash;14 contain insights visible ONLY from simultaneous multi-agent synthesis. No single analytical lens could produce these findings independently.
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 03 — EXECUTIVE SUMMARY -->
+  <section class="slide" id="s3">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-150px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(78,132,196,0.15);color:var(--accent);">SYNTHESIS</span> Executive Summary</div>
+      <h2 class="slide-title anim d1">The Strategic Position in Six Numbers</h2>
+      <p class="section-intro anim d2">Inovalon operates a compliance-dependent platform business at the peak of a regulatory cycle. Its advantages are genuine, large — and time-bounded. The 2026&ndash;2028 window is the entire thesis.</p>
+      <div class="stat-grid anim d3">
+        <div class="stat-card">
+          <div class="stat-label">US Analytics Market CAGR</div>
+          <div class="stat-value positive">20&ndash;25%</div>
+          <div class="stat-context">$15&ndash;20B SAM at 3&ndash;4% current penetration</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">HEDIS Population Coverage</div>
+          <div class="stat-value positive">~85%</div>
+          <div class="stat-context">205M+ lives; 25 consecutive NCQA certifications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">MA Contracts Facing Stars Decline</div>
+          <div class="stat-value negative">89%</div>
+          <div class="stat-context">Under CY2027 proposed methodology reset</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">QBP Payments Destroyed</div>
+          <div class="stat-value negative">$1.3B</div>
+          <div class="stat-context">Estimated under CY2027 Stars methodology shift</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Customer Revenue Concentration</div>
+          <div class="stat-value warn">60&ndash;65%</div>
+          <div class="stat-context">Top 10 customers; existential renewal risk</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">PE Exit Target Valuation</div>
+          <div class="stat-value positive">$10&ndash;15B</div>
+          <div class="stat-context">Requires 15&ndash;20% CAGR + 35&ndash;45% EBITDA margins</div>
+        </div>
+      </div>
+      <div class="anim d5" style="margin-top:1.5rem;padding:14px 20px;background:rgba(0,228,159,0.06);border:1px solid rgba(0,228,159,0.2);border-radius:10px;">
+        <strong style="color:var(--accent-success);">FOUNDATION CONSENSUS:</strong> <span style="font-size:13px;color:var(--text-secondary);">All three agents independently confirm Inovalon holds dominant quality measurement market position, operates a genuinely large proprietary data asset, and faces simultaneous regulatory demand tailwinds — while its post-take-private financial performance remains entirely opaque. The critical strategic fact: every advantage peaks in the same 2026&ndash;2028 window as the PE exit.</span>
+      </div>
+      <div class="slide-footer">
+        <span>Cross-Agent Synthesis | 24 findings | Confidence: MEDIUM</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 04 — ENTITY & STRATEGIC PROFILE -->
+  <section class="slide" id="s4">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);bottom:-200px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(78,132,196,0.15);color:var(--accent);">DOMAIN</span> Inovalon Intelligence Agent</div>
+      <h2 class="slide-title anim d1">Entity &amp; Strategic Profile</h2>
+      <p class="section-intro anim d2">What we know with confidence vs. what the private-company veil obscures. The take-private in November 2022 created one of the most significant intelligence gaps in healthcare IT.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card anim d3">
+            <div class="finding-title">$7.3B PE Take-Private — Nordic Capital Consortium</div>
+            <div class="finding-body">Closed November 2022 (~$41/share, &gt;40% premium). Co-investors: Insight Partners, Novo Holdings, 22C Capital. Pre-take-private revenue trajectory: $155M (2016) to $834M (2021) at 35%+ CAGR. Exit window: 4&ndash;6 year hold implies <strong style="color:var(--accent-bright);">2026&ndash;2028 target.</strong></div>
+            <span class="confidence-badge high">High — SEC 10-K / Nordic Capital filings</span>
+          </div>
+          <div class="finding-card opportunity anim d4">
+            <div class="finding-title">ONE Platform: Integrated Compliance Architecture</div>
+            <div class="finding-body">Cloud-native platform spanning: Stars/HEDIS quality measurement, HCC risk adjustment, prior authorization, clinical data exchange, and pharmacy analytics. Serves all top 15 US health plans. Data asset: <strong style="color:var(--accent-success);">397M patients, 86.6B unique medical events</strong> (Jan 2025).</div>
+            <span class="confidence-badge high">High — Product documentation / SEC S-1 filings</span>
+          </div>
+          <div class="finding-card risk anim d5">
+            <div class="finding-title">Customer Concentration: Existential Renewal Risk</div>
+            <div class="finding-body">Top 10 customers represent 60&ndash;65% of revenue. Anchor relationships include UnitedHealth/Optum affiliates, Humana, Centene, CVS/Aetna, Blues plans. A single Optum defection to internal analytics would be severe. Humana's 400K member loss compounds the risk.</div>
+            <span class="confidence-badge high">High — SEC 10-K risk factor disclosures</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card anim d3">
+            <div class="finding-title">Nordic Capital Value Creation Thesis: Three Pillars</div>
+            <div class="finding-body">
+              <strong style="color:var(--accent-bright);">1. Margin Expansion:</strong> EBITDA optimization through subscription pricing power<br>
+              <strong style="color:var(--accent-bright);">2. M&amp;A Augmentation:</strong> VigiLanz (Feb 2024), Apixio AI capabilities<br>
+              <strong style="color:var(--accent-bright);">3. Exit Vehicle:</strong> Re-IPO at $10&ndash;15B or strategic sale to major payer/tech<br><br>
+              Requires demonstrating 15&ndash;20% CAGR + 35&ndash;45% EBITDA for premium multiple.
+            </div>
+            <span class="confidence-badge medium">Medium — Nordic Capital public materials / PE comparables</span>
+          </div>
+          <div class="finding-card anim d4">
+            <div class="finding-title">HEDIS Dominance: 25 Consecutive NCQA Certifications</div>
+            <div class="finding-body">Processing quality metrics on <strong style="color:var(--accent-bright);">205M+ lives (~85% of HEDIS-covered population)</strong>. Powers 70% of MA enrollees in 4+ Star plans. Best in KLAS 2026. This position constitutes the most defensible moat element — 25 years of continuous certification creates transition friction that no competitor can replicate quickly.</div>
+            <span class="confidence-badge high">High — NCQA / KLAS / Product documentation</span>
+          </div>
+          <div class="anim d5" style="padding:14px;background:rgba(255,92,92,0.06);border:1px solid rgba(255,92,92,0.2);border-radius:10px;font-size:12px;color:var(--text-secondary);">
+            <strong style="color:var(--accent-error);">CRITICAL GAP:</strong> Post-take-private financial performance is entirely opaque. The $740M revenue estimate is unverified. Debt structure ($3&ndash;4B estimated LBO leverage), covenant compliance, and free cash flow are unknown. The entire financial health assessment rests on pre-2022 public data.
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Inovalon Intelligence Agent (RESEARCHER-DOMAIN) | 8 findings | Confidence: HIGH/MEDIUM</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+      <div class="source-list">
+        <strong>Sources:</strong> SEC 10-K/S-1 Filings (2015&ndash;2021) | Nordic Capital public materials | NCQA certification records | KLAS Research 2026 | Inovalon product documentation
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 05 — HEALTHCARE IT MARKET DYNAMICS -->
+  <section class="slide" id="s5">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);top:-150px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(0,228,159,0.15);color:var(--accent-success);">MARKET</span> Healthcare IT Market Analyst</div>
+      <h2 class="slide-title anim d1">Market Dynamics &amp; Growth Vectors</h2>
+      <p class="section-intro anim d2">A $15&ndash;20B addressable market growing at 20&ndash;25% CAGR — but MA enrollment deceleration, plan financial stress, and AI democratization create structurally mixed conditions. Where is demand accelerating fastest?</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card opportunity anim d3">
+            <div class="finding-title">Healthcare Analytics TAM: $15&ndash;20B US, 20&ndash;25% CAGR</div>
+            <div class="finding-body">MarketsandMarkets: $15.85B US in 2024, 24.9% CAGR to $59.68B by 2030. Inovalon's ~$740M<span class="source-unverified" title="Unverified — third-party aggregator estimate, not primary filing">†</span> revenue = 3&ndash;4% penetration. Market ceiling is not the binding constraint — competitive differentiation and execution are.</div>
+            <span class="confidence-badge high">High — MarketsandMarkets / Grand View Research</span>
+          </div>
+          <div class="finding-card anim d4">
+            <div class="finding-title">MA Enrollment Deceleration: 9% → 4% → 3%</div>
+            <div class="finding-body">Historical 9% CAGR (2007&ndash;2024) dropping to 4% in 2025, projected 3% in 2026. However: <strong style="color:var(--accent-bright);">SNP enrollment growing at 10%</strong>, now 23% of MA. Higher-acuity SNP members require more intensive per-member analytics — upgrading the value of the existing install base even as total enrollment decelerates.</div>
+            <span class="confidence-badge high">High — KFF Feb 2026 / CMS enrollment data</span>
+          </div>
+          <div class="finding-card anim d5">
+            <div class="finding-title">Value-Based Care: 45.2% of Payments, MA Leading at 64.3%</div>
+            <div class="finding-body">VBC adoption grew from 41.3% (2022) to 45.2% (2023) across all lines of business. MA leads at 64.3%. Shared risk arrangements growing. The VBC adoption curve is still mid-innings — 45% vs. a theoretical 100% ceiling suggests long structural runway for population health and quality analytics demand.</div>
+            <span class="confidence-badge high">High — HCP-LAN 2024 Annual Survey / AHIP</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card opportunity anim d3">
+            <div class="finding-title">Risk Adjustment Market: $2.5B, AI-Augmented Competition Intensifying</div>
+            <div class="finding-body">Risk adjustment software market: $2.5B (2024), growing at 6.9% CAGR to $5.2B by 2035. V28 HCC model transition creating <strong style="color:var(--accent-success);">acute payer investment urgency</strong> — plans need AI-powered coding analytics to maintain risk scores under stricter documentation requirements. Cotiviti, Episource, and Optum are co-investing heavily.</div>
+            <span class="confidence-badge medium">Medium — WiseGuy Reports / DataInsightsMarket</span>
+          </div>
+          <div class="finding-card opportunity anim d4">
+            <div class="finding-title">Prior Authorization Automation: $1.1&ndash;4.1B, CMS-0057-F Catalyst</div>
+            <div class="finding-body">AI-powered PA: $1.42B globally at 18.7% CAGR. CMS-0057-F creating immediate spending wave — <strong style="color:var(--accent-success);">$15B projected 10-year savings</strong> drives compliance investment. Phase 1 already live Jan 2026. Cohere Health and Availity capturing mandate-driven demand. Inovalon's PA positioning relative to mandate unclear.</div>
+            <span class="confidence-badge high">High — DataIntelo / GrowthMarketReports / CMS primary rule</span>
+          </div>
+          <div class="finding-card anim d5">
+            <div class="finding-title">GenAI in Healthcare: 30&ndash;39% CAGR, 60% Targeting Admin Operations</div>
+            <div class="finding-body">AI is the fastest-growing healthcare investment category. 60% of healthcare AI investment directed at administrative operations — directly aligned with Inovalon's core use cases. Simultaneously: AI-native entrants (Innovaccer, Arcadia, Veradigm) threaten to leapfrog legacy platform architectures. Double-edged signal.</div>
+            <span class="confidence-badge high">High — Market research consensus / CB Insights</span>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Healthcare IT Market Analyst (MACRO-CONTEXT) | 8 findings | Confidence: HIGH/MEDIUM</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+      <div class="source-list">
+        <strong>Sources:</strong> MarketsandMarkets | KFF Feb 2026 | HCP-LAN 2024 Survey | WiseGuy Reports | DataIntelo | CMS-0057-F Final Rule | AMA 2024 Market Study
+      </div>
+      <div class="dagger-footnote">† Source: third-party financial aggregator (companiesmarketcap.com) — primary post-take-private financial filing not accessible</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 06 — REGULATORY ENVIRONMENT -->
+  <section class="slide" id="s6">
+    <div class="slide-bg-glow" style="background:var(--inov-sand);bottom:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(245,230,187,0.15);color:var(--accent-warning);">REGULATORY</span> Regulatory Environment Scanner</div>
+      <h2 class="slide-title anim d1">The Regulatory Demand Machine</h2>
+      <p class="section-intro anim d2">Five concurrent CMS mandates are creating a compliance environment of unprecedented complexity. Each is an independent demand catalyst. Together they are something else entirely — see Slide 11.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="policy-box anim d3">
+            <h4>CY2027 Stars Methodology Reset</h4>
+            <p>Removes 12 measures (7 operational, 3 process, 2 patient experience), adds Depression Screening. Modeling: 89% of MA contracts see Star score declines; $1.3B QBP destruction.</p>
+            <div class="impact impact-severe">&#9650; CRITICAL DEMAND DRIVER | Plans urgently need Stars scenario modeling &amp; simulation</div>
+          </div>
+          <div class="policy-box anim d4">
+            <h4>CMS-HCC V28 — 100% Implementation PY2026</h4>
+            <p>Removes 2,000+ ICD-10 codes from HCC mapping. Expected 3&ndash;8% risk score declines for non-adapting plans. OIG escalating RADV audit intensity. V28 completion + unlinked chart review exclusion = compounding documentation pressure.</p>
+            <div class="impact impact-severe">&#9650; CRITICAL DEMAND DRIVER | Prospective documentation accuracy tools required</div>
+          </div>
+          <div class="policy-box anim d5">
+            <h4>CMS-0057-F Prior Authorization Mandate</h4>
+            <p>Phase 1 (live Jan 1, 2026): 72-hour expedited, 7-day standard turnaround + public metrics reporting. Phase 2 (Jan 1, 2027): FHIR-based PA API requirements. $15B projected 10-year savings creates immediate spending wave. Enforcement certainty: CERTAIN for Phase 1, uncertain for Phase 2 under Trump deregulatory posture.</p>
+            <div class="impact impact-severe">&#9650; CRITICAL — Phase 1 LIVE | Phase 2 enforcement under watch</div>
+          </div>
+        </div>
+        <div>
+          <div class="policy-box anim d3">
+            <h4>NCQA HEDIS dQM Transition — 100% FHIR-ECDS by MY2030</h4>
+            <p>Hybrid methodology retirement by MY2029. MY2026 migration already in progress (Lead Screening, etc.). Vendors without FHIR-native HEDIS certification lose status. NCQA Digital Content Services standardizes measure logic — shifts differentiation toward data connectivity and analytics. Inovalon's 25 consecutive certifications = strong position during transition.</p>
+            <div class="impact impact-moderate">&#9888; HIGH COMPLEXITY | 4-year transition window; certification moat active now</div>
+          </div>
+          <div class="policy-box anim d4">
+            <h4>TEFCA / Information Blocking Enforcement</h4>
+            <p>TEFCA: 10M to 500M document exchanges in 14 months. ONC first letters of nonconformity Feb 2026. HTI-5 proposing FHIR-centricity, removing 34 certification criteria. Near-term: enriches Inovalon's dataset. Medium-term: standardizes access, eroding proprietary connectivity advantage.</p>
+            <div class="impact impact-moderate">&#9888; TIME-DEPENDENT | Strengthens moat 2026&ndash;2028; erodes it 2029+</div>
+          </div>
+          <div class="policy-box neutral anim d5">
+            <h4>CY2027 MA Advance Notice: +0.09% Rate</h4>
+            <p>Essentially flat payment vs. industry expectation of 4&ndash;6%. Unlinked chart review diagnoses excluded from risk scores starting 2027. Creates 'do more with less' dynamic — compresses plan budgets while compliance requirements intensify. Favors consolidated platform vendors over point solutions.</p>
+            <div class="impact impact-neutral">&#9432; MIXED | Revenue pressure + analytics urgency simultaneously</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Regulatory Environment Scanner (REGULATORY-RADAR) | 8 findings | Confidence: HIGH</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+      <div class="source-list">
+        <strong>Sources:</strong> CMS CY2027 Proposed Rule (Nov 2025) | CMS-0057-F Final Rule (Jan 2024) | CMS Jan 2026 Advance Notice | NCQA May 2025 Webinar | ASTP/ONC TEFCA data | OIG Work Plan | Federal Register
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 07 — CONVERGENCE LAYER -->
+  <section class="slide" id="s7">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-100px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(78,132,196,0.15);color:var(--accent);">CONVERGENCE</span> Multi-Agent Cross-Validation</div>
+      <h2 class="slide-title anim d1">Where All Three Agents Agree Independently</h2>
+      <p class="section-intro anim d2">These findings were reached through genuinely different evidence trails. Source independence tested and confirmed. Convergence amplifies confidence beyond what any single agent achieves.</p>
+      <div class="grid-2 anim d3">
+        <div class="emergence-card anim d3">
+          <h4>&#10003; Risk Adjustment Is the Highest-Stakes Battleground</h4>
+          <p>Domain Agent via SEC filings + Apixio analysis. Market Agent via $2.5B market sizing. Regulatory Agent via V28 implementation + RADV escalation. All three independently confirm simultaneous demand acceleration and intensifying competition in risk adjustment — Inovalon's most strategically exposed segment.</p>
+        </div>
+        <div class="emergence-card anim d4">
+          <h4>&#10003; PE Exit Window: 2026&ndash;2029</h4>
+          <p>Domain Agent via Nordic Capital's typical 4&ndash;6 year hold pattern. Market Agent via re-IPO valuation framework requiring $10&ndash;15B target. Regulatory Agent via mandate calendar that lands squarely in exit preparation window. All three reach the same timing from structurally different evidence.</p>
+        </div>
+        <div class="emergence-card anim d5">
+          <h4>&#10003; GenAI: Largest Opportunity AND Most Significant Threat</h4>
+          <p>Domain Agent via Apixio capability analysis and commoditization risk. Market Agent via 60% admin AI investment alignment with Inovalon use cases. Regulatory Agent via light federal / heavy state regulatory patchwork favoring incumbents. The same force that expands the market threatens to commoditize Inovalon's analytics layer.</p>
+        </div>
+        <div class="emergence-card anim d5">
+          <h4>&#10003; Customer Concentration Is Existential, Not Merely Disclosed</h4>
+          <p>Domain Agent via SEC 10-K filings (top 10 = 60&ndash;65% revenue). Market Agent via top 3 payers = 40% commercial market concentration analysis. Regulatory Agent via second-order financial risk modeling where $1.3B QBP destruction cascades directly to Inovalon through distressed anchor customers. Three independent confirmation paths.</p>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Cross-Agent Convergence | 5 convergent findings | Source Independence: Verified</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 08 — STRATEGIC TENSIONS -->
+  <section class="slide" id="s8">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);bottom:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(108,108,255,0.15);color:var(--accent-violet);">TENSIONS</span> Strategic Complexity Map</div>
+      <h2 class="slide-title anim d1">Five Tensions That Cannot Be Flattened</h2>
+      <p class="section-intro anim d2">These represent genuine strategic complexity preserved rather than artificially resolved. Each requires executive judgment. The resolutions below are scenario-based, not prescriptive.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card anim d3" style="border-left-color:var(--accent-warning);">
+            <div class="finding-title">&#9888; MA Financial Stress: Demand Driver vs. Demand Suppressor</div>
+            <div class="finding-body">
+              <strong style="color:var(--accent-success);">Side A (Regulatory + Domain):</strong> Plans facing $1.3B QBP destruction increase analytics spend to recover Stars ratings. Recovery urgency = highest willingness to pay.<br><br>
+              <strong style="color:var(--accent-error);">Side B (Market):</strong> Severely distressed plans cut vendor budgets, consolidate, or exit markets entirely. Humana &minus;400K members is a direct revenue risk.<br><br>
+              <strong style="color:var(--accent-bright);">Resolution:</strong> Both true simultaneously for different segments. See Emergence Slide 12 for three-segment model.
+            </div>
+          </div>
+          <div class="finding-card anim d4" style="border-left-color:var(--accent-warning);">
+            <div class="finding-title">&#9888; Platform Breadth: Enterprise Strength vs. Functional Weakness</div>
+            <div class="finding-body">
+              <strong style="color:var(--accent-success);">Side A (Domain):</strong> Platform wins at CIO/CTO vendor rationalization. Multiplicative switching costs during concurrent compliance mandates.<br><br>
+              <strong style="color:var(--accent-error);">Side B (Market):</strong> Reveleer ($300M+ risk adjustment), Cohere Health (PA), Cotiviti outperform in functional evaluations.<br><br>
+              <strong style="color:var(--accent-bright);">Resolution:</strong> Both correct at different buying levels. CY2027 upheaval temporarily strengthens enterprise argument — time-limited window.
+            </div>
+          </div>
+          <div class="finding-card anim d5" style="border-left-color:var(--accent-warning);">
+            <div class="finding-title">&#9888; CMS-0057-F: Phase 2 Enforcement Certainty</div>
+            <div class="finding-body">
+              <strong style="color:var(--accent-success);">Side A (Regulatory):</strong> Phase 1 live and irreversible. Bipartisan Congressional support. AHIP not opposing core mandate.<br><br>
+              <strong style="color:var(--accent-error);">Side B (Market):</strong> Trump deregulatory posture could delay Phase 2 to 2028&ndash;2029. Historical precedent of CMS mandate delays.<br><br>
+              <strong style="color:var(--accent-bright);">Resolution:</strong> Direction of travel irreversible. Calibrate to Phase 1 certainty; maintain Phase 2 optionality.
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card anim d3" style="border-left-color:var(--accent-error);">
+            <div class="finding-title">&#9650; Data Moat: Genuinely Defensible vs. Structurally Eroding</div>
+            <div class="finding-body">
+              <strong style="color:var(--accent-success);">Side A (Domain):</strong> 397M patients / 86.6B events — continuously compounding. TEFCA enforcement near-term enriches dataset. 25 years of NCQA continuity is irreplicable.<br><br>
+              <strong style="color:var(--accent-error);">Side B (Market + Regulatory):</strong> TEFCA scaling 10M → 500M exchanges in 14 months. HEDIS dQM standardizes formats. Optum 100M+ lives. AI democratizes analytics.<br><br>
+              <strong style="color:var(--accent-bright);">Resolution:</strong> Strong now; time-bounded. Moat peaks 2026&ndash;2028. See Emergence Slide 14.
+            </div>
+          </div>
+          <div class="finding-card anim d4" style="border-left-color:var(--accent-error);">
+            <div class="finding-title">&#9650; PE Margin Extraction vs. Growth Investment Requirements</div>
+            <div class="finding-body">
+              <strong style="color:var(--accent-success);">Side A (Domain + Market):</strong> Nordic Capital requires exit-ready EBITDA expansion and recurring revenue growth for $10&ndash;15B valuation target.<br><br>
+              <strong style="color:var(--accent-error);">Side B (Regulatory + Domain):</strong> PA automation (CMS-0057-F), HEDIS dQM retooling, AI capabilities, and provider market diversification all require sustained or increased investment.<br><br>
+              <strong style="color:var(--accent-bright);">Resolution:</strong> Values conflict requiring human judgment. IPO = growth narrative; strategic sale = margin profile. Tension intensifies as exit window opens.
+            </div>
+          </div>
+          <div class="anim d5" style="padding:14px;background:rgba(108,108,255,0.08);border:1px solid rgba(108,108,255,0.25);border-radius:10px;font-size:12px;color:var(--text-secondary);">
+            <strong style="color:var(--accent-violet);">TENSION PRESERVATION NOTE:</strong> The MA demand paradox tension was deliberately not flattened into a single narrative. Both sides are simultaneously true for different plan segments. The three-segment model on Slide 12 is the most honest resolution — conditional on customer-segment financial data that does not currently exist publicly.
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Cross-Agent Tension Analysis | 5 productive tensions | Preserved: Unresolved</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 09 — EMERGENCE #1: TEMPORAL CONVERGENCE -->
+  <section class="slide emergent-slide" id="s9">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-200px;right:-200px;opacity:0.12;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-violet);bottom:-200px;left:-200px;opacity:0.08;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">01</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-cyan">EMERGENCE</span> Critical Insight — All Three Agents</div>
+        <h2 class="slide-title anim d1">Temporal Convergence of All Advantages</h2>
+        <p class="slide-subtitle anim d2">Every major competitive advantage Inovalon possesses is independently time-bounded — and all peak in the same 2026&ndash;2028 window. This is not a set of opportunities with separate timelines. It is a single unified strategic window.</p>
+        <div class="stat-grid anim d3">
+          <div class="stat-card">
+            <div class="stat-label">Data Moat Peak</div>
+            <div class="stat-value" style="color:var(--accent-bright);">2026&ndash;28</div>
+            <div class="stat-context">Before TEFCA standardizes access (2029+)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Switching-Cost Peak</div>
+            <div class="stat-value" style="color:var(--accent-bright);">2025&ndash;29</div>
+            <div class="stat-context">Maximum concurrent compliance mandates</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Platform Breadth Advantage</div>
+            <div class="stat-value" style="color:var(--accent-bright);">2026&ndash;28</div>
+            <div class="stat-context">While regulatory upheaval overwhelms multi-vendor management</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">PE Exit Window</div>
+            <div class="stat-value" style="color:var(--accent-success);">2026&ndash;29</div>
+            <div class="stat-context">Nordic Capital 4&ndash;6 year hold from Nov 2022</div>
+          </div>
+        </div>
+        <div class="emergent-why anim d4">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">The <strong>Domain Agent</strong> saw PE timeline pressure in isolation. The <strong>Regulatory Agent</strong> mapped individual mandate expiration and stabilization dates. The <strong>Market Agent</strong> tracked TEFCA scaling curves and AI democratization trajectories. No single agent could recognize that every independent time limit they identified converges on the same window. The recognition that Inovalon is not a company with several time-sensitive opportunities but a company whose <em>entire strategic position is a time-bounded phenomenon</em> requires overlaying three separate temporal maps simultaneously. This is the highest-order finding in the analysis — it subsumes all other emergences.</div>
+        </div>
+        <div class="anim d5" style="margin-top:1.5rem;padding:14px 20px;background:rgba(255,92,92,0.07);border:1px solid rgba(255,92,92,0.25);border-radius:10px;font-size:13px;">
+          <strong style="color:var(--accent-error);">STRATEGIC IMPERATIVE:</strong> <span style="color:var(--text-secondary);">The entire PE value creation thesis reduces to one directive — execute within this window or face secular advantage erosion on multiple dimensions simultaneously. After 2028, advantages do not fade sequentially; they erode concurrently.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10 — EMERGENCE #2: PE EXIT BINARY -->
+  <section class="slide emergent-slide" id="s10">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-200px;left:-150px;opacity:0.1;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">02</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-cyan">EMERGENCE</span> Cross-Agent Theme Mining</div>
+        <h2 class="slide-title anim d1">PE Exit &times; Regulatory Disruption Binary</h2>
+        <p class="slide-subtitle anim d2">Nordic Capital's exit window coincides precisely with the most intense period of simultaneous regulatory disruption in Medicare Advantage history. The narrative is binary — and narrative control during 2025&ndash;2026 is as strategically important as actual financial performance.</p>
+        <div class="grid-2 anim d3">
+          <div class="finding-card opportunity anim d3">
+            <div class="finding-title">&#9650; SCENARIO A: Premium Exit ($10&ndash;15B)</div>
+            <div class="finding-body">
+              Narrative: <strong style="color:var(--accent-success);">"Indispensable compliance infrastructure during maximum regulatory disruption."</strong><br><br>
+              Conditions: Inovalon demonstrates revenue growth through the Stars reset, V28 completion, and PA mandate wave. EBITDA margins expand to 35&ndash;45%. Customer base remains largely intact despite plan stress. PA gap is closed before exit narrative crystallizes.
+            </div>
+            <span class="confidence-badge medium">Achievable — Requires execution in 2025&ndash;2026</span>
+          </div>
+          <div class="finding-card risk anim d4">
+            <div class="finding-title">&#9660; SCENARIO B: Distressed Exit</div>
+            <div class="finding-body">
+              Narrative: <strong style="color:var(--accent-error);">"Overlevered vendor dependent on customers in financial free-fall."</strong><br><br>
+              Conditions: Anchor customer churn (Humana, CVS/Aetna) materially reduces revenue. LBO debt servicing strains FCF under rising rates. PA gap persists, undermining converged-platform narrative. CY2027 Stars disruption compresses distressed plan budgets — demand paradox resolves negatively.
+            </div>
+            <span class="confidence-badge medium">Risk — Accelerates if customer segment 3 dominates</span>
+          </div>
+        </div>
+        <div class="anim d4" style="margin-top:1.5rem;">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;padding:14px;background:rgba(78,132,196,0.08);border:1px solid rgba(78,132,196,0.2);border-radius:10px;font-size:12px;">
+              <strong style="color:var(--accent);">2026 BINARY FORCES</strong>
+              <div style="margin-top:8px;color:var(--text-secondary);">
+                89% MA contracts declining in Stars &bull; V28 100% implementation &bull; CMS-0057-F Phase 2 &bull; HEDIS dQM midpoint &bull; Nordic Capital hold year 4
+              </div>
+            </div>
+            <div style="flex:1;min-width:200px;padding:14px;background:rgba(0,228,159,0.05);border:1px solid rgba(0,228,159,0.2);border-radius:10px;font-size:12px;">
+              <strong style="color:var(--accent-success);">KEY POSITIONING LEVERS</strong>
+              <div style="margin-top:8px;color:var(--text-secondary);">
+                Close PA gap before exit narrative locks &bull; Segment customer base by distress tier &bull; Demonstrate Stars recovery wins for distressed-viable plans &bull; Expand provider/life sciences revenue to reduce payer concentration
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="emergent-why anim d5">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">No single agent connected PE exit timeline, regulatory disruption calendar, and market financial stress simultaneously. The binary framing — and the recognition that the <em>precision</em> of the coincidence matters strategically — requires overlaying all three temporal maps at once.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11 — EMERGENCE #3: SWITCHING COST MULTIPLIER -->
+  <section class="slide emergent-slide" id="s11">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);top:-100px;right:-200px;opacity:0.1;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">03</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-cyan">EMERGENCE</span> Structural Pattern Recognition</div>
+        <h2 class="slide-title anim d1">Multiplicative Switching-Cost Amplifier</h2>
+        <p class="slide-subtitle anim d2">Five simultaneous CMS mandates each create independent vendor dependencies. When concurrent, they produce a <em>multiplicative</em> — not additive — switching-cost effect. Arguably Inovalon's most powerful near-term competitive defense. And entirely time-bound.</p>
+        <div class="anim d3" style="margin-bottom:1.5rem;">
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
+            <div style="padding:14px;background:rgba(255,92,92,0.08);border:1px solid rgba(255,92,92,0.25);border-radius:10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:var(--accent-error);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">V28 HCC</div>
+              <div style="font-size:10px;color:var(--text-secondary);">Risk adjustment retooling</div>
+              <div style="margin-top:8px;font-size:10px;color:var(--accent-warning);">PY2026 100%</div>
+            </div>
+            <div style="padding:14px;background:rgba(255,92,92,0.08);border:1px solid rgba(255,92,92,0.25);border-radius:10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:var(--accent-error);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Stars Reset</div>
+              <div style="font-size:10px;color:var(--text-secondary);">Quality methodology migration</div>
+              <div style="margin-top:8px;font-size:10px;color:var(--accent-warning);">CY2027</div>
+            </div>
+            <div style="padding:14px;background:rgba(255,92,92,0.08);border:1px solid rgba(255,92,92,0.25);border-radius:10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:var(--accent-error);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">PA FHIR APIs</div>
+              <div style="font-size:10px;color:var(--text-secondary);">CMS-0057-F API mandate</div>
+              <div style="margin-top:8px;font-size:10px;color:var(--accent-warning);">Jan 2027</div>
+            </div>
+            <div style="padding:14px;background:rgba(255,92,92,0.08);border:1px solid rgba(255,92,92,0.25);border-radius:10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:var(--accent-error);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">HEDIS dQM</div>
+              <div style="font-size:10px;color:var(--text-secondary);">FHIR-ECDS migration</div>
+              <div style="margin-top:8px;font-size:10px;color:var(--accent-warning);">MY2030</div>
+            </div>
+            <div style="padding:14px;background:rgba(255,92,92,0.08);border:1px solid rgba(255,92,92,0.25);border-radius:10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:var(--accent-error);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">TEFCA</div>
+              <div style="font-size:10px;color:var(--text-secondary);">Interoperability enforcement</div>
+              <div style="margin-top:8px;font-size:10px;color:var(--accent-warning);">Active 2026</div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-tertiary);">Each mandate = independent switching cost &#8594; Concurrent mandates = switching costs multiply, not add</div>
+        </div>
+        <div class="stat-grid anim d4">
+          <div class="stat-card">
+            <div class="stat-label">Mandates in Active Compliance</div>
+            <div class="stat-value" style="color:var(--accent-error);">5</div>
+            <div class="stat-context">All simultaneously requiring platform retooling</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Compliance Wave Duration</div>
+            <div class="stat-value" style="color:var(--accent-bright);">2025&ndash;29</div>
+            <div class="stat-context">Peak lock-in window for incumbent vendors</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Switching Cost Type</div>
+            <div class="stat-value" style="color:var(--accent-success);">&#215; MULT</div>
+            <div class="stat-context">Multiplicative, not additive — each mandate compounds</div>
+          </div>
+        </div>
+        <div class="emergent-why anim d5">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">The <strong>Domain Agent</strong> described platform breadth and contract stickiness. The <strong>Regulatory Agent</strong> mapped five mandate timelines with implementation details. The <strong>Market Agent</strong> identified payer consolidation favoring platform vendors. The distinction between <em>additive</em> and <em>multiplicative</em> switching costs — the key insight — requires product-mandate mapping (Domain × Regulatory) overlaid with market structure dynamics (Market). No single agent would describe this as a switching-cost multiplier because each only sees one dimension of the lock-in mechanism.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 12 — EMERGENCE #4: DEMAND PARADOX -->
+  <section class="slide emergent-slide" id="s12">
+    <div class="slide-bg-glow" style="background:var(--inov-sand);bottom:-200px;left:-100px;opacity:0.08;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">04</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-cyan">EMERGENCE</span> Tension Point Mapping</div>
+        <h2 class="slide-title anim d1">The Demand Paradox</h2>
+        <p class="slide-subtitle anim d2

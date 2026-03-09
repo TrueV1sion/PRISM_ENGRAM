@@ -24,7 +24,7 @@ import {
   EXTENDED_THINKING,
   cachedSystemPrompt,
 } from "@/lib/ai/client";
-import { BlueprintSchema, type Blueprint } from "./types";
+import { BlueprintSchema, type Blueprint, type PipelineEvent } from "./types";
 
 // ─── Methodology-Core Sections 1-2 (System Prompt) ──────────
 
@@ -215,8 +215,9 @@ function getBlueprintJsonSchema(): Record<string, unknown> {
 export async function think(input: {
   query: string;
   urgency?: string;
+  onEvent?: (event: PipelineEvent) => void;
 }): Promise<Blueprint> {
-  const { query, urgency = "balanced" } = input;
+  const { query, urgency = "balanced", onEvent } = input;
 
   // Urgency multiplier per methodology-core.md
   const urgencyMultiplier =
@@ -241,7 +242,7 @@ Call the submit_blueprint tool with your complete analysis.`;
 
   const client = getAnthropicClient();
 
-  const response = await client.messages.create({
+  const stream = client.messages.stream({
     model: MODELS.THINK,
     max_tokens: 16000,
     thinking: EXTENDED_THINKING,
@@ -254,9 +255,25 @@ Call the submit_blueprint tool with your complete analysis.`;
         input_schema: getBlueprintJsonSchema() as Anthropic.Messages.Tool.InputSchema,
       },
     ],
-    tool_choice: { type: "tool" as const, name: "submit_blueprint" },
+    tool_choice: { type: "auto" as const },
     messages: [{ role: "user", content: userPrompt }],
   });
+
+  stream.on("streamEvent", (event) => {
+    if (
+      event.type === "content_block_delta" &&
+      event.delta.type === "thinking_delta"
+    ) {
+      onEvent?.({ type: "thinking_token", token: event.delta.thinking });
+    } else if (
+      event.type === "content_block_delta" &&
+      event.delta.type === "text_delta"
+    ) {
+      onEvent?.({ type: "thinking_token", token: event.delta.text });
+    }
+  });
+
+  const response = await stream.finalMessage();
 
   // ─── Extract blueprint from tool_use response ──────────────
 
@@ -268,7 +285,7 @@ Call the submit_blueprint tool with your complete analysis.`;
   if (!toolUseBlock) {
     throw new Error(
       "THINK phase failed: model did not call submit_blueprint tool. " +
-        `Stop reason: ${response.stop_reason}`,
+      `Stop reason: ${response.stop_reason}`,
     );
   }
 

@@ -265,11 +265,16 @@ ${synthesis.criticRevisions.length > 0 ? `- Critic revisions applied: ${synthesi
 PRISM | Intelligence branding throughout. No Inovalon or other brand references.
 Use "PRISM Intelligence" in the header mark and footer attributions.
 
-## Output
-Generate a complete, self-contained HTML5 file following the Presentation System spec.
-Include ALL CSS inline in a <style> tag and ALL JavaScript inline in a <script> tag.
-The output must be a single HTML file that opens in any modern browser.
-Do NOT include any markdown formatting — output ONLY the raw HTML.`;
+## Output Instructions (CRITICAL)
+1. **EXECUTIVE QUALITY**: You MUST aggressively leverage the advanced PRISM components (Stat Grids, Finding Cards, Threat Meters, Strategic Timelines, Comparison Bars, State Grids, Policy Boxes, Quote Blocks).
+2. **NO PLAIN TEXT BULLETS**: Do not use standard <ul>/<li> lists for core findings. Wrap data in rich components instead to create a dense, cinematic, and data-rich visual experience.
+3. Generate a complete HTML5 file following the Presentation System spec.
+4. DO NOT write any inline CSS inside a <style> tag.
+5. DO NOT write any inline Javascript inside a <script> tag.
+6. You MUST include exactly these two external links in the HTML explicitly:
+  <link rel="stylesheet" href="/styles/presentation.css">
+  <script src="/js/presentation.js" defer></script>
+7. Output ONLY the raw HTML string starting with <!DOCTYPE html>. Do NOT include any markdown formatting (like \`\`\`html).`;
 }
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -383,18 +388,24 @@ export async function present(input: PresentInput): Promise<PresentationResult> 
     max_tokens: 16000,
     system: [cachedSystemPrompt(presentationSpec)],
     messages: [{ role: "user", content: userPrompt }],
+    stream: true,
   });
 
-  // --- 5. Extract HTML from response ---
-  const textBlock = response.content.find(
-    (block): block is Anthropic.Messages.TextBlock => block.type === "text",
-  );
-
-  if (!textBlock) {
-    throw new Error("[PRESENT] No text content in Claude response.");
+  let fullText = "";
+  for await (const chunk of response) {
+    if (chunk.type === "content_block_delta" && chunk.delta.type === "text_delta") {
+      fullText += chunk.delta.text;
+      emitEvent({
+        type: "thinking_token", // Reuse this to keep SSE alive
+        token: chunk.delta.text,
+      });
+    } else if (chunk.type === "message_stop") {
+      console.log("[PRESENT] Generation complete. Stop Reason:", (chunk as any).stop_reason);
+    }
   }
 
-  const html = extractHtml(textBlock.text);
+  // --- 5. Extract HTML from response ---
+  const html = extractHtml(fullText);
 
   // --- 6. Count slides ---
   const slideCount = countSlides(html);

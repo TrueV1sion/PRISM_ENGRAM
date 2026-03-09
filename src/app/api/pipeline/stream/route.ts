@@ -9,9 +9,11 @@
 
 import { executePipeline } from "@/lib/pipeline/executor";
 import { prisma } from "@/lib/prisma";
+import { pipelineRateLimiter } from "@/lib/rate-limit";
 import type { PipelineEvent, AutonomyMode } from "@/lib/pipeline/types";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 300;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -26,6 +28,22 @@ export async function GET(request: Request) {
     );
   }
 
+  // Rate limiting (by IP)
+  const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const rateCheck = pipelineRateLimiter.check(clientIp);
+  if (!rateCheck.allowed) {
+    return new Response(
+      JSON.stringify({ error: "Rate limit exceeded. Please wait before starting another pipeline run." }),
+      {
+        status: 429,
+        headers: {
+          "Content-Type": "application/json",
+          "Retry-After": String(Math.ceil(rateCheck.retryAfterMs / 1000)),
+        },
+      },
+    );
+  }
+
   if (!process.env.ANTHROPIC_API_KEY) {
     return new Response(
       JSON.stringify({ error: "ANTHROPIC_API_KEY is not configured. Set it in .env to enable live mode." }),
@@ -34,6 +52,7 @@ export async function GET(request: Request) {
   }
 
   const encoder = new TextEncoder();
+  const abortController = new AbortController();
 
   const stream = new ReadableStream({
     async start(controller) {
@@ -42,7 +61,8 @@ export async function GET(request: Request) {
           const payload = `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
           controller.enqueue(encoder.encode(payload));
         } catch {
-          // Stream may have been closed by client
+          // Stream may have been closed by client — trigger abort
+          abortController.abort();
         }
       }
 
@@ -52,6 +72,7 @@ export async function GET(request: Request) {
           controller.enqueue(encoder.encode(": heartbeat\n\n"));
         } catch {
           clearInterval(heartbeat);
+          abortController.abort();
         }
       }, 15_000);
 
@@ -68,7 +89,7 @@ export async function GET(request: Request) {
               tier: event.blueprint.tier,
               estimatedTime: event.blueprint.estimatedTime,
               agentCount: event.blueprint.agents.length,
-              complexityScore: event.blueprint.complexityScore,
+              complexity: event.blueprint.complexityScore,
               dimensions: event.blueprint.dimensions.map((d) => ({
                 name: d.name,
                 description: d.description,
@@ -83,33 +104,41 @@ export async function GET(request: Request) {
             });
             break;
 
-          case "agent_spawned":
+          case "agent_spawned": {
+            const spawnId = event.agentName.toLowerCase().replace(/\s+/g, "-");
             send("agent_spawned", {
-              agentName: event.agentName,
+              agentId: spawnId,
+              name: event.agentName,
               archetype: event.archetype,
               dimension: event.dimension,
             });
             break;
+          }
 
-          case "agent_progress":
+          case "agent_progress": {
+            const progressId = event.agentName.toLowerCase().replace(/\s+/g, "-");
             send("agent_progress", {
-              agentName: event.agentName,
+              agentId: progressId,
               progress: event.progress,
               message: event.message,
             });
             break;
+          }
 
-          case "tool_call":
+          case "tool_call": {
+            const toolId = event.agentName.toLowerCase().replace(/\s+/g, "-");
             send("tool_call", {
-              agentName: event.agentName,
+              agentId: toolId,
               toolName: event.toolName,
               serverName: event.serverName,
             });
             break;
+          }
 
-          case "finding_added":
+          case "finding_added": {
+            const findingAgentId = event.agentName.toLowerCase().replace(/\s+/g, "-");
             send("finding_added", {
-              agentName: event.agentName,
+              agentId: findingAgentId,
               finding: {
                 statement: event.finding.statement,
                 confidence: event.finding.confidence,
@@ -120,14 +149,18 @@ export async function GET(request: Request) {
               },
             });
             break;
+          }
 
-          case "agent_complete":
+          case "agent_complete": {
+            const completeId = event.agentName.toLowerCase().replace(/\s+/g, "-");
             send("agent_complete", {
-              agentName: event.agentName,
+              agentId: completeId,
               findingCount: event.findingCount,
+              gapCount: 0,
               tokensUsed: event.tokensUsed,
             });
             break;
+          }
 
           case "synthesis_started":
             send("synthesis_started", { agentCount: event.agentCount });
@@ -160,7 +193,16 @@ export async function GET(request: Request) {
             break;
 
           case "quality_report":
-            send("quality_report", event.report);
+            send("quality_report", {
+              ...event.report,
+              // Ensure enriched QA fields are forwarded
+              grade: event.report.grade,
+              overallScore: event.report.overallScore,
+              provenanceCompleteness: event.report.provenanceCompleteness,
+              warningCount: event.report.warningCount,
+              criticalWarnings: event.report.criticalWarnings,
+              dimensions: event.report.dimensions,
+            });
             break;
 
           case "presentation_started":
@@ -182,6 +224,7 @@ export async function GET(request: Request) {
               totalFindings: event.manifest.qualityReport.totalFindings,
               emergentInsights: event.manifest.synthesis.emergentInsights.length,
               totalTokens: event.manifest.metadata.totalTokens,
+              totalCost: event.manifest.metadata.totalCost,
               presentationPath: `/decks/${event.manifest.metadata.runId}.html`,
             });
             break;
@@ -189,13 +232,19 @@ export async function GET(request: Request) {
           case "error":
             send("error", { error: event.message, phase: event.phase });
             break;
+
+          case "thinking_token":
+            send("thinking_token", { token: event.token });
+            break;
         }
       }
 
       try {
-        // Create the Run record in the database
-        await prisma.run.create({
-          data: {
+        // Upsert the Run record to handle native EventSource reconnects gracefully
+        await prisma.run.upsert({
+          where: { id: runId },
+          update: {}, // If it exists (e.g., auto-retry), do nothing
+          create: {
             id: runId,
             query,
             status: "INITIALIZE",
@@ -206,6 +255,7 @@ export async function GET(request: Request) {
           query,
           runId,
           autonomyMode,
+          signal: abortController.signal,
           onEvent: handleEvent,
         });
       } catch (error) {
@@ -215,6 +265,10 @@ export async function GET(request: Request) {
         clearInterval(heartbeat);
         controller.close();
       }
+    },
+    cancel() {
+      // Called when the client disconnects (navigates away, closes tab)
+      abortController.abort();
     },
   });
 

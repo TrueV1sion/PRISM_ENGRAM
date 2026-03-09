@@ -7,7 +7,6 @@ interface InputPhaseProps {
     query: string;
     setQuery: (query: string) => void;
     onSubmitLive: (e: React.FormEvent) => void;
-    onSubmitDemo: (e: React.FormEvent) => void;
     onOpenSettings: () => void;
 }
 
@@ -15,7 +14,6 @@ export default function InputPhase({
     query,
     setQuery,
     onSubmitLive,
-    onSubmitDemo,
     onOpenSettings,
 }: InputPhaseProps) {
     return (
@@ -82,17 +80,6 @@ export default function InputPhase({
                             </div>
 
                             <div className="flex items-center gap-3">
-                                <button
-                                    type="button"
-                                    onClick={onSubmitDemo}
-                                    disabled={!query.trim()}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all duration-300 ${query.trim()
-                                        ? "border border-white/10 text-prism-muted hover:border-white/20 hover:text-white"
-                                        : "border border-white/5 text-white/20 cursor-not-allowed"
-                                        }`}
-                                >
-                                    Demo Mode
-                                </button>
                                 <button
                                     type="submit"
                                     disabled={!query.trim()}

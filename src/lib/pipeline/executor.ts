@@ -13,9 +13,17 @@ import { prisma } from "@/lib/prisma";
 import { think } from "./think";
 import { construct } from "./construct";
 import { deploy } from "./deploy";
+import type { AgentDeployResult } from "./deploy";
 import { synthesize } from "./synthesize";
 import { verify } from "./verify";
 import { present } from "./present";
+import {
+  runQualityAssurance,
+  getQualityGateSystem,
+} from "./quality-assurance";
+import { withRetry } from "./retry";
+import { CostTracker } from "./cost";
+import { waitForBlueprintApproval, cancelApproval } from "./approval";
 import type {
   Blueprint,
   PipelineEvent,
@@ -34,6 +42,7 @@ export interface PipelineInput {
   query: string;
   runId: string;
   autonomyMode?: AutonomyMode;
+  signal?: AbortSignal;
   onEvent?: (event: PipelineEvent) => void;
 }
 
@@ -99,13 +108,21 @@ function buildQualityReport(
 export async function executePipeline(
   input: PipelineInput,
 ): Promise<IntelligenceManifest> {
-  const { query, runId, autonomyMode = "supervised", onEvent } = input;
+  const { query, runId, autonomyMode = "supervised", signal, onEvent } = input;
   const startTime = new Date().toISOString();
   let totalTokens = 0;
+  const costTracker = new CostTracker();
 
   const emitEvent = (event: PipelineEvent) => {
     onEvent?.(event);
   };
+
+  /** Throws if the pipeline has been aborted (client disconnected). */
+  function checkAbort() {
+    if (signal?.aborted) {
+      throw new DOMException("Pipeline aborted by client", "AbortError");
+    }
+  }
 
   let currentPhase = "THINK";
 
@@ -116,12 +133,23 @@ export async function executePipeline(
     await updateRunStatus(runId, "THINK");
     emitEvent({ type: "phase_change", phase: "THINK", message: "Decomposing query into analytical dimensions..." });
 
-    const blueprint = await think({ query });
+    const blueprint = await withRetry(
+      () => think({ query, onEvent: emitEvent }),
+      { maxRetries: 2, baseDelayMs: 2000, signal, label: "THINK" },
+    );
 
     // Persist blueprint to database
     await persistBlueprint(runId, blueprint);
 
     emitEvent({ type: "blueprint", blueprint });
+
+    // ─── Blueprint Approval Gate ───────────────────────────
+    // Pause and wait for user approval before proceeding.
+    // The client POSTs to /api/pipeline/approve to resolve this.
+    emitEvent({ type: "phase_change", phase: "BLUEPRINT", message: "Awaiting blueprint approval..." });
+    await waitForBlueprintApproval(runId);
+
+    checkAbort();
 
     // ─── Phase 1: CONSTRUCT ───────────────────────────────
 
@@ -145,17 +173,23 @@ export async function executePipeline(
       });
     }
 
+    checkAbort();
+
     // ─── Phase 2: DEPLOY ──────────────────────────────────
 
     currentPhase = "DEPLOY";
     await updateRunStatus(runId, "DEPLOY");
     emitEvent({ type: "phase_change", phase: "DEPLOY", message: `Deploying ${agents.length} agents in parallel...` });
 
-    const deployResult = await deploy({
-      agents,
-      blueprint,
-      emitEvent,
-    });
+    const deployResult = await withRetry(
+      () => deploy({
+        agents,
+        blueprint,
+        emitEvent,
+        signal,
+      }),
+      { maxRetries: 2, baseDelayMs: 2000, signal, label: "DEPLOY" },
+    );
 
     const { agentResults, criticResult } = deployResult;
 
@@ -167,42 +201,45 @@ export async function executePipeline(
       totalTokens += criticResult.tokensUsed;
     }
 
-    // Persist findings to database
-    for (const agentResult of agentResults) {
-      // Update agent status
-      await prisma.agent.updateMany({
-        where: { runId, name: agentResult.agentName },
-        data: {
-          status: "complete",
-          progress: 100,
-        },
-      });
+    // Persist findings to database (batched for performance)
+    // 1. Look up all agent DB records in one query
+    const dbAgents = await prisma.agent.findMany({
+      where: { runId },
+      select: { id: true, name: true },
+    });
+    const agentIdMap = new Map(dbAgents.map((a) => [a.name, a.id]));
 
-      // Persist findings
-      const dbAgent = await prisma.agent.findFirst({
-        where: { runId, name: agentResult.agentName },
-      });
+    // 2. Build all finding records for batch insert
+    const findingsData = agentResults.flatMap((agentResult) => {
+      const agentId = agentIdMap.get(agentResult.agentName);
+      if (!agentId) return [];
+      return agentResult.findings.map((finding) => ({
+        statement: finding.statement,
+        evidence: finding.evidence,
+        confidence: finding.confidence,
+        evidenceType: finding.evidenceType,
+        source: finding.source,
+        sourceTier: finding.sourceTier,
+        implication: finding.implication,
+        action: "keep",
+        tags: JSON.stringify(finding.tags),
+        agentId,
+        runId,
+      }));
+    });
 
-      if (dbAgent) {
-        for (const finding of agentResult.findings) {
-          await prisma.finding.create({
-            data: {
-              statement: finding.statement,
-              evidence: finding.evidence,
-              confidence: finding.confidence,
-              evidenceType: finding.evidenceType,
-              source: finding.source,
-              sourceTier: finding.sourceTier,
-              implication: finding.implication,
-              action: "keep",
-              tags: JSON.stringify(finding.tags),
-              agentId: dbAgent.id,
-              runId,
-            },
-          });
-        }
-      }
-    }
+    // 3. Batch update all agent statuses + create all findings in a transaction
+    await prisma.$transaction([
+      // Mark all agents as complete
+      prisma.agent.updateMany({
+        where: { runId },
+        data: { status: "complete", progress: 100 },
+      }),
+      // Batch create all findings
+      prisma.finding.createMany({
+        data: findingsData,
+      }),
+    ]);
 
     // Check: enough agents succeeded?
     if (agentResults.length < 2) {
@@ -211,37 +248,102 @@ export async function executePipeline(
       );
     }
 
+    checkAbort();
+
     // ─── Phase 3: SYNTHESIZE ──────────────────────────────
 
     currentPhase = "SYNTHESIZE";
     await updateRunStatus(runId, "SYNTHESIZE");
     emitEvent({ type: "phase_change", phase: "SYNTHESIZE", message: "Running emergence detection and synthesis..." });
 
-    const synthesis = await synthesize({
-      agentResults,
-      blueprint,
-      criticResult,
-      emitEvent,
+    const synthesis = await withRetry(
+      () => synthesize({
+        agentResults,
+        blueprint,
+        criticResult,
+        emitEvent,
+      }),
+      { maxRetries: 2, baseDelayMs: 2000, signal, label: "SYNTHESIZE" },
+    );
+
+    // Persist synthesis layers (batched)
+    await prisma.synthesis.createMany({
+      data: synthesis.layers.map((layer, i) => ({
+        layerName: layer.name,
+        description: layer.description,
+        insights: JSON.stringify(layer.insights),
+        order: i,
+        runId,
+      })),
     });
 
-    // Persist synthesis layers
-    for (let i = 0; i < synthesis.layers.length; i++) {
-      const layer = synthesis.layers[i];
-      await prisma.synthesis.create({
-        data: {
-          layerName: layer.name,
-          description: layer.description,
-          insights: JSON.stringify(layer.insights),
-          order: i,
-          runId,
-        },
-      });
-    }
-
-    // Build quality report
+    // Build base quality report
     const qualityReport = buildQualityReport(agentResults, synthesis);
 
+    // ─── Phase 3.25: QUALITY ASSURANCE ─────────────────────
+
+    currentPhase = "QUALITY_ASSURANCE";
+    emitEvent({ type: "phase_change", phase: "QUALITY_ASSURANCE", message: "Running provenance tracking and quality scoring..." });
+
+    // Convert AgentResult[] → AgentDeployResult[] for QA system compatibility
+    const deployResultsForQA: AgentDeployResult[] = agentResults.map((ar) => ({
+      agentName: ar.agentName,
+      dimension: ar.dimension,
+      result: ar,
+      warnings: [],
+    }));
+
+    // Build a partial manifest for QA scoring (presentation not yet available)
+    const partialManifest: IntelligenceManifest = {
+      blueprint,
+      agentResults,
+      synthesis,
+      presentation: { html: "", title: "", subtitle: "", slideCount: 0 },
+      qualityReport,
+      metadata: {
+        runId,
+        startTime,
+        endTime: new Date().toISOString(),
+        totalTokens,
+        totalCost: costTracker.totalCost,
+      },
+    };
+
+    // Run full QA pipeline: provenance → scoring → gates → warnings
+    const gateSystem = getQualityGateSystem();
+    const qaReport = await runQualityAssurance(
+      partialManifest,
+      deployResultsForQA,
+      blueprint,
+      gateSystem,
+      undefined, // criticIssues — could be populated from critic agent later
+      emitEvent,
+    );
+
+    // Enrich the quality report with full QA data
+    qualityReport.grade = qaReport.score.grade;
+    qualityReport.overallScore = qaReport.score.overallScore;
+    qualityReport.provenanceCompleteness = qaReport.provenance.chainCompleteness;
+    qualityReport.warningCount = qaReport.warnings.length;
+    qualityReport.criticalWarnings = qaReport.warnings
+      .filter((w) => w.severity === "critical")
+      .map((w) => w.message);
+    qualityReport.dimensions = qaReport.score.dimensions.map((d) => ({
+      name: d.name,
+      score: d.score,
+      details: d.details,
+    }));
+
+    // Emit the enriched quality report
     emitEvent({ type: "quality_report", report: qualityReport });
+
+    if (!qaReport.passesAllGates) {
+      console.warn(
+        `[EXECUTOR] QA gates did not all pass (grade: ${qaReport.score.grade}, score: ${qaReport.score.overallScore}%). Continuing to VERIFY phase.`,
+      );
+    }
+
+    checkAbort();
 
     // ─── Phase 3.5: VERIFY ────────────────────────────────
 
@@ -271,18 +373,23 @@ export async function executePipeline(
       // the user the claims before streaming the presentation.
     }
 
+    checkAbort();
+
     // ─── Phase 4: PRESENT ─────────────────────────────────
 
     currentPhase = "PRESENT";
     await updateRunStatus(runId, "PRESENT");
     emitEvent({ type: "phase_change", phase: "PRESENT", message: "Generating HTML5 presentation..." });
 
-    const presentation = await present({
-      synthesis,
-      agentResults,
-      blueprint,
-      emitEvent,
-    });
+    const presentation = await withRetry(
+      () => present({
+        synthesis,
+        agentResults,
+        blueprint,
+        emitEvent,
+      }),
+      { maxRetries: 1, baseDelayMs: 3000, signal, label: "PRESENT" },
+    );
 
     // Save HTML to public/decks/
     const decksDir = join(process.cwd(), "public", "decks");
@@ -317,6 +424,7 @@ export async function executePipeline(
         startTime,
         endTime,
         totalTokens,
+        totalCost: costTracker.totalCost,
       },
     };
 
@@ -332,16 +440,24 @@ export async function executePipeline(
 
     return manifest;
   } catch (error) {
+    const isAbort = error instanceof DOMException && error.name === "AbortError";
     const errorMessage =
       error instanceof Error ? error.message : String(error);
 
-    // Update run status to failed
+    // Clean up pending approval if pipeline fails during blueprint wait
+    cancelApproval(runId);
+
+    // Update run status
     await prisma.run.update({
       where: { id: runId },
-      data: { status: "FAILED" },
+      data: { status: isAbort ? "CANCELLED" : "FAILED" },
     });
 
-    emitEvent({ type: "error", message: errorMessage, phase: currentPhase });
+    if (isAbort) {
+      emitEvent({ type: "error", message: "Pipeline cancelled by user", phase: currentPhase });
+    } else {
+      emitEvent({ type: "error", message: errorMessage, phase: currentPhase });
+    }
 
     throw error;
   }
@@ -357,41 +473,35 @@ async function updateRunStatus(runId: string, status: string) {
 }
 
 async function persistBlueprint(runId: string, blueprint: Blueprint) {
-  // Update run with complexity data
-  await prisma.run.update({
-    where: { id: runId },
-    data: {
-      tier: blueprint.tier,
-      complexityScore: Math.round(blueprint.complexityScore.total),
-      breadth: blueprint.complexityScore.breadth,
-      depth: blueprint.complexityScore.depth,
-      interconnection: blueprint.complexityScore.interconnection,
-      estimatedTime: blueprint.estimatedTime,
-    },
-  });
-
-  // Create dimensions
-  for (const dim of blueprint.dimensions) {
-    await prisma.dimension.create({
+  // Update run with complexity data + batch create dimensions and agents
+  await prisma.$transaction([
+    prisma.run.update({
+      where: { id: runId },
       data: {
+        tier: blueprint.tier,
+        complexityScore: Math.round(blueprint.complexityScore.total),
+        breadth: blueprint.complexityScore.breadth,
+        depth: blueprint.complexityScore.depth,
+        interconnection: blueprint.complexityScore.interconnection,
+        estimatedTime: blueprint.estimatedTime,
+      },
+    }),
+    prisma.dimension.createMany({
+      data: blueprint.dimensions.map((dim) => ({
         name: dim.name,
         description: dim.description,
         runId,
-      },
-    });
-  }
-
-  // Create agents
-  for (const agent of blueprint.agents) {
-    await prisma.agent.create({
-      data: {
+      })),
+    }),
+    prisma.agent.createMany({
+      data: blueprint.agents.map((agent) => ({
         name: agent.name,
         archetype: agent.archetype,
         mandate: agent.mandate,
         tools: JSON.stringify(agent.tools),
         dimension: agent.dimension,
         runId,
-      },
-    });
-  }
+      })),
+    }),
+  ]);
 }

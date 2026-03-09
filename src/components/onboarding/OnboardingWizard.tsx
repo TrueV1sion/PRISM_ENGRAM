@@ -26,17 +26,23 @@ export default function OnboardingWizard({ onComplete }: OnboardingWizardProps) 
 
   if (loading || !status) return null;
 
-  const handleConfigNext = async (config: {
+  const handleConfigNext = (config: {
     maxAgents: number;
     defaultUrgency: "speed" | "balanced" | "thorough";
     enableMemoryBus: boolean;
     enableCriticPass: boolean;
   }) => {
-    await fetch("/api/settings", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(config),
-    });
+    // Fire-and-forget settings save — don't block navigation
+    fetch("/api/settings")
+      .then((r) => r.json())
+      .then((current) =>
+        fetch("/api/settings", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...current, ...config }),
+        })
+      )
+      .catch(() => {});
     nextStep();
   };
 

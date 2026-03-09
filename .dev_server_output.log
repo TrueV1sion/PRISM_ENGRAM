@@ -1,0 +1,24 @@
+
+> protoprism@0.1.0 dev
+> next dev --turbopack
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.73:3000
+- Environments: .env
+
+✓ Starting...
+✓ Ready in 375ms
+ GET / 200 in 1088ms (compile: 1000ms, render: 87ms)
+ GET /api/onboarding/status 200 in 107ms (compile: 43ms, render: 64ms)
+ GET /api/onboarding/status 200 in 4ms (compile: 1181µs, render: 2ms)
+ GET /api/onboarding/status 200 in 4ms (compile: 1104µs, render: 3ms)
+ GET /api/settings 200 in 20ms (compile: 17ms, render: 3ms)
+ PUT /api/settings 200 in 7ms (compile: 1141µs, render: 6ms)
+ GET /api/onboarding/status 200 in 4ms (compile: 1315µs, render: 3ms)
+ GET /api/onboarding/status 200 in 4ms (compile: 1779µs, render: 3ms)
+[THINK] Agent count (5) outside tier EXTENDED range [7-10]
+[THINK] Known interconnection missed: Regulatory <-> Technology (coupling=3)
+[THINK] Known interconnection missed: Clinical <-> Financial (coupling=5)
+[THINK] Known interconnection missed: Regulatory <-> Financial (coupling=4)
+[MCPManager] Initialized: 0 connected, 6 unavailable

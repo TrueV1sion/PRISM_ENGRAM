@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Strategic Brief — Inovalon Market Position & Growth Opportunities</title>
+  <link rel="stylesheet" href="/styles/presentation.css">
+</head>
+<body>
+
+  <div id="slideProgress"></div>
+  <div class="prism-mark">PRISM Intelligence</div>
+  <div class="slide-counter" id="slideCounter">01 / 18</div>
+  <div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+
+  <button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents" aria-label="Open table of contents">&#9776;</button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <div class="nav-panel" id="navPanel">
+    <h3>Table of Contents</h3>
+    <a class="nav-item" href="#s1" onclick="toggleNav()"><span class="nav-num">01</span><span class="nav-label">Title — Inovalon Intelligence Brief</span></a>
+    <a class="nav-item" href="#s2" onclick="toggleNav()"><span class="nav-num">02</span><span class="nav-label">Intelligence Map</span></a>
+    <a class="nav-item" href="#s3" onclick="toggleNav()"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+    <a class="nav-item" href="#s4" onclick="toggleNav()"><span class="nav-num">04</span><span class="nav-label">Entity Profile & Capabilities</span></a>
+    <a class="nav-item" href="#s5" onclick="toggleNav()"><span class="nav-num">05</span><span class="nav-label">Competitive Landscape</span></a>
+    <a class="nav-item" href="#s6" onclick="toggleNav()"><span class="nav-num">06</span><span class="nav-label">Technology & Data Asset</span></a>
+    <a class="nav-item" href="#s7" onclick="toggleNav()"><span class="nav-num">07</span><span class="nav-label">Growth Vectors & PE Exit</span></a>
+    <a class="nav-item" href="#s8" onclick="toggleNav()"><span class="nav-num">08</span><span class="nav-label">Strategic Tensions</span></a>
+    <a class="nav-item" href="#s9" onclick="toggleNav()"><span class="nav-num">09</span><span class="nav-label">Emergent #1 — Data-to-Workflow Migration</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s10" onclick="toggleNav()"><span class="nav-num">10</span><span class="nav-label">Emergent #2 — PE Triple Bind</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s11" onclick="toggleNav()"><span class="nav-num">11</span><span class="nav-label">Emergent #3 — Middle-Tier Exit Problem</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s12" onclick="toggleNav()"><span class="nav-num">12</span><span class="nav-label">Emergent #4 — Regulatory Concentration Risk</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s13" onclick="toggleNav()"><span class="nav-num">13</span><span class="nav-label">Emergent #5 — Specialty Pharmacy Wedge</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s14" onclick="toggleNav()"><span class="nav-num">14</span><span class="nav-label">Strategic Timeline</span></a>
+    <a class="nav-item" href="#s15" onclick="toggleNav()"><span class="nav-num">15</span><span class="nav-label">Competitive Benchmarks</span></a>
+    <a class="nav-item" href="#s16" onclick="toggleNav()"><span class="nav-num">16</span><span class="nav-label">Regulatory Radar</span></a>
+    <a class="nav-item" href="#s17" onclick="toggleNav()"><span class="nav-num">17</span><span class="nav-label">Intelligence Provenance</span></a>
+    <a class="nav-item" href="#s18" onclick="toggleNav()"><span class="nav-num">18</span><span class="nav-label">Gaps & Next Steps</span></a>
+  </div>
+
+  <!-- SLIDE 01 — TITLE -->
+  <section class="slide title-slide" id="s1">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-200px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-300px;left:-200px;"></div>
+    <div class="slide-inner" style="text-align:center;">
+      <div class="anim">
+        <div class="hero-badge">PRISM Multi-Source Validated — EXTENDED Tier</div>
+      </div>
+      <h1 class="hero-title anim d1">Inovalon: Market Position,<br>Competitive Landscape &amp;<br>Growth Opportunities</h1>
+      <p class="hero-sub anim d2">Health IT Sector Intelligence — Nordic Capital PE Hold Period Analysis</p>
+      <p class="hero-date anim d3">2025 | 4-Agent Swarm | MEDIUM Confidence — Post-2022 Opacity Cap</p>
+      <div class="anim d4" style="margin-top:1.5rem;">
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-bright)"></span>Entity Researcher</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-success)"></span>Competitive Analyst</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-warning)"></span>Technology Assessor</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-violet)"></span>Growth Strategist</span>
+      </div>
+      <div class="anim d5" style="margin-top:2rem;">
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="value cyan">$7.3B</div>
+            <div class="label">LBO Enterprise Value</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value gold">~$749M</div>
+            <div class="label">FY2021 Revenue (last public)</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value green">85%</div>
+            <div class="label">HEDIS Market Share†</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value blue">68B+</div>
+            <div class="label">Medical Events in Dataset†</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value red">~$340M</div>
+            <div class="label">Est. Annual Interest Burden</div>
+          </div>
+        </div>
+      </div>
+      <div class="anim d6" style="margin-top:2rem;">
+        <div class="validation-box">
+          <div class="validation-card">
+            <h4>&#10003; Validation Methodology</h4>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Foundation layer verified across all 4 agents independently</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>4 convergent cross-agent findings — independent evidence paths confirmed</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>5 emergent insights passed quality gate (4+ on 3 of 5 dimensions)</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Self-reported data (HEDIS share, dataset scale) flagged with † throughout</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Confidence capped at MEDIUM — no post-2022 public financials available</div>
+          </div>
+          <div class="validation-card framework-card">
+            <h4>&#9670; PRISM Processing Framework</h4>
+            <p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">32 findings across 4 agents synthesized through 5-layer intelligence pyramid</p>
+            <div class="framework-visual">
+              <span class="fw-node">Entity Researcher</span>
+              <span class="fw-node">Competitive Analyst</span>
+              <span class="fw-node">Technology Assessor</span>
+              <span class="fw-node">Growth Strategist</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-center">Cross-Agent Synthesis</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success);">5 Emergent Insights</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dagger-footnote">† Source: Inovalon self-reported — primary independent validation not available</div>
+  </section>
+
+  <!-- SLIDE 02 — TABLE OF CONTENTS -->
+  <section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-150px;right:-150px;"></div>
+    <div class="slide-inner">
+      <h2 class="slide-title anim">Executive <span style="color:var(--accent);">Intelligence Map</span></h2>
+      <p class="section-intro anim d1">18-slide analysis spanning entity profile, competitive landscape, technology assessment, growth strategy, 5 emergent insights, and PE exit scenario modeling — all grounded in a 4-agent swarm synthesis.</p>
+      <div class="grid-3 anim d2">
+        <div>
+          <h3 class="toc-group-header">Foundational Analysis</h3>
+          <a class="nav-item toc-item" href="#s3"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+          <a class="nav-item toc-item" href="#s4"><span class="nav-num">04</span><span class="nav-label">Entity Profile &amp; Capabilities</span></a>
+          <a class="nav-item toc-item" href="#s5"><span class="nav-num">05</span><span class="nav-label">Competitive Landscape</span></a>
+          <a class="nav-item toc-item" href="#s6"><span class="nav-num">06</span><span class="nav-label">Technology &amp; Data Asset</span></a>
+          <a class="nav-item toc-item" href="#s7"><span class="nav-num">07</span><span class="nav-label">Growth Vectors &amp; PE Exit</span></a>
+          <a class="nav-item toc-item" href="#s8"><span class="nav-num">08</span><span class="nav-label">Strategic Tensions</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Emergent Intelligence</h3>
+          <a class="nav-item toc-item" href="#s9"><span class="nav-num">09</span><span class="nav-label">Data-to-Workflow Moat Migration</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">PE Leverage-Innovation Triple Bind</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">Middle-Tier PE Exit Problem</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s12"><span class="nav-num">12</span><span class="nav-label">Regulatory Concentration Risk</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s13"><span class="nav-num">13</span><span class="nav-label">Specialty Pharmacy Wedge</span><span class="nav-tag">NEW</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Strategic Synthesis</h3>
+          <a class="nav-item toc-item" href="#s14"><span class="nav-num">14</span><span class="nav-label">Strategic Timeline</span></a>
+          <a class="nav-item toc-item" href="#s15"><span class="nav-num">15</span><span class="nav-label">Competitive Benchmarks</span></a>
+          <a class="nav-item toc-item" href="#s16"><span class="nav-num">16</span><span class="nav-label">Regulatory Radar</span></a>
+          <a class="nav-item toc-item" href="#s17"><span class="nav-num">17</span><span class="nav-label">Intelligence Provenance</span></a>
+          <a class="nav-item toc-item" href="#s18"><span class="nav-num">18</span><span class="nav-label">Gaps &amp; Next Steps</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 03 — EXECUTIVE SUMMARY -->
+  <section class="slide" id="s3">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Strategic</span> Executive Summary</div>
+      <h2 class="slide-title anim d1">The 5 Insights That Define<br>Inovalon's Strategic Moment</h2>
+      <p class="section-intro anim d2">Four agents. Thirty-two findings. Five emergent truths invisible to any single analytical lens. This is the synthesis that matters.</p>
+      <div class="grid-2 anim d3">
+        <div class="emergence-card">
+          <h4>1. The Moat Is Migrating, Not Disappearing</h4>
+          <p>Inovalon's competitive advantage is shifting from data ownership (being commoditized by TEFCA/FHIR mandates) to workflow embeddedness — 25 years NCQA HEDIS certification, 85%† processing share, compliance-driven switching costs. Data moat erodes in 3-5 years; workflow moat can be deepened in 1-2.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>2. A Triple Bind With a Countdown Clock</h4>
+          <p>PE debt (~$340M/yr interest) constrains R&amp;D precisely when GenAI's critical adoption window (2024-2026) is open AND TEFCA matures (2025-2027). Nordic MUST acquire AI capabilities — organic build is structurally insufficient. Execution window: 2024-2025 or the clock expires.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>3. Middle-Tier Everywhere = PE Exit Problem</h4>
+          <p>Inovalon is "strong but not leading" in every segment simultaneously — below Cotiviti in payer analytics, below R1 RCM in revenue cycle, blocked by PBMs in managed pharmacy. No category leadership in any single dimension creates a narrative problem for both IPO and strategic sale.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>4. CMS Concentration Is a Hidden Portfolio Risk</h4>
+          <p>CMS policy changes can simultaneously impact HEDIS revenue, V28 risk adjustment revenue, Part D pharmacy revenue, and prior auth workflow revenue. This systemic regulatory concentration is distinct from and additive to well-documented 40-50% customer concentration in top 10 clients.</p>
+        </div>
+      </div>
+      <div class="finding-card emergent anim d4" style="margin-top:1rem;">
+        <div class="finding-title">5. Specialty Pharmacy Is The One Segment Where Inovalon Actually Leads</div>
+        <div class="finding-body">ScriptMed is the only cloud-native end-to-end specialty pharmacy solution, serving the majority of top-15 specialty pharmacies — genuine category leadership in a $2-3B TAM with 60-70% gross margins and GLP-1/gene therapy tailwinds. This is both the strongest growth vector and the natural anchor for solving the PE exit narrative problem.</div>
+        <span class="confidence-badge high">High Conviction — 4 Agent Convergence</span>
+      </div>
+      <div class="slide-footer">
+        <span>PRISM 4-Agent Swarm | 32 Findings | Overall Confidence: MEDIUM (post-2022 opacity cap)</span>
+        <span>PRISM Intelligence</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 04 — ENTITY PROFILE -->
+  <section class="slide" id="s4">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-150px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag clinical">Entity</span> Dimension 1 — Inovalon Entity Researcher</div>
+      <h2 class="slide-title anim d1">The ONE Platform: Breadth,<br>Debt, and Opacity</h2>
+      <p class="section-intro anim d2">Founded 1998 by Dr. Keith Dunleavy. NASDAQ IPO 2015. Taken private November 2022. Everything since then is inference — confirmed FY2021 data is the last public ground truth.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">FY2021 REVENUE</div>
+              <div class="stat-value warn">~$749M</div>
+              <div class="stat-context">Last publicly reported — pre-LBO baseline</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">ADJ. EBITDA MARGIN</div>
+              <div class="stat-value positive">~37%</div>
+              <div class="stat-context">~$280M adj. EBITDA — FY2021</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">LBO ENTERPRISE VALUE</div>
+              <div class="stat-value warn">$7.3B</div>
+              <div class="stat-context">~9.7x revenue / ~26x EBITDA at close</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">EST. ANNUAL INTEREST</div>
+              <div class="stat-value negative">~$340M</div>
+              <div class="stat-context">~$4-4.5B debt at ~8% floating — unverified</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card anim d3">
+            <div class="finding-title">ONE Platform: Four Pillars, One Complexity Problem</div>
+            <div class="finding-body">Data &amp; Analytics, Quality Measurement, Revenue Cycle Management, and Pharmacy Solutions serve health plans, providers, and PBMs. This breadth creates genuine cross-sell optionality but forces Inovalon to compete against different specialized rivals in every segment — Cotiviti in payer quality, R1 RCM in revenue cycle, ScriptMed peers in pharmacy. No single pillar achieves best-in-class depth vs. pure-plays.</div>
+            <span class="confidence-badge high">High — Primary (2021 10-K + company filings)</span>
+          </div>
+          <div class="finding-card anim d4">
+            <div class="finding-title">Customer Concentration: 40-50% in Top 10 Clients</div>
+            <div class="finding-body">Blue Cross Blue Shield plans, Centene, Molina, CVS/Aetna, Humana represent core commercial base. Top customer historically ~10-13% of revenue. High payer concentration = durable revenue floor but limited upside ceiling. Losing even one major MA plan is a material event. Provider expansion via Ability Network (~$540M) diversifies TAM but adds execution complexity.</div>
+            <span class="confidence-badge high">High — Primary (2020-2021 10-K disclosures)</span>
+          </div>
+        </div>
+      </div>
+      <div class="bar-row anim d5">
+        <div class="bar-label">Data &amp; Analytics</div>
+        <div class="bar-track"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sky))"><span class="bar-fill-value">Core moat — longitudinal claims 25+ yrs</span></div></div>
+      </div>
+      <div class="bar-row anim d5">
+        <div class="bar-label">Quality Measurement</div>
+        <div class="bar-track"><div class="bar-fill" style="width:90%;background:linear-gradient(90deg,var(--inov-jade),var(--inov-sky))"><span class="bar-fill-value">85%† HEDIS share — strongest pillar</span></div></div>
+      </div>
+      <div class="bar-row anim d5">
+        <div class="bar-label">Revenue Cycle Mgmt</div>
+        <div class="bar-track"><div class="bar-fill" style="width:60%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-violet))"><span class="bar-fill-value">Analytics-focused — not full outsourcing</span></div></div>
+      </div>
+      <div class="bar-row anim d5">
+        <div class="bar-label">Pharmacy Solutions</div>
+        <div class="bar-track"><div class="bar-fill" style="width:70%;background:linear-gradient(90deg,var(--inov-jade),var(--inov-cerulean))"><span class="bar-fill-value">ScriptMed — specialty category leader</span></div></div>
+      </div>
+      <div class="slide-footer">
+        <span>Entity Researcher | 8 findings | Confidence: HIGH on pre-2022 data, MEDIUM on post-LBO inferences</span>
+        <span>PRISM Intelligence</span>
+      </div>
+      <div class="dagger-footnote">† Source: Inovalon self-reported — primary independent validation not available</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 05 — COMPETITIVE LANDSCAPE -->
+  <section class="slide" id="s5">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-200px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Competitive</span> Dimension 2 — Health IT Competitive Analyst</div>
+      <h2 class="slide-title anim d1">Strong in Every Segment,<br>Leading in None</h2>
+      <p class="section-intro anim d2">Inovalon occupies a well-resourced middle tier across all competitive dimensions. HEDIS dominance is the single genuine exception — and the one moat worth defending.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card anim d3">
+            <div class="finding-title">HEDIS Processing: The Crown Jewel</div>
+            <div class="finding-body">~85%† HEDIS market share via Converged Quality. 25 consecutive years NCQA certification — no competitor matches this continuity. Switching costs estimated at 12-18 months parallel processing. MA Star Rating penalties create career-risk-level incentive to stay. This is the most defensible revenue base in the entire portfolio.</div>
+            <span class="confidence-badge high">High — BusinessWire / NCQA documentation</span>
+          </div>
+          <div class="finding-card risk anim d4">
+            <div class="finding-title">Revenue Scale Gap vs. Cotiviti</div>
+            <div class="finding-body">Cotiviti generates ~$750M more annual revenue than Inovalon's last public figure (~$1.5B+ vs ~$800M+). Customers report Inovalon as "expensive and difficult to work with" (KLAS 2020 — data may be stale). Converged Quality lacks sufficient KLAS respondents for independent ranking. Cotiviti and Optum hold pricing and relationship advantages in competitive takeouts.</div>
+            <span class="confidence-badge medium">Medium — KLAS 2020 (pre-LBO, may be stale)</span>
+          </div>
+          <div class="finding-card opportunity anim d5">
+            <div class="finding-title">Change Healthcare Breach: 344K Providers†</div>
+            <div class="finding-body">Feb 2024 breach reportedly drove ~344K provider contracts to Inovalon (~98% converting to permanent). Structural multi-vendor RCM shift is real — board-level vendor concentration risk concern is now industry-wide. Black Book #1 for provider RCM analytics in 2024, ahead of MedeAnalytics, Arcadia, and Health Catalyst.</div>
+            <span class="confidence-badge medium">Medium — Reuters/Inc.com single source†</span>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);margin-bottom:12px;">Competitive Tier by Segment</h4>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">HEDIS Quality</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:90%;background:linear-gradient(90deg,var(--inov-jade),var(--inov-sky))"><span class="bar-fill-value">Dominant — 85%† share</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">Payer Analytics</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:65%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sky))"><span class="bar-fill-value">Mid-tier — below Cotiviti scale</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">RCM Analytics</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:70%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-violet))"><span class="bar-fill-value">#1 analytics — limited outsourcing</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">Specialty Pharmacy</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:85%;background:linear-gradient(90deg,var(--inov-jade),var(--inov-cerulean))"><span class="bar-fill-value">Category leader — ScriptMed</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">GenAI / AI-Native</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:30%;background:linear-gradient(90deg,#ff5c5c,#f97316)"><span class="bar-fill-value">No public roadmap — lagging</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">Life Sciences RWE</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:45%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sand))"><span class="bar-fill-value">Below IQVIA / Flatiron scale</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Competitive Analyst | 8 findings | Confidence: MEDIUM (2022-2023 data; post-LBO landscape may have shifted)</span>
+        <span>PRISM Intelligence</span>
+      </div>
+      <div class="dagger-footnote">† Source: Inovalon self-reported (HEDIS share) or single secondary source (344K providers) — primary independent validation not available</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 06 — TECHNOLOGY & DATA ASSET -->
+  <section class="slide" id="s6">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-200px;left:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag quality">Technology</span> Dimension 3 — Technology Assessor</div>
+      <h2 class="slide-title anim d1">Evolutionary Architecture,<br>Eroding Data Exclusivity</h2>
+      <p class="section-intro anim d2">The data asset is real and large. But the forces commoditizing it are structural, regulatory, and accelerating. The architectural legacy creates technical debt precisely when AI-native competitors are attacking.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card anim d3">
+            <div class="finding-title">Platform Architecture: Evolutionary, Not Greenfield</div>
+            <div class="finding-body">ONE Platform is cloud-native multi-tenant SaaS on AWS — but reflects evolutionary modernization from legacy origins, not greenfield cloud-native design. Creates technical debt risk vs. AI-native entrants (Innovaccer, Arcadia) built from scratch. API composability and developer ecosystem depth are constrained vs. newer architectures. FHIR posture is compliance-driven, not infrastructure-leadership-driven.</div>
+            <span class="confidence-badge medium">Medium — S-1 filings + public materials</span>
+          </div>
+          <div class="finding-card risk anim d4">
+            <div class="finding-title">AI/ML Stack: Established But Increasingly Commoditized</div>
+            <div class="finding-body">ML capabilities primarily rooted in supervised learning on structured claims for quality measurement, risk adjustment, and predictive analytics — well-established but lagging in NLP-based unstructured data extraction and generative AI. No public GenAI product roadmap as of late 2023. This is a cautionary signal for the 2024-2026 critical adoption window. AI-native disruptors (Innovaccer, ClosedLoop, Apixio) gaining KLAS 2024 VBC survey traction.</div>
+            <span class="confidence-badge medium">Medium — Product sheet analysis + KLAS data</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card anim d3">
+            <div class="finding-title">Data Asset: Scale Is Real, Exclusivity Is Eroding</div>
+            <div class="finding-body">68B+ medical events, 380M+ patients†, 25+ years longitudinal — one of the largest claims datasets in U.S. healthcare. BUT: TEFCA/QHIN enables national health data exchange by 2025-2027; 21st Century Cures Act information blocking mandates data openness; Komodo Health has reached 330M patients via alternative accumulation. Raw claims scale is ceasing to be uniquely defensible. True moat is data linkage quality and workflow embeddedness — not record counts.</div>
+            <span class="confidence-badge medium">Medium — Company-reported figures†; regulatory analysis confirmed</span>
+          </div>
+          <div class="finding-card opportunity anim d4">
+            <div class="finding-title">RWE/Life Sciences: Underexploited High-Margin Vector</div>
+            <div class="finding-body">FDA's growing RWE acceptance creates demand for longitudinal datasets. Inovalon's linked claims-pharmacy-EHR dataset is differentiated at the payer-integrated claims layer. RWE market projected $4.1B by 2028 (CAGR ~13%). But claims-only foundation limits regulatory acceptance vs. EHR-enriched competitors (Flatiron, IQVIA). Needs clinical data partnerships or acquisition to compete in oncology/specialty RWE.</div>
+            <span class="confidence-badge medium">Medium — FDA RWE guidance + market projections</span>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Technology Assessor | 8 findings | Confidence: MEDIUM (no access to post-2022 R&amp;D data, architecture details unverifiable)</span>
+        <span>PRISM Intelligence</span>
+      </div>
+      <div class="source-list">
+        <strong>Sources:</strong>
+        <a href="https://www.fda.gov/science-research/science-and-research-special-topics/real-world-evidence" target="_blank">FDA RWE Framework</a> |
+        <a href="https://www.healthit.gov/topic/interoperability/policy/21st-century-cures-act-interoperability-information-blocking" target="_blank">21st Century Cures Act</a> |
+        <a href="https://rce.cms.gov/files/tefca-one-pager.pdf" target="_blank">TEFCA/QHIN Overview</a>
+      </div>
+      <div class="dagger-footnote">† Source: Inovalon self-reported dataset metrics — primary independent validation not available</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 07 — GROWTH VECTORS & PE EXIT -->
+  <section class="slide" id="s7">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);top:-200px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag financial">Growth &amp; Exit</span> Dimension 4 — Growth Strategy &amp; PE Exit Analyst</div>
+      <h2 class="slide-title anim d1">Nordic's Exit Math:<br>$18-22B or Bust</h2>
+      <p class="section-intro anim d2">At 2.5-3x MOIC on $7.3B, Nordic needs to deliver ~$18-22B enterprise value at exit. That math requires revenue scale (~$2B+ at 10x revenue) or EBITDA expansion (~$600-700M at 30x). The 2026-2028 window is closing.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity anim d3">
+            <div class="finding-title">Medicare Advantage Tailwind: V28 Model Changes</div>
+            <div class="finding-body">MA enrollment reached 31.8M beneficiaries (51% of Medicare eligible) in 2024; projected &gt;60% by 2030. CMS V28 risk adjustment model changes (phasing 2024-2026) increase coding compliance burden — payers who self-managed risk adjustment will outsource. Estimated $500M-$1B TAM expansion for coding accuracy and quality analytics. New MA entrants (Oscar, Devoted, Alignment) represent untapped greenfield.</div>
+            <span class="confidence-badge high">High — KFF, CBO, CMS Actuary projections</span>
+          </div>
+          <div class="finding-card opportunity anim d4">
+            <div class="finding-title">Life Sciences RWE: Highest-Margin Growth Vector</div>
+            <div class="finding-body">RWE market projected $4.1B by 2028 (~13% CAGR). Inovalon's linked claims-EHR-pharmacy dataset covering 320M+ patient lives is differentiated at payer-integrated claims layer. Potential $150-300M incremental high-margin revenue (60-70% gross margin) over 3-5 years. Most likely strategic acquirer interest from IQVIA, Veritas/Cotiviti, Tempus AI. Requires clinical data enrichment investment to fully compete.</div>
+            <span class="confidence-badge medium">Medium — MarketsandMarkets + FDA RWE guidance</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">EXIT TARGET EV</div>
+              <div class="stat-value positive">$18-22B</div>
+              <div class="stat-context">2.5-3x MOIC on $7.3B acquisition</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">EXIT WINDOW</div>
+              <div class="stat-value warn">2026-2028</div>
+              <div class="stat-context">4-7 year typical PE hold from 2022</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">GenAI MARKET 2032</div>
+              <div class="stat-value positive">$21.7B</div>
+              <div class="stat-context">Healthcare AI — ~37% CAGR from $1.1B (2022)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">RCM MARKET 2030</div>
+              <div class="stat-value positive">$117B</div>
+              <div class="stat-context">12.4% CAGR — analytics-focused positioning</div>
+            </div>
+          </div>
+          <div class="finding-card anim d4">
+            <div class="finding-title">M&amp;A Roll-Up: 2-4 Acquisitions Needed</div>
+            <div class="finding-body">Nordic's typical playbook targets $50M-$500M acquisitions to fill capability gaps. Priority targets: (1) provider-side workflow integration, (2) Medicaid managed care analytics, (3) AI/GenAI capabilities — buy vs. build is structurally mandated by debt constraint. Well-chosen acquisitions could increase revenue 25-40% and expand TAM from ~$15B to $30B+. Vigilanz acquisition (early 2024) signals the strategy is activating.</div>
+            <span class="confidence-badge medium">Medium — Nordic track record + public M&amp;A signals</span>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Growth Strategist | 8 findings | Confidence: MEDIUM (post-2022 opacity; scenarios built on projections and analogies)</span>
+        <span>PRISM Intelligence</span>
+      </div>
+      <div class="source-list">
+        <strong>Sources:</strong>
+        <a href="https://www.kff.org/medicare/issue-brief/medicare-advantage-in-2024-enrollment-update-and-key-trends/" target="_blank">KFF Medicare Advantage 2024</a> |
+        <a href="https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats/risk-adjustors/2024-model" target="_blank">CMS V28 Model</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 08 — STRATEGIC TENSIONS -->
+  <section class="slide" id="s8">
+    <div class="slide-bg-glow" style="background:var(--inov-sand);top:-200px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag regulatory">Tension</span> Strategic Ambiguities — 5 Unresolved Questions</div>
+      <h2 class="slide-title anim d1">What We Cannot Honestly<br>Resolve With Available Evidence</h2>
+      <p class="section-intro anim d2">Five genuine strategic tensions preserved rather than flattened. Each requires contingent strategy — not false certainty.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="policy-box neutral">
+            <h4>Data Moat: Eroding Layer vs. Strengthening Layer</h4>
+            <p>Raw claims data exclusivity IS structurally eroding (TEFCA, Komodo 330M patients, CMS public data). Workflow moat (HEDIS certifications, process embeddedness) IS independently strengthening. Both are simultaneously true. Invest in workflow deepening — not data defense.</p>
+            <div class="impact impact-moderate">PREDICTIVE TENSION | Timeline: Data erodes in 3-5 yrs; workflow can deepen in 1-2 yrs — urgent priority</div>
+          </div>
+          <div class="policy-box neutral">
+            <h4>PE Ownership: Enabler vs. Constraint</h4>
+            <p>~$340M/yr interest limits R&amp;D vs. Veeva ($290M R&amp;D budget). BUT removes earnings pressure and enables buy-and-build M&amp;A. Net effect is contingent on whether 2-4 AI acquisitions execute successfully in 2024-2025.</p>
+            <div class="impact impact-moderate">INTERPRETIVE TENSION | Evidence insufficient — will only resolve at exit event</div>
+          </div>
+          <div class="policy-box neutral">
+            <h4>Platform Breadth: Asset vs. Liability</h4>
+            <p>For top-25 enterprise health plans: breadth IS the asset (fewer vendors, integration wins). For mid-tier plans, providers, ACOs: breadth IS the liability (best-in-class beats broad). Resolution: segment-specific value propositions, not portfolio reduction.</p>
+            <div class="impact impact-moderate">INTERPRETIVE TENSION | Answer is market-segment-dependent</div>
+          </div>
+        </div>
+        <div>
+          <div class="policy-box neutral">
+            <h4>Change Healthcare Captures: Durable or Temporary?†</h4>
+            <p>344K† provider contracts may reflect permanent multi-vendor shift OR shallow emergency diversification with high reversion. Optum's retention resources exceed Inovalon's capture capacity. Robust assumption: 60-80% retention, focus on deepening integration — not assuming full durability.</p>
+            <div class="impact impact-moderate">PREDICTIVE TENSION | Single source†; magnitude unverified; must flag in exit model</div>
+          </div>
+          <div class="policy-box neutral">
+            <h4>Pharmacy: High-Growth Opportunity vs. PBM Structural Block</h4>
+            <p>Managed/retail pharmacy: structurally blocked by CVS/Caremark, OptumRx, Express Scripts (&gt;80% PBM market). Specialty/infusion pharmacy: fragmented, Inovalon holds category leadership via ScriptMed. Two different sub-markets — both sides are right about different segments.</p>
+            <div class="impact impact-positive">SCOPE TENSION | Resolution: Specialty yes, managed pharmacy no — explicitly define addressable market</div>
+          </div>
+          <div class="quote-block anim d5">
+            "Nordic Capital's ~$7.3B acquisition price implies a need for substantial value creation. At a typical PE target of 2.5-3x MOIC over 6-7 years, Nordic needs an enterprise value of ~$18-22B at exit."
+            <div class="quote-attr">— Growth Strategy &amp; PE Exit Analyst, PRISM Intelligence Brief</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Synthesis Layer | 5 Tension Points | Confidence: MEDIUM (post-2022 data gap constrains resolution on all five tensions)</span>
+        <span>PRISM Intelligence</span>
+      </div>
+      <div class="dagger-footnote">† Source: Reuters/Inc.com single secondary source for 344K provider figure — primary independent verification not available</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 09 — EMERGENCE #1: DATA-TO-WORKFLOW MIGRATION -->
+  <section class="slide emergent-slide" id="s9">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-100px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">01</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag" style="background:rgba(89,221,253,0.15);color:var(--accent-bright);">Emergent Insight</span> Cross-Agent Theme Mining — All 4 Agents</div>
+        <h2 class="slide-title anim d1">The Data-to-Workflow Moat Migration</h2>
+        <p class="slide-subtitle anim d2">Inovalon is not a 'data company with analytics' — it is a 'regulatory compliance workflow company with data advantages.' This distinction has profound implications for competitive strategy, M&amp;A targeting, and PE exit narrative.</p>
+        <div class="grid-2 anim d3">
+          <div>
+            <div class="stat-card">
+              <div class="stat-label">HEDIS SHARE†</div>
+              <div class="stat-value positive">85%</div>
+              <div class="stat-context">Workflow lock-in via 25 consecutive yrs NCQA certification</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">SWITCHING COST ESTIMATE</div>
+              <div class="stat-value warn">12-18 mo</div>
+              <div class="stat-context">Parallel processing required for HEDIS vendor transition</div>
+            </div>
+          </div>
+          <div>
+            <div class="stat-card">
+              <div class="stat-label">DATA MOAT EROSION TIMELINE</div>
+              <div class="stat-value negative">3-5 yrs</div>
+              <div class="stat-context">TEFCA maturation + competitor accumulation</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">WORKFLOW DEEPENING WINDOW</div>
+              <div class="stat-value positive">1-2 yrs</div>
+              <div class="stat-context">Executable now — urgent strategic priority</div>
+            </div>
+          </div>
+        </div>
+        <div class="emergent-why anim d4">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">No single agent articulated the moat MIGRATION dynamic. The Entity Researcher documented data asset scale and erosion risk. The Technology Assessor independently identified TEFCA/FHIR as the commoditization mechanism. The Competitive Analyst independently quantified workflow lock-in (85%† HEDIS, switching costs). The Growth Strategist independently identified regulatory complexity as a demand driver. Only by overlaying all four perspectives does the directional shift — from data-moat to workflow-moat — become visible as a coherent migration pattern rather than disconnected observations. This is the foundational strategic reframe: stop defending data exclusivity, start deepening compliance workflow integration. Novelty: 4/5 | Grounding: 5/5 | Actionability: 5/5</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Emergence Algorithm: cross_agent_theme_mining | All 4 agents converged | Confidence: MEDIUM (85% share is self-reported)</span>
+      <span>PRISM Intelligence</span>
+    </div>
+    <div class="dagger-footnote">† Source: Inovalon self-reported — primary independent validation not available</div>
+  </section>
+
+  <!-- SLIDE 10 — EMERGENCE #2: PE TRIPLE BIND -->
+  <section class="slide emergent-slide" id="s10">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">02</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag" style="background:rgba(89,221,253,0.15);color:var(--accent-bright);">Emergent Insight</span> Tension Point Mapping — Entity Researcher, Technology Assessor, Growth Strategist, Competitive Analyst</div>
+        <h2 class="slide-title anim d1">The PE Leverage–Innovation–<br>Regulation Triple Bind</h2>
+        <p class="slide-subtitle anim d2">Three forces on a collision course with a specific timing prediction: Nordic Capital MUST acquire AI capabilities — organic build is structurally insufficient. The execution window is 2024-2025.</p>
+        <div class="grid-2 anim d3">
+          <div>
+            <div class="finding-card risk anim d3">
+              <div class="finding-title">Leg 1: PE Debt Constrains R&amp;D</div>
+              <div class="finding-body">~$4-4.5B estimated debt. ~$340M/yr estimated interest. Veeva's R&amp;D budget ($290M) exceeds Inovalon's entire estimated free cash flow. Health Catalyst ($90M R&amp;D) is a fraction of Inovalon's scale but may outinvest per dollar of revenue on AI.</div>
+              <span class="confidence-badge medium">Medium — Debt estimates unverified; FCF projection</span>
+            </div>
+            <div class="finding-card risk anim d4">
+              <div class="finding-title">Leg 2: GenAI Critical Adoption Window</div>
+              <div class="finding-body">Healthcare AI market: $1.1B (2022) → $21.7B (2032) at ~37% CAGR. CMS-0057-F prior auth mandate creates hard 2026 deadline. AI-native disruptors (Innovaccer, ClosedLoop, Apixio) are gaining KLAS traction NOW. First-mover advantages are calcifying during 2024-2026.</div>
+              <span class="confidence-badge medium">Medium — MarketsandMarkets; KLAS 2024</span>
+            </div>
+          </div>
+          <div>
+            <div class="finding-card risk anim d3">
+              <div class="finding-title">Leg 3: Data Moat Clock Is Ticking</div>
+              <div class="finding-body">TEFCA matures 2025-2027. 21st Century Cures Act information blocking provisions creating legal obligation to share data. CMS public data programs expanding. The data exclusivity that justifies Inovalon's $7.3B valuation is structurally eroding on a known regulatory timeline.</div>
+              <span class="confidence-badge high">High — Regulatory analysis (primary sources)</span>
+            </div>
+            <div class="finding-card anim d4">
+              <div class="finding-title">The Derived Prediction</div>
+              <div class="finding-body">Three timelines converge: debt constraint is permanent until exit, AI window closes ~2026, data moat erodes ~2025-2027. Nordic MUST execute 2-4 AI/GenAI acquisitions in 2024-2025 to yield returns before the 2026-2028 exit window. Delay beyond 2025 creates compounding risk. MultiPlan's post-SPAC 85% stock decline is the cautionary analogy for PE cost-optimization over innovation.</div>
+              <span class="confidence-badge medium">Medium — Derived from convergent analysis; M&amp;A activity opaque</span>
+            </div>
+          </div>
+        </div>
+        <div class="emergent-why anim d5">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">Each agent identified one leg of the triple bind independently. Entity Researcher quantified debt constraint. Technology Assessor identified AI gap AND regulatory timeline. Growth Strategist mapped AI market opportunity and M&amp;A playbook. Competitive Analyst documented AI-native encroachment. No single agent connected all three forces into a unified paradox or derived the prediction that M&amp;A-for-AI is structurally NECESSARY (not just strategically preferable) with a specific 2024-2025 execution window. Novelty: 4/5 | Grounding: 4/5 | Actionability: 5/5</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Emergence Algorithm: tension_point_mapping | 4 agents | Confidence: MEDIUM (PE timeline prediction may already be resolved — 2+ years of opacity)</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 11 — EMERGENCE #3: MIDDLE-TIER EXIT PROBLEM -->
+  <section class="slide emergent-slide" id="s11">
+    <div class="slide-bg-glow" style="background:var(--accent-error);top:-200px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">03</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag" style="background:rgba(89,221,253,0.15);color:var(--accent-bright);">Emergent Insight</span> Structural Pattern Recognition — All 4 Agents</div>
+        <h2 class="slide-title anim d1">Consistent Middle-Tier Positioning<br>Creates a PE Exit Narrative Problem</h2>
+        <p class="slide-subtitle anim d2">The pattern only becomes visible when you overlay all four analytical dimensions simultaneously — and it is potentially the most consequential finding for Nordic Capital's return thesis.</p>
+        <div class="anim d3">
+          <h4 style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);margin-bottom:12px;">Competitive Tier Assessment — Across All Segments</h4>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">Payer Analytics vs. Cotiviti</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:60%;background:linear-gradient(90deg,var(--accent-warning),var(--inov-cerulean))"><span class="bar-fill-value">Strong but below ~$1.5B Cotiviti scale</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">RCM vs. R1 RCM ($8.9B EV)</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:45%;background:linear-gradient(90deg,var(--accent-warning),var(--accent-error))"><span class="bar-fill-value">Analytics only — limited full outsourcing</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">Managed Pharmacy vs. PBMs</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:20%;background:linear-gradient(90deg,var(--accent-error),#f97316)"><span class="bar-fill-value">Structurally blocked — cannot compete</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">Clinical Data vs. Epic/Flatiron</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:40%;background:linear-gradient(90deg,var(--accent-warning),var(--inov-cerulean))"><span class="bar-fill-value">Claims-heavy — limited clinical richness</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">GenAI vs. AI-Native Entrants</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:25%;background:linear-gradient(90deg,var(--accent-error),#f97316)"><span class="bar-fill-value">No public roadmap — critical gap</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label" style="font-size:11px;">SPECIALTY Pharmacy (ScriptMed)</div>
+            <div class="bar-track"><div class="bar-fill animate" style="width:90%;background:linear-gradient(90deg,var(--inov-jade),var(--inov-sky))"><span class="bar-fill-value">Category LEADER — only exception to pattern</span></div></div>
+          </div>
+        </div>
+        <div class="emergent-why anim d4">
+          <div class="emergent-why-label">The Exit Implication — Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">Each agent assessed Inovalon's competitive position within their own dimension and found it "strong but not leading." Only by overlaying all four perspectives does the cross-cutting STRUCTURAL PATTERN become visible — that middle-tier positioning is consistent across ALL segments simultaneously. Strategic acquirers want market dominance OR unique IP. IPO investors want clear category leadership narrative. Breadth-without-depth fails both tests. The natural solution: anchor the exit narrative on the ONE segment of genuine category leadership — specialty pharmacy — while preserving breadth as cross-sell optionality. Novelty: 5/5 | Surprise: 4/5 | Actionability: 4/5</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Emergence Algorithm: structural_pattern_recognition | All 4 agents | Confidence: MEDIUM (competitive data from 2022-2023; positions may have shifted)</span>
+      <span>PRISM Intelligence</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 12 — EMERGENCE #4: REGULATORY CONCENTRATION -->
+  <section class="slide emergent-slide" id="s12">
+    <div class="slide-bg-glow" style="background:var(--accent-warning);top:-150px;left:-200px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">04</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag" style="background:rgba(89,221,253,0.15);color:var(--accent-bright);">Emergent Insight</span> Structural Pattern Recognition — All 4 Agents</div>
+        <h2 class="slide-title anim d1">Regulatory Concentration:<br>The Hidden Portfolio-Level Risk</h2>
+        <p class="slide-subtitle anim d2">CMS regulatory concentration is distinct from and additive to well-documented customer concentration risk — and is invisible to any single-segment analysis. A single adverse CMS policy cycle can impact ALL revenue streams simultaneously.</p>
+        <div class="grid-2 anim d3">
+          <div>
+            <div class="finding-card risk anim d3">
+              <div class="finding-title">CMS Drives ALL Revenue Streams Simultaneously</div>
+              <div class="finding-body">
+                <strong class="red">HEDIS methodology changes</strong> → Quality Measurement revenue<br>
+                <strong class="red">V28 risk adjustment model</strong> → Risk Adjustment / Coding revenue<br>
+                <strong class="red">Part D Star measure reweighting</strong> → Pharmacy Solutions revenue<br>
+                <strong class="red">CMS-0057-F enforcement (2026)</strong> → Prior Auth / Workflow revenue<br>
+                <strong class="red">FHIR/TEFCA mandate enforcement</strong> → Interoperability positioning<br><br>
+                All five revenue streams share a single regulatory counterparty.
+              </div>
+              <span class="confidence-badge high">High — Confirmed across all 4 agent regulatory analyses</span>
+            </div>
+          </div>
+          <div>
+            <div class="stat-grid">
+              <div class="stat-card">
+                <div class="stat-label">CUSTOMER CONCENTRATION</div>
+                <div class="stat-value negative">40-50%</div>
+                <div class="stat-context">Top 10 clients — well-documented, modeled risk</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">REGULATORY CONCENTRATION</div>
+                <div class="stat-value negative">~100%</div>
+                <div class="stat-context">U.S.

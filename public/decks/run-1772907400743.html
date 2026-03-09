@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Strategic Brief — Nvidia Healthcare AI & Drug Discovery</title>
+  <link rel="stylesheet" href="/styles/presentation.css">
+</head>
+<body>
+
+  <div id="slideProgress"></div>
+  <div class="prism-mark">PRISM Intelligence</div>
+  <div class="slide-counter" id="slideCounter">01 / 18</div>
+  <div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+
+  <button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents" aria-label="Open table of contents">&#9776;</button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <div class="nav-panel" id="navPanel">
+    <h3>Table of Contents</h3>
+
+    <a class="nav-item" href="#s1" onclick="toggleNav()">
+      <span class="nav-num">01</span>
+      <span class="nav-label">Strategic Brief Title</span>
+    </a>
+    <a class="nav-item" href="#s2" onclick="toggleNav()">
+      <span class="nav-num">02</span>
+      <span class="nav-label">Intelligence Map</span>
+    </a>
+    <a class="nav-item" href="#s3" onclick="toggleNav()">
+      <span class="nav-num">03</span>
+      <span class="nav-label">Executive Summary</span>
+    </a>
+
+    <div style="margin: 12px 0 6px; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-tertiary); padding-left: 4px;">Scientific Foundation</div>
+    <a class="nav-item" href="#s4" onclick="toggleNav()">
+      <span class="nav-num">04</span>
+      <span class="nav-label">Drug Discovery Evidence</span>
+    </a>
+    <a class="nav-item" href="#s5" onclick="toggleNav()">
+      <span class="nav-num">05</span>
+      <span class="nav-label">AlphaFold &amp; Compute Moat</span>
+    </a>
+
+    <div style="margin: 12px 0 6px; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-tertiary); padding-left: 4px;">Financial Architecture</div>
+    <a class="nav-item" href="#s6" onclick="toggleNav()">
+      <span class="nav-num">06</span>
+      <span class="nav-label">Market Sizing &amp; TAM</span>
+    </a>
+    <a class="nav-item" href="#s7" onclick="toggleNav()">
+      <span class="nav-num">07</span>
+      <span class="nav-label">Revenue Model &amp; Materiality</span>
+    </a>
+
+    <div style="margin: 12px 0 6px; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-tertiary); padding-left: 4px;">Strategic Scenarios</div>
+    <a class="nav-item" href="#s8" onclick="toggleNav()">
+      <span class="nav-num">08</span>
+      <span class="nav-label">Scenario Analysis</span>
+    </a>
+    <a class="nav-item" href="#s9" onclick="toggleNav()">
+      <span class="nav-num">09</span>
+      <span class="nav-label">Tension Points</span>
+    </a>
+
+    <div style="margin: 12px 0 6px; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-tertiary); padding-left: 4px;">Emergent Intelligence</div>
+    <a class="nav-item" href="#s10" onclick="toggleNav()">
+      <span class="nav-num">10</span>
+      <span class="nav-label">Emergent #1: Outcome-Agnostic</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s11" onclick="toggleNav()">
+      <span class="nav-num">11</span>
+      <span class="nav-label">Emergent #2: Efficiency Paradox</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s12" onclick="toggleNav()">
+      <span class="nav-num">12</span>
+      <span class="nav-label">Emergent #3: Narrative Shelter</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s13" onclick="toggleNav()">
+      <span class="nav-num">13</span>
+      <span class="nav-label">Emergent #4: Dual-Clock</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+
+    <div style="margin: 12px 0 6px; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-tertiary); padding-left: 4px;">Structural Analysis</div>
+    <a class="nav-item" href="#s14" onclick="toggleNav()">
+      <span class="nav-num">14</span>
+      <span class="nav-label">Open Science / Proprietary Pipes</span>
+    </a>
+    <a class="nav-item" href="#s15" onclick="toggleNav()">
+      <span class="nav-num">15</span>
+      <span class="nav-label">Dual-Customer Tension</span>
+    </a>
+    <a class="nav-item" href="#s16" onclick="toggleNav()">
+      <span class="nav-num">16</span>
+      <span class="nav-label">Strategic Timeline</span>
+    </a>
+
+    <div style="margin: 12px 0 6px; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-tertiary); padding-left: 4px;">Intelligence Audit</div>
+    <a class="nav-item" href="#s17" onclick="toggleNav()">
+      <span class="nav-num">17</span>
+      <span class="nav-label">Provenance &amp; Confidence</span>
+    </a>
+    <a class="nav-item" href="#s18" onclick="toggleNav()">
+      <span class="nav-num">18</span>
+      <span class="nav-label">Gaps &amp; Next Steps</span>
+    </a>
+  </div>
+
+  <!-- SLIDE 01: TITLE -->
+  <section class="slide title-slide" id="s1">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-200px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-300px;left:-150px;"></div>
+    <div class="slide-inner" style="text-align:center;">
+      <div class="anim">
+        <div class="hero-badge">PRISM Multi-Source Validated &mdash; 3-Agent Swarm &mdash; EXTENDED Tier</div>
+      </div>
+      <h1 class="hero-title anim d1">Nvidia Healthcare AI<br>&amp; Drug Discovery</h1>
+      <p class="hero-sub anim d2">Strategic Expansion into Picks-and-Shovels Infrastructure for the AI Drug Discovery Era</p>
+      <p class="hero-date anim d3">2024 Intelligence Brief &nbsp;|&nbsp; 3-Agent Extended Swarm &nbsp;|&nbsp; Overall Confidence: MEDIUM</p>
+      <div class="anim d4" style="margin-top:1.5rem;">
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-bright)"></span>DrugDiscoveryScienceAuditor</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-success)"></span>HealthcareAIFinancialAnalyst</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-violet)"></span>HealthcareAIFuturist</span>
+      </div>
+      <div class="hero-stats anim d5" style="margin-top:2.5rem; grid-template-columns: repeat(5,1fr);">
+        <div class="hero-stat">
+          <div class="value cyan">$47.5B</div>
+          <div class="label">Data Center Rev FY2024</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value gold">$1–4B</div>
+          <div class="label">Est. Healthcare Compute †</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value green">$236B</div>
+          <div class="label">Patent Cliff 2023–2028</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value blue">214M+</div>
+          <div class="label">AlphaFold Structures</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value red">0</div>
+          <div class="label">AI Drugs FDA Approved</div>
+        </div>
+      </div>
+      <div class="validation-box anim d6">
+        <div class="validation-card">
+          <h4>&#10003; Validation Methodology</h4>
+          <div class="val-row"><span class="val-icon green">&#10003;</span>8 findings per agent &mdash; 24 total cross-validated</div>
+          <div class="val-row"><span class="val-icon green">&#10003;</span>Foundation layer confirms uncontested facts across all 3 lenses</div>
+          <div class="val-row"><span class="val-icon green">&#10003;</span>Critic revisions applied: evidence fragility, source independence warnings</div>
+          <div class="val-row"><span class="val-icon green">&#10003;</span>6 emergent insights, all tested against 5-dimension quality gate</div>
+        </div>
+        <div class="validation-card framework-card">
+          <h4>&#9670; PRISM Processing Framework</h4>
+          <p style="font-size:10px;color:var(--text-secondary);margin-bottom:8px;">3-agent swarm with independent analytical lenses synthesized through 5-layer intelligence pyramid</p>
+          <div class="framework-visual">
+            <span class="fw-node">Science Auditor</span>
+            <span class="fw-node">Financial Analyst</span>
+            <span class="fw-node">Futurist</span>
+            <span class="fw-arrow">&#8594;</span>
+            <span class="fw-center">Cross-Agent Synthesis</span>
+            <span class="fw-arrow">&#8594;</span>
+            <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success)">Emergence Detection</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dagger-footnote">† Source: bottom-up industry estimation &mdash; primary source not verified; Nvidia does not disclose healthcare-specific revenue</div>
+  </section>
+
+  <!-- SLIDE 02: TABLE OF CONTENTS -->
+  <section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--inov-navy);top:-100px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Navigation</span> Intelligence Map</div>
+      <h2 class="slide-title anim d1">Executive <span style="color:var(--accent)">Intelligence Map</span></h2>
+      <p class="section-intro anim d2">18-slide analysis spanning scientific validation, financial architecture, strategic scenarios, and 6 emergent cross-agent insights on Nvidia&rsquo;s healthcare AI expansion.</p>
+      <div class="grid-3 anim d3">
+        <div>
+          <h3 class="toc-group-header">Scientific &amp; Financial</h3>
+          <a class="nav-item toc-item" href="#s4"><span class="nav-num">04</span><span class="nav-label">Drug Discovery Evidence</span></a>
+          <a class="nav-item toc-item" href="#s5"><span class="nav-num">05</span><span class="nav-label">AlphaFold &amp; Compute Moat</span></a>
+          <a class="nav-item toc-item" href="#s6"><span class="nav-num">06</span><span class="nav-label">Market Sizing &amp; TAM</span></a>
+          <a class="nav-item toc-item" href="#s7"><span class="nav-num">07</span><span class="nav-label">Revenue Model &amp; Materiality</span></a>
+          <a class="nav-item toc-item" href="#s8"><span class="nav-num">08</span><span class="nav-label">Scenario Analysis</span></a>
+          <a class="nav-item toc-item" href="#s9"><span class="nav-num">09</span><span class="nav-label">Tension Points</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Emergent Intelligence</h3>
+          <a class="nav-item toc-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Outcome-Agnostic Position</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">Efficiency Paradox</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s12"><span class="nav-num">12</span><span class="nav-label">Narrative Shelter</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s13"><span class="nav-num">13</span><span class="nav-label">Dual-Clock Convergence</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s14"><span class="nav-num">14</span><span class="nav-label">Open Science / Proprietary Pipes</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s15"><span class="nav-num">15</span><span class="nav-label">Dual-Customer Tension</span><span class="nav-tag">NEW</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Structural &amp; Audit</h3>
+          <a class="nav-item toc-item" href="#s3"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+          <a class="nav-item toc-item" href="#s16"><span class="nav-num">16</span><span class="nav-label">Strategic Timeline</span></a>
+          <a class="nav-item toc-item" href="#s17"><span class="nav-num">17</span><span class="nav-label">Provenance &amp; Confidence</span></a>
+          <a class="nav-item toc-item" href="#s18"><span class="nav-num">18</span><span class="nav-label">Gaps &amp; Next Steps</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence &mdash; Extended Brief &mdash; 3 Agents &mdash; 24 Findings</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 03: EXECUTIVE SUMMARY -->
+  <section class="slide" id="s3">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-150px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Synthesis</span> Foundation Layer</div>
+      <h2 class="slide-title anim d1">Executive Summary: <span style="color:var(--accent-bright)">What We Know For Certain</span></h2>
+      <p class="section-intro anim d2">8 uncontested facts established independently across all 3 analytical lenses. These form the bedrock upon which all scenarios and emergent insights rest.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card anim d3">
+            <div class="finding-title">&#9679; No healthcare revenue disclosure &mdash; structural opacity</div>
+            <div class="finding-body">Nvidia subsumes all healthcare compute within its Data Center segment ($47.5B FY2024). Every healthcare revenue estimate ($1&ndash;4B range) is bottom-up and unverifiable. This opacity is both an information gap and a potential strategic asset.</div>
+            <span class="confidence-badge medium">Medium &mdash; All 3 Agents</span>
+          </div>
+          <div class="finding-card anim d4">
+            <div class="finding-title">&#9679; Zero FDA-approved AI-designed drugs &mdash; most advanced is Phase 2</div>
+            <div class="finding-body">Insilico Medicine&rsquo;s INS018_055 (IPF candidate) is the most advanced AI-generative-chemistry drug, currently in Phase 2 trials. Definitive clinical verdict is realistically 2027&ndash;2030. The entire AI drug discovery thesis remains clinically unproven.</div>
+            <span class="confidence-badge high">High &mdash; Science Auditor (Primary)</span>
+          </div>
+          <div class="finding-card anim d5">
+            <div class="finding-title">&#9679; BioNeMo deploys open-source models &mdash; not proprietary Nvidia science</div>
+            <div class="finding-body">ESMFold, DiffDock, ProteinMPNN, OpenFold, MolMIM &mdash; all MIT/Apache licensed. Nvidia&rsquo;s differentiation is CUDA optimization and infrastructure convenience, not unique scientific IP. The science layer is freely replicable.</div>
+            <span class="confidence-badge high">High &mdash; Science Auditor (Primary)</span>
+          </div>
+          <div class="finding-card anim d6">
+            <div class="finding-title">&#9679; $236B patent cliff creates structural pharma desperation</div>
+            <div class="finding-body">Branded drug revenues at loss of exclusivity risk 2023&ndash;2028 create a structural demand-side pull for AI pipeline acceleration. This is Nvidia&rsquo;s single most reliable tailwind regardless of AI drug discovery efficacy.</div>
+            <span class="confidence-badge medium">Medium &mdash; Financial Analyst (Secondary)</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card emergent anim d3">
+            <div class="finding-title">&#9670; AlphaFold2/3: The ONE scientifically bulletproof pillar</div>
+            <div class="finding-body">Nobel Prize 2024 validated. 214M+ structures deposited. Used by essentially all major pharma companies. Downstream usage runs on Nvidia GPUs even though training used Google TPUs. Strongest scientific foundation for Nvidia&rsquo;s healthcare narrative.</div>
+            <span class="confidence-badge high">High &mdash; Science Auditor (Primary)</span>
+          </div>
+          <div class="finding-card anim d4">
+            <div class="finding-title">&#9679; Picks-and-shovels model &mdash; revenue decoupled from drug outcomes</div>
+            <div class="finding-body">Nvidia monetizes through GPU hardware sales and cloud compute consumption, not drug IP or licensing. This structurally decouples Nvidia&rsquo;s revenue from binary clinical trial outcomes &mdash; the defining structural advantage of the entire strategy.</div>
+            <span class="confidence-badge high">High &mdash; Financial Analyst (Primary)</span>
+          </div>
+          <div class="finding-card risk anim d5">
+            <div class="finding-title">&#9679; Recursion REC-994 Phase 2 failure &mdash; AI doesn&rsquo;t reduce attrition</div>
+            <div class="finding-body">The most significant negative clinical signal. AI-native companies face standard drug development attrition rates. The market should not price in an AI-specific risk reduction premium for drug development until Phase 3 data arrives.</div>
+            <span class="confidence-badge medium">Medium &mdash; Science Auditor</span>
+          </div>
+          <div class="finding-card anim d6">
+            <div class="finding-title">&#9679; Capital-light strategy is a learned behavior, not lack of commitment</div>
+            <div class="finding-body">IBM Watson Health&rsquo;s $4B+ loss and Google Health restructuring independently identified by both Financial Analyst and Futurist as informing Nvidia&rsquo;s ~$200&ndash;500M/year approach. Ecosystem scope, not capital deployment, is the correct measurement frame.</div>
+            <span class="confidence-badge medium">Medium &mdash; Convergence: Financial + Futurist</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Foundation Layer &mdash; 3 Agents &mdash; 8 Uncontested Facts &mdash; Confidence: HIGH on bedrock claims</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 04: DRUG DISCOVERY SCIENCE -->
+  <section class="slide" id="s4">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-200px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag clinical">Scientific</span> DrugDiscoveryScienceAuditor</div>
+      <h2 class="slide-title anim d1">AI Drug Discovery: <span style="color:var(--accent-bright)">What the Evidence Actually Shows</span></h2>
+      <p class="section-intro anim d2">Separating validated science from vendor-sourced claims. The clinical pipeline is real but nascent; efficiency claims are methodologically unvalidated.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card opportunity anim d3">
+            <div class="finding-title">20+ AI-designed drug candidates in Phase 1/2 clinical trials</div>
+            <div class="finding-body">Insilico Medicine&rsquo;s INS018_055 is the most advanced (Phase 2, IPF) &mdash; first AI-generative-chemistry drug with publicly documented end-to-end AI design, published in Nature Aging (2023). The clinical pipeline is genuine, if nascent.</div>
+            <span class="confidence-badge medium">Medium &mdash; Secondary</span>
+          </div>
+          <div class="finding-card risk anim d4">
+            <div class="finding-title">AI efficiency claims: 2&ndash;5x speed, 50&ndash;70% cost reduction &mdash; ALL vendor-sourced<span class="source-unverified" title="Source: company reports and consulting firms — no independent peer-reviewed audit exists">†</span></div>
+            <div class="finding-body">Insilico&rsquo;s 18-month claim (vs. 4&ndash;6 year average) is the most cited data point. Exscientia cited 12-month design-to-candidate timelines with Sanofi. No independent controlled comparison study exists. All benchmarks are company-reported.</div>
+            <span class="confidence-badge low">Low &mdash; Secondary</span>
+          </div>
+          <div class="finding-card risk anim d5">
+            <div class="finding-title">Paper molecule problem: only 5&ndash;15% of AI-generated molecules are synthetically accessible</div>
+            <div class="finding-body">Gao et al. (NeurIPS 2022) benchmark found many generative models perform poorly when practical synthesis constraints are applied. Computationally strong molecules routinely fail ADMET filters and wet-lab validation. Raw computational metrics are poor proxies for drug development outcomes.</div>
+            <span class="confidence-badge medium">Medium &mdash; Primary</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card opportunity anim d3">
+            <div class="finding-title">Molecular dynamics: scientifically validated, 10&ndash;100x cost reduction on Nvidia GPU</div>
+            <div class="finding-body">GROMACS GPU benchmarks (Lindahl group, KTH/Stockholm) demonstrate 100x improvement on Nvidia A100 vs. CPU-only. AMBER24 GPU package enables microsecond-timescale simulations previously impossible. MD has a multi-decade scientific track record &mdash; unlike generative AI, this is proven.</div>
+            <span class="confidence-badge high">High &mdash; Primary</span>
+          </div>
+          <div class="stat-grid anim d4">
+            <div class="stat-card">
+              <div class="stat-label">Most Advanced Candidate</div>
+              <div class="stat-value">Phase 2</div>
+              <div class="stat-context">INS018_055 &mdash; Insilico Medicine (IPF)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Pipeline Uncertainty</div>
+              <div class="stat-value warn">20&ndash;158</div>
+              <div class="stat-context">AI drug candidates &mdash; 8x range by definition</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Phase 3 Readouts</div>
+              <div class="stat-value negative">2026&ndash;28</div>
+              <div class="stat-context">First definitive clinical verdict window</div>
+            </div>
+          </div>
+          <div class="finding-card risk anim d5">
+            <div class="finding-title">Recursion REC-994 Phase 2 failure: standard attrition rates persist for AI-native firms</div>
+            <div class="finding-body">Discontinued 2023. The most significant negative clinical signal in the field. AI drug discovery companies face the same ~90% Phase 1-to-approval failure rate as traditional pharma. No AI-specific risk reduction premium is empirically justified yet.</div>
+            <span class="confidence-badge high">High &mdash; Primary</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>DrugDiscoveryScienceAuditor &mdash; 8 findings &mdash; Confidence: MEDIUM (critical data gaps: ClinicalTrials.gov offline)</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+    <div class="dagger-footnote">† Source: company reports, investor presentations, McKinsey/BCG/Deloitte consulting analyses &mdash; no peer-reviewed independent audit exists for AI drug discovery efficiency claims</div>
+  </section>
+
+  <!-- SLIDE 05: ALPHAFOLD & COMPUTE MOAT -->
+  <section class="slide" id="s5">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-200px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag clinical">Scientific</span> DrugDiscoveryScienceAuditor &mdash; Infrastructure Evidence</div>
+      <h2 class="slide-title anim d1">AlphaFold &amp; the CUDA <span style="color:var(--accent-success)">Infrastructure Moat</span></h2>
+      <p class="section-intro anim d2">The strongest scientific pillar for Nvidia&rsquo;s healthcare narrative &mdash; and where the moat is real vs. where it is temporary.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity anim d3">
+            <div class="finding-title">AlphaFold2/3: Nobel Prize-validated, 214M+ structures &mdash; Nvidia runs the downstream</div>
+            <div class="finding-body">AlphaFold2 (Jumper et al., Nature 2021, Nobel Prize 2024) deposited 214 million predicted structures via EMBL-EBI. Training used Google TPUs &mdash; but downstream usage (OpenFold, ESMFold, BioNeMo) runs extensively on Nvidia GPU infrastructure. Structure-based drug design using AI predictions is now mainstream pharma practice.</div>
+            <span class="confidence-badge high">High &mdash; Primary</span>
+          </div>
+          <div class="finding-card opportunity anim d4">
+            <div class="finding-title">GROMACS, AMBER, NAMD: decade-deep CUDA integration creates real switching costs</div>
+            <div class="finding-body">Molecular dynamics codes have 10&ndash;15 years of CUDA-specific optimization. Pharmaceutical IT teams have CUDA expertise embedded in workflows. Re-porting these codes to AMD ROCm or Google TPU would take years and represents a genuine, if time-bounded, competitive moat.</div>
+            <span class="confidence-badge high">High &mdash; Primary</span>
+          </div>
+        </div>
+        <div>
+          <div class="inovalon-header anim d3">
+            <h3 style="color:var(--accent);">BioNeMo Platform &mdash; What It Is vs. What It Isn&rsquo;t</h3>
+            <p style="font-size:12px;color:var(--text-secondary);">Infrastructure convenience + CUDA optimization &mdash; NOT proprietary science</p>
+          </div>
+          <div class="bar-row anim d4">
+            <div class="bar-label" style="font-size:11px;">ESMFold (Meta, MIT)</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));">
+                <span class="bar-fill-value">Open-source &mdash; BioNeMo optimized</span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-row anim d5">
+            <div class="bar-label" style="font-size:11px;">DiffDock (MIT)</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));">
+                <span class="bar-fill-value">Open-source &mdash; BioNeMo optimized</span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-row anim d6">
+            <div class="bar-label" style="font-size:11px;">ProteinMPNN (U. Washington)</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));">
+                <span class="bar-fill-value">Open-source &mdash; BioNeMo optimized</span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-row anim d7">
+            <div class="bar-label" style="font-size:11px;">OpenFold / MolMIM</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));">
+                <span class="bar-fill-value">Open-source &mdash; BioNeMo optimized</span>
+              </div>
+            </div>
+          </div>
+          <div class="finding-card risk anim d7" style="margin-top:1rem;">
+            <div class="finding-title">AMD MI300X, Google TPU, AWS Trainium: functionally equivalent services possible as GPU performance converges</div>
+            <div class="finding-body">All BioNeMo underlying models are MIT/Apache licensed. The manufacturing yield/supply chain IS the primary moat &mdash; and it is temporal. Inference workload commoditization projected 2027&ndash;2029.</div>
+            <span class="confidence-badge medium">Medium &mdash; Convergence Signal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>DrugDiscoveryScienceAuditor + Signal synthesis &mdash; Infrastructure evidence &mdash; Confidence: HIGH (primary sources)</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 06: MARKET SIZING & TAM -->
+  <section class="slide" id="s6">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-180px;right:-180px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag financial">Financial</span> HealthcareAIFinancialAnalyst</div>
+      <h2 class="slide-title anim d1">Market Sizing: <span style="color:var(--accent-success)">TAM, Patent Cliff &amp; Opportunity Window</span></h2>
+      <p class="section-intro anim d2">Healthcare AI is large enough to be strategically material &mdash; but precise sizing requires applying significant credibility discounts to all third-party projections.</p>
+      <div class="stat-grid anim d3">
+        <div class="stat-card">
+          <div class="stat-label">Healthcare AI Market 2023-24</div>
+          <div class="stat-value warn">$22&ndash;45B <span class="source-unverified" title="Grand View Research, MarketsandMarkets, McKinsey, Goldman Sachs — CAGR varies 35-45% across sources">†</span></div>
+          <div class="stat-context">Starting market across research firm estimates</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Projected Market 2030&ndash;2034</div>
+          <div class="stat-value warn">$188&ndash;613B <span class="source-unverified" title="Wide range reflects 8x variation in scope definition across research firms">†</span></div>
+          <div class="stat-context">35&ndash;45% CAGR consensus; drug discovery subset $4&ndash;45B</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Nvidia Addressable (15&ndash;25% share)</div>
+          <div class="stat-value positive">$15&ndash;25B</div>
+          <div class="stat-context">By 2030 at current GPU market share rates &mdash; ~8&ndash;12% of projected Nvidia revenue</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Patent Cliff Pressure</div>
+          <div class="stat-value negative">$236B</div>
+          <div class="stat-context">Branded drug revenues at LOE risk 2023&ndash;2028 &mdash; structural AI demand driver</div>
+        </div>
+      </div>
+      <div class="grid-2 anim d4">
+        <div>
+          <div class="finding-card opportunity anim d4">
+            <div class="finding-title">Patent cliff creates structural demand-side pull that is underappreciated in Nvidia financial models</div>
+            <div class="finding-body">Evaluate Pharma estimates $236B in branded drug revenues face LOE between 2023&ndash;2028. This creates urgent pipeline replenishment pressure &mdash; AI compute becomes a rational bet even without clinical validation. Healthcare could be Nvidia&rsquo;s 3rd-largest vertical by 2028&ndash;2030 if this thesis plays out.</div>
+            <span class="confidence-badge low">Low &mdash; Secondary (Evaluate Pharma)</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card anim d4">
+            <div class="finding-title">Healthcare AI CAGR 35&ndash;45% &mdash; strong enough to matter even at conservative Nvidia capture rates</div>
+            <div class="finding-body">Goldman Sachs (2023), McKinsey, Grand View Research converge on 35&ndash;45% CAGR. Even at the low end of TAM projections with Nvidia&rsquo;s current ~70&ndash;80% GPU training share applied conservatively to healthcare-specific workloads, the opportunity is strategically material by 2027&ndash;2029.</div>
+            <span class="confidence-badge medium">Medium &mdash; Secondary</span>
+          </div>
+          <div class="policy-box neutral anim d5">
+            <h4>Key Constraint: Pharma R&D Budget Cap</h4>
+            <p style="font-size:11.5px;">Large pharma R&D spend typically caps at 15&ndash;25% of revenue. Total compute expansion from Jevons Paradox dynamics may be constrained even if per-program costs fall. Paradox applies to program count, not necessarily total budget.</p>
+            <div class="impact impact-moderate">CRITIC FLAG | Apply discount to total spend projections</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>HealthcareAIFinancialAnalyst &mdash; 8 findings &mdash; Confidence: MEDIUM (TAM estimates unverifiable; drug discovery subset varies 11x)</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+    <div class="dagger-footnote">† Source: Grand View Research, MarketsandMarkets, McKinsey, Goldman Sachs &mdash; market sizing firms; wide CAGR and endpoint ranges reflect scope definition variation, not primary data</div>
+  </section>
+
+  <!-- SLIDE 07: REVENUE MODEL & MATERIALITY -->
+  <section class="slide" id="s7">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);bottom:-200px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag financial">Financial</span> HealthcareAIFinancialAnalyst &mdash; Revenue Architecture</div>
+      <h2 class="slide-title anim d1">Revenue Model: <span style="color:var(--accent-bright)">Picks &amp; Shovels, Not Drug IP</span></h2>
+      <p class="section-intro anim d2">Nvidia&rsquo;s monetization is indirect, infrastructure-native, and high-margin &mdash; with a critical inflection pending: will BioNeMo become a disclosed SaaS revenue stream?</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="inovalon-header anim d3">
+            <h3>Est. Healthcare Compute Revenue FY2024</h3>
+            <p style="font-size:12px;color:var(--text-secondary);">$1&ndash;4B estimated &mdash; within $47.5B Data Center segment &mdash; completely opaque <span class="source-unverified" title="Bottom-up estimation only; Nvidia does not disclose healthcare-specific revenue">†</span></p>
+          </div>
+          <div class="finding-card anim d4">
+            <div class="finding-title">BioNeMo + DGX Cloud monetization: ~$37K/month per DGX A100 equivalent</div>
+            <div class="finding-body">Nvidia&rsquo;s healthcare business model is fundamentally infrastructure &mdash; 75&ndash;78% gross margins broadly consistent with Data Center overall. Revenue depends on pharma capital budgets and AI adoption rates, which can be volatile. Not a lower-margin software business despite platform framing.</div>
+            <span class="confidence-badge medium">Medium &mdash; Primary (published cloud pricing)</span>
+          </div>
+          <div class="finding-card anim d5">
+            <div class="finding-title">$50M Recursion investment + 1,000+ NVIDIA Inception healthcare startups &mdash; ecosystem flywheel</div>
+            <div class="finding-body">Financially immaterial to Nvidia (~negligible vs. $130B+ market cap) but strategically important as proof-of-concept for platform model. Investments drive compute dependency, which drives revenue, which funds more investments. Wall Street likely does not explicitly value this ecosystem option.</div>
+            <span class="confidence-badge medium">Medium &mdash; Primary (SEC 8-K filing)</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-grid anim d3">
+            <div class="stat-card">
+              <div class="stat-label">Current Revenue Share</div>
+              <div class="stat-value warn">1&ndash;3% <span class="source-unverified" title="Estimated from team size, visible investments, and analogy to other verticals">†</span></div>
+              <div class="stat-context">Of total Nvidia revenue in FY2024</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Projected Revenue Share FY2028&ndash;30</div>
+              <div class="stat-value positive">8&ndash;15% <span class="source-unverified" title="Bull case modeling contingent on patent cliff thesis and AI drug discovery validation">†</span></div>
+              <div class="stat-context">If patent cliff thesis plays out</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Gross Margin Profile</div>
+              <div class="stat-value positive">75&ndash;78%</div>
+              <div class="stat-context">Consistent with Data Center overall</div>
+            </div>
+          </div>
+          <div class="policy-box neutral anim d5">
+            <h4>Key Inflection Point: BioNeMo Revenue Disclosure</h4>
+            <p style="font-size:11.5px;">Whether BioNeMo/Clara transitions to subscription SaaS pricing (disclosable ARR, investor-visible) or remains embedded in hardware/cloud pricing is the pivotal question for Wall Street re-rating. Nvidia has not announced this transition.</p>
+            <div class="impact impact-moderate">WATCH | Not announced as of mid-2024</div>
+          </div>
+          <div class="policy-box anim d6">
+            <h4>IBM Watson Health Precedent: $4B+ Loss</h4>
+            <p style="font-size:11.5px;">Nvidia&rsquo;s capital-light approach (~$200&ndash;500M/year) is the deliberate opposite of IBM&rsquo;s proprietary platform lock-in strategy. The distinction: Nvidia provides general-purpose infrastructure; IBM tried to own clinical decision-making.</p>
+            <div class="impact impact-positive">POSITIVE SIGNAL | Learned from predecessor failures</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>HealthcareAIFinancialAnalyst &mdash; Revenue architecture &mdash; Confidence: MEDIUM (indirect monetization limits precision)</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+    <div class="dagger-footnote">† Revenue estimates are bottom-up inferences; Nvidia&rsquo;s healthcare-specific revenue, R&D allocation, and gross margin profile are not disclosed</div>
+  </section>
+
+  <!-- SLIDE 08: SCENARIO ANALYSIS -->
+  <section class="slide" id="s8">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-200px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Futurist</span> HealthcareAIFuturist &mdash; Strategic Scenarios</div>
+      <h2 class="slide-title anim d1">Four Scenarios: <span style="color:var(--accent-bright)">What We Must Believe for Each</span></h2>
+      <p class="section-intro anim d2">Probability-weighted scenario analysis through 2030 &mdash; with a robust strategy that holds across all scenarios.</p>
+      <div class="grid-2 anim d3">
+        <div class="finding-card opportunity anim d3">
+          <div class="finding-title">Scenario 1 &mdash; Preferred Infrastructure Layer (~45%)<br><span style="color:var(--accent-success);font-size:11px;">MOST LIKELY</span></div>
+          <div class="finding-body">CUDA ecosystem lock-in sustains 60&ndash;70% GPU market share in pharma AI workloads. Open-source models proliferate on top of Nvidia infrastructure. AWS analogy: 33% cloud share sustained by ecosystem, not hardware monopoly. Pharma companies become dependent on Nvidia upgrade cycles &mdash; a structured subsidy relationship. <br><br><strong style="color:var(--text-primary);">Must believe:</strong> Training-heavy workloads for novel modalities (RNA therapeutics, PROTAC design) sustain CUDA demand; inference does not commoditize before 2030.</div>
+          <span class="confidence-badge medium">Medium &mdash; Analogical (AWS precedent)</span>
+        </div>
+        <div class="finding-card anim d4">
+          <div class="finding-title">Scenario 2 &mdash; Inference Commoditization (~25%)<br><span style="color:var(--accent-warning);font-size:11px;">SIGNIFICANT RISK</span></div>
+          <div class="finding-body">Open-source model proliferation + AMD MI300X + custom ASICs erode moat in inference workloads by 2027&ndash;2029. Training remains Nvidia-dominant but represents shrinking share. Margin compression to 45&ndash;55% share. Key trigger: inference-to-training shift in drug discovery workloads.<br><br><strong style="color:var(--text-primary);">Must believe:</strong> Models mature faster than new training modalities emerge; cloud providers aggressively price-discount healthcare compute.</div>
+          <span class="confidence-badge medium">Medium &mdash; Convergence (Financial + Futurist)</span>
+        </div>
+        <div class="finding-card risk anim d5">
+          <div class="finding-title">Scenario 3 &mdash; Regulatory Slowdown (~15%)<br><span style="color:var(--accent-error);font-size:11px;">TAIL RISK</span></div>
+          <div class="finding-body">FDA creates 2&ndash;4 year adoption plateau by issuing restrictive or slow guidance on AI-designed drug IND submissions. AI drug failures accumulate, collapsing venture funding that currently subsidizes GPU purchases. Note: compute budgets often INCREASE during regulatory delays (more simulations, reanalysis).<br><br><strong style="color:var(--text-primary);">Must believe:</strong> FDA remains silent or restrictive beyond 2026; multiple high-profile Phase 2/3 AI drug failures cluster.</div>
+          <span class="confidence-badge medium">Medium &mdash; Primary (FDA framework analysis)</span>
+        </div>
+        <div class="finding-card emergent anim d6">
+          <div class="finding-title">Scenario 4 &mdash; Vertical Integration (~15%)<br><span style="color:var(--accent-bright);font-size:11px;">SPECULATIVE UPSIDE</span></div>
+          <div class="finding-body">Nvidia takes equity stakes or revenue-share in AI-discovered drugs via BioNeMo + compute assets, transforming healthcare model. Even 1&ndash;2 AI drugs with Nvidia equity reaching market by 2030 would fundamentally reposition Nvidia as a healthcare company with a much higher valuation multiple.<br><br><strong style="color:var(--text-primary);">Must believe:</strong> BioNeMo demonstrates drug-level differentiation; Jensen Huang commits to healthcare vertical integration over ecosystem-only strategy.</div>
+          <span class="confidence-badge low">Low &mdash; Speculative (Signal evidence only)</span>
+        </div>
+      </div>
+      <div class="finding-card opportunity anim d7" style="margin-top:1rem;">
+        <div class="finding-title">&#9670; Robust Strategy Across All Scenarios: Accelerate BioNeMo&rsquo;s Transition to Sticky SaaS/API Layer</div>
+        <div class="finding-body">Software lock-in must replace hardware lock-in before the moat narrows. In all four scenarios, earlier software monetization is better. The inference transition timeline is the key monitorable indicator for which scenario is materializing.</div>
+        <span class="confidence-badge high">High &mdash; Cross-agent convergence</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>HealthcareAIFuturist &mdash; 4 scenarios through 2030 &mdash; Confidence: MEDIUM (scenario probabilities are best estimates, not forecasts)</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 09: TENSION POINTS -->
+  <section class="slide" id="s9">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-150px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Synthesis</span> Tension Layer &mdash; Genuine Complexity</div>
+      <h2 class="slide-title anim d1">Four Tensions That <span style="color:var(--accent-warning)">Cannot Be Resolved</span></h2>
+      <p class="section-intro anim d2">Productive tensions that represent genuine complexity &mdash; not analytical failures. Both sides of each tension are simultaneously correct.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="policy-box neutral anim d3">
+            <h4>Tension 1: Scientific Deficit vs. Financial Momentum</h4>
+            <p style="font-size:11.5px;"><span class="red">Science Auditor:</span> AI efficiency claims are methodologically unvalidated &mdash; no peer-reviewed controlled study exists. <span class="green">Financial + Futurist:</span> Pharma investment is rational regardless because the patent cliff cost of NOT investing exceeds uncertain cost of investing. <strong>Pascal&rsquo;s Wager dynamic.</strong> Resolves only at first Phase 3 readout (2026&ndash;2028).</p>
+            <div class="impact impact-moderate">INTERPRETIVE TENSION | Both positions are simultaneously correct</div>
+          </div>
+          <div class="policy-box neutral anim d5">
+            <h4>Tension 3: Compute vs. Data as Binding Constraint</h4>
+            <p style="font-size:11.5px;"><span class="blue">Financial Analyst:</span> Compute is binding &mdash; protein folding, MD simulations are compute-bound; scaling laws apply. <span class="cyan">Science + Futurist:</span> Data quality is binding &mdash; AlphaFold degrades without homologous structures; Regeneron&rsquo;s 500K+ exomes cannot be replicated with compute. <strong>Resolves at different timescales &mdash; 2024&ndash;28: compute; 2028&ndash;32: data.</strong></p>
+            <div class="impact impact-neutral">METHODOLOGICAL TENSION | False dichotomy that resolves by therapeutic area and era</div>
+          </div>
+        </div>
+        <div>
+          <div class="policy-box neutral anim d4">
+            <h4>Tension 2: CUDA Moat Durability</h4>
+            <p style="font-size:11.5px;"><span class="blue">Science Auditor:</span> 15-year CUDA ecosystem + GROMACS/AMBER/NAMD deep integration creates durable competitive advantage through 2030+. <span class="red">Financial + Futurist:</span> Open-source models + AMD MI300X + inference commoditization erodes moat by 2027&ndash;2029. <strong>Scenario A: 50%. Scenario B: 40%. Scenario C: 10%.</strong></p>
+            <div class="impact impact-moderate">PREDICTIVE TENSION | Inference transition timeline is the key monitorable</div>
+          </div>
+          <div class="policy-box neutral anim d6">
+            <h4>Tension 4: Genuine Priority vs. Marketing Narrative</h4>
+            <p style="font-size:11.5px;"><span class="red">Financial Analyst:</span> Healthcare is marginal &mdash; 2&ndash;8% of Data Center, no disclosed revenue, no Chief Medical Officer, BioNeMo team &lt;200 of 29,600. <span class="green">Futurist + Science:</span> Healthcare is genuine when measured by ecosystem metrics &mdash; platform surface area, developer adoption, equity investments. <strong>Same playbook as gaming&rarr;data center&rarr;automotive.</strong></p>
+            <div class="impact impact-neutral">SCOPE TENSION | Testable prediction: BioNeMo revenue disclosure by 2026&ndash;27</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Tension Layer &mdash; 4 productive tensions &mdash; Deliberate non-resolution preserves genuine analytical complexity</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: EMERGENT #1 — OUTCOME-AGNOSTIC -->
+  <section class="slide emergent-slide" id="s10">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-100px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">01</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag" style="background:rgba(89,221,253,0.15);color:var(--accent-bright);">Emergent Insight</span> structural_pattern_recognition &mdash; All 3 Agents</div>
+        <h2 class="slide-title anim d1">Outcome-Agnostic Positioning: <span style="color:var(--accent-bright)">Nvidia Profits From the Process, Not the Result</span></h2>
+        <p class="slide-subtitle anim d2">Clinical failures generate MORE compute demand &mdash; not less. This is a structurally asymmetric position.</p>
+        <div class="stat-grid anim d3">
+          <div class="stat-card">
+            <div class="stat-label">Recursion REC-994 outcome</div>
+            <div class="stat-value negative">FAILED</div>
+            <div class="stat-context">Phase 2 discontinued 2023</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Recursion compute spend after failure</div>
+            <div class="stat-value positive">INCREASED</div>
+            <div class="stat-context">Reanalysis + alternative programs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">IBM Watson Health: outcome-coupled approach</div>
+            <div class="stat-value negative">$4B+ LOSS</div>
+            <div class="stat-context">Sold at significant loss to Francisco Partners 2022</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Nvidia healthcare approach</div>
+            <div class="stat-value positive">DECOUPLED</div>
+            <div class="stat-context">Revenue from process, not drug IP or approvals</div>
+          </div>
+        </div>
+        <div class="finding-card emergent anim d4">
+          <div class="finding-title">All failure modes generate compute &mdash; the only exit scenario is wholesale AI abandonment</div>
+          <div class="finding-body">Clinical failures &rarr; reanalysis + alternative hypothesis testing &rarr; more compute. Regulatory delays &rarr; more simulations during wait &rarr; more compute. Phase 2 failures &rarr; portfolio expansion with AI selection &rarr; more compute. The only scenario where Nvidia loses is wholesale abandonment of AI in drug discovery &mdash; which the $236B patent cliff pressure makes extremely unlikely through at least 2030.</div>
+          <span class="confidence-badge high">High &mdash; Grounding: 5/5 &mdash; Novelty: 4/5</span>
+        </div>
+        <div class="emergent-why anim d5">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">The Science Auditor sees clinical failures and compute demands but doesn&rsquo;t model revenue implications. The Financial Analyst sees the picks-and-shovels model but doesn&rsquo;t connect it to clinical attrition dynamics. The Futurist models scenarios but doesn&rsquo;t trace how each path maintains compute demand. Only by combining all three does the &ldquo;outcome-agnostic&rdquo; positioning become visible as a deliberate structural advantage rather than coincidence.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Emergence Algorithm: structural_pattern_recognition &mdash; Science Auditor + Financial Analyst + Futurist &mdash; Quality: 4.4/5 avg</span>
+      <span>PRISM Executive Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: EMERGENT #2 — EFFICIENCY PARADOX -->
+  <section class="slide emergent-slide" id="s11">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-150px;right:-100px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">02</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag" style="background:rgba(89,221,253,0.15);color:var(--accent-bright);">Emergent Insight</span> cross_agent_theme_mining &mdash; All 3 Agents</div>
+        <h2 class="slide-title anim d1">Jevons Paradox in Pharma R&amp;D: <span style="color:var(--accent-success)">Efficiency Is Nvidia&rsquo;s Accelerant</span></h2>
+        <p class="slide-subtitle anim d2">30&ndash;50% per-program cost reductions are more than offset by 2&ndash;3x increase in programs pursued. Total compute spend INCREASES as AI improves.</p>
+        <div class="two-col anim d3">
+          <div>
+            <div class="finding-card opportunity anim d3">
+              <div class="finding-title">Mechanism (Science Auditor): Paper molecule problem means each &ldquo;efficient&rdquo; program still requires massive compute</div>
+              <div class="finding-body">Only 5&ndash;15% of AI-generated molecules are synthetically accessible. Each program requires extensive iterative validation cycles &mdash; each consuming GPU-hours. AI claims 2&ndash;5x speed increase, enabling MORE programs per unit time, not fewer total GPU-hours.</div>
+              <span class="confidence-badge medium">Medium &mdash; Primary (NeurIPS 2022 benchmark)</span>
+            </div>
+            <div class="finding-card opportunity anim d4">
+              <div class="finding-title">Demand driver (Financial Analyst): $236B patent cliff forces pipeline breadth expansion</div>
+              <div class="finding-body">Pharma AI compute TAM growing at 35&ndash;45% CAGR &mdash; outpacing per-program cost reduction rates. Compute is additive spend, not substitutive. AI compute represents &lt;5% of total R&D budgets &mdash; making it a low-cost option with asymmetric upside even if ROI is uncertain.</div>
+              <span class="confidence-badge medium">Medium &mdash; Secondary</span>
+            </div>
+          </div>
+          <div>
+            <div class="finding-card opportunity anim d3">
+              <div class="finding-title">Behavioral economics (Futurist): lower per-program costs lead to expanded portfolios, not reduced budgets</div>
+              <div class="finding-body">Pharma responds to lower per-program costs by pursuing 2&ndash;3x more IND targets. Eroom&rsquo;s Law dynamic: remaining undrugged targets are harder, absorbing efficiency gains. Total compute demand

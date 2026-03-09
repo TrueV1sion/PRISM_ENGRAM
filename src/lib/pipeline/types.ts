@@ -13,6 +13,7 @@ import { z } from "zod";
 export const SwarmTierEnum = z.enum(["MICRO", "STANDARD", "EXTENDED", "MEGA", "CAMPAIGN"]);
 export type SwarmTier = z.infer<typeof SwarmTierEnum>;
 
+
 export const ConfidenceLevelEnum = z.enum(["HIGH", "MEDIUM", "LOW"]);
 export type ConfidenceLevel = z.infer<typeof ConfidenceLevelEnum>;
 
@@ -141,7 +142,7 @@ export const AgentResultSchema = z.object({
   findings: z.array(AgentFindingSchema),
   gaps: z.array(z.string()),
   signals: z.array(z.string()),
-  minorityViews: z.array(z.string()),
+  minorityViews: z.array(z.string()).default([]),
   toolsUsed: z.array(z.string()),
   tokensUsed: z.number(),
 });
@@ -236,6 +237,17 @@ export const QualityReportSchema = z.object({
   emergenceYield: z.number(),
   gapCount: z.number(),
   provenanceComplete: z.boolean(),
+  // ─── Extended QA fields (populated when full QA system is wired) ───
+  grade: z.string().optional(),                    // e.g. "A", "B+", "C"
+  overallScore: z.number().optional(),             // 0-100 weighted score
+  provenanceCompleteness: z.number().optional(),   // 0-100% chain completeness
+  warningCount: z.number().optional(),             // total QA warnings
+  criticalWarnings: z.array(z.string()).optional(), // critical-severity warning messages
+  dimensions: z.array(z.object({
+    name: z.string(),
+    score: z.number(),
+    details: z.string(),
+  })).optional(),
 });
 export type QualityReport = z.infer<typeof QualityReportSchema>;
 
@@ -259,7 +271,8 @@ export type PipelineEvent =
   | { type: "presentation_started" }
   | { type: "presentation_complete"; title: string; slideCount: number; htmlPath: string }
   | { type: "complete"; manifest: IntelligenceManifest }
-  | { type: "error"; message: string; phase?: string };
+  | { type: "error"; message: string; phase?: string }
+  | { type: "thinking_token"; token: string };
 
 
 // ─── Verification Gate (Phase 3.5) ──────────────────────────
@@ -294,5 +307,6 @@ export interface IntelligenceManifest {
     startTime: string;
     endTime: string;
     totalTokens: number;
+    totalCost: number;
   };
 }

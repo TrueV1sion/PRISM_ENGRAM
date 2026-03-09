@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRISM Strategic Brief — GLP-1 Impact on Payer MLR 2026</title>
+<style>
+:root {
+  --inov-navy: #003D79;
+  --inov-cerulean: #4E84C4;
+  --inov-sky: #59DDFD;
+  --inov-midnight: #001E3C;
+  --inov-jade: #00E49F;
+  --inov-sand: #F5E6BB;
+  --inov-violet: #6C6CFF;
+  --inov-cloud: #F4F0EA;
+  --bg-primary: #0a0b10;
+  --bg-secondary: #10121a;
+  --bg-tertiary: #181b26;
+  --bg-elevated: #1e2130;
+  --bg-card: rgba(30,33,48,0.85);
+  --text-primary: #f0f2f8;
+  --text-secondary: #a0a8c0;
+  --text-tertiary: #5c6480;
+  --accent: #4E84C4;
+  --accent-bright: #59DDFD;
+  --accent-success: #00E49F;
+  --accent-warning: #F5E6BB;
+  --accent-error: #ff5c5c;
+  --accent-violet: #6C6CFF;
+  --border: rgba(78,132,196,0.12);
+  --border-bright: rgba(89,221,253,0.25);
+  --chart-1: #003D79;
+  --chart-2: #4E84C4;
+  --chart-3: #59DDFD;
+  --chart-4: #001E3C;
+  --chart-5: #00E49F;
+  --chart-6: #F5E6BB;
+  --chart-7: #6C6CFF;
+  --chart-8: #F4F0EA;
+  --text-xs: clamp(0.65rem,0.6rem + 0.2vw,0.8rem);
+  --text-sm: clamp(0.8rem,0.74rem + 0.3vw,1rem);
+  --text-base: clamp(1rem,0.92rem + 0.4vw,1.2rem);
+  --text-lg: clamp(1.2rem,1.1rem + 0.5vw,1.5rem);
+  --text-xl: clamp(1.5rem,1.35rem + 0.65vw,1.9rem);
+  --text-2xl: clamp(1.9rem,1.7rem + 0.85vw,2.5rem);
+  --text-3xl: clamp(2.4rem,2.1rem + 1.1vw,3.2rem);
+  --text-hero: clamp(3.2rem,2.8rem + 1.6vw,4.5rem);
+  --ease-out-expo: cubic-bezier(0.16,1,0.3,1);
+  --ease-out-quart: cubic-bezier(0.25,1,0.5,1);
+  --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+  --dur-fast: 200ms;
+  --dur-normal: 350ms;
+  --dur-slow: 600ms;
+  --dur-cinematic: 1000ms;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-snap-type: y mandatory; overflow-y: scroll; scroll-behavior: smooth; background: var(--bg-primary); color: var(--text-primary); font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; }
+body { overflow-x: hidden; }
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 4rem 5vw 3rem;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+.slide-inner { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+.slide-bg-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); opacity: 0.07; z-index: 0; pointer-events: none; }
+#slideProgress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg,var(--inov-navy),var(--inov-cerulean),var(--inov-sky)); z-index: 1000; transition: width 0.3s var(--ease-out-quart); width: 0%; }
+.prism-mark { position: fixed; top: 1.5rem; left: 2rem; font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.25em; color: var(--accent); z-index: 100; text-transform: uppercase; }
+.slide-counter { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 1001; font-size: 11px; color: var(--text-tertiary); letter-spacing: 2px; font-weight: 600; background: rgba(10,11,16,0.85); padding: 4px 14px; border-radius: 20px; border: 1px solid var(--border); backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.3s; }
+.slide-counter.visible { opacity: 1; }
+.slide-nav-hint { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); z-index: 1001; font-size: 10px; color: var(--text-tertiary); letter-spacing: 1px; text-align: center; opacity: 0; transition: opacity 1s; pointer-events: none; }
+.slide-nav-hint.show { opacity: 0.6; }
+.nav-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; width: 44px; height: 44px; border-radius: 50%; background: rgba(78,132,196,0.15); border: 1px solid rgba(78,132,196,0.3); color: var(--accent); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; backdrop-filter: blur(12px); transition: all 0.3s; }
+.nav-toggle:hover { background: rgba(78,132,196,0.3); transform: scale(1.05); }
+.nav-panel { position: fixed; top: 0; right: -340px; width: 320px; height: 100vh; background: rgba(10,11,16,0.97); border-left: 1px solid var(--border); z-index: 999; transition: right 0.35s ease; overflow-y: auto; padding: 70px 20px 30px; backdrop-filter: blur(20px); }
+.nav-panel.open { right: 0; }
+.nav-panel h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s; text-decoration: none; margin-bottom: 2px; color: var(--text-primary); }
+.nav-item:hover { background: rgba(78,132,196,0.1); }
+.nav-num { font-size: 10px; color: var(--text-tertiary); min-width: 24px; font-weight: 700; }
+.nav-label { font-size: 12.5px; color: var(--text-primary); font-weight: 500; flex: 1; }
+.nav-tag { font-size: 8px; color: var(--accent-warning); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 998; display: none; }
+.nav-overlay.open { display: block; }
+.anim { opacity: 0; transform: translateY(24px); transition: opacity var(--dur-slow) var(--ease-out-expo), transform var(--dur-slow) var(--ease-out-expo); }
+.anim.visible { opacity: 1; transform: translateY(0); }
+.anim.d1 { transition-delay: 100ms; }
+.anim.d2 { transition-delay: 200ms; }
+.anim.d3 { transition-delay: 300ms; }
+.anim.d4 { transition-delay: 400ms; }
+.anim.d5 { transition-delay: 500ms; }
+.anim.d6 { transition-delay: 600ms; }
+.anim.d7 { transition-delay: 700ms; }
+.eyebrow { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+.slide-title { font-size: var(--text-3xl); font-weight: 700; line-height: 1.15; background: linear-gradient(135deg,var(--text-primary) 0%,var(--accent-bright) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; }
+.slide-subtitle { font-size: var(--text-sm); color: var(--text-secondary); max-width: 700px; line-height: 1.7; margin-bottom: 1.5rem; }
+.section-intro { font-size: 13.5px; line-height: 1.7; max-width: 800px; margin-bottom: 20px; color: var(--text-secondary); }
+.tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.tag.clinical { background: rgba(0,228,159,0.15); color: var(--accent-success); }
+.tag.financial { background: rgba(78,132,196,0.15); color: var(--accent); }
+.tag.regulatory { background: rgba(245,230,187,0.15); color: var(--accent-warning); }
+.tag.quality { background: rgba(108,108,255,0.15); color: var(--accent-violet); }
+.tag.strategic { background: rgba(89,221,253,0.15); color: var(--accent-bright); }
+.tag.emergent { background: rgba(108,108,255,0.2); color: var(--accent-violet); border: 1px solid rgba(108,108,255,0.4); }
+.tag-red { background: rgba(255,92,92,0.15); color: var(--accent-error); }
+.tag-green { background: rgba(0,228,159,0.15); color: var(--accent-success); }
+.tag-blue { background: rgba(78,132,196,0.15); color: var(--accent); }
+.tag-orange { background: rgba(249,115,22,0.15); color: #f97316; }
+.tag-purple { background: rgba(108,108,255,0.15); color: var(--accent-violet); }
+.tag-gold { background: rgba(245,230,187,0.15); color: var(--accent-warning); }
+.tag-cyan { background: rgba(89,221,253,0.15); color: var(--accent-bright); }
+.agent-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-size: var(--text-xs); color: var(--text-secondary); margin: 0 4px 4px 0; }
+.dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1.25rem; margin-top: 1.25rem; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; backdrop-filter: blur(10px); transition: transform 0.2s; }
+.stat-card:hover { transform: translateY(-2px); }
+.stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-tertiary); margin-bottom: 0.5rem; font-weight: 700; }
+.stat-value { font-size: clamp(1.5rem,2.5vw,2.2rem); font-weight: 800; line-height: 1; margin-bottom: 0.4rem; }
+.stat-value.negative { color: var(--accent-error); }
+.stat-value.positive { color: var(--accent-success); }
+.stat-value.warn { color: var(--accent-warning); }
+.stat-value.blue { color: var(--accent); }
+.stat-value.cyan { color: var(--accent-bright); }
+.stat-value.purple { color: var(--accent-violet); }
+.stat-context { font-size: 11px; color: var(--text-tertiary); line-height: 1.5; }
+.finding-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 1.1rem 1.4rem; margin-bottom: 0.75rem; backdrop-filter: blur(10px); }
+.finding-card.emergent { border-left-color: var(--accent-bright); }
+.finding-card.risk { border-left-color: var(--accent-error); }
+.finding-card.opportunity { border-left-color: var(--accent-success); }
+.finding-card.warn { border-left-color: var(--accent-warning); }
+.finding-card.purple { border-left-color: var(--accent-violet); }
+.finding-title { font-size: 13.5px; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem; line-height: 1.4; }
+.finding-body { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+.confidence-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.5rem; }
+.confidence-badge.high { background: rgba(0,228,159,0.15); color: var(--accent-success); }
+.confidence-badge.medium { background: rgba(245,230,187,0.15); color: var(--accent-warning); }
+.confidence-badge.low { background: rgba(255,92,92,0.15); color: var(--accent-error); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 1rem; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.75rem; margin-top: 1rem; }
+.bar-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+.bar-label { font-size: 11px; color: var(--text-secondary); min-width: 160px; font-weight: 600; }
+.bar-track { flex: 1; background: rgba(255,255,255,0.05); border-radius: 4px; height: 28px; overflow: hidden; position: relative; }
+.bar-fill { height: 100%; border-radius: 4px; transform: scaleX(0); transform-origin: left; transition: transform 0.8s var(--ease-out-expo); display: flex; align-items: center; padding-left: 0.75rem; }
+.bar-fill.animate { transform: scaleX(1); }
+.bar-fill-value { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap; }
+.policy-box { background: rgba(255,92,92,0.05); border: 1px solid rgba(255,92,92,0.2); border-radius: 10px; padding: 12px 16px; margin: 6px 0; }
+.policy-box.positive { background: rgba(0,228,159,0.05); border-color: rgba(0,228,159,0.2); }
+.policy-box.neutral { background: rgba(78,132,196,0.05); border-color: rgba(78,132,196,0.2); }
+.policy-box h4 { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; }
+.policy-box p { font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; }
+.impact { display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; margin-top: 5px; }
+.impact-severe { color: var(--accent-error); }
+.impact-moderate { color: var(--accent-warning); }
+.impact-positive { color: var(--accent-success); }
+.impact-neutral { color: var(--accent); }
+.threat-meter { display: flex; gap: 3px; align-items: center; }
+.threat-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+.threat-dot.active-red { background: var(--accent-error); }
+.threat-dot.active-orange { background: #f97316; }
+.threat-dot.active-yellow { background: var(--accent-warning); }
+.threat-dot.active-green { background: var(--accent-success); }
+.threat-dot.active-blue { background: var(--accent); }
+.quote-block { border-left: 3px solid var(--accent-warning); padding: 10px 18px; margin: 10px 0; background: rgba(245,230,187,0.05); border-radius: 0 8px 8px 0; font-style: italic; color: var(--text-primary); font-size: 13px; line-height: 1.6; }
+.quote-attr { font-style: normal; font-size: 10.5px; color: var(--text-secondary); margin-top: 6px; }
+.timeline-bar { display: flex; height: 7px; border-radius: 4px; overflow: hidden; margin-top: 5px; background: rgba(255,255,255,0.05); }
+.timeline-segment { height: 100%; }
+.tl-done { background: var(--accent-success); }
+.tl-active { background: var(--accent-warning); }
+.tl-pending { background: rgba(255,255,255,0.1); }
+.pipeline-caption { font-size: 9.5px; color: var(--text-tertiary); margin: 3px 0 0; }
+.emergence-card { background: linear-gradient(135deg,rgba(108,108,255,0.08),rgba(78,132,196,0.08)); border: 1px solid rgba(108,108,255,0.3); border-radius: 14px; padding: 18px; }
+.emergence-card h4 { color: var(--accent-violet); font-size: 13.5px; margin-bottom: 6px; font-weight: 700; }
+.emergence-card p { font-size: 11.5px; color: var(--text-secondary); line-height: 1.6; }
+.emergent-number { font-size: var(--text-hero); font-weight: 900; color: rgba(89,221,253,0.06); position: absolute; top: -30px; left: -20px; line-height: 1; pointer-events: none; z-index: 0; }
+.emergent-why { background: var(--bg-card); border: 1px solid var(--border-bright); border-radius: 12px; padding: 1.25rem 1.5rem; margin-top: 1.25rem; }
+.emergent-why-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-bright); font-weight: 700; margin-bottom: 0.5rem; }
+.slide-footer { position: absolute; bottom: 14px; left: 5vw; right: 5vw; display: flex; justify-content: space-between; font-size: 9.5px; color: var(--text-tertiary); border-top: 1px solid var(--border); padding-top: 7px; }
+.source-list { margin-top: 8px; font-size: 9.5px; color: var(--text-tertiary); line-height: 1.8; }
+.source-list a { color: var(--text-tertiary); text-decoration: none; border-bottom: 1px dotted rgba(78,132,196,0.3); }
+.source-unverified { color: var(--accent-warning); font-size: 0.75em; vertical-align: super; cursor: help; opacity: 0.85; }
+.dagger-footnote { position: absolute; bottom: 30px; left: 5vw; right: 5vw; font-size: 9px; color: var(--text-tertiary); font-style: italic; border-top: 1px solid var(--border); padding-top: 5px; }
+.hero-stats { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; max-width: 1100px; margin: 1.5rem auto 0; }
+.hero-stat { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 18px 10px; text-align: center; transition: transform 0.2s; }
+.hero-stat:hover { transform: translateY(-2px); }
+.hero-stat .value { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+.hero-stat .label { font-size: 9px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.4; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; background: rgba(78,132,196,0.12); border: 1px solid rgba(78,132,196,0.3); border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+.hero-title { font-size: clamp(2rem,3.5vw,3.2rem); font-weight: 800; line-height: 1.1; background: linear-gradient(135deg,#fff 0%,var(--inov-sky) 60%,var(--inov-cerulean) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.75rem; }
+.hero-sub { font-size: clamp(1rem,1.5vw,1.3rem); color: var(--text-secondary); margin-bottom: 0.5rem; line-height: 1.5; }
+.hero-date { font-size: var(--text-xs); color: var(--text-tertiary); letter-spacing: 0.1em; }
+.validation-box { display: flex; gap: 14px; max-width: 1100px; margin: 1.5rem auto 0; text-align: left; }
+.validation-card { flex: 1; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; }
+.validation-card h4 { font-size: 9.5px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-success); margin-bottom: 8px; font-weight: 700; }
+.framework-card h4 { color: var(--accent-violet); }
+.val-row { display: flex; align-items: flex-start; gap: 8px; margin: 4px 0; font-size: 10.5px; color: var(--text-secondary); line-height: 1.4; }
+.val-icon { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.val-icon.green { background: rgba(0,228,159,0.2); color: var(--accent-success); }
+.framework-visual { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+.fw-node { background: rgba(108,108,255,0.1); border: 1px solid rgba(108,108,255,0.3); border-radius: 6px; padding: 3px 8px; font-size: 9px; color: var(--accent-violet); font-weight: 600; }
+.fw-arrow { color: var(--text-tertiary); font-size: 10px; }
+.fw-center { background: linear-gradient(135deg,rgba(108,108,255,0.2),rgba(78,132,196,0.2)); border: 1px solid rgba(108,108,255,0.4); border-radius: 8px; padding: 4px 10px; font-size: 9px; color: var(--text-primary); font-weight: 700; }
+.prov-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.prov-table th { text-align: left; padding: 8px 12px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-tertiary); border-bottom: 1px solid var(--border); }
+.prov-table td { padding: 10px 12px; border-bottom: 1px solid rgba(78,132,196,0.06); vertical-align: top; color: var(--text-secondary); line-height: 1.5; }
+.prov-table tr:last-child td { border-bottom: none; }
+.compact-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.compact-table th { text-align: left; padding: 7px 10px; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); border-bottom: 1px solid var(--border); }
+.compact-table td { padding: 7px 10px; border-bottom: 1px solid rgba(78,132,196,0.06); color: var(--text-secondary); vertical-align: middle; }
+.compact-table tr:last-child td { border-bottom: none; }
+.toc-group-header { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); font-weight: 700; }
+.toc-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 5px; font-size: 11.5px; }
+.toc-item:hover { background: rgba(78,132,196,0.08); border-color: rgba(78,132,196,0.25); }
+.inovalon-header { background: linear-gradient(135deg,rgba(78,132,196,0.1),rgba(0,228,159,0.1)); border: 1px solid rgba(78,132,196,0.2); border-radius: 14px; padding: 18px 22px; margin-bottom: 14px; }
+.inovalon-header h3 { color: var(--accent); margin-bottom: 4px; font-size: 15px; }
+.inovalon-header p { font-size: 12px; color: var(--text-secondary); }
+.card-accent { border-left: 3px solid var(--accent-error) !important; }
+.card-blue { border-left: 3px solid var(--accent) !important; }
+.card-green { border-left: 3px solid var(--accent-success) !important; }
+.card-orange { border-left: 3px solid #f97316 !important; }
+.card-purple { border-left: 3px solid var(--accent-violet) !important; }
+.card-gold { border-left: 3px solid var(--accent-warning) !important; }
+.card-cyan { border-left: 3px solid var(--accent-bright) !important; }
+.red { color: var(--accent-error); }
+.orange { color: #f97316; }
+.blue { color: var(--accent); }
+.green { color: var(--accent-success); }
+.purple { color: var(--accent-violet); }
+.gold { color: var(--accent-warning); }
+.white { color: var(--text-primary); }
+.cyan { color: var(--accent-bright); }
+.highlight { color: var(--text-primary); font-weight: 600; }
+.chart-container { width: 100%; position: relative; }
+.bar-chart .bar { transform-origin: bottom; transform: scaleY(0); transition: transform 0.6s var(--ease-out-expo), opacity 0.3s; }
+.bar-chart.is-visible .bar { transform: scaleY(1); }
+.bar-chart .bar:nth-child(1) { transition-delay: 0.1s; }
+.bar-chart .bar:nth-child(2) { transition-delay: 0.2s; }
+.bar-chart .bar:nth-child(3) { transition-delay: 0.3s; }
+.bar-chart .bar:nth-child(4) { transition-delay: 0.4s; }
+.bar-chart .bar:nth-child(5) { transition-delay: 0.5s; }
+.bar-chart .bar:nth-child(6) { transition-delay: 0.6s; }
+.bar-chart .bar:hover,.bar-chart .bar:focus { opacity: 0.8; outline: 2px solid var(--accent); outline-offset: 2px; }
+.line-chart .clip-rect { transition: width 1.5s var(--ease-out-expo); }
+.line-chart.is-visible .clip-rect { width: 500px; }
+.donut-chart .segment { transition: stroke-dashoffset 1s var(--ease-out-expo), opacity 0.2s; }
+.donut-chart .segment:hover { opacity: 0.8; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin-top: 12px; font-size: 11px; color: var(--text-secondary); }
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
+.gap-card { background: rgba(255,92,92,0.04); border: 1px solid rgba(255,92,92,0.15); border-radius: 10px; padding: 12px 15px; margin-bottom: 8px; }
+.gap-card.significant { background: rgba(245,230,187,0.04); border-color: rgba(245,230,187,0.15); }
+.gap-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent-error); margin-bottom: 4px; }
+.gap-card.significant .gap-label { color: var(--accent-warning); }
+.gap-body { font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; }
+.tension-col { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.tension-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.tension-col h4.pro { color: var(--accent-success); }
+.tension-col h4.con { color: var(--accent-error); }
+.tension-resolution { background: linear-gradient(135deg,rgba(108,108,255,0.08),rgba(78,132,196,0.08)); border: 1px solid rgba(108,108,255,0.25); border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem; }
+.tension-resolution-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-violet); font-weight: 700; margin-bottom: 5px; }
+@media (max-width: 1024px) {
+  .slide { padding: 40px 30px 50px; }
+  .hero-stats { grid-template-columns: repeat(3,1fr); }
+  .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .validation-box { flex-direction: column; }
+  .nav-toggle { top: 12px; right: 12px; }
+}
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: repeat(2,1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="slideProgress"></div>
+<div class="prism-mark">PRISM Intelligence</div>
+<div class="slide-counter" id="slideCounter">01 / 17</div>
+<div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+<button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents">&#9776;</button>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+<div class="nav-panel" id="navPanel">
+  <h3>Table of Contents</h3>
+  <a class="nav-item" href="#s1" onclick="toggleNav()"><span class="nav-num">01</span><span class="nav-label">Title — GLP-1 Impact on Payer MLR</span></a>
+  <a class="nav-item" href="#s2" onclick="toggleNav()"><span class="nav-num">02</span><span class="nav-label">Intelligence Map</span></a>
+  <a class="nav-item" href="#s3" onclick="toggleNav()"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+  <a class="nav-item" href="#s4" onclick="toggleNav()"><span class="nav-num">04</span><span class="nav-label">Clinical Evidence — Cost Offsets</span></a>
+  <a class="nav-item" href="#s5" onclick="toggleNav()"><span class="nav-num">05</span><span class="nav-label">Payer MLR Financial Modeling</span></a>
+  <a class="nav-item" href="#s6" onclick="toggleNav()"><span class="nav-num">06</span><span class="nav-label">The J-Curve & Adherence Crisis</span></a>
+  <a class="nav-item" href="#s7" onclick="toggleNav()"><span class="nav-num">07</span><span class="nav-label">Payer Segment Divergence</span></a>
+  <a class="nav-item" href="#s8" onclick="toggleNav()"><span class="nav-num">08</span><span class="nav-label">Tension Points</span></a>
+  <a class="nav-item" href="#s9" onclick="toggleNav()"><span class="nav-num">09</span><span class="nav-label">Emergent — Double Time Lag Trap</span><span class="nav-tag">NEW</span></a>
+  <a class="nav-item" href="#s10" onclick="toggleNav()"><span class="nav-num">10</span><span class="nav-label">Emergent — Inverse Vulnerability Paradox</span><span class="nav-tag">NEW</span></a>
+  <a class="nav-item" href="#s11" onclick="toggleNav()"><span class="nav-num">11</span><span class="nav-label">Emergent — Adherence-Offset Doom Loop</span><span class="nav-tag">NEW</span></a>
+  <a class="nav-item" href="#s12" onclick="toggleNav()"><span class="nav-num">12</span><span class="nav-label">Emergent — Risk Stratification Strategy</span><span class="nav-tag">NEW</span></a>
+  <a class="nav-item" href="#s13" onclick="toggleNav()"><span class="nav-num">13</span><span class="nav-label">Strategic Timeline</span></a>
+  <a class="nav-item" href="#s14" onclick="toggleNav()"><span class="nav-num">14</span><span class="nav-label">Critical Evidence Gaps</span></a>
+  <a class="nav-item" href="#s15" onclick="toggleNav()"><span class="nav-num">15</span><span class="nav-label">Provenance & Confidence</span></a>
+  <a class="nav-item" href="#s16" onclick="toggleNav()"><span class="nav-num">16</span><span class="nav-label">Gaps & Next Steps</span></a>
+  <a class="nav-item" href="#s17" onclick="toggleNav()"><span class="nav-num">17</span><span class="nav-label">Bariatric Surgery Correction</span></a>
+</div>
+
+<!-- ============================================================ SLIDE 1: TITLE -->
+<section class="slide" id="s1" style="background:linear-gradient(155deg,var(--bg-primary) 0%,#0d1420 50%,var(--bg-primary) 100%);text-align:center;">
+  <div class="slide-bg-glow" style="background:var(--accent);top:-150px;left:50%;transform:translateX(-50%);"></div>
+  <div class="slide-bg-glow" style="background:var(--accent-violet);bottom:-200px;right:-100px;opacity:0.05;"></div>
+  <div class="slide-inner">
+    <div class="anim">
+      <div class="hero-badge">&#9670; PRISM Multi-Source Validated &nbsp;|&nbsp; Medium Overall Confidence</div>
+    </div>
+    <h1 class="hero-title anim d1">GLP-1 Drugs &amp;<br>Payer MLR in 2026</h1>
+    <p class="hero-sub anim d2">A 2-Agent Swarm Analysis of Clinical Cost-Offset Evidence and Financial Impact Modeling</p>
+    <p class="hero-date anim d3">2025 Strategic Intelligence Brief &nbsp;|&nbsp; 2-Agent Swarm &nbsp;|&nbsp; EXTENDED Tier &nbsp;|&nbsp; 16 Total Findings</p>
+    <div class="anim d4" style="margin-top:1.5rem;">
+      <span class="agent-chip"><span class="dot" style="background:var(--accent-success)"></span>GLP-1 Cost Offset Evidence Agent</span>
+      <span class="agent-chip"><span class="dot" style="background:var(--accent)"></span>Payer MLR Impact Modeling Agent</span>
+    </div>
+    <div class="hero-stats anim d5">
+      <div class="hero-stat">
+        <div class="value negative">+100–300</div>
+        <div class="label">bps MLR Pressure (Fully-Insured)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="value warn">2–5 yrs</div>
+        <div class="label">Offset Materialization Lag</div>
+      </div>
+      <div class="hero-stat">
+        <div class="value negative">~85%</div>
+        <div class="label">Discontinuation Rate by 24 Months</div>
+      </div>
+      <div class="hero-stat">
+        <div class="value cyan">$8–15K</div>
+        <div class="label">GLP-1 List Price PMPY</div>
+      </div>
+      <div class="hero-stat">
+        <div class="value purple">4–7 yrs</div>
+        <div class="label">Est. Time to MLR Equilibrium</div>
+      </div>
+    </div>
+    <div class="validation-box anim d6">
+      <div class="validation-card">
+        <h4>&#10003; Validation Methodology</h4>
+        <div class="val-row"><span class="val-icon green">&#10003;</span>PRIMARY source verification: SELECT (NEJM 2023), FLOW (NEJM 2024), IRA CMS actuarial memoranda</div>
+        <div class="val-row"><span class="val-icon green">&#10003;</span>Fact-checker corrected 5 claims including bariatric surgery framing and IRA liability shift</div>
+        <div class="val-row"><span class="val-icon green">&#10003;</span>Unverified quantitative estimates flagged with &dagger; notation throughout</div>
+        <div class="val-row"><span class="val-icon green">&#10003;</span>Source-independence testing applied to all 4 convergent findings</div>
+      </div>
+      <div class="validation-card framework-card">
+        <h4>&#9670; PRISM Processing Framework</h4>
+        <p style="font-size:10.5px;color:var(--text-secondary);margin-bottom:6px;">5-layer intelligence pyramid: Foundation → Convergence → Tension → Emergence → Gaps</p>
+        <div class="framework-visual">
+          <span class="fw-node">Clinical RWE Agent</span>
+          <span class="fw-node">Financial Modeling Agent</span>
+          <span class="fw-arrow">&#8594;</span>
+          <span class="fw-center">Cross-Agent Synthesis</span>
+          <span class="fw-arrow">&#8594;</span>
+          <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success)">4 Emergent Insights</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SLIDE 2: TOC -->
+<section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+  <div class="slide-bg-glow" style="background:var(--accent-violet);top:-200px;right:-100px;"></div>
+  <div class="slide-inner">
+    <div class="eyebrow anim"><span class="tag strategic">Navigation</span></div>
+    <h2 class="slide-title anim d1">Executive <span style="color:var(--accent)">Intelligence Map</span></h2>
+    <p class="section-intro anim d2">17-slide analysis spanning clinical trial evidence, actuarial modeling, payer segment dynamics, IRA structural impacts, and 4 multi-agent emergent insights. Medium overall confidence due to unverified quantitative inputs and critical evidence gaps.</p>
+    <div class="grid-3 anim d3">
+      <div>
+        <h3 class="toc-group-header">Foundation &amp; Dimensions</h3>
+        <a class="nav-item toc-item" href="#s3"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+        <a class="nav-item toc-item" href="#s4"><span class="nav-num">04</span><span class="nav-label">Clinical Evidence — Cost Offsets</span></a>
+        <a class="nav-item toc-item" href="#s5"><span class="nav-num">05</span><span class="nav-label">Payer MLR Financial Modeling</span></a>
+        <a class="nav-item toc-item" href="#s6"><span class="nav-num">06</span><span class="nav-label">J-Curve &amp; Adherence Crisis</span></a>
+        <a class="nav-item toc-item" href="#s7"><span class="nav-num">07</span><span class="nav-label">Payer Segment Divergence</span></a>
+        <a class="nav-item toc-item" href="#s8"><span class="nav-num">08</span><span class="nav-label">Tension Points</span></a>
+      </div>
+      <div>
+        <h3 class="toc-group-header">Emergent Insights <span class="tag emergent" style="font-size:8px;">Multi-Agent</span></h3>
+        <a class="nav-item toc-item" href="#s9"><span class="nav-num">09</span><span class="nav-label">Double Time Lag Trap</span><span class="nav-tag">NEW</span></a>
+        <a class="nav-item toc-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Inverse Vulnerability Paradox</span><span class="nav-tag">NEW</span></a>
+        <a class="nav-item toc-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">Adherence-Offset Doom Loop</span><span class="nav-tag">NEW</span></a>
+        <a class="nav-item toc-item" href="#s12"><span class="nav-num">12</span><span class="nav-label">Risk Stratification Strategy</span><span class="nav-tag">NEW</span></a>
+      </div>
+      <div>
+        <h3 class="toc-group-header">Intelligence Quality Layer</h3>
+        <a class="nav-item toc-item" href="#s13"><span class="nav-num">13</span><span class="nav-label">Strategic Timeline 2024–2030</span></a>
+        <a class="nav-item toc-item" href="#s14"><span class="nav-num">14</span><span class="nav-label">Critical Evidence Gaps</span></a>
+        <a class="nav-item toc-item" href="#s15"><span class="nav-num">15</span><span class="nav-label">Provenance &amp; Confidence</span></a>
+        <a class="nav-item toc-item" href="#s16"><span class="nav-num">16</span><span class="nav-label">Gaps &amp; Next Steps</span></a>
+        <a class="nav-item toc-item" href="#s17"><span class="nav-num">17</span><span class="nav-label">Bariatric Surgery Correction</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SLIDE 3: EXECUTIVE SUMMARY -->
+<section class="slide" id="s3" style="background:var(--bg-secondary);">
+  <div class="slide-bg-glow" style="background:var(--accent-error);top:-100px;right:-150px;"></div>
+  <div class="slide-inner">
+    <div class="eyebrow anim"><span class="tag strategic">Foundation Layer</span> Uncontested Synthesis</div>
+    <h2 class="slide-title anim d1">2026: GLP-1s Are Net MLR-Accretive <span style="color:var(--accent-error)">For Nearly Every Payer</span></h2>
+    <p class="slide-subtitle anim d2">The clinical cost-offset evidence is real — but it does not mature fast enough to counterbalance drug expenditure within a single plan year. 2026 sits squarely in the cost-accretive zone for most GLP-1 cohorts.</p>
+    <div class="stat-grid anim d3">
+      <div class="stat-card">
+        <div class="stat-label">GLP-1 Net Drug Cost (PMPY)</div>
+        <div class="stat-value negative">$3.5–8K</div>
+        <div class="stat-context">After rebates (35–60%). Accrues immediately upon initiation.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">2026 Offset Realization</div>
+        <div class="stat-value warn">15–35%<span class="source-unverified" title="Modeled assumption — no verified primary actuarial source">†</span></div>
+        <div class="stat-context">Of long-term actuarial offset value. Base-case estimate only.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Commercial MLR Impact</div>
+        <div class="stat-value negative">+100–300</div>
+        <div class="stat-context">bps for fully-insured segments (~40% of commercial lives).</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">MA Catastrophic Liability Shift</div>
+        <div class="stat-value negative">+40 pp</div>
+        <div class="stat-context">IRA Part D redesign: plan liability in catastrophic phase rose from 20% → 60%.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">12-Month Discontinuation Rate</div>
+        <div class="stat-value negative">~67%</div>
+        <div class="stat-context">Of commercially insured obesity patients. Only ~15% maintain PDC >80% at 2 years.</div>
+      </div>
+    </div>
+    <div class="grid-2 anim d4" style="margin-top:1.25rem;">
+      <div class="finding-card risk">
+        <div class="finding-title">GLP-1s Will Worsen MLR for Most Payers in 2026</div>
+        <div class="finding-body">Drug costs accrue immediately at $3,500–$8,000 net PMPY. Medical cost offsets require 2–5 years. For new initiators in 2024–2026, 2026 is almost entirely cost-accretive with near-zero offset realization. Both clinical and financial agents independently confirm this structural J-curve.</div>
+        <span class="confidence-badge high">High — Foundation Layer</span>
+      </div>
+      <div class="finding-card risk">
+        <div class="finding-title">Bariatric Surgery Substitution: A Net Cost INCREASE</div>
+        <div class="finding-body">Previously framed as a cost offset. JAMA Surgery 2025 (n=30,458) and Rubino et al. Lancet 2024 demonstrate continuous GLP-1 costs exceed amortized bariatric surgery costs over 2+ year horizons. This correction propagates into all MLR models. <strong class="red">Prior framing was significantly misleading.</strong></div>
+        <span class="confidence-badge high">High — Fact-Checker Verified</span>
+      </div>
+    </div>
+    <div class="dagger-footnote">† Source: actuarial modeling — primary source not verified (no Milliman or equivalent primary actuarial source confirmed)</div>
+    <div class="slide-footer"><span>Foundation Layer | 5 key metrics | Confidence: HIGH (structural findings)</span><span>PRISM Intelligence</span></div>
+  </div>
+</section>
+
+<!-- ============================================================ SLIDE 4: CLINICAL EVIDENCE -->
+<section class="slide" id="s4" style="background:var(--bg-primary);">
+  <div class="slide-bg-glow" style="background:var(--accent-success);top:-150px;left:-100px;"></div>
+  <div class="slide-inner">
+    <div class="eyebrow anim"><span class="tag clinical">Clinical Evidence</span> GLP-1 Cost Offset Evidence Agent</div>
+    <h2 class="slide-title anim d1">Trial Evidence Is Real — But <span style="color:var(--accent-warning)">Time-Horizon Mismatched</span></h2>
+    <p class="slide-subtitle anim d2">SELECT and FLOW provide the strongest GLP-1 cost-offset evidence to date. Both trials demonstrate meaningful clinical benefits — over 34–39 month follow-up periods that structurally cannot be captured in a single 2026 plan year.</p>
+    <div class="two-col anim d3">
+      <div>
+        <div class="finding-card opportunity">
+          <div class="finding-title">SELECT Trial: 20% MACE Reduction (HR 0.80)</div>
+          <div class="finding-body">Semaglutide 2.4mg reduced major adverse cardiovascular events by 20% (95% CI 0.72–0.90) in non-diabetic obese adults with established CVD. Mean follow-up: 39.8 months. NNT ~67 over 3 years — material hospitalization avoidance, but NOT fully captured in a single 2026 plan year. Applies only to ~15–20% of GLP-1 users with established CVD.</div>
+          <span class="confidence-badge high">High — PRIMARY (NEJM 2023)</span>
+        </div>
+        <div class="finding-card opportunity">
+          <div class="finding-title">FLOW Trial: 24% Kidney Composite Reduction (HR 0.76)</div>
+          <div class="finding-body">Semaglutide 1.0mg reduced composite kidney outcomes in T2D patients with CKD. Creates a distinct, high-value cost offset category: dialysis avoidance at $90,000–$100,000/year per incident ESRD patient. Most defensible GLP-1 coverage case for MA payers with diabetic CKD populations — requires Ozempic, separate coverage pathway from obesity indication.</div>
+          <span class="confidence-badge high">High — PRIMARY (NEJM 2024)</span>
+        </div>
+        <div class="finding-card warn">
+          <div class="finding-title">Tirzepatide Evidence Asymmetry</div>
+          <div class="finding-body">SURPASS-CVOT (NEJM Dec 2025) now provides T2D cardiovascular data for tirzepatide. However, the obesity-without-diabetes population — the primary growth driver — remains unproven. SURMOUNT-MMO results expected October 2027. Payers extrapolating semaglutide evidence to Zepbound users in general obesity are operating in an evidence vacuum.</div>
+          <span class="confidence-badge high">High — CONVERGENT finding</span>
+        </div>
+      </div>
+      <div>
+        <div class="finding-card">
+          <div class="finding-title">RWE Claims Data: 10–20% Lower Total Medical Costs at 12 Months</div>
+          <div class="finding-body">Multiple retrospective cohort studies (IBM MarketScan, Optum, IQVIA) find GLP-1 users have 10–20% lower total medical costs vs. matched diabetic controls within 12 months — but offset magnitude increases substantially at 24–36 months. Critical for 2026: patients initiated in 2025–2026 generate primarily drug costs in Year 1, with offsets materializing in 2027–2028.</div>
+          <span class="confidence-badge medium">Medium — SECONDARY (Multiple RWE)</span>
+        </div>
+        <div class="finding-card">
+          <div class="finding-title">Offset Stratification: 3–4x Differential by Risk Tier</div>
+          <div class="finding-body">Hospitalization cost offsets are <strong class="red">NOT uniform</strong> across GLP-1 users:<br>
+          &bull; High-CVD-risk (SELECT-eligible): <strong class="green">$180–280 PMPM</strong><br>
+          &bull; General obesity (no CVD): <strong class="red">$40–80 PMPM</strong><br>
+          Drug cost: ~$900–$1,300 PMPM at list price. Even high-CVD offsets fall short of drug cost at 2026 realization rates.</div>
+          <span class="confidence-badge medium">Medium — Clinical RWE + Trial Data</span>
+        </div>
+        <div class="policy-box">
+          <h4>Obesity-Only Evidence Vacuum</h4>
+          <p>The fastest-growing GLP-1 segment (obesity without diabetes/CVD) has the weakest cost-offset evidence. SELECT enrolled patients with ESTABLISHED CVD — inapplicable to ~80% of commercial GLP-1 users. This critical gap persists until SURMOUNT-MMO (2027).</p>
+          <div class="impact impact-severe">&#9888; CRITICAL GAP | Unquantifiable for 2026 MLR modeling</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-list anim d5"><strong>Sources:</strong> SELECT trial (NEJM 2023) | FLOW trial (NEJM 2024) | SURPASS-CVOT (NEJM Dec 2025) | IBM MarketScan RWE | Optum Clinformatics claims data</div>
+    <div class="slide-footer"><span>GLP-1 Cost Offset Evidence Agent | 5 findings | Confidence: HIGH (trial data) / MEDIUM (RWE)</span><span>PRISM Intelligence</span></div>
+  </div>
+</section>
+
+<!-- ============================================================ SLIDE 5: FINANCIAL MODELING -->
+<section class="slide" id="s5" style="background:var(--bg-secondary);">
+  <div class="slide-bg-glow" style="background:var(--accent);bottom:-150px;right:-100px;"></div>
+  <div class="slide-inner">
+    <div class="eyebrow anim"><span class="tag financial">Financial Modeling</span> Payer MLR Impact Modeling Agent</div>
+    <h2 class="slide-title anim d1">Drug Spend Dominates the <span style="color:var(--accent-error)">MLR Numerator</span> in 2026</h2>
+    <p class="slide-subtitle anim d2">GLP-1s are becoming the single largest drug class cost driver for most payers — exceeding oncology specialty spend for commercially insured populations. The near-term cash MLR impact is 4–9 percentage points higher than long-term steady-state.</p>
+    <div class="anim d3">
+      <div style="margin-bottom:1rem;">
+        <div class="bar-label" style="font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:0.5rem;">GLP-1 Share of Pharmacy Spend by Segment</div>
+        <div class="bar-row">
+          <div class="bar-label">Commercial (2024 Est.)</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:50%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sky))">
+              <span class="bar-fill-value">3–6% of total medical expense</span>
+            </div>
+          </div>
+        </div>

@@ -20,12 +20,12 @@ export function getAnthropicClient(): Anthropic {
 
 /** Model assignments per pipeline phase */
 export const MODELS = {
-  THINK: "claude-opus-4-0-20250514",
-  CONSTRUCT: "claude-sonnet-4-20250514",
-  DEPLOY: "claude-sonnet-4-20250514",
-  CRITIC: "claude-opus-4-0-20250514",
-  SYNTHESIZE: "claude-opus-4-0-20250514",
-  PRESENT: "claude-sonnet-4-20250514",
+  THINK: "claude-opus-4-6",
+  CONSTRUCT: "claude-sonnet-4-6",
+  DEPLOY: "claude-sonnet-4-6",
+  CRITIC: "claude-opus-4-6",
+  SYNTHESIZE: "claude-opus-4-6",
+  PRESENT: "claude-sonnet-4-6",
 } as const;
 
 export type PipelinePhase = keyof typeof MODELS;

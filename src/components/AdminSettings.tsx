@@ -29,8 +29,8 @@ const ALL_SKILLS = [
 ];
 
 const MODEL_OPTIONS = [
-    { value: "claude-sonnet-4-20250514", label: "Claude Sonnet 4" },
-    { value: "claude-3-5-sonnet-20241022", label: "Claude 3.5 Sonnet" },
+    { value: "claude-sonnet-4-6", label: "Claude 4.6 Sonnet" },
+    { value: "claude-opus-4-6", label: "Claude 4.6 Opus" },
     { value: "gpt-4o", label: "GPT-4o" },
     { value: "gemini-2.5-pro", label: "Gemini 2.5 Pro" },
 ];

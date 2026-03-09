@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  // Prevent Next.js from reloading when Prisma DB and pipeline output changes
+  serverExternalPackages: ["@prisma/client", "prisma"],
 };
 
 export default nextConfig;

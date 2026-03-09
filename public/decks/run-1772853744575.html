@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Strategic Brief — Inovalon Market Position & Growth Intelligence</title>
+  <link rel="stylesheet" href="/styles/presentation.css">
+</head>
+<body>
+
+  <div id="slideProgress"></div>
+  <div class="prism-mark">PRISM Intelligence</div>
+  <div class="slide-counter" id="slideCounter">01 / 18</div>
+  <div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+
+  <button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents" aria-label="Open table of contents">&#9776;</button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <div class="nav-panel" id="navPanel">
+    <h3>Table of Contents</h3>
+    <a class="nav-item" href="#s1" onclick="toggleNav()"><span class="nav-num">01</span><span class="nav-label">Inovalon Intelligence Brief</span></a>
+    <a class="nav-item" href="#s2" onclick="toggleNav()"><span class="nav-num">02</span><span class="nav-label">Intelligence Map</span></a>
+    <a class="nav-item" href="#s3" onclick="toggleNav()"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+    <a class="nav-item" href="#s4" onclick="toggleNav()"><span class="nav-num">04</span><span class="nav-label">Company Profile & Platform</span></a>
+    <a class="nav-item" href="#s5" onclick="toggleNav()"><span class="nav-num">05</span><span class="nav-label">Competitive Landscape</span></a>
+    <a class="nav-item" href="#s6" onclick="toggleNav()"><span class="nav-num">06</span><span class="nav-label">Financial Structure & PE Dynamics</span></a>
+    <a class="nav-item" href="#s7" onclick="toggleNav()"><span class="nav-num">07</span><span class="nav-label">Strategic Tensions</span></a>
+    <a class="nav-item" href="#s8" onclick="toggleNav()"><span class="nav-num">08</span><span class="nav-label">Emergent: Triple Convergence</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s9" onclick="toggleNav()"><span class="nav-num">09</span><span class="nav-label">Emergent: Cyberattack-Exit Paradox</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s10" onclick="toggleNav()"><span class="nav-num">10</span><span class="nav-label">Emergent: PE Debt-AI Mismatch</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s11" onclick="toggleNav()"><span class="nav-num">11</span><span class="nav-label">Emergent: Batch-to-Realtime Transition</span><span class="nav-tag">NEW</span></a>
+    <a class="nav-item" href="#s12" onclick="toggleNav()"><span class="nav-num">12</span><span class="nav-label">HEDIS Franchise Scenarios</span></a>
+    <a class="nav-item" href="#s13" onclick="toggleNav()"><span class="nav-num">13</span><span class="nav-label">Exit Path Analysis</span></a>
+    <a class="nav-item" href="#s14" onclick="toggleNav()"><span class="nav-num">14</span><span class="nav-label">Strategic Timeline 2025–2029</span></a>
+    <a class="nav-item" href="#s15" onclick="toggleNav()"><span class="nav-num">15</span><span class="nav-label">Data Moat Assessment</span></a>
+    <a class="nav-item" href="#s16" onclick="toggleNav()"><span class="nav-num">16</span><span class="nav-label">Competitive Threat Radar</span></a>
+    <a class="nav-item" href="#s17" onclick="toggleNav()"><span class="nav-num">17</span><span class="nav-label">Provenance & Confidence</span></a>
+    <a class="nav-item" href="#s18" onclick="toggleNav()"><span class="nav-num">18</span><span class="nav-label">Gaps & Next Steps</span></a>
+  </div>
+
+  <!-- SLIDE 01: TITLE -->
+  <section class="slide title-slide" id="s1">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-200px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-300px;left:-150px;"></div>
+    <div class="slide-inner" style="text-align:center;">
+      <div class="anim">
+        <div class="hero-badge">PRISM Multi-Source Validated &nbsp;|&nbsp; MEDIUM Confidence &nbsp;|&nbsp; 3-Agent Swarm</div>
+      </div>
+      <h1 class="hero-title anim d1">Inovalon: Market Position,<br>Competitive Landscape &amp; Growth</h1>
+      <p class="hero-sub anim d2">An extended multi-agent intelligence brief spanning company profile, competitive structure, financial trajectory, emergent strategic risks, and PE exit dynamics — synthesized from 24 findings across 3 analytical agents.</p>
+      <p class="hero-date anim d3">PRISM Intelligence &nbsp;|&nbsp; 3-Agent Swarm &nbsp;|&nbsp; Extended Validated Synthesis &nbsp;|&nbsp; Healthcare Technology Sector</p>
+      <div class="anim d4" style="margin-top:1.5rem;">
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-bright)"></span>Inovalon Intelligence Agent</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-success)"></span>Competitive Landscape Analyst</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--accent-violet)"></span>PE Value &amp; Financial Trajectory Analyst</span>
+      </div>
+      <div class="anim d5" style="margin-top:2.5rem;">
+        <div class="hero-stats" style="grid-template-columns:repeat(5,1fr);">
+          <div class="hero-stat">
+            <div class="value negative">$7.3B</div>
+            <div class="label">Take-Private EV (2022)</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value cyan">454M</div>
+            <div class="label">Unique Lives — MORE2 Registry</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value positive">85%+</div>
+            <div class="label">U.S. HEDIS Market Share</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value warn">$250–350M</div>
+            <div class="label">Est. Annual Interest Expense</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value purple">2027–28</div>
+            <div class="label">PE Exit Window</div>
+          </div>
+        </div>
+      </div>
+      <div class="anim d6" style="margin-top:2rem;">
+        <div class="validation-box" style="max-width:1100px;margin:0 auto;">
+          <div class="validation-card">
+            <h4>&#10003; Validation Methodology</h4>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>All findings cross-referenced across 3 independent analytical agents</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Source tier assessed: 10 PRIMARY, 13 SECONDARY, 1 TERTIARY</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Revenue baseline dispute flagged — $750M DEFM14A figure used as conservative baseline</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Post-privatization opacity acknowledged as binding confidence constraint</div>
+          </div>
+          <div class="validation-card framework-card">
+            <h4>&#9670; PRISM Processing Framework</h4>
+            <p style="font-size:10px;color:var(--text-secondary);margin-bottom:8px;">3-agent swarm with 5-layer synthesis — foundation, convergence, tension, emergence, gaps</p>
+            <div class="framework-visual">
+              <span class="fw-node">Domain Agent</span>
+              <span class="fw-node">Competitive Agent</span>
+              <span class="fw-node">Financial Agent</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-center">Cross-Agent Synthesis</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success);">4 Emergent Insights</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence &nbsp;|&nbsp; 3-Agent Swarm &nbsp;|&nbsp; 24 Total Findings</span>
+      <span>Inovalon Market Position Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 02: TABLE OF CONTENTS -->
+  <section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-blue">Navigation</span> Intelligence Map</div>
+      <h2 class="slide-title anim d1">Executive <span style="color:var(--accent);">Intelligence Map</span></h2>
+      <p class="section-intro anim d2">18-slide analysis spanning company fundamentals, competitive dynamics, financial structure, four emergent multi-agent insights, and PE exit scenario modeling.</p>
+      <div class="grid-3 anim d3">
+        <div>
+          <h3 class="toc-group-header">Foundational Analysis</h3>
+          <a class="nav-item toc-item" href="#s3"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+          <a class="nav-item toc-item" href="#s4"><span class="nav-num">04</span><span class="nav-label">Company Profile &amp; Platform</span></a>
+          <a class="nav-item toc-item" href="#s5"><span class="nav-num">05</span><span class="nav-label">Competitive Landscape</span></a>
+          <a class="nav-item toc-item" href="#s6"><span class="nav-num">06</span><span class="nav-label">Financial Structure &amp; PE Dynamics</span></a>
+          <a class="nav-item toc-item" href="#s7"><span class="nav-num">07</span><span class="nav-label">Strategic Tensions</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Emergent Intelligence</h3>
+          <a class="nav-item toc-item" href="#s8"><span class="nav-num">08</span><span class="nav-label">Triple Convergence Problem</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s9"><span class="nav-num">09</span><span class="nav-label">Cyberattack-Exit Paradox</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">PE Debt-AI Mismatch</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">Batch-to-Realtime Transition</span><span class="nav-tag">NEW</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header">Strategic Modeling</h3>
+          <a class="nav-item toc-item" href="#s12"><span class="nav-num">12</span><span class="nav-label">HEDIS Franchise Scenarios</span></a>
+          <a class="nav-item toc-item" href="#s13"><span class="nav-num">13</span><span class="nav-label">Exit Path Analysis</span></a>
+          <a class="nav-item toc-item" href="#s14"><span class="nav-num">14</span><span class="nav-label">Strategic Timeline 2025–2029</span></a>
+          <a class="nav-item toc-item" href="#s15"><span class="nav-num">15</span><span class="nav-label">Data Moat Assessment</span></a>
+          <a class="nav-item toc-item" href="#s16"><span class="nav-num">16</span><span class="nav-label">Competitive Threat Radar</span></a>
+          <a class="nav-item toc-item" href="#s17"><span class="nav-num">17</span><span class="nav-label">Provenance &amp; Confidence</span></a>
+          <a class="nav-item toc-item" href="#s18"><span class="nav-num">18</span><span class="nav-label">Gaps &amp; Next Steps</span></a>
+        </div>
+      </div>
+      <div class="anim d5" style="margin-top:1.5rem;padding:12px 18px;background:rgba(108,108,255,0.07);border:1px solid rgba(108,108,255,0.2);border-radius:10px;font-size:12px;color:var(--text-secondary);">
+        <span style="color:var(--accent-warning);font-weight:700;">&#9651; Overall Confidence: MEDIUM</span> &nbsp;—&nbsp; Binding constraint: post-privatization (Nov 2022) financial opacity. All forward-looking projections are modeled, not observed. Every financial metric post-FY2021 is estimated. This is the single largest epistemic boundary in the analysis.
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PRISM Intelligence &nbsp;|&nbsp; Navigation Slide</span>
+      <span>Inovalon Market Position Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 03: EXECUTIVE SUMMARY -->
+  <section class="slide" id="s3">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-150px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-cyan">Synthesis</span> Executive Summary</div>
+      <h2 class="slide-title anim d1">Four Emergent Insights That<br><span style="color:var(--accent-bright);">Change the Strategic Picture</span></h2>
+      <p class="section-intro anim d2">PRISM's 3-agent synthesis produced four multi-agent emergent insights invisible to any single analytical dimension. Together they define Inovalon's strategic window, competitive trajectory, and PE exit constraints.</p>
+      <div class="grid-2 anim d3">
+        <div class="emergence-card">
+          <h4>&#9650; 01. The Triple Convergence Problem</h4>
+          <p>Three independent timelines — PE exit imperative (2027–28), AI-native competitors reaching enterprise scale, and HEDIS regulatory modernization — all converge on the same 2026–2028 window. Strategic missteps in any dimension cascade across all three through a debt-amplified doom loop.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>&#9650; 02. The Cyberattack-Exit Paradox</h4>
+          <p>The 2024 Change Healthcare cyberattack windfall (~344K providers, 98% retention) that most strengthens Inovalon's near-term financials structurally eliminates its highest-multiple exit path. Optum — the highest-value acquirer — is the entity these customers fled. Revenue improvement and exit optionality are inversely coupled.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>&#9650; 03. PE Debt-AI Structural Mismatch</h4>
+          <p>Inovalon's LBO structure was designed for a mature compliance franchise in 2021. Healthcare AI has changed the battlefield. ~$250–350M annual debt service competes with AI investment for the same constrained cash flow — while Innovaccer (zero debt) and Navina (zero debt) invest freely. The mismatch compounds annually.</p>
+        </div>
+        <div class="emergence-card">
+          <h4>&#9650; 04. Architectural Category Transition</h4>
+          <p>Inovalon's 85% HEDIS market share may represent dominance of a shrinking architectural category. Healthcare quality measurement is migrating from retrospective batch analytics (Inovalon's model) to real-time, workflow-embedded intelligence (Navina + Oracle Health model). Market share in a shrinking category is a different asset than market share in a growing one.</p>
+        </div>
+      </div>
+      <div class="anim d5" style="margin-top:1rem;">
+        <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+          <div class="stat-card">
+            <div class="stat-label">Emergent Insights</div>
+            <div class="stat-value positive">4</div>
+            <div class="stat-context">All passed quality gate (4+ on 3/5 dimensions)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Strategic Tensions</div>
+            <div class="stat-value warn">5</div>
+            <div class="stat-context">Preserved as genuine complexity — not artificially resolved</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Critical Gaps</div>
+            <div class="stat-value negative">3</div>
+            <div class="stat-context">Post-privatization financials, AI spend, debt structure</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Convergent Findings</div>
+            <div class="stat-value cyan">5</div>
+            <div class="stat-context">Independently validated across agents via different evidence paths</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Synthesis Layer &nbsp;|&nbsp; All 3 Agents Contributing &nbsp;|&nbsp; Confidence: MEDIUM</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 04: COMPANY PROFILE & PLATFORM -->
+  <section class="slide" id="s4">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);bottom:-200px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-blue">Domain</span> Inovalon Company Profile</div>
+      <h2 class="slide-title anim d1">ONE Platform: Architecture,<br><span style="color:var(--accent);">Scale &amp; Market Position</span></h2>
+      <p class="section-intro anim d2">Inovalon's ONE Platform integrates five capability pillars across payers, providers, and life sciences. The MORE2 Registry — one of the largest longitudinal healthcare datasets in the U.S. — constitutes its primary competitive moat.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">ONE Platform: Five Integrated Pillars</div>
+            <div class="finding-body">Data analytics, quality measurement, revenue cycle management, clinical analytics, and pharmacy solutions — cloud-native, unified infrastructure serving 21,000+ entities. Integration creates cross-sell lock-in: modules are more valuable together than standalone, driving 115%+ NRR pre-privatization.</div>
+            <span class="confidence-badge high">High &nbsp;|&nbsp; SEC 10-K (Primary)</span>
+          </div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Revenue Mix: Payer-Heavy with Expansion Opportunity</div>
+            <div class="finding-body">Payers ~55% of revenue, Providers ~25%, Life Sciences ~20%. Payer concentration creates regulatory exposure but deep integration with plan economics. Life sciences segment (via MORE2 Registry) carries highest-margin potential — GLP-1/Novo Holdings partnership signal noted.</div>
+            <span class="confidence-badge high">High &nbsp;|&nbsp; 10-K / Proxy (Primary)</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Pre-Privatization Revenue Trajectory</div>
+            <div class="finding-body">FY2019: ~$541M → FY2020: ~$656M → FY2021: ~$750M (DEFM14A proxy, Financial Agent). 17% 3-year CAGR. EBITDA margins 28–32%. Revenue baseline is contested — Domain Agent cites ~$875M, likely ARR or total contract value. <span class="source-unverified" title="Domain Agent figure not verified against DEFM14A primary source">†</span> DEFM14A figure ($750M) used as defensible baseline.</div>
+            <span class="confidence-badge medium">Medium &nbsp;|&nbsp; DEFM14A / Bloomberg (Primary+Secondary)</span>
+          </div>
+        </div>
+        <div>
+          <div class="inovalon-header">
+            <h3>MORE2 Registry Scale</h3>
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">As of most recent public disclosure (post-privatization estimates)</p>
+          </div>
+          <div class="stat-grid" style="grid-template-columns:1fr 1fr;">
+            <div class="stat-card">
+              <div class="stat-label">Unique Lives</div>
+              <div class="stat-value cyan">454M</div>
+              <div class="stat-context">All 50 states, all payer types</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Medical Events</div>
+              <div class="stat-value cyan">97B</div>
+              <div class="stat-context">Longitudinal, cross-payer</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Primary Data Sources</div>
+              <div class="stat-value positive">160+</div>
+              <div class="stat-context">CMS Qualified Entity status</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Customer Entities</div>
+              <div class="stat-value positive">21,000+</div>
+              <div class="stat-context">Payers, providers, life sciences</div>
+            </div>
+          </div>
+          <div class="finding-card" style="margin-top:1rem;">
+            <div class="finding-title">Novo Holdings Co-Investment: Underappreciated Strategic Signal</div>
+            <div class="finding-body">Novo Holdings (Novo Nordisk parent — Ozempic/Wegovy) participated in the Nordic Capital take-private. GLP-1 real-world outcomes analytics, medication adherence measurement, and drug commercialization via MORE2 Registry represent a high-value strategic channel. May foreshadow Novo Nordisk commercial partnership or strategic sale path.</div>
+            <span class="confidence-badge medium">Medium &nbsp;|&nbsp; Merger Announcement (Primary)</span>
+          </div>
+        </div>
+      </div>
+      <div class="dagger-footnote">† Domain Agent $875M figure likely represents ARR or total contract value — DEFM14A proxy (stricter legal scrutiny) cites $746–750M GAAP revenue; primary source not reconciled</div>
+    </div>
+    <div class="slide-footer">
+      <span>Inovalon Intelligence Agent (RESEARCHER-DOMAIN) &nbsp;|&nbsp; 8 Findings &nbsp;|&nbsp; Confidence: HIGH</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 05: COMPETITIVE LANDSCAPE -->
+  <section class="slide" id="s5">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);top:-150px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-green">Competitive</span> Landscape Analysis</div>
+      <h2 class="slide-title anim d1">Structural Position: Near-Monopoly<br><span style="color:var(--accent-success);">in a Consolidating Market</span></h2>
+      <p class="section-intro anim d2">Inovalon holds dominant positions in HEDIS/quality measurement and risk adjustment analytics — but the competitive landscape is undergoing rapid consolidation and AI-native disruption from below.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">HEDIS: Structural Near-Monopoly</div>
+            <div class="finding-body">85%+ of all U.S. HEDIS-covered lives processed by Inovalon. 25 consecutive years of NCQA certification. Switching costs are extreme — compliance risk, operational disruption, and the 25-year certification track record create a near-irreplicable moat. Confirmed independently by Domain, Competitive, and Financial agents.</div>
+            <span class="confidence-badge high">High &nbsp;|&nbsp; Inovalon Press Release + KLAS (Primary+Secondary)</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Risk Adjustment: Big Four Oligopoly</div>
+            <div class="finding-body">KLAS Research identifies Inovalon as one of four dominant risk adjustment vendors alongside Optum, Cotiviti, and Change Healthcare. 'Big Four' status provides revenue floor stability but signals customer inertia — not product excellence — as the primary retention driver. Perception vulnerabilities: "expensive" and "oversells."</div>
+            <span class="confidence-badge medium">Medium &nbsp;|&nbsp; KLAS Research 2020 (Secondary)</span>
+          </div>
+          <div class="finding-card risk">
+            <div class="finding-title">Optum: Vertical Integration Threat</div>
+            <div class="finding-body">Optum's $31B+ acquisitions (including $7.8B Change Healthcare) represent the most significant structural consolidation threat. Bundled payer analytics + care delivery creates an offering no standalone vendor can match. However, the Change Healthcare cyberattack paradoxically accelerated multi-vendor diversification — directly benefiting Inovalon.</div>
+            <span class="confidence-badge high">High &nbsp;|&nbsp; DOJ Filings / Press (Secondary)</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Innovaccer: Most Credible AI-Native Threat</div>
+            <div class="finding-body">$275M Series F at $3.45B valuation (Jan 2025). Total funding: $675M. 50% YoY revenue growth for 5 consecutive years. ~$250M ARR. PQS acquisition directly targets Inovalon's pharmacy quality segment. Cloud-native architecture, AI-first product roadmap, 6 of top 10 health systems as customers. Zero debt.</div>
+            <span class="confidence-badge high">High &nbsp;|&nbsp; TechCrunch + S&amp;P (Primary+Secondary)</span>
+          </div>
+          <div class="finding-card risk">
+            <div class="finding-title">Navina: Real-Time Point-of-Care Disruption</div>
+            <div class="finding-body">$100M venture capital (zero debt). Best-in-KLAS 2025 for Clinician Digital Workflow. 86% weekly active clinician usage — extraordinary for healthcare AI. Captures risk adjustment and quality gaps in real-time at point of care, not in annual batch cycles. Represents the architectural disruption vector from the workflow side.</div>
+            <span class="confidence-badge high">High &nbsp;|&nbsp; KLAS Research 2025 (Secondary)</span>
+          </div>
+          <div style="margin-top:1rem;">
+            <div class="bar-row anim d4">
+              <div class="bar-label" style="font-size:11px;width:130px;">Inovalon HEDIS Share</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:85%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sky));">
+                  <span class="bar-fill-value">85%+ U.S. HEDIS Lives</span>
+                </div>
+              </div>
+            </div>
+            <div class="bar-row anim d5">
+              <div class="bar-label" style="font-size:11px;width:130px;">Innovaccer ARR Growth</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:50%;background:linear-gradient(90deg,var(--inov-jade),#00b87a);">
+                  <span class="bar-fill-value">50% YoY for 5 Years</span>
+                </div>
+              </div>
+            </div>
+            <div class="bar-row anim d6">
+              <div class="bar-label" style="font-size:11px;width:130px;">Navina Active Usage</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:86%;background:linear-gradient(90deg,var(--inov-violet),#8a8aff);">
+                  <span class="bar-fill-value">86% Weekly Active Clinicians</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="source-list">
+        <strong>Sources:</strong> KLAS Research (2020, 2025) | TechCrunch (Jan 2025, Innovaccer Series F) | DOJ Healthcare Merger Filings | Inovalon Press Releases
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Competitive Landscape Analyst (ANALYST-STRATEGIC) &nbsp;|&nbsp; 8 Findings &nbsp;|&nbsp; Confidence: HIGH/MEDIUM</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 06: FINANCIAL STRUCTURE & PE DYNAMICS -->
+  <section class="slide" id="s6">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-200px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-purple">Financial</span> PE Structure &amp; Trajectory</div>
+      <h2 class="slide-title anim d1">Nordic Capital LBO: Value Creation<br><span style="color:var(--accent-violet);">Under Structural Constraint</span></h2>
+      <p class="section-intro anim d2">The $7.3B take-private creates both strategic freedom (from public market short-termism) and financial constraint (~$250–350M annual debt service). PE playbook, exit modeling, and capital allocation pressures define the strategic envelope.</p>
+      <div class="two-col anim d3">
+        <div>
+          <div class="stat-grid" style="grid-template-columns:1fr 1fr;">
+            <div class="stat-card">
+              <div class="stat-label">Enterprise Value (Entry)</div>
+              <div class="stat-value negative">$7.3B</div>
+              <div class="stat-context">Nov 2022 close</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Estimated Debt Load</div>
+              <div class="stat-value negative">$3.5–4B</div>
+              <div class="stat-context">~50–55% LBO financing</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Est. Annual Interest</div>
+              <div class="stat-value warn">$250–350M</div>
+              <div class="stat-context">At 6–8% estimated rates</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Baseline EBITDA (FY2021)</div>
+              <div class="stat-value positive">~$225M</div>
+              <div class="stat-context">~30% margin on $750M revenue</div>
+            </div>
+          </div>
+          <div class="finding-card" style="margin-top:1rem;">
+            <div class="finding-title">Entry Multiple: ~32x EBITDA</div>
+            <div class="finding-body">At $750M revenue and ~$225M EBITDA, the $7.3B entry implies ~32x EBITDA — a premium reflecting data moat and HEDIS franchise value. To achieve 2.5–3x equity return, EBITDA must grow to $450–600M+ at exit. This requires significant organic growth or $500M+ in EBITDA-accretive acquisitions.</div>
+            <span class="confidence-badge medium">Medium &nbsp;|&nbsp; DEFM14A + S&amp;P Capital IQ (Primary+Secondary)</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Nordic Capital Playbook: Cotiviti Model</div>
+            <div class="finding-body">Expect 2–4 tuck-in acquisitions ($50–300M range), 300–500bps EBITDA margin expansion in years 1–3, and cross-sell revenue acceleration across the ONE Platform. Cotiviti benchmark: ~2.6x value creation in 5 years via platform consolidation. MultiPlan cautionary tale: avoid over-concentrating on single product segment.</div>
+            <span class="confidence-badge medium">Medium &nbsp;|&nbsp; Nordic Capital Portfolio Analysis (Secondary)</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Strategic Freedom vs. Financial Constraint: Both True Simultaneously</div>
+            <div class="finding-body">The Domain Agent frames privatization as enabling long-term investment. The Financial Agent frames it as imposing $250–350M annual constraint on cash flow. Synthesized: PE ownership provides STRATEGIC freedom but FINANCIAL constraint. Inovalon can pursue any strategy — but cannot fund all simultaneously. The binding variable is unobservable post-privatization EBITDA trajectory.</div>
+            <span class="confidence-badge medium">Medium &nbsp;|&nbsp; Interpretive Tension — Both Agents (Secondary)</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Exit Window: 2026–2028 (Fund Vintage Modeling)</div>
+            <div class="finding-body">Nordic Capital Fund IX vintage 2022 + typical 5–7 year hold = 2027–2029 exit window. Waystar June 2024 IPO at ~10x revenue confirms public market window is reopening for healthcare IT platforms. Exit preparation (revenue acceleration, EBITDA margin expansion, AI narrative) likely in active phase 2024–2026.</div>
+            <span class="confidence-badge medium">Medium &nbsp;|&nbsp; Fund Vintage Analysis + Waystar IPO (Secondary)</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Comparable Benchmarks: Value Creation Range</div>
+            <div class="finding-body">Cotiviti (Veritas): $4.9B → ~$12.6B (~2.6x, 5 years). MultiPlan (Hellman &amp; Friedman): ~$5.7B → ~$3.4B post-IPO (cautionary tale). Waystar: successful 2024 re-IPO. Inovalon needs to avoid the MultiPlan single-product trap while executing the Cotiviti platform consolidation playbook.</div>
+            <span class="confidence-badge medium">Medium &nbsp;|&nbsp; Transaction Analysis (Secondary)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PE Value &amp; Financial Trajectory Analyst (ANALYST-FINANCIAL) &nbsp;|&nbsp; 8 Findings &nbsp;|&nbsp; Confidence: MEDIUM</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 07: STRATEGIC TENSIONS -->
+  <section class="slide" id="s7">
+    <div class="slide-bg-glow" style="background:var(--accent-warning);top:-200px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag tag-gold">Tension</span> Productive Strategic Tensions</div>
+      <h2 class="slide-title anim d1">Five Unresolved Tensions That<br><span style="color:var(--accent-warning);">Bound the Range of Outcomes</span></h2>
+      <p class="section-intro anim d2">These tensions are preserved as genuine complexity — not artificially resolved. Each represents a real strategic uncertainty where the resolution depends on unobservable data or future events.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="policy-box">
+            <h4>&#9651; Revenue Baseline Dispute</h4>
+            <p>Domain Agent: ~$875M FY2021 (10-K). Financial Agent: ~$750M (DEFM14A proxy — stricter legal scrutiny). <span class="source-unverified" title="Domain Agent $875M figure not verified against DEFM14A">†</span> ~17% discrepancy affects entry multiple (8.3x vs. 9.7x) and all downstream financial modeling. DEFM14A figure used as conservative baseline. Domain figure may represent ARR or total contract value.</p>
+            <div class="impact impact-moderate">FACTUAL DISPUTE &nbsp;|&nbsp; Use $750M as conservative baseline; flag for primary source verification</div>
+          </div>
+          <div class="policy-box">
+            <h4>&#9651; PE Ownership: Enabler vs. Constraint</h4>
+            <p>Strategic freedom (remove quarterly pressure, enable multi-year pivots) vs. financial constraint (~$250–350M annual debt service competing with AI investment for same constrained cash flow). Both are simultaneously true. Binding variable: unobservable post-privatization EBITDA trajectory.</p>
+            <div class="impact impact-moderate">INTERPRETIVE &nbsp;|&nbsp; Genuine duality — preserved as unresolvable without private financial data</div>
+          </div>
+          <div class="policy-box">
+            <h4>&#9651; HEDIS Franchise Durability</h4>
+            <p>Permanent near-monopoly (regulatory inertia, 25-year certification) vs. architectural obsolescence (dQM transition, EHR-native analytics). Three scenarios across A (40%), B (40%), C (20%) probability. PE exit window (2027–28) falls within zone where all three scenarios remain viable.</p>
+            <div class="impact impact-severe">PREDICTIVE RISK &nbsp;|&nbsp; Critical scenario uncertainty — see Slide 12 for scenario analysis</div>
+          </div>
+        </div>
+        <div>
+          <div class="policy-box">
+            <h4>&#9651; Data Moat Durability</h4>
+            <p>454M-life dataset: permanently defensible vs. depreciating asset. Depends on which data advantage dimension drives future value: DATA SCALE (erodes as CMS expands access), DATA INTEGRATION (persists — cross-payer linkage hardest to replicate), or MODEL QUALITY (only as durable as Inovalon's AI investment, which is debt-constrained).</p>
+            <div class="impact impact-moderate">PREDICTIVE &nbsp;|&nbsp; Integration dimension is most defensible — see Slide 15 for moat assessment</div>
+          </div>
+          <div class="policy-box">
+            <h4>&#9651; Optimal PE Exit Path</h4>
+            <p>Optum/UHG at 14–18x EBITDA (highest-multiple, highest-probability) vs. re-IPO or non-Optum strategic sale (preserves the 344K post-cyberattack customer base that fled Optum concentration). The revenue event that most improves Inovalon's exit readiness structurally eliminates its most valuable exit path.</p>
+            <div class="impact impact-severe">STRATEGIC PARADOX &nbsp;|&nbsp; See Emergent Insight #2 and Slide 13 for exit scenario modeling</div>
+          </div>
+          <div style="padding:12px 16px;background:rgba(108,108,255,0.07);border:1px solid rgba(108,108,255,0.2);border-radius:10px;margin-top:6px;font-size:12px;color:var(--text-secondary);">
+            <span style="color:var(--accent-violet);font-weight:700;">TENSION PRINCIPLE:</span> These tensions are not analytical failures. They reflect genuine, irreducible strategic complexity. Each tension defines a boundary on the range of outcomes — the actual outcome lives somewhere within the tension, not at either pole.
+          </div>
+        </div>
+      </div>
+      <div class="dagger-footnote">† Domain Agent $875M revenue figure may represent ARR or total contract value — DEFM14A primary source cites $746–750M GAAP; discrepancy not reconcilable without access to primary merger filings</div>
+    </div>
+    <div class="slide-footer">
+      <span>Tension Layer &nbsp;|&nbsp; All 3 Agents Contributing &nbsp;|&nbsp; Confidence: MEDIUM</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 08: EMERGENT #1 — TRIPLE CONVERGENCE -->
+  <section class="slide emergent-slide" id="s8">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-100px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-navy);bottom:-200px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">01</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-cyan">Emergent Insight 01</span> Cross-Agent Theme Mining</div>
+        <h2 class="slide-title anim d1">The Triple Convergence Problem:<br><span style="color:var(--accent-bright);">Three Clocks, One Alarm</span></h2>
+        <p class="slide-subtitle anim d2">Three independently analyzed timelines — PE exit, AI-native competitor scale, and HEDIS regulatory modernization — all converge on 2026–2028. Inovalon must simultaneously optimize for exit, defend against AI disruption, and manage regulatory franchise transformation while carrying ~$3.5–4B in LBO debt.</p>
+        <div class="stat-grid anim d3" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card">
+            <div class="stat-label">Clock 1: PE Exit Imperative</div>
+            <div class="stat-value warn">2027–28</div>
+            <div class="stat-context">Fund IX vintage 2022 + 5–7yr hold. Waystar 2024 IPO = market window open.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Clock 2: AI-Native Scale</div>
+            <div class="stat-value negative">~$250M ARR</div>
+            <div class="stat-context">Innovaccer 50% YoY growth. Enterprise scale reached by 2026–27.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Clock 3: HEDIS Transition</div>
+            <div class="stat-value negative">2025–26</div>
+            <div class="stat-context">CMS dQM roadmap + Stars recalibration eroding batch franchise.</div>
+          </div>
+        </div>
+        <div class="finding-card risk anim d4" style="margin-top:1rem;">
+          <div class="finding-title">The Doom Loop: How Missteps Cascade</div>
+          <div class="finding-body">A weakened HEDIS franchise reduces exit multiples → which increases pressure to cut AI investment to protect EBITDA → which accelerates competitive erosion from AI-native entrants → which further weakens the franchise and exit multiples. The loop only triggers if Inovalon mismanages the convergence, but the structural conditions for it are already in place. ~$250–350M annual debt service constrains the response capacity at precisely the moment maximum investment is required across all three fronts.</div>
+        </div>
+        <div class="emergent-why anim d5">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">The Financial Agent modeled PE exit timing without mapping competitor growth curves. The Competitive Agent documented AI-native entrants without connecting to PE exit pressure or debt constraints. The Domain Agent analyzed regulatory risk without connecting to either competitive scaling or financial structure. Only by overlaying all three timelines does the 2026–2028 convergence — and the cascading doom-loop dynamics — become visible. Each agent saw one clock; the synthesis reveals three clocks converging on the same alarm.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Emergent: cross_agent_theme_mining &nbsp;|&nbsp; All 3 Agents &nbsp;|&nbsp; Quality: Novelty=5, Grounding=4, Actionability=4, Depth=5, Surprise=4</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 09: EMERGENT #2 — CYBERATTACK-EXIT PARADOX -->
+  <section class="slide emergent-slide" id="s9">
+    <div class="slide-bg-glow" style="background:var(--accent-error);top:-150px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-200px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">02</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-red">Emergent Insight 02</span> Tension Point Mapping</div>
+        <h2 class="slide-title anim d1">The Cyberattack-Exit Paradox:<br><span style="color:var(--accent-error);">Revenue Windfall Destroys Exit Optionality</span></h2>
+        <p class="slide-subtitle anim d2">The 2024 Change Healthcare cyberattack gave Inovalon ~344,000 new provider contracts (98% retention) — its best near-term revenue event. But these customers fled Optum/Change concentration. An Optum acquisition would re-concentrate exactly the market these providers escaped. The revenue event that most strengthens exit readiness structurally eliminates the highest-value exit path.</p>
+        <div class="two-col anim d3">
+          <div>
+            <div class="stat-grid" style="grid-template-columns:1fr 1fr;">
+              <div class="stat-card">
+                <div class="stat-label">Provider Migrations</div>
+                <div class="stat-value positive">~344K</div>
+                <div class="stat-context">Post-cyberattack, away from Change Healthcare</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Long-Term Retention</div>
+                <div class="stat-value positive">98%</div>
+                <div class="stat-context">Under Inovalon independent ownership</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Optum Premium Multiple</div>
+                <div class="stat-value warn">14–18x</div>
+                <div class="stat-context">EBITDA — highest-value exit path</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Est. Churn Under Optum</div>
+                <div class="stat-value negative">15–30%?</div>
+                <div class="stat-context">Inferred from migration motivation; not observed</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="finding-card opportunity">
+              <div class="finding-title">Constrained Exit Paths: Re-IPO Becomes Base Case</div>
+              <div class="finding-body"><strong class="highlight">Path 1 — Optum Acquisition:</strong> 14–18x EBITDA premium, 15–30% estimated cyberattack-customer churn. Net value depends on churn magnitude vs. multiple. <br><strong class="highlight">Path 2 — Re-IPO:</strong> 10–14x EBITDA, full customer base preserved, independence narrative intact. Waystar 2024 as precedent. <br><strong class="highlight">Path 3 — Non-Optum Strategic:</strong> Oracle/life sciences acquirer via Novo Holdings, 12–16x EBITDA, minimal customer disruption. <br><strong style="color:var(--accent-success);">Robust strategy: Re-IPO as base case (works across all scenarios).</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="emergent-why anim d4">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">The Competitive Agent analyzed the cyberattack as a market share event without modeling exit implications. The Financial Agent modeled Optum as the top acquirer without incorporating the cyberattack-driven customer composition shift. Neither connected the critical link: the customer base Inovalon gained FROM the cyberattack is the customer base that would FLEE an Optum acquisition. This insight — that a revenue windfall can structurally constrain exit options — required seeing competitive dynamics and financial exit modeling simultaneously. <em>Note: Provider churn under Optum ownership is analytical inference from migration motivation, not observed data.</em></div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Emergent: tension_point_mapping &nbsp;|&nbsp; Competitive + Financial Agents &nbsp;|&nbsp; Quality: Novelty=5, Grounding=4, Actionability=5, Depth=5, Surprise=5</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: EMERGENT #3 — PE DEBT-AI MISMATCH -->
+  <section class="slide emergent-slide" id="s10">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-150px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">03</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-purple">Emergent Insight 03</span> Structural Pattern Recognition</div>
+        <h2 class="slide-title anim d1">PE Debt-AI Structural Mismatch:<br><span style="color:var(--accent-violet);">Compounding Asymmetric Disadvantage</span></h2>
+        <p class="slide-subtitle anim d2">Inovalon's LBO capital structure, rational for a mature compliance franchise in 2021, is architecturally mismatched with 2025's competitive requirements. AI-native competitors invest freely with zero debt; Inovalon's AI investment competes with $250–350M annual debt service for the same constrained cash flow pool. The mismatch compounds annually.</p>
+        <div class="stat-grid anim d3" style="grid-template-columns:repeat(4,1fr);">
+          <div class="stat-card">
+            <div class="stat-label">Inovalon Annual Debt Service</div>
+            <div class="stat-value negative">$250–350M</div>
+            <div class="stat-context">Competing with AI investment for same cash flow</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Innovaccer Total Funding</div>
+            <div class="stat-value positive">$675M</div>
+            <div class="stat-context">Zero debt. 50% YoY growth.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Navina Total Funding</div>
+            <div class="stat-value positive">$100M</div>
+            <div class="stat-context">Zero debt. Best-in-KLAS 2025.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Inovalon Baseline EBITDA</div>
+            <div class="stat-value warn">~$225M</div>
+            <div class="stat-context">FY2021 — debt service exceeds EBITDA baseline</div>
+          </div>
+        </div>
+        <div class="two-col anim d4" style="margin-top:1rem;">
+          <div class="finding-card risk">
+            <div class="finding-title">The Ratchet Mechanism</div>
+            <div class="finding-body">Each year of AI under-investment widens the capability gap against Innovaccer and Navina → making the eventual catch-up cost higher → while simultaneously the competitive landscape shifts from data-scale advantages (Inovalon's 454M-life dataset) to model-quality advantages (where investment velocity matters more than data volume). The PE capital structure cannot be fixed through operational improvements alone — it requires either debt restructuring or a capital injection.</div>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">The Structural Design Failure</div>
+            <div class="finding-body">The LBO structure was rational in 2021 when Inovalon's HEDIS/Stars franchise faced no architectural threat and AI healthcare applications were nascent. The 2022–2025 explosion of healthcare AI changed the competitive battlefield after the debt was loaded. Inovalon did not create this problem — the timing of the market transition was not foreseeable in 2021. But the problem is real and compounding regardless of its origin.</div>
+          </div>
+        </div>
+        <div class="emergent-why anim d5">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">The Financial Agent modeled the debt constraint in purely financial terms without mapping it against specific competitor investment levels. The Competitive Agent documented AI-native competitor funding levels without comparing to Inovalon's capital structure. The Domain Agent identified Inovalon's AI strategic pivot without assessing whether the financial structure supports it. Only by combining all three does the structural mismatch — and critically, its compounding nature over time — become visible.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Emergent: structural_pattern_recognition &nbsp;|&nbsp; All 3 Agents &nbsp;|&nbsp; Quality: Novelty=4, Grounding=5, Actionability=5, Depth=5, Surprise=3</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: EMERGENT #4 — BATCH-TO-REALTIME TRANSITION -->
+  <section class="slide emergent-slide" id="s11">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-100px;right:-300px;"></div>
+    <div class="slide-bg-glow" style="background:var(--accent-error);bottom:-300px;left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">04</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim"><span class="tag tag-cyan">Emergent Insight 04</span> Structural Pattern Recognition</div>
+        <h2 class="slide-title anim d1">Architectural Category Transition:<br><span style="color:var(--accent-bright);">Batch-to-Realtime Disruption</span></h2>
+        <p class="slide-subtitle anim d2">Inovalon's 85% HEDIS market share may represent dominance of a shrinking architectural category. Healthcare quality measurement is migrating from retrospective batch analytics (Inovalon's 25-year model) into real-time, workflow-embedded intelligence. Two forces attack simultaneously from opposite ends.</p>
+        <div class="two-col anim d3">
+          <div>
+            <div class="finding-card risk">
+              <div class="finding-title">Attack Vector 1: Workflow Side (Navina)</div>
+              <div class="finding-body">Navina's point-of-care AI captures risk adjustment and quality gaps in real-time during the clinical encounter — before the data ever reaches a batch processor. 86% weekly active clinician usage means quality measurement happens inside the workflow, not after the fact. Best-in-KLAS 2025. Zero debt. Structurally bypasses Inovalon's entire batch processing layer.</div>
+            </div>
+            <div class="finding-card risk">
+              <div class="finding-title">Attack Vector 2: Data-Source Side (Oracle Health)</div>
+              <div class="finding-body">Oracle Health Clinical Data Exchange (launched Oct 2024) embeds analytics directly into EHR workflows at the data source — upstream from Inovalon's entire data ingestion architecture. If quality measurement happens at the EHR level, the batch analytics middleware layer becomes redundant. Oracle's $28.4B Cerner acquisition gives it the patient-level data density to execute this.</div>
+            </div>
+          </div>
+          <div>
+            <div class="finding-card">
+              <div class="finding-title">PE Benchmarking Assumes Category Continuity</div>
+              <div class="finding-body">The Financial Agent's comparable valuations — Cotiviti, MultiPlan, Waystar — all implicitly assume the batch-analytics category persists. Exit multiples derived from these comparables are only valid if the architectural transition is slow (Scenario A or B probability: 80%). If Scenario C (rapid EHR-native disruption within 3 years, 20% probability) occurs, the comparable-based exit multiples become systematically overstated.</div>
+            </div>
+            <div class="finding-card opportunity">
+              <div class="finding-title">Structural Analogy: Financial Data Analytics</div>
+              <div class="finding-body">The batch-to-real-time transition in financial data analytics (Bloomberg terminal replacing periodic research reports, Reuters Eikon replacing end-of-day feeds) is the structural analogue. The key lesson: incumbents with dominant batch-mode market share consistently underestimated the speed of architectural category displacement. Healthcare has a regulatory brake that financial data did not — but the pattern is recognizable.</div>
+            </div>
+          </div>
+        </div>
+        <div class="emergent-why anim d4">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">The Domain Agent described Inovalon's batch-processing regulatory franchise without recognizing it as an architectural category at risk of obsolescence. The Competitive Agent documented Navina and Oracle Health as individual competitors without identifying the structural pattern they share (real-time workflow embedding vs. retrospective batch). The Financial Agent's PE benchmarks assumed the batch-analytics category would persist. Only by overlaying all three perspectives does the full architectural transition pattern become visible — revealing that market share in a shrinking category is a fundamentally different asset than market share in a growing one.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Emergent: structural_pattern_recognition &nbsp;|&nbsp; All 3 Agents &nbsp;|&nbsp; Quality: Novelty=5, Grounding=4, Actionability=4, Depth=5, Surprise=4</span>
+      <span>PRISM Intelligence Brief</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 12: HEDIS FRANCHISE SCENARIOS -->
+  <section class="slide

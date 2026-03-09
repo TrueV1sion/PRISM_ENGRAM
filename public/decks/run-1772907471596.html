@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Strategic Brief — Nvidia Healthcare AI & Drug Discovery</title>
+  <link rel="stylesheet" href="/styles/presentation.css">
+</head>
+<body>
+
+  <div id="slideProgress"></div>
+  <div class="prism-mark">PRISM Intelligence</div>
+  <div class="slide-counter" id="slideCounter">01 / 18</div>
+  <div class="slide-nav-hint show" id="navHint">&#8595; Arrow Down / Space to navigate &#8595;</div>
+
+  <button class="nav-toggle" onclick="toggleNav()" id="navBtn" title="Table of Contents" aria-label="Open table of contents">&#9776;</button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <div class="nav-panel" id="navPanel">
+    <h3>Table of Contents</h3>
+
+    <a class="nav-item" href="#s1" onclick="toggleNav()">
+      <span class="nav-num">01</span>
+      <span class="nav-label">Title &amp; Overview</span>
+    </a>
+    <a class="nav-item" href="#s2" onclick="toggleNav()">
+      <span class="nav-num">02</span>
+      <span class="nav-label">Intelligence Map</span>
+    </a>
+    <a class="nav-item" href="#s3" onclick="toggleNav()">
+      <span class="nav-num">03</span>
+      <span class="nav-label">Executive Summary</span>
+    </a>
+
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);padding:10px 12px 4px;margin-top:6px;">Dimension Analysis</div>
+
+    <a class="nav-item" href="#s4" onclick="toggleNav()">
+      <span class="nav-num">04</span>
+      <span class="nav-label">Drug Discovery Science</span>
+    </a>
+    <a class="nav-item" href="#s5" onclick="toggleNav()">
+      <span class="nav-num">05</span>
+      <span class="nav-label">Technology Moat</span>
+    </a>
+    <a class="nav-item" href="#s6" onclick="toggleNav()">
+      <span class="nav-num">06</span>
+      <span class="nav-label">Competitive Landscape</span>
+    </a>
+    <a class="nav-item" href="#s7" onclick="toggleNav()">
+      <span class="nav-num">07</span>
+      <span class="nav-label">Regulatory Landscape</span>
+    </a>
+
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);padding:10px 12px 4px;margin-top:6px;">Synthesis</div>
+
+    <a class="nav-item" href="#s8" onclick="toggleNav()">
+      <span class="nav-num">08</span>
+      <span class="nav-label">Strategic Tensions</span>
+    </a>
+    <a class="nav-item" href="#s9" onclick="toggleNav()">
+      <span class="nav-num">09</span>
+      <span class="nav-label">Emergent Insight #1</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s10" onclick="toggleNav()">
+      <span class="nav-num">10</span>
+      <span class="nav-label">Emergent Insight #2</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s11" onclick="toggleNav()">
+      <span class="nav-num">11</span>
+      <span class="nav-label">Emergent Insight #3</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s12" onclick="toggleNav()">
+      <span class="nav-num">12</span>
+      <span class="nav-label">Emergent Insight #4</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+    <a class="nav-item" href="#s13" onclick="toggleNav()">
+      <span class="nav-num">13</span>
+      <span class="nav-label">Emergent Insight #5 &amp; #6</span>
+      <span class="nav-tag">NEW</span>
+    </a>
+
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);padding:10px 12px 4px;margin-top:6px;">Strategic Intelligence</div>
+
+    <a class="nav-item" href="#s14" onclick="toggleNav()">
+      <span class="nav-num">14</span>
+      <span class="nav-label">Temporal Moat Window</span>
+    </a>
+    <a class="nav-item" href="#s15" onclick="toggleNav()">
+      <span class="nav-num">15</span>
+      <span class="nav-label">Strategic Timeline</span>
+    </a>
+    <a class="nav-item" href="#s16" onclick="toggleNav()">
+      <span class="nav-num">16</span>
+      <span class="nav-label">Provenance &amp; Confidence</span>
+    </a>
+    <a class="nav-item" href="#s17" onclick="toggleNav()">
+      <span class="nav-num">17</span>
+      <span class="nav-label">Competitive Radar</span>
+    </a>
+    <a class="nav-item" href="#s18" onclick="toggleNav()">
+      <span class="nav-num">18</span>
+      <span class="nav-label">Gaps &amp; Next Steps</span>
+    </a>
+  </div>
+
+  <!-- SLIDE 01: TITLE -->
+  <section class="slide title-slide" id="s1">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-200px;right:-200px;"></div>
+    <div class="slide-bg-glow" style="background:var(--inov-jade);bottom:-300px;left:-150px;"></div>
+    <div class="slide-inner" style="text-align:center;">
+      <div class="anim">
+        <div class="hero-badge">PRISM Multi-Source Validated &nbsp;|&nbsp; EXTENDED Tier &nbsp;|&nbsp; 4-Agent Swarm</div>
+      </div>
+      <h1 class="hero-title anim d1">Nvidia Healthcare AI<br>&amp; Drug Discovery</h1>
+      <p class="hero-sub anim d2">Strategic expansion across computational biology, clinical AI infrastructure,<br>competitive moat analysis, and regulatory positioning — 2024–2027 horizon</p>
+      <p class="hero-date anim d3">July 2025 &nbsp;|&nbsp; 4-Agent Swarm &nbsp;|&nbsp; MEDIUM Confidence &nbsp;|&nbsp; 32 Findings &nbsp;|&nbsp; 6 Emergent Insights</p>
+      <div class="anim d4" style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        <span class="agent-chip"><span class="dot" style="background:var(--inov-sky)"></span>DrugDiscoveryScienceAgent</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--inov-cerulean)"></span>TechMoatAnalyst</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--inov-jade)"></span>CompetitiveLandscapeAgent</span>
+        <span class="agent-chip"><span class="dot" style="background:var(--inov-violet)"></span>RegulatoryLandscapeAgent</span>
+      </div>
+      <div class="anim d5" style="margin-top:2rem;">
+        <div class="hero-stats" style="grid-template-columns:repeat(5,1fr);">
+          <div class="hero-stat">
+            <div class="value cyan">1,250+</div>
+            <div class="label">FDA AI Devices Cleared</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value green">$130M+</div>
+            <div class="label">Schrödinger GPU Revenue†</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value gold">50+</div>
+            <div class="label">AI Candidates in Trials</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value red">0</div>
+            <div class="label">Phase 3 AI Drug Completions</div>
+          </div>
+          <div class="hero-stat">
+            <div class="value blue">3–5yr</div>
+            <div class="label">Strategic Window Estimate</div>
+          </div>
+        </div>
+      </div>
+      <div class="anim d6" style="margin-top:1.5rem;">
+        <div class="validation-box">
+          <div class="validation-card">
+            <h4>&#10003; Validation Methodology</h4>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>32 findings across 4 specialist agents</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Source tier distribution: 15 PRIMARY, 16 SECONDARY, 1 TERTIARY</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>Confidence distribution: 21 HIGH, 11 MEDIUM, 0 LOW</div>
+            <div class="val-row"><span class="val-icon green">&#10003;</span>6 emergent insights via structural pattern recognition</div>
+          </div>
+          <div class="validation-card framework-card">
+            <h4>&#9670; PRISM Processing Framework</h4>
+            <p style="font-size:10px;color:var(--text-secondary);margin-bottom:6px;">4-layer synthesis pyramid — Foundation → Convergence → Tension → Emergence</p>
+            <div class="framework-visual">
+              <span class="fw-node">DrugDiscovery</span>
+              <span class="fw-node">TechMoat</span>
+              <span class="fw-node">Competitive</span>
+              <span class="fw-node">Regulatory</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-center">Cross-Agent Synthesis</span>
+              <span class="fw-arrow">&#8594;</span>
+              <span class="fw-node" style="border-color:rgba(0,228,159,0.4);color:var(--accent-success)">Emergence Detection</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dagger-footnote">† Source: Schrödinger annual reports and analyst estimates — figure representative of GPU-dependent software revenue segment</div>
+  </section>
+
+  <!-- SLIDE 02: TABLE OF CONTENTS -->
+  <section class="slide" id="s2" style="background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;right:-100px;"></div>
+    <div class="slide-inner">
+      <h2 class="slide-title anim">Executive <span style="color:var(--accent);">Intelligence Map</span></h2>
+      <p class="section-intro anim d1">18-slide analysis spanning drug discovery science, technology architecture, competitive ecosystem, regulatory positioning, and multi-agent emergent insights — covering Nvidia's strategic expansion into healthcare AI.</p>
+      <div class="grid-3 anim d2">
+        <div>
+          <h3 class="toc-group-header" style="color:var(--accent-bright);">Foundation &amp; Overview</h3>
+          <a class="nav-item toc-item" href="#s3"><span class="nav-num">03</span><span class="nav-label">Executive Summary</span></a>
+          <h3 class="toc-group-header" style="color:var(--accent);margin-top:16px;">Dimension Analysis</h3>
+          <a class="nav-item toc-item" href="#s4"><span class="nav-num">04</span><span class="nav-label">Drug Discovery Science</span></a>
+          <a class="nav-item toc-item" href="#s5"><span class="nav-num">05</span><span class="nav-label">Technology Moat</span></a>
+          <a class="nav-item toc-item" href="#s6"><span class="nav-num">06</span><span class="nav-label">Competitive Landscape</span></a>
+          <a class="nav-item toc-item" href="#s7"><span class="nav-num">07</span><span class="nav-label">Regulatory Landscape</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header" style="color:var(--accent-warning);">Synthesis Layer</h3>
+          <a class="nav-item toc-item" href="#s8"><span class="nav-num">08</span><span class="nav-label">Strategic Tensions</span></a>
+          <h3 class="toc-group-header" style="color:var(--accent-violet);margin-top:16px;">Emergent Insights</h3>
+          <a class="nav-item toc-item" href="#s9"><span class="nav-num">09</span><span class="nav-label">Regulation-as-Moat</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s10"><span class="nav-num">10</span><span class="nav-label">Maturity Paradox</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s11"><span class="nav-num">11</span><span class="nav-label">Data Void</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s12"><span class="nav-num">12</span><span class="nav-label">Two-Speed Arbitrage</span><span class="nav-tag">NEW</span></a>
+          <a class="nav-item toc-item" href="#s13"><span class="nav-num">13</span><span class="nav-label">Schrödinger TAM &amp; Finite Window</span><span class="nav-tag">NEW</span></a>
+        </div>
+        <div>
+          <h3 class="toc-group-header" style="color:var(--accent-success);">Strategic Intelligence</h3>
+          <a class="nav-item toc-item" href="#s14"><span class="nav-num">14</span><span class="nav-label">Temporal Moat Window</span></a>
+          <a class="nav-item toc-item" href="#s15"><span class="nav-num">15</span><span class="nav-label">Strategic Timeline</span></a>
+          <a class="nav-item toc-item" href="#s16"><span class="nav-num">16</span><span class="nav-label">Provenance &amp; Confidence</span></a>
+          <a class="nav-item toc-item" href="#s17"><span class="nav-num">17</span><span class="nav-label">Competitive Radar</span></a>
+          <a class="nav-item toc-item" href="#s18"><span class="nav-num">18</span><span class="nav-label">Gaps &amp; Next Steps</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 03: EXECUTIVE SUMMARY -->
+  <section class="slide" id="s3">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-150px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Strategic</span> Executive Summary</div>
+      <h2 class="slide-title anim d1">The Healthcare AI Infrastructure Play — <span style="color:var(--accent-bright);">What the Evidence Shows</span></h2>
+      <p class="section-intro anim d2">Nvidia has built the broadest healthcare AI ecosystem among all technology providers, but clinical validation remains structurally 5–10 years away for drug discovery, while clinical AI imaging demands intensify now. The compound moat — CUDA lock-in amplified by regulatory switching costs — is real but finite.</p>
+      <div class="stat-grid anim d3">
+        <div class="stat-card">
+          <div class="stat-label">CUDA Ecosystem Apps</div>
+          <div class="stat-value positive">3,500+</div>
+          <div class="stat-context">Healthcare bioinformatics tools with no performance-equivalent non-CUDA alternatives at scale</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Clinical AI Devices (FDA)</div>
+          <div class="stat-value positive">1,250+</div>
+          <div class="stat-context">Authorized as of July 2025 — 71.5% radiology, 295 cleared in 2025 alone</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">AI Drug Completions (Phase 3)</div>
+          <div class="stat-value negative">Zero</div>
+          <div class="stat-context">No fully AI-designed molecules have completed Phase 3 or received FDA approval — 5–10 year gap</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">BioNeMo Revenue Clarity</div>
+          <div class="stat-value negative">Opaque</div>
+          <div class="stat-context">Commercial adoption metrics undisclosed — deliberate non-disclosure likely indicates early-stage revenue</div>
+        </div>
+      </div>
+      <div class="grid-2 anim d4" style="margin-top:16px;">
+        <div class="finding-card opportunity">
+          <div class="finding-title">Clinical AI (Clara/MONAI): Near-Term Revenue Engine</div>
+          <div class="finding-body">1,250+ FDA-cleared devices, CMS reimbursement at $128.90/AI-ECG, and PCCP compliance requirements are creating immediate, durable inference compute demand. Regulatory burden paradoxically strengthens Nvidia's moat via lock-in.</div>
+          <span class="confidence-badge high">High — Primary Sources</span>
+        </div>
+        <div class="finding-card risk">
+          <div class="finding-title">Drug Discovery (BioNeMo): 5–10 Year Horizon with TAM Reset</div>
+          <div class="finding-body">No IND filings, Recursion stake reduced from $50M to ~$7.7M, and all BioNeMo models are open-source academic IP. Schrödinger's $130M model sets realistic ceiling: computational chemistry licensing, not drug pipeline transformation.</div>
+          <span class="confidence-badge medium">Medium — Secondary Sources</span>
+        </div>
+      </div>
+      <div class="finding-card emergent anim d5">
+        <div class="finding-title">The Core Synthesis: A 3–5 Year Strategic Window Before Commoditization</div>
+        <div class="finding-body">Regulatory lock-in (PCCP, HIPAA, EU AI Act) buys time as technical moat erodes via ASIC competition. But regulatory switching costs are finite — they delay, not prevent, competitive erosion. Nvidia must choose: (a) achieve inference-layer cost competitiveness, (b) move up-stack with application-layer products, or (c) create data-layer defensibility through exclusive partnerships.</div>
+        <span class="confidence-badge medium">Medium — Emergent Synthesis</span>
+      </div>
+      <div class="slide-footer">
+        <span>PRISM Intelligence | 4-Agent Swarm | 32 Findings | Confidence: MEDIUM</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 04: DRUG DISCOVERY SCIENCE -->
+  <section class="slide" id="s4">
+    <div class="slide-bg-glow" style="background:var(--inov-sky);top:-200px;left:-100px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag clinical">Clinical</span> DrugDiscoveryScienceAgent — Dimension Analysis</div>
+      <h2 class="slide-title anim d1">Drug Discovery &amp; Computational Biology AI</h2>
+      <p class="section-intro anim d2">GPU-accelerated molecular simulation is scientifically validated and commercially deployed. But the gap between validated computational tools and validated drugs remains 5–10 years wide. The technology works — drug discovery success requires far more.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">GPU-Accelerated MD Simulation: 100–1,000x Speedups Validated</div>
+            <div class="finding-body">DE Shaw Anton 3 and Nvidia A100/H100 systems achieve ~100 microseconds/day vs. ~1 microsecond/day for CPU clusters. GROMACS, AMBER, OpenMM all CUDA-optimized. This is Nvidia's strongest scientific foundation — but simulation speed ≠ drug approval.</div>
+            <span class="confidence-badge high">High — Primary</span>
+          </div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">AlphaFold2/3 — Scientific Validation Crosses Commercial Threshold</div>
+            <div class="finding-body">AlphaFold2 TM-score &gt;0.9 on CASP14 solved the 50-year protein folding problem. Isomorphic Labs deals worth $500M+ in milestones (Lilly/Novartis). $45M–$37.5M upfront signals pharma willingness to pay. However, AlphaFold3 hallucination concerns mean wet-lab validation remains mandatory.</div>
+            <span class="confidence-badge high">High — Primary</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">BioNeMo: Scientifically Credible, Commercially Unproven</div>
+            <div class="finding-body">Launched March 2023 with DiffDock, ESMFold, MolMIM, AlphaFold2. All foundation models are open-source academic IP (Meta FAIR, MIT, academic labs). Zero public BioNeMo-powered IND filings. The platform is real; drug outcomes are a 2028–2035 opportunity.</div>
+            <span class="confidence-badge medium">Medium — Primary</span>
+          </div>
+          <div class="finding-card risk">
+            <div class="finding-title">Recursion: High Attrition Threatens the Narrative</div>
+            <div class="finding-body">REC-4881 discontinued after Phase 2 failure. 40+ discovery programs but credibility pressure mounting. Market cap declined from ~$10B to ~$2–3B. Nvidia stake reduced from $50M to ~$7.7M. AI phenotypic screening does not yet reliably predict clinical success.</div>
+            <span class="confidence-badge high">High — Primary</span>
+          </div>
+        </div>
+      </div>
+      <div class="stat-grid anim d4" style="margin-top:12px;">
+        <div class="stat-card">
+          <div class="stat-label">AI Candidates in Trials</div>
+          <div class="stat-value positive">50+</div>
+          <div class="stat-context">By 2024, crossed proof-of-concept threshold</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Phase 3 Completions</div>
+          <div class="stat-value negative">0</div>
+          <div class="stat-context">No fully AI-designed molecules approved by FDA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Schrödinger GPU Revenue†</div>
+          <div class="stat-value positive">$130M+</div>
+          <div class="stat-context">Annual — the ONLY validated revenue model</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">BioNeMo IND Filings</div>
+          <div class="stat-value negative">None</div>
+          <div class="stat-context">No public record of BioNeMo-powered IND submissions</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>DrugDiscoveryScienceAgent | 8 findings | Confidence: HIGH/MEDIUM blend</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+      <div class="dagger-footnote">† Source: industry analysis — Schrödinger revenue figure from analyst estimates; primary documentation not independently verified</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 05: TECHNOLOGY MOAT -->
+  <section class="slide" id="s5">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-100px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Strategic</span> TechMoatAnalyst — Dimension Analysis</div>
+      <h2 class="slide-title anim d1">Technology Architecture &amp; Competitive Moat</h2>
+      <p class="section-intro anim d2">CUDA's lock-in is structurally deep but workload-segmented. Near-irreversible for legacy computational biology; genuinely eroding for transformer-based workloads. The software stack (Clara, MONAI, RAPIDS) is likely more durable than hardware performance advantages.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">CUDA Lock-In: Deep and Structural in Bioinformatics</div>
+            <div class="finding-body">GROMACS, AMBER, NAMD, GATK/Parabricks — all have GPU acceleration primarily developed for CUDA. Switching requires 2–5 years of re-engineering per application. Parabricks delivers ~50x speedup on whole-genome sequencing. 3,500+ CUDA-ecosystem apps across healthcare and bioinformatics.</div>
+            <span class="confidence-badge high">High — Secondary</span>
+          </div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Clara/MONAI Platform: Software Moat Strategy Executing</div>
+            <div class="finding-body">MONAI has 500,000+ downloads, deployed at 1,000+ hospitals/institutions. Domain-specific transforms, loss functions, and pre-trained 3D imaging models create DICOM pipeline dependencies. Full migration to TPUs or AMD requires wholesale re-engineering of imaging workflows.</div>
+            <span class="confidence-badge high">High — Secondary</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Inference Shift: Nvidia's Most Structural Vulnerability</div>
+            <div class="finding-body">H100 vs. TPU v4 training gap: ~3.3 min vs. ~3.8 min (relatively narrow). Inference gap narrows to ~1.5–2x. By 2026, Frost &amp; Sullivan projects &gt;70% of healthcare AI compute is inference. CMS reimbursement creates high-volume inference demand — exactly where ASICs compete.</div>
+            <span class="confidence-badge medium">Medium — Secondary/Tertiary</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">RAPIDS: Data-Layer Lock-In Compounds Compute Lock-In</div>
+            <div class="finding-body">cuDF: 150x speedup over pandas for genomic VCF ETL. cuML: 45x speedup on k-means for single-cell analysis. As genomics scales to millions of whole genomes (UK Biobank, All of Us), the performance differential becomes practically insurmountable without GPU acceleration.</div>
+            <span class="confidence-badge medium">Medium — Secondary</span>
+          </div>
+        </div>
+      </div>
+      <div class="anim d4" style="margin-top:14px;">
+        <div class="bar-row">
+          <div class="bar-label" style="font-size:11px;color:var(--text-secondary);min-width:180px;">CUDA Lock-In Depth</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:92%;background:linear-gradient(90deg,var(--inov-cerulean),var(--inov-sky));">
+              <span class="bar-fill-value">MD Simulation / Genomics — Near-Irreversible</span>
+            </div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="font-size:11px;color:var(--text-secondary);min-width:180px;">Transformer Workloads</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:55%;background:linear-gradient(90deg,var(--inov-violet),var(--inov-cerulean));">
+              <span class="bar-fill-value">Clinical NLP / Foundation Models — Eroding via PyTorch/JAX</span>
+            </div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="font-size:11px;color:var(--text-secondary);min-width:180px;">Inference (Clinical AI)</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:42%;background:linear-gradient(90deg,var(--accent-warning),var(--accent-error));">
+              <span class="bar-fill-value">ASIC Gap Narrowing — 44.6% custom ASIC growth†</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>TechMoatAnalyst | 8 findings | Confidence: HIGH/MEDIUM blend</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+      <div class="dagger-footnote">† Source: TrendForce projections — custom ASIC shipment growth vs. 16.1% GPU; secondary source, not independently verified</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 06: COMPETITIVE LANDSCAPE -->
+  <section class="slide" id="s6">
+    <div class="slide-bg-glow" style="background:var(--inov-jade);top:-150px;right:-150px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag strategic">Strategic</span> CompetitiveLandscapeAgent — Dimension Analysis</div>
+      <h2 class="slide-title anim d1">Competitive &amp; Partnership Ecosystem</h2>
+      <p class="section-intro anim d2">Google/Isomorphic Labs is the most structurally dangerous competitor. Microsoft is the most important co-partner and the most credible defection risk. Partners rationally multi-source — the moat depends on integration depth, not partnership count.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card risk">
+            <div class="finding-title">Google/Isomorphic Labs: Full-Stack Threat</div>
+            <div class="finding-body">$600M raised (Thrive Capital, March 2025), $3B in pharma partnerships (Lilly/Novartis), clinical-stage oncology trials initiating. AlphaFold3 free server undercuts BioNeMo NIM pricing. Operates on TPUs — not a customer, purely a competitor with Alphabet's full resource backing.</div>
+            <span class="confidence-badge high">High — Secondary</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Microsoft: Strategic Co-Partner and Defection Risk</div>
+            <div class="finding-body">Azure DGX Cloud + Nuance Precision Imaging Network reaches 12,000+ healthcare facilities. But Maia 200 custom silicon already powering ChatGPT inference. If Azure shifts clinical AI inference to Maia, Nvidia's per-token healthcare revenue erodes at the deployment layer.</div>
+            <span class="confidence-badge high">High — Primary</span>
+          </div>
+          <div class="finding-card risk">
+            <div class="finding-title">Tempus AI: Data Moat Competitor Nvidia Cannot Match</div>
+            <div class="finding-body">Acquired Paige for $81.25M (August 2025). 7M+ annotated pathology slides on Azure — not Nvidia. 89.6% YoY revenue growth. $1.265B 2025 revenue guidance. Owns the scarce asset (annotated clinical data at scale) that Nvidia's infrastructure play cannot replicate.</div>
+            <span class="confidence-badge high">High — Primary</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">Recursion: Marquee Partner, Active Multi-Sourcing</div>
+            <div class="finding-body">BioHive-2 built on 504 H100 GPUs (#35 TOP500). Yet expanded to Google Cloud October 2024 for TPU training and BigQuery data management. "Loving CUDA" while simultaneously reducing Nvidia dependency. Nvidia stake reduced from $50M to ~$7.7M in SEC filings.</div>
+            <span class="confidence-badge high">High — Primary</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">AWS: Integrated Competitor Accelerating</div>
+            <div class="finding-body">HealthLake, HealthOmics, HealthImaging, HealthScribe, Connect Health (March 2026 — first AI agent platform for healthcare). Trainium chips claim 30–40% better price-performance vs. Nvidia for inference. End-to-end data-to-agentic-AI stack where Nvidia infrastructure is optional.</div>
+            <span class="confidence-badge high">High — Secondary</span>
+          </div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Eli Lilly DGX SuperPOD: Pharma Vertical Integration Precedent</div>
+            <div class="finding-body">First pharmaceutical DGX SuperPOD AI factory owned and operated by a pharma company. Creates a new on-premise market for Nvidia hardware but reduces hyperscaler intermediary revenue. Pattern: large pharma may vertically integrate AI compute rather than relying on cloud.</div>
+            <span class="confidence-badge high">High — Primary</span>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>CompetitiveLandscapeAgent | 8 findings | Confidence: HIGH blend</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 07: REGULATORY LANDSCAPE -->
+  <section class="slide" id="s7">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag regulatory">Regulatory</span> RegulatoryLandscapeAgent — Dimension Analysis</div>
+      <h2 class="slide-title anim d1">Regulatory &amp; Clinical Validation Landscape</h2>
+      <p class="section-intro anim d2">The FDA has authorized 1,250+ AI medical devices and PCCP is creating durable MLOps lock-in. CMS reimbursement at $128.90/AI-ECG is the commercial ignition event. The EU AI Act's August 2027 deadline creates a compliance crunch that favors on-premises Nvidia infrastructure.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="policy-box positive">
+            <h4>FDA PCCP — December 2024 Final Guidance</h4>
+            <p>Predetermined Change Control Plans shift AI medical devices from static to continuous lifecycle oversight. Retraining workflows embedded in approved PCCPs create structural switching costs — changing compute requires re-validating entire PCCP submissions.</p>
+            <div class="impact impact-positive">TAILWIND | Nvidia DGX infrastructure positioned as PCCP-compliant compute layer</div>
+          </div>
+          <div class="policy-box positive">
+            <h4>CMS Reimbursement — $128.90 AI-ECG (Jan 2025)</h4>
+            <p>First national Medicare payment rate for AI diagnostics. AMA 2026 CPT codes explicitly recognizing AI-augmented services. Template being replicated for radiology, pathology, screening — each new reimbursable application = sustained inference compute demand.</p>
+            <div class="impact impact-positive">TAILWIND | ~350M ECGs annually; even 5–10% penetration = $2.25–4.5B service market</div>
+          </div>
+        </div>
+        <div>
+          <div class="policy-box">
+            <h4>EU AI Act — August 2027 Hard Deadline</h4>
+            <p>Medical AI devices classified high-risk under MDR Class IIa+ require notified body conformity assessment. Extra-territorial scope affects US OEMs (GE, Siemens) selling in EU. Full data lineage traceability and GDPR Article 22 automated decision safeguards favor controlled on-prem environments.</p>
+            <div class="impact impact-moderate">MIXED | Strong tailwind for on-prem DGX; compliance crunch creates urgent infrastructure decisions now</div>
+          </div>
+          <div class="policy-box">
+            <h4>HIPAA BAA Compliance Gap</h4>
+            <p>66% of healthcare AI vendors fail initial BAA audits. PHI-bearing model training on cloud requires complex BAA structures. Nvidia DGX on-prem air-gap sidesteps the cloud BAA problem entirely — the precise value proposition for Lilly and national health systems.</p>
+            <div class="impact impact-moderate">TAILWIND | HIPAA Security Rule NPRM (Jan 2025) will further raise compliance costs for cloud AI training</div>
+          </div>
+          <div class="policy-box" style="margin-top:6px;">
+            <h4>Clara Reason NIH Deployment — Regulatory Boundary Risk</h4>
+            <p>Clara Reason assists with radiology report drafting at NIH. Sits on the precise boundary between non-regulated CDS and FDA-regulated AI-DSF. If clinical outputs inform individual patient management, SaMD reclassification risk activates.</p>
+            <div class="impact impact-severe">RISK | Requires immediate strategic clarity — firewall or prepare regulatory pathway</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-grid anim d4" style="margin-top:10px;">
+        <div class="stat-card">
+          <div class="stat-label">FDA AI Clearances 2025</div>
+          <div class="stat-value positive">295</div>
+          <div class="stat-context">350–400+ projected by 2027</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Radiology % of Cleared Devices</div>
+          <div class="stat-value positive">71.5%</div>
+          <div class="stat-context">Clara/MONAI imaging SDK leverage concentrated here</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">HIPAA BAA Initial Fail Rate†</div>
+          <div class="stat-value negative">66%</div>
+          <div class="stat-context">Forces on-premises compute for PHI training</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">EU AI Act Deadline</div>
+          <div class="stat-value warn">Aug 2027</div>
+          <div class="stat-context">18-month compliance crunch underway now</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>RegulatoryLandscapeAgent | 8 findings | Confidence: HIGH blend</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+      <div class="dagger-footnote">† Source: HHS audit data analysis — 66% BAA initial audit failure rate; secondary source estimate, not independently audited</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 08: STRATEGIC TENSIONS -->
+  <section class="slide" id="s8">
+    <div class="slide-bg-glow" style="background:var(--accent-warning);top:-200px;right:-100px;opacity:0.05;"></div>
+    <div class="slide-inner">
+      <div class="eyebrow anim"><span class="tag" style="background:rgba(245,230,187,0.15);color:var(--accent-warning);">Synthesis</span> Tension Layer</div>
+      <h2 class="slide-title anim d1">Strategic Tensions — <span style="color:var(--accent-warning);">Preserved Complexity</span></h2>
+      <p class="section-intro anim d2">Five productive tensions representing genuine strategic complexity — not resolvable by analysis alone. Each defines a fork in Nvidia's healthcare AI strategy.</p>
+      <div class="grid-2 anim d3">
+        <div>
+          <div class="finding-card">
+            <div class="finding-title">CUDA Lock-In: Near-Irreversible vs. Accelerating Erosion</div>
+            <div class="finding-body"><span class="highlight">Workload-segmented resolution:</span> CUDA lock-in is strongest for MD simulation, FEP+, genomics (decades of optimization). Weakest for transformer-based workloads where PyTorch/JAX abstraction enables hardware portability. Both positions are simultaneously true for different segments.</div>
+            <span class="confidence-badge high">Convergent — TechMoat + Competitive</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">AI Drug Discovery: Transformative Acceleration vs. Faster Failures</div>
+            <div class="finding-body"><span class="highlight">Efficiency, not efficacy:</span> AI delivers cycle-time compression (Schrödinger's $130M proves pharma pays). It does NOT yet improve fundamental clinical translation success rates. Zero Phase 3 completions. INS018_055 Phase 2 is the binary inflection point.</div>
+            <span class="confidence-badge medium">Convergent — DrugDiscovery + Regulatory</span>
+          </div>
+          <div class="finding-card risk">
+            <div class="finding-title">Infrastructure Provider vs. Application-Layer Healthcare Company</div>
+            <div class="finding-body"><span class="highlight">Unresolved governance decision:</span> Nvidia GM says "not a healthcare company." Clara Reason at NIH says otherwise. This tension creates SaMD regulatory risk AND partner encroachment perception AND value capture upside simultaneously. Cannot be resolved by analysis — requires human governance decision.</div>
+            <span class="confidence-badge medium">Scope tension — Competitive + Regulatory</span>
+          </div>
+        </div>
+        <div>
+          <div class="finding-card opportunity">
+            <div class="finding-title">Regulatory Environment: Net Tailwind vs. Net Headwind</div>
+            <div class="finding-body"><span class="highlight">Scenario-branching resolution:</span> Increased regulation strengthens Nvidia's on-premises sovereign AI position (defensible under all scenarios, ~20–30% of healthcare AI compute). Deregulation strengthens cloud competitors at inference layer. EU/pharma/government segments remain defensible regardless.</div>
+            <span class="confidence-badge high">Convergent — Regulatory + Competitive</span>
+          </div>
+          <div class="finding-card">
+            <div class="finding-title">Partnership Ecosystem: Durable Moat vs. Shallow Multi-Sourcing</div>
+            <div class="finding-body"><span class="highlight">Level-dependent resolution:</span> At the ECOSYSTEM level, integrated multi-product workflows (MONAI→TensorRT→Triton→Clara) create genuine switching costs. At the INDIVIDUAL level, multi-sourcing is rational and ongoing (Tempus on Azure, Recursion on Google Cloud). Moat depth = integration depth per partner, not partner count.</div>
+            <span class="confidence-badge high">Convergent — TechMoat + Competitive</span>
+          </div>
+          <div class="quote-block">
+            "We're not trying to become a healthcare company."
+            <div class="quote-attr">— Nvidia GM Kimberly Powell. Strategically inconsistent with Clara Reason's NIH clinical radiology deployment. Requires senior-level resolution.</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Synthesis Layer | 5 tension points analyzed | Cross-agent convergence verified</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 09: EMERGENT INSIGHT #1 — REGULATION-AS-MOAT -->
+  <section class="slide emergent-slide" id="s9">
+    <div class="slide-bg-glow" style="background:var(--inov-violet);top:-100px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">01</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim d1"><span class="tag" style="background:rgba(108,108,255,0.15);color:var(--accent-violet);">Emergent</span> Structural Pattern Recognition</div>
+        <h2 class="slide-title anim d2">Regulation-as-Moat Feedback Loop</h2>
+        <p class="slide-subtitle anim d3">Regulatory complexity amplifies and OUTLASTS CUDA's technical lock-in — creating a multiplicative, not additive, compound barrier.</p>
+        <div class="stat-grid anim d4">
+          <div class="stat-card">
+            <div class="stat-label">HIPAA BAA Fail Rate†</div>
+            <div class="stat-value negative">66%</div>
+            <div class="stat-context">Forces PHI training on-premises, cementing DGX dependency</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">PCCP Switching Cost</div>
+            <div class="stat-value warn">Full Re-Val</div>
+            <div class="stat-context">Changing compute infrastructure requires re-validating entire PCCP submissions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">EU AI Act Scope</div>
+            <div class="stat-value cyan">Extra-Terr.</div>
+            <div class="stat-context">Applies to US OEMs selling in EU — data lineage requirements favor controlled on-prem GPU environments</div>
+          </div>
+        </div>
+        <div class="finding-card emergent anim d5">
+          <div class="finding-title">The Compound Moat Mechanism</div>
+          <div class="finding-body">HIPAA forces on-premises training of PHI-bearing models → DGX SuperPOD deployment. PCCP retraining workflows are validated against specific infrastructure configurations → changing compute requires re-validation. EU AI Act Article 13 requires full data lineage documentation → controlled GPU environments preferred over multi-tenant cloud. GDPR Article 22 creates audit requirements tied to specific compute configurations. Each layer is independently powerful; together they are <span class="highlight">multiplicative</span> — regulatory switching costs activate precisely when technical switching costs begin to decline.</div>
+          <span class="confidence-badge high">High — TechMoat + Regulatory + Competitive (3 independent trails)</span>
+        </div>
+        <div class="emergent-why anim d6">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">TechMoatAnalyst analyzed CUDA technical lock-in without mapping regulatory switching costs. RegulatoryLandscapeAgent analyzed HIPAA/EU AI Act/PCCP compliance without connecting to hardware-specific dependencies. CompetitiveLandscapeAgent analyzed partnership lock-in without connecting to regulatory enforcement mechanisms. Only by seeing all three dimensions simultaneously does the <em>compound, multiplicative</em> moat — where regulatory requirements cement technical dependencies into legally-enforceable switching costs — become visible.</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Emergence Algorithm: structural_pattern_recognition | Novelty: 5/5 | Grounding: 4/5 | Actionability: 4/5</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+      <div class="dagger-footnote">† Source: HHS audit data analysis — secondary source estimate</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: EMERGENT INSIGHT #2 — MATURITY PARADOX -->
+  <section class="slide emergent-slide" id="s10">
+    <div class="slide-bg-glow" style="background:var(--accent-error);top:-100px;right:-200px;opacity:0.08;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">02</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim d1"><span class="tag" style="background:rgba(108,108,255,0.15);color:var(--accent-violet);">Emergent</span> Cross-Agent Theme Mining</div>
+        <h2 class="slide-title anim d2">The Maturity Paradox</h2>
+        <p class="slide-subtitle anim d3">Nvidia's healthcare AI moat weakens precisely as its strategic investments succeed — a structural paradox at the heart of the expansion thesis.</p>
+        <div class="grid-2 anim d4">
+          <div>
+            <div class="finding-card opportunity">
+              <div class="finding-title">Training Phase: Where Nvidia Wins</div>
+              <div class="finding-body">BioNeMo/drug discovery: CUDA lock-in deepest during R&amp;D phase (GROMACS, AMBER, FEP+ requiring A100s). Clinical AI: training new models requires GPU compute dominance. This is the current moment — Nvidia's position is strongest.</div>
+              <span class="confidence-badge high">High — DrugDiscovery + TechMoat</span>
+            </div>
+          </div>
+          <div>
+            <div class="finding-card risk">
+              <div class="finding-title">Inference Phase: Where the Paradox Activates</div>
+              <div class="finding-body">As FDA clearances accelerate (295 in 2025) and CMS reimbursement activates ($128.90/AI-ECG), dominant demand shifts to high-volume, cost-sensitive inference — exactly where custom ASICs claim 30–40% price-performance advantages. TrendForce: custom ASIC shipments growing 44.6% vs. 16.1% GPU.†</div>
+              <span class="confidence-badge medium">Medium — Competitive + Regulatory</span>
+            </div>
+          </div>
+        </div>
+        <div class="finding-card risk anim d5">
+          <div class="finding-title">The Core Paradox</div>
+          <div class="finding-body">Every BioNeMo investment that moves an AI candidate toward clinical validation shifts the compute profile from training (Nvidia's strongest segment) to inference (ASICs' best segment). Every FDA clearance and CMS reimbursement event Nvidia enables through its Clara/MONAI ecosystem creates more high-volume inference demand — precisely the workload where custom ASICs outperform general-purpose GPUs. <span class="highlight">Nvidia must extract maximum value during each wave's training phase before inference commoditization erodes margins.</span> The paradox is structural, not cyclical.</div>
+          <span class="confidence-badge medium">Medium — 4 independent agent trails</span>
+        </div>
+        <div class="emergent-why anim d6">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">DrugDiscoveryScienceAgent established the 5–10 year drug discovery timeline. TechMoatAnalyst quantified the training-to-inference performance gap narrowing via MLPerf. CompetitiveLandscapeAgent quantified the ASIC growth trajectory (TrendForce data). RegulatoryLandscapeAgent established that CMS reimbursement and FDA clearance acceleration create the specific inference demand profile. No single agent connected all four trajectories into a unified structural paradox.</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Emergence Algorithm: cross_agent_theme_mining | Novelty: 5/5 | Grounding: 5/5 | Actionability: 4/5</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+      <div class="dagger-footnote">† Source: TrendForce projections — secondary source; custom ASIC vs. GPU shipment growth comparison not independently verified</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: EMERGENT INSIGHT #3 — DATA VOID -->
+  <section class="slide emergent-slide" id="s11">
+    <div class="slide-bg-glow" style="background:var(--accent-warning);top:-100px;left:-200px;opacity:0.06;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">03</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim d1"><span class="tag" style="background:rgba(108,108,255,0.15);color:var(--accent-violet);">Emergent</span> Gap Triangulation</div>
+        <h2 class="slide-title anim d2">Data Void at Nvidia's Strategic Center</h2>
+        <p class="slide-subtitle anim d3">Nvidia controls compute and integration layers but owns zero proprietary clinical datasets — the ultimate scarce resource in healthcare AI.</p>
+        <div class="grid-2 anim d4">
+          <div>
+            <div class="finding-card">
+              <div class="finding-title">What Nvidia Controls</div>
+              <div class="finding-body">Compute layer: H100/H200/Blackwell GPUs, DGX SuperPOD. Integration layer: Clara, MONAI, BioNeMo, RAPIDS. Software optimization: CUDA, TensorRT, Triton, NIM. All open-source (MONAI, BioNeMo models) — not proprietary IP.</div>
+            </div>
+            <div class="finding-card risk">
+              <div class="finding-title">What Partners Own — the Scarce Asset</div>
+              <div class="finding-body">Tempus: 7M+ annotated pathology slides — on <span class="red">Azure</span>, not Nvidia. Recursion: RxRx datasets — expanding to <span class="red">Google Cloud</span>. Mayo Clinic: 20M slides + 10M patient records. Isomorphic Labs: proprietary AlphaFold3 training data. Partners can bring compute in-house. Nvidia cannot acquire clinical data without becoming a healthcare company.</div>
+            </div>
+          </div>
+          <div>
+            <div class="finding-card risk">
+              <div class="finding-title">Asymmetric Vertical Integration Risk</div>
+              <div class="finding-body">Partners CAN vertically integrate compute: Lilly's DGX SuperPOD, Recursion's Google Cloud migration. Nvidia CANNOT vertically integrate data without becoming a healthcare company — which its GM explicitly says it will not do. The moat depends on the continued willingness of data-rich partners to buy Nvidia infrastructure rather than switch.</div>
+              <span class="confidence-badge high">High — 3 independent trails</span>
+            </div>
+            <div class="finding-card">
+              <div class="finding-title">Open-Source IP Gap</div>
+              <div class="finding-body">ESM-2: Meta FAIR. DiffDock: MIT. OpenFold: academic consortium. AlphaFold2: DeepMind. MONAI: open-source (King's College London + Nvidia). Nvidia's BioNeMo models are peer-reviewed academic IP with GPU optimization as value-add — defensibility depends on platform integration, not scientific IP ownership.</div>
+              <span class="confidence-badge high">High — DrugDiscovery + TechMoat</span>
+            </div>
+          </div>
+        </div>
+        <div class="emergent-why anim d5">
+          <div class="emergent-why-label">Why Only Multi-Agent Analysis Finds This</div>
+          <div class="finding-body">DrugDiscoveryScienceAgent identified that BioNeMo models are open-source academic research. TechMoatAnalyst identified that MONAI's competitive advantage is CUDA optimization, not proprietary data. CompetitiveLandscapeAgent identified that data-rich partners (Tempus on Azure, Recursion on Google Cloud) control the scarce asset and are not exclusively Nvidia-dependent. Only by triangulating across all three does the structural asymmetry — partners can vertically integrate compute; Nvidia cannot vertically integrate data — become clear.</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Emergence Algorithm: gap_triangulation | Novelty: 4/5 | Grounding: 5/5 | Actionability: 4/5</span>
+        <span>PRISM Executive Intelligence Brief</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 12: EMERGENT INSIGHT #4 — TWO-SPEED ARBITRAGE -->
+  <section class="slide emergent-slide" id="s12">
+    <div class="slide-bg-glow" style="background:var(--inov-cerulean);top:-100px;right:-200px;"></div>
+    <div class="slide-inner">
+      <div class="emergent-number anim">04</div>
+      <div class="emergent-content">
+        <div class="eyebrow anim d1"><span class="tag" style="background:rgba(108,108,255,0.15);color:var(--accent-violet);">Emergent</span> Tension Point Mapping</div>
+        <h2 class="slide-title anim d2">Two-Speed Regulatory Arbitrage</h2>
+        <p class="slide-subtitle anim d3">The regulatory-free business has the longest revenue horizon. The regulatory-constrained business has the shortest. Paradoxically, regulation creates Nvidia's strongest moat.</p>
+        <div class="grid-2 anim d3">
+          <div>
+            <div class="inovalon-header" style="margin-bottom:12px;">
+              <h3 style="color:var(--accent-success);">BioNeMo — Drug Discovery</h3>
+              <p style="font-size:12px;color:var(--text-secondary);">Regulatory Status: <span class="green">OUTSIDE FDA SaMD</span> — no premarket burden, rapid iteration</p>
+            </div>
+            <div class="finding-card">
+              <div class="finding-title">Revenue Horizon: 5–10 Years</div>
+              <div class="finding-body">Drug candidates take 5–10 years to reach market regardless of regulatory status. No IND filings from BioNeMo. Weakest moat (open-source models, no PCCP lock-in). Paradox: the most regulatory freedom = the weakest competitive barrier = the longest wait for revenue.</div>
+              <span class="confidence-badge medium">Medium — DrugDiscovery + Regulatory</span>
+            </div>
+          </div>
+          <div>
+            <div class="inovalon-header" style="margin-bottom:12px;">
+              <h3 style="color:var(--accent-warning);">Clara/MONAI — Clinical AI</h3>
+              <p style="font-size:12px;color:var(--text-secondary);">Regulatory Status: <span class="gold">INCREASING SCRUTINY</span> — PCCP, SaMD risk, Clara Reason boundary</p>
+            </div>
+            <div class="finding-card opportunity">
+              <div class="finding-title">Revenue Horizon: Immediate + Growing</div>
+              <div class="finding-body">1,250+ FDA-cleared devices already generating inference compute demand. CMS $128.90/AI-ECG creates billing-level commercial ignition. PCCP compliance requirements create switching costs that lock clinical AI partners into Nvidia infrastructure. Paradox: most regulation = strongest moat = fastest revenue.</div>
+              <span class="confidence-badge high">High — Regulatory + TechMoat</span>
+            </div>
+          </div>
+        </div>
+        <div class="finding-card emergent anim d4">
+          <div class="finding-title">The Inverted Risk-Reward Profile</div>
+          <div class="finding-body">
