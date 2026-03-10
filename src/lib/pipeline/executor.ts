@@ -210,16 +210,19 @@ export async function executePipeline(
     const agentIdMap = new Map(dbAgents.map((a) => [a.name, a.id]));
 
     // 2. Build all finding records for batch insert
+    // Safety: clamp enum values to valid options to prevent DB validation errors
+    const validSourceTiers = new Set(["PRIMARY", "SECONDARY", "TERTIARY"]);
+    const validConfidence = new Set(["HIGH", "MEDIUM", "LOW"]);
     const findingsData = agentResults.flatMap((agentResult) => {
       const agentId = agentIdMap.get(agentResult.agentName);
       if (!agentId) return [];
       return agentResult.findings.map((finding) => ({
         statement: finding.statement,
         evidence: finding.evidence,
-        confidence: finding.confidence,
+        confidence: validConfidence.has(finding.confidence) ? finding.confidence : "MEDIUM",
         evidenceType: finding.evidenceType,
         source: finding.source,
-        sourceTier: finding.sourceTier,
+        sourceTier: validSourceTiers.has(finding.sourceTier) ? finding.sourceTier : "SECONDARY",
         implication: finding.implication,
         action: "keep",
         tags: JSON.stringify(finding.tags),
@@ -396,7 +399,45 @@ export async function executePipeline(
     mkdirSync(decksDir, { recursive: true });
     const filename = `${runId}.html`;
     const htmlPath = `/decks/${filename}`;
-    writeFileSync(join(decksDir, filename), presentation.html, "utf-8");
+
+    // Post-process HTML to ensure required assets are included.
+    // The LLM frequently omits the script tag, and sometimes produces
+    // truncated HTML when the output hits max_tokens.
+    let finalHtml = presentation.html;
+
+    // Ensure the CSS link is present
+    if (!finalHtml.includes("presentation.css")) {
+      if (finalHtml.includes("</head>")) {
+        finalHtml = finalHtml.replace(
+          "</head>",
+          `  <link rel="stylesheet" href="/styles/presentation.css">\n</head>`,
+        );
+      }
+    }
+
+    // Ensure the JS script tag is present
+    if (!finalHtml.includes("presentation.js")) {
+      if (finalHtml.includes("</body>")) {
+        finalHtml = finalHtml.replace(
+          "</body>",
+          `  <script src="/js/presentation.js" defer></script>\n</body>`,
+        );
+      } else {
+        // Truncated HTML — close any open sections and append closing tags + script
+        // Count open vs closed sections to repair the document structure
+        const openSections = (finalHtml.match(/<section/g) || []).length;
+        const closedSections = (finalHtml.match(/<\/section>/g) || []).length;
+        const unclosedSections = openSections - closedSections;
+        if (unclosedSections > 0) {
+          // Close open divs heuristically and then close the section(s)
+          finalHtml += `\n</div></div></section>`.repeat(unclosedSections);
+          console.warn(`[PRESENT] Repaired ${unclosedSections} unclosed section(s) in truncated HTML`);
+        }
+        finalHtml += `\n<script src="/js/presentation.js" defer></script>\n</body>\n</html>`;
+      }
+    }
+
+    writeFileSync(join(decksDir, filename), finalHtml, "utf-8");
 
     // Persist presentation to database
     await prisma.presentation.create({
@@ -444,14 +485,24 @@ export async function executePipeline(
     const errorMessage =
       error instanceof Error ? error.message : String(error);
 
+    // Log errors to server console for debugging
+    console.error(`[EXECUTOR] Pipeline ${runId} failed in phase ${currentPhase}:`, errorMessage);
+    if (error instanceof Error && error.stack) {
+      console.error(`[EXECUTOR] Stack trace:`, error.stack);
+    }
+
     // Clean up pending approval if pipeline fails during blueprint wait
     cancelApproval(runId);
 
     // Update run status
-    await prisma.run.update({
-      where: { id: runId },
-      data: { status: isAbort ? "CANCELLED" : "FAILED" },
-    });
+    try {
+      await prisma.run.update({
+        where: { id: runId },
+        data: { status: isAbort ? "CANCELLED" : "FAILED" },
+      });
+    } catch (dbErr) {
+      console.error(`[EXECUTOR] Failed to update run status:`, dbErr);
+    }
 
     if (isAbort) {
       emitEvent({ type: "error", message: "Pipeline cancelled by user", phase: currentPhase });

@@ -154,9 +154,6 @@ export default function BlueprintApproval({
                     transition={{ delay: 0.5 }}
                     className="flex items-center justify-center gap-4 pt-4 pb-8"
                 >
-                    <button className="px-6 py-2.5 rounded-lg text-sm text-prism-muted border border-white/10 hover:border-white/20 hover:text-white transition-colors">
-                        Edit Roster
-                    </button>
                     <button
                         onClick={onApprove}
                         data-tour-id="tour-deploy-agents"
