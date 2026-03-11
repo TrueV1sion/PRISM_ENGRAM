@@ -8,6 +8,8 @@
 
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
 import Anthropic from "@anthropic-ai/sdk";
 
 import type { ArchetypeFamily } from "@/lib/pipeline/types";
@@ -23,7 +25,7 @@ import {
 
 interface ConnectedServer {
   client: Client;
-  transport: StdioClientTransport;
+  transport: StdioClientTransport | StreamableHTTPClientTransport | SSEClientTransport;
   tools: MCPToolInfo[];
 }
 
@@ -94,11 +96,33 @@ export class MCPManager {
     name: string,
     config: MCPServerConfig,
   ): Promise<void> {
-    const transport = new StdioClientTransport({
-      command: config.command,
-      args: config.args,
-      env: config.env,
-    });
+    let transport: StdioClientTransport | StreamableHTTPClientTransport | SSEClientTransport;
+
+    if (config.transport === "sse") {
+      const url = config.envUrlKey ? process.env[config.envUrlKey] : undefined;
+      if (!url) {
+        console.warn(
+          `[MCPManager] Remote server "${name}" skipped: env var ${config.envUrlKey} not set`,
+        );
+        this.unavailableServers.push(name);
+        return;
+      }
+      // Prefer StreamableHTTP (modern), fall back to SSE (legacy) if needed
+      try {
+        transport = new StreamableHTTPClientTransport(new URL(url));
+      } catch {
+        transport = new SSEClientTransport(new URL(url));
+      }
+    } else {
+      if (!config.command) {
+        throw new Error(`Stdio server "${name}" missing command`);
+      }
+      transport = new StdioClientTransport({
+        command: config.command,
+        args: config.args ?? [],
+        env: config.env,
+      });
+    }
 
     const client = new Client(
       { name: `prism-${name}`, version: "1.0.0" },
