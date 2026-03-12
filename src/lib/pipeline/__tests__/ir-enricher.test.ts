@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { enrichAfterDeploy, enrichAfterSynthesize } from "../ir-enricher";
+import { enrichAfterDeploy, enrichAfterSynthesize, enrichAfterQA, finalizeIRMetadata } from "../ir-enricher";
 import { createEmptyIRGraph } from "../ir-types";
 import type { IRGraph } from "../ir-types";
 import type { AgentResult, SynthesisResult } from "../types";
@@ -252,5 +252,112 @@ describe("IR Enricher — SYNTHESIZE phase", () => {
       "foundation", "convergence", "tension", "emergence", "gap",
     ]);
     expect(graph.metadata.synthesisMode).toBe("full_pyramid");
+  });
+});
+
+describe("IR Enricher — QA phase", () => {
+  it("populates quality from QA report", () => {
+    const graph = createEmptyIRGraph("run-1", "test");
+    const qaReport = {
+      score: {
+        overallScore: 82,
+        grade: "B+",
+        dimensions: [
+          { name: "Source Quality", score: 85, weight: 0.3, details: "Good" },
+        ],
+      },
+      provenance: {
+        chainCompleteness: 75,
+        links: [
+          {
+            claim: "Market is $5B",
+            findingStatement: "Market is $5B",
+            agentName: "market-analyst",
+            source: "report",
+            sourceVerifiable: true,
+            chainComplete: true,
+            chainGaps: [],
+          },
+        ],
+      },
+      warnings: [
+        { severity: "minor" as const, category: "coverage", message: "Low APAC coverage" },
+      ],
+      passesAllGates: true,
+    };
+
+    enrichAfterQA(graph, qaReport);
+
+    expect(graph.quality).toBeDefined();
+    expect(graph.quality!.overallScore).toBe(82);
+    expect(graph.quality!.grade).toBe("B+");
+    expect(graph.quality!.passesQualityGate).toBe(true);
+    expect(graph.quality!.warnings).toHaveLength(1);
+  });
+
+  it("populates provenance from QA report", () => {
+    const graph = createEmptyIRGraph("run-1", "test");
+    graph.findings.push({
+      id: "f-1",
+      agent: "market-analyst",
+      agentArchetype: "ANALYST-FINANCIAL",
+      dimension: "Market",
+      key: "market/direct",
+      value: "Market is $5B",
+      confidence: 0.9,
+      evidenceType: "direct",
+      tags: [],
+      references: [],
+      timestamp: new Date().toISOString(),
+      findingIndex: 0,
+      actionabilityScore: 3,
+      noveltyScore: 4,
+    });
+
+    const qaReport = {
+      score: { overallScore: 80, grade: "B", dimensions: [] },
+      provenance: {
+        chainCompleteness: 90,
+        links: [
+          {
+            claim: "Market is $5B",
+            findingStatement: "Market is $5B",
+            agentName: "market-analyst",
+            source: "report",
+            sourceVerifiable: true,
+            chainComplete: true,
+            chainGaps: [],
+          },
+        ],
+      },
+      warnings: [],
+      passesAllGates: true,
+    };
+
+    enrichAfterQA(graph, qaReport);
+
+    expect(graph.provenance).toBeDefined();
+    expect(graph.provenance!.chainCompleteness).toBe(90);
+    expect(graph.provenance!.links).toHaveLength(1);
+  });
+});
+
+describe("IR Enricher — finalize", () => {
+  it("sets final metadata timestamp and quality grade", () => {
+    const graph = createEmptyIRGraph("run-1", "test");
+    graph.quality = {
+      overallScore: 85,
+      grade: "B+",
+      passesQualityGate: true,
+      dimensions: [],
+      warnings: [],
+      recommendations: [],
+    };
+
+    finalizeIRMetadata(graph);
+
+    expect(graph.metadata.qualityGrade).toBe("B+");
+    expect(graph.metadata.overallScore).toBe(85);
+    expect(graph.metadata.timestamp).toBeDefined();
   });
 });

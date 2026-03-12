@@ -17,6 +17,8 @@ import type {
   IRTension,
   IREmergence,
   IRGap,
+  IRQuality,
+  IRProvenance,
 } from "./ir-types";
 import { mapSwarmTierToInvestigationTier, deriveSynthesisMode } from "./ir-types";
 import type { AgentResult, SwarmTier, SynthesisResult } from "./types";
@@ -294,5 +296,108 @@ export function enrichAfterSynthesize(
         graph.relationships.push(rel);
       }
     }
+  }
+}
+
+// ─── QA Enrichment ──────────────────────────────────────────
+
+/**
+ * Minimal interface for the QA report data we need.
+ * Avoids importing the full QA module types.
+ */
+export interface QAReportForIR {
+  score: {
+    overallScore: number;
+    grade: string;
+    dimensions: Array<{
+      name: string;
+      score: number;
+      weight?: number;
+      details: string;
+    }>;
+  };
+  provenance: {
+    chainCompleteness: number;
+    links: Array<{
+      claim: string;
+      findingStatement?: string;
+      agentName: string;
+      source: string;
+      sourceVerifiable: boolean;
+      chainComplete: boolean;
+      chainGaps: string[];
+    }>;
+  };
+  warnings: Array<{
+    severity: "critical" | "major" | "minor" | "info";
+    category: string;
+    message: string;
+  }>;
+  passesAllGates: boolean;
+}
+
+export function enrichAfterQA(
+  graph: IRGraph,
+  qaReport: QAReportForIR,
+): void {
+  // Quality
+  graph.quality = {
+    overallScore: qaReport.score.overallScore,
+    grade: qaReport.score.grade,
+    passesQualityGate: qaReport.passesAllGates,
+    dimensions: qaReport.score.dimensions.map(d => ({
+      name: d.name,
+      score: d.score,
+      weight: d.weight ?? 0,
+      details: d.details,
+    })),
+    warnings: qaReport.warnings,
+    recommendations: [],
+  };
+
+  // Provenance
+  const links = qaReport.provenance.links.map(link => {
+    // Match to a finding by agent name + claim overlap
+    const matchingFinding = graph.findings.find(f =>
+      f.agent === link.agentName &&
+      (f.value.includes(link.claim.slice(0, 30)) || link.claim.includes(f.value.slice(0, 30)))
+    );
+    return {
+      claim: link.claim,
+      findingId: matchingFinding?.id ?? "unmatched",
+      agentName: link.agentName,
+      source: link.source,
+      sourceVerifiable: link.sourceVerifiable,
+      chainComplete: link.chainComplete,
+      chainGaps: link.chainGaps,
+    };
+  });
+
+  graph.provenance = {
+    totalClaims: links.length,
+    verifiableSources: links.filter(l => l.sourceVerifiable).length,
+    unverifiableSources: links.filter(l => !l.sourceVerifiable).length,
+    chainCompleteness: qaReport.provenance.chainCompleteness,
+    links,
+  };
+
+  // Stamp findings with provenance data
+  for (const link of links) {
+    if (link.findingId === "unmatched") continue;
+    const finding = graph.findings.find(f => f.id === link.findingId);
+    if (finding) {
+      finding.sourceVerified = link.sourceVerifiable;
+      finding.provenanceComplete = link.chainComplete;
+    }
+  }
+}
+
+// ─── Finalize ───────────────────────────────────────────────
+
+export function finalizeIRMetadata(graph: IRGraph): void {
+  graph.metadata.timestamp = new Date().toISOString();
+  if (graph.quality) {
+    graph.metadata.qualityGrade = graph.quality.grade;
+    graph.metadata.overallScore = graph.quality.overallScore;
   }
 }
