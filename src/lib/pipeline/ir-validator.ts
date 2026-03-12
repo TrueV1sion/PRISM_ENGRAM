@@ -17,7 +17,7 @@ export interface ValidationResult {
 
 const VALID_TIERS: Set<string> = new Set(["SIGNAL", "FOCUSED", "EXTENDED", "PERSISTENT"]);
 const VALID_SYNTHESIS_MODES: Set<string> = new Set(["facts_only", "convergence", "full_pyramid"]);
-const VALID_EVIDENCE_TYPES: Set<string> = new Set(["direct", "inferred", "analogical"]);
+const VALID_EVIDENCE_TYPES: Set<string> = new Set(["direct", "inferred", "analogical", "modeled"]);
 const VALID_RELATIONSHIP_TYPES: Set<string> = new Set(["convergence", "dependency", "discovery", "tension_link"]);
 const VALID_GAP_TYPES: Set<string> = new Set(["structural", "researchable", "emerging"]);
 const VALID_GAP_SOURCES: Set<string> = new Set(["synthesis_layer", "agent_reported"]);
