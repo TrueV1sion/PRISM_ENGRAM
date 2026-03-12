@@ -270,6 +270,11 @@ export type PipelineEvent =
   | { type: "quality_report"; report: QualityReport }
   | { type: "presentation_started" }
   | { type: "presentation_complete"; title: string; slideCount: number; htmlPath: string }
+  | { type: "memory_write"; agentName: string; key: string; confidence: number }
+  | { type: "memory_signal"; from: string; to: string; signalType: string; priority: string }
+  | { type: "memory_conflict"; conflictId: string; claim: string; agents: string[] }
+  | { type: "memory_conflict_resolved"; conflictId: string; resolution: string }
+  | { type: "memory_snapshot"; phase: string; entries: number; signals: number; openConflicts: number }
   | { type: "complete"; manifest: IntelligenceManifest }
   | { type: "error"; message: string; phase?: string }
   | { type: "thinking_token"; token: string };

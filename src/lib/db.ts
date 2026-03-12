@@ -25,6 +25,10 @@ const SNAKE_MAP: Record<string, string> = {
   onboardingDismissed: "onboarding_dismissed",
   hasCompletedTour: "has_completed_tour",
   encryptedKey: "encrypted_key",
+  entryCount: "entry_count",
+  signalCount: "signal_count",
+  conflictCount: "conflict_count",
+  openConflictCount: "open_conflict_count",
 };
 
 const CAMEL_MAP: Record<string, string> = {};
@@ -158,6 +162,18 @@ export interface DbApiKey {
   encryptedKey: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface DbMemoryBusSnapshot {
+  id: string;
+  phase: string;
+  snapshot: string;
+  entryCount: number;
+  signalCount: number;
+  conflictCount: number;
+  openConflictCount: number;
+  createdAt: string;
+  runId: string;
 }
 
 // ─── Database access object ─────────────────────────────────
@@ -512,6 +528,44 @@ export const db = {
         return { ...existing, ...data };
       }
       return db.presentation.create({ ...data, runId });
+    },
+  },
+
+  // ── MemoryBusSnapshots ──────────────────────────────────
+  memoryBusSnapshot: {
+    async create(data: Omit<DbMemoryBusSnapshot, "id" | "createdAt">) {
+      const { data: row, error } = await supabase
+        .from("memory_bus_snapshots")
+        .insert({
+          id: cuid(),
+          ...toSnake(data as unknown as Record<string, unknown>),
+        })
+        .select()
+        .single();
+      if (error) throw new Error(`db.memoryBusSnapshot.create: ${error.message}`);
+      return toCamel<DbMemoryBusSnapshot>(row);
+    },
+
+    async findByRunId(runId: string) {
+      const { data: rows, error } = await supabase
+        .from("memory_bus_snapshots")
+        .select("*")
+        .eq("run_id", runId)
+        .order("created_at", { ascending: true });
+      if (error) throw new Error(`db.memoryBusSnapshot.findByRunId: ${error.message}`);
+      return toCamelArray<DbMemoryBusSnapshot>(rows ?? []);
+    },
+
+    async findLatest(runId: string) {
+      const { data: row, error } = await supabase
+        .from("memory_bus_snapshots")
+        .select("*")
+        .eq("run_id", runId)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (error) throw new Error(`db.memoryBusSnapshot.findLatest: ${error.message}`);
+      return row ? toCamel<DbMemoryBusSnapshot>(row) : null;
     },
   },
 

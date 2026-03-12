@@ -13,6 +13,8 @@ import {
 import { withRetry } from "./retry";
 import { CostTracker } from "./cost";
 import { waitForBlueprintApproval, cancelApproval } from "./approval";
+import { getOrCreateBus, removeBus } from "./memory-bus-manager";
+import type { MemoryBus } from "./memory-bus";
 import type {
   Blueprint,
   PipelineEvent,
@@ -117,6 +119,9 @@ export async function executePipeline(
     await waitForBlueprintApproval(runId);
     checkAbort();
 
+    // Create MemoryBus for cross-phase intelligence sharing
+    const memoryBus = getOrCreateBus(runId, query);
+
     currentPhase = "CONSTRUCT";
     await updateRunStatus(runId, "CONSTRUCT");
     emitEvent({ type: "phase_change", phase: "CONSTRUCT", message: "Building agent prompts and tool configurations..." });
@@ -140,7 +145,7 @@ export async function executePipeline(
     emitEvent({ type: "phase_change", phase: "DEPLOY", message: `Deploying ${agents.length} agents in parallel...` });
 
     const deployResult = await withRetry(
-      () => deploy({ agents, blueprint, emitEvent, signal }),
+      () => deploy({ agents, blueprint, emitEvent, signal, memoryBus }),
       { maxRetries: 2, baseDelayMs: 2000, signal, label: "DEPLOY" },
     );
 
@@ -179,6 +184,9 @@ export async function executePipeline(
     await db.agent.updateMany(runId, { status: "complete", progress: 100 });
     await db.finding.createMany(findingsData);
 
+    // Persist MemoryBus snapshot after DEPLOY phase
+    await persistSnapshot(runId, memoryBus, "DEPLOY", emitEvent);
+
     if (agentResults.length < 2) {
       throw new Error(
         `Only ${agentResults.length} agents succeeded -- minimum 2 required for synthesis.`,
@@ -192,7 +200,7 @@ export async function executePipeline(
     emitEvent({ type: "phase_change", phase: "SYNTHESIZE", message: "Running emergence detection and synthesis..." });
 
     const synthesis = await withRetry(
-      () => synthesize({ agentResults, blueprint, criticResult, emitEvent }),
+      () => synthesize({ agentResults, blueprint, criticResult, emitEvent, memoryBus }),
       { maxRetries: 2, baseDelayMs: 2000, signal, label: "SYNTHESIZE" },
     );
 
@@ -205,6 +213,9 @@ export async function executePipeline(
         runId,
       })),
     );
+
+    // Persist MemoryBus snapshot after SYNTHESIZE phase
+    await persistSnapshot(runId, memoryBus, "SYNTHESIZE", emitEvent);
 
     const qualityReport = buildQualityReport(agentResults, synthesis);
 
@@ -241,6 +252,7 @@ export async function executePipeline(
       gateSystem,
       undefined,
       emitEvent,
+      memoryBus,
     );
 
     qualityReport.grade = qaReport.score.grade;
@@ -270,7 +282,7 @@ export async function executePipeline(
     await updateRunStatus(runId, "VERIFY");
     emitEvent({ type: "phase_change", phase: "VERIFY", message: "Running verification gate..." });
 
-    await verify({ synthesis, agentResults, autonomyMode, emitEvent });
+    await verify({ synthesis, agentResults, autonomyMode, emitEvent, memoryBus });
 
     checkAbort();
 
@@ -279,7 +291,7 @@ export async function executePipeline(
     emitEvent({ type: "phase_change", phase: "PRESENT", message: "Generating HTML5 presentation..." });
 
     const presentation = await withRetry(
-      () => present({ synthesis, agentResults, blueprint, emitEvent }),
+      () => present({ synthesis, agentResults, blueprint, emitEvent, memoryBus }),
       { maxRetries: 1, baseDelayMs: 3000, signal, label: "PRESENT" },
     );
 
@@ -343,6 +355,9 @@ export async function executePipeline(
       },
     };
 
+    // Persist final MemoryBus snapshot
+    await persistSnapshot(runId, memoryBus, "COMPLETE", emitEvent);
+
     await db.run.update(runId, {
       status: "COMPLETE",
       completedAt: new Date().toISOString(),
@@ -372,11 +387,43 @@ export async function executePipeline(
     }
 
     throw error;
+  } finally {
+    // Always clean up the MemoryBus to prevent memory leaks
+    removeBus(runId);
   }
 }
 
 async function updateRunStatus(runId: string, status: string) {
   await db.run.update(runId, { status });
+}
+
+async function persistSnapshot(
+  runId: string,
+  bus: MemoryBus,
+  phase: string,
+  emitEvent: (event: PipelineEvent) => void,
+) {
+  const status = bus.getStatus();
+  try {
+    await db.memoryBusSnapshot.create({
+      runId,
+      phase,
+      snapshot: bus.export(),
+      entryCount: status.entries,
+      signalCount: status.signals,
+      conflictCount: status.openConflicts + status.resolvedConflicts,
+      openConflictCount: status.openConflicts,
+    });
+  } catch (err) {
+    console.warn(`[EXECUTOR] Failed to persist MemoryBus snapshot (${phase}):`, err);
+  }
+  emitEvent({
+    type: "memory_snapshot",
+    phase,
+    entries: status.entries,
+    signals: status.signals,
+    openConflicts: status.openConflicts,
+  });
 }
 
 async function persistBlueprint(runId: string, blueprint: Blueprint) {

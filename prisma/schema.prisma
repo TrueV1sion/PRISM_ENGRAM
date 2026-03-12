@@ -29,11 +29,12 @@ model Run {
   completedAt     DateTime?
 
   // Relations
-  agents        Agent[]
-  findings      Finding[]
-  synthesis     Synthesis[]
-  dimensions    Dimension[]
-  presentation  Presentation?
+  agents             Agent[]
+  findings           Finding[]
+  synthesis          Synthesis[]
+  dimensions         Dimension[]
+  presentation       Presentation?
+  memoryBusSnapshots MemoryBusSnapshot[]
 }
 
 // ─── Dimension ───────────────────────────────────────────
@@ -110,6 +111,21 @@ model Presentation {
 
   runId String @unique
   run   Run    @relation(fields: [runId], references: [id], onDelete: Cascade)
+}
+
+// ─── MemoryBusSnapshot ──────────────────────────────────
+// Captures MemoryBus state at key pipeline phases
+model MemoryBusSnapshot {
+  id                String   @id @default(cuid())
+  phase             String                    // DEPLOY | SYNTHESIZE | COMPLETE
+  snapshot          String   @default("{}")   // JSON blob of MemoryBusState
+  entryCount        Int      @default(0)
+  signalCount       Int      @default(0)
+  conflictCount     Int      @default(0)
+  openConflictCount Int      @default(0)
+  createdAt         DateTime @default(now())
+  runId             String
+  run               Run      @relation(fields: [runId], references: [id], onDelete: Cascade)
 }
 
 // ─── Settings ────────────────────────────────────────────

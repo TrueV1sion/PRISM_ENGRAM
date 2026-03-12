@@ -164,6 +164,21 @@ export async function GET(request: Request) {
               presentationPath: `/decks/${event.manifest.metadata.runId}.html`,
             });
             break;
+          case "memory_write":
+            send("memory_write", { agentName: event.agentName, key: event.key, confidence: event.confidence });
+            break;
+          case "memory_signal":
+            send("memory_signal", { from: event.from, to: event.to, signalType: event.signalType, priority: event.priority });
+            break;
+          case "memory_conflict":
+            send("memory_conflict", { conflictId: event.conflictId, claim: event.claim, agents: event.agents });
+            break;
+          case "memory_conflict_resolved":
+            send("memory_conflict_resolved", { conflictId: event.conflictId, resolution: event.resolution });
+            break;
+          case "memory_snapshot":
+            send("memory_snapshot", { phase: event.phase, entries: event.entries, signals: event.signals, openConflicts: event.openConflicts });
+            break;
           case "error":
             send("error", { error: event.message, phase: event.phase });
             break;
