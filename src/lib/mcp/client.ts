@@ -196,6 +196,11 @@ export class MCPManager {
     return gaps;
   }
 
+  /** Check if a specific MCP server is connected and available. */
+  isServerAvailable(serverName: string): boolean {
+    return this.servers.has(serverName) && !this.unavailableServers.includes(serverName);
+  }
+
   /**
    * Execute a tool call by routing to the correct MCP server.
    *
