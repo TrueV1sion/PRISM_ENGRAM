@@ -6,12 +6,16 @@ const mockFetch = vi.fn();
 vi.stubGlobal("fetch", mockFetch);
 
 // Mock the rate limiters to avoid real timing
-vi.mock("@/lib/data-sources/rate-limit", () => ({
-  globalRateLimiter: { acquire: vi.fn(async () => {}), release: vi.fn() },
-  TokenBucketLimiter: vi.fn().mockImplementation(() => ({
-    acquire: vi.fn(async () => {}),
-  })),
-}));
+vi.mock("@/lib/data-sources/rate-limit", () => {
+  // Must use a regular function (not arrow) so `new` works
+  function MockTokenBucketLimiter() {
+    return { acquire: vi.fn(async () => {}) };
+  }
+  return {
+    globalRateLimiter: { acquire: vi.fn(async () => {}), release: vi.fn() },
+    TokenBucketLimiter: MockTokenBucketLimiter,
+  };
+});
 
 describe("openFDA API Client", () => {
   beforeEach(() => {

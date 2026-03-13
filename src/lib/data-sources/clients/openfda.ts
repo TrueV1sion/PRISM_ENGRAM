@@ -28,23 +28,7 @@ const ENDPOINTS = {
 } as const;
 
 // 4 req/s without API key (240/min with key)
-// Lazy singleton — deferred so mocks in tests can intercept the constructor.
-// Called without 'new' so arrow-function mocks (vitest) also satisfy the call.
-let _clientLimiter: { acquire: () => Promise<void> } | null = null;
-function getClientLimiter(): { acquire: () => Promise<void> } {
-  if (!_clientLimiter) {
-    // Use Object.create + call pattern so both 'class' and 'vi.fn() arrow mock'
-    // work. When mocked, TokenBucketLimiter is a plain function returning an
-    // object with acquire(); when real, it's a class that must be newed.
-    try {
-      _clientLimiter = new TokenBucketLimiter(4);
-    } catch {
-      // Fallback for test environments where TokenBucketLimiter is an arrow mock
-      _clientLimiter = (TokenBucketLimiter as unknown as (n: number) => { acquire: () => Promise<void> })(4);
-    }
-  }
-  return _clientLimiter;
-}
+const clientLimiter = new TokenBucketLimiter(4);
 
 // ─── Types ───────────────────────────────────────────────────
 
@@ -92,7 +76,7 @@ async function makeRequest(
 ): Promise<ApiResponse<OpenFDAResult>> {
   await globalRateLimiter.acquire();
   try {
-    await getClientLimiter().acquire();
+    await clientLimiter.acquire();
 
     // Build URL manually — openFDA uses literal '+' in search syntax
     const queryParts: string[] = [];
