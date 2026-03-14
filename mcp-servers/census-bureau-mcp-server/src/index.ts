@@ -7,14 +7,15 @@
  *
  * Target archetypes: MACRO-CONTEXT, ANALYST-STRATEGIC, RESEARCHER-DATA
  *
- * Supports both stdio and HTTP (SSE) transports.
+ * Supports both stdio and HTTP (Streamable HTTP) transports.
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
 import { createServer, IncomingMessage, ServerResponse } from "node:http";
+import { randomUUID } from "node:crypto";
 
 import { CensusApiClient } from "./api-client.js";
 import {
@@ -35,18 +36,28 @@ import {
 const CENSUS_API_KEY = process.env.CENSUS_API_KEY;
 
 if (!CENSUS_API_KEY) {
-  console.error(
-    "ERROR: CENSUS_API_KEY environment variable is required.\n" +
-      "Get a free API key at: https://api.census.gov/data/key_signup.html\n" +
-      "Then set: export CENSUS_API_KEY=your_key_here"
+  console.warn(
+    "WARNING: CENSUS_API_KEY not set. Server will start but tools will return errors.\n" +
+      "Get a free API key at: https://api.census.gov/data/key_signup.html"
   );
-  process.exit(1);
 }
 
 // ─── Initialize Client & Server ─────────────────────────────
 
-const censusClient = new CensusApiClient({ apiKey: CENSUS_API_KEY });
+const censusClient = CENSUS_API_KEY ? new CensusApiClient({ apiKey: CENSUS_API_KEY }) : null;
 
+function requireCensusClient(): CensusApiClient {
+  if (!censusClient) {
+    throw new Error(
+      "CENSUS_API_KEY not configured. Get a free key at https://api.census.gov/data/key_signup.html"
+    );
+  }
+  return censusClient;
+}
+
+// ─── Server Factory ─────────────────────────────────────────
+
+function createMcpServer(): McpServer {
 const server = new McpServer(
   {
     name: SERVER_NAME,
@@ -133,7 +144,7 @@ server.registerTool(
         ? args.variables
         : ["NAME", ...args.variables];
 
-      const result = await censusClient.getAcsData(
+      const result = await requireCensusClient().getAcsData(
         args.year,
         variables,
         args.geography,
@@ -223,7 +234,7 @@ server.registerTool(
         geography = "us";
       }
 
-      const result = await censusClient.getAcsData(
+      const result = await requireCensusClient().getAcsData(
         args.year,
         ["NAME", ...allVars],
         geography,
@@ -347,7 +358,7 @@ server.registerTool(
         ? SAHIE_INCOME_CATEGORIES[args.income_level]
         : undefined;
 
-      const result = await censusClient.getSahieData({
+      const result = await requireCensusClient().getSahieData({
         year: args.year,
         stateFips: args.state_fips,
         countyFips: args.county_fips,
@@ -463,7 +474,7 @@ server.registerTool(
       const datasetPath =
         args.dataset === "acs1" ? DATASETS.ACS1 : DATASETS.ACS5;
 
-      const result = await censusClient.getAcsData(
+      const result = await requireCensusClient().getAcsData(
         args.year,
         ["NAME", ...demoConfig.variables],
         geography,
@@ -574,7 +585,7 @@ server.registerTool(
           return toolError(`Unknown dataset: ${args.dataset}`);
       }
 
-      const result = await censusClient.listVariables(
+      const result = await requireCensusClient().listVariables(
         args.year,
         datasetStr,
         args.table_prefix
@@ -597,110 +608,99 @@ server.registerTool(
   }
 );
 
-// ─── Transport Setup ────────────────────────────────────────
-
-async function startStdioTransport(): Promise<void> {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error(`${SERVER_NAME} v${SERVER_VERSION} running on stdio`);
+  return server;
 }
 
-async function startHttpTransport(port: number): Promise<void> {
-  const sessions = new Map<string, SSEServerTransport>();
-
-  const httpServer = createServer(
-    async (req: IncomingMessage, res: ServerResponse) => {
-      const url = new URL(req.url ?? "/", `http://localhost:${port}`);
-
-      // CORS headers
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-      res.setHeader(
-        "Access-Control-Allow-Headers",
-        "Content-Type, Authorization"
-      );
-
-      if (req.method === "OPTIONS") {
-        res.writeHead(204);
-        res.end();
-        return;
-      }
-
-      // Health check
-      if (url.pathname === "/health" && req.method === "GET") {
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(
-          JSON.stringify({
-            status: "ok",
-            server: SERVER_NAME,
-            version: SERVER_VERSION,
-          })
-        );
-        return;
-      }
-
-      // SSE endpoint - establishes the event stream
-      if (url.pathname === "/sse" && req.method === "GET") {
-        const transport = new SSEServerTransport("/messages", res);
-        sessions.set(transport.sessionId, transport);
-
-        transport.onclose = () => {
-          sessions.delete(transport.sessionId);
-        };
-
-        await server.connect(transport);
-        return;
-      }
-
-      // Messages endpoint - receives client JSON-RPC messages
-      if (url.pathname === "/messages" && req.method === "POST") {
-        const sessionId = url.searchParams.get("sessionId");
-        if (!sessionId) {
-          res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Missing sessionId parameter" }));
-          return;
-        }
-
-        const transport = sessions.get(sessionId);
-        if (!transport) {
-          res.writeHead(404, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Session not found" }));
-          return;
-        }
-
-        await transport.handlePostMessage(req, res);
-        return;
-      }
-
-      // 404 for unknown routes
-      res.writeHead(404, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: "Not found" }));
-    }
-  );
-
-  httpServer.listen(port, () => {
-    console.error(
-      `${SERVER_NAME} v${SERVER_VERSION} running on HTTP port ${port}`
-    );
-    console.error(`  SSE endpoint: http://localhost:${port}/sse`);
-    console.error(`  Health check: http://localhost:${port}/health`);
-  });
-}
-
-// ─── Main ───────────────────────────────────────────────────
+// ─── Transport & Startup ────────────────────────────────────
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
 
   if (args.includes("--http")) {
+    // Support both --port=N and --port N formats
+    const portFlag = args.find((a) => a.startsWith("--port="));
     const portIdx = args.indexOf("--port");
-    const port =
-      portIdx !== -1 && args[portIdx + 1]
+    const port = portFlag
+      ? parseInt(portFlag.split("=")[1]!, 10)
+      : portIdx !== -1 && args[portIdx + 1]
         ? parseInt(args[portIdx + 1], 10)
-        : 3006;
-    await startHttpTransport(port);
+        : 3016;
+
+    const sessions = new Map<
+      string,
+      { transport: InstanceType<typeof StreamableHTTPServerTransport>; server: McpServer }
+    >();
+
+    const httpServer = createServer(
+      async (req: IncomingMessage, res: ServerResponse) => {
+        // Health check
+        if (req.url === "/health" && req.method === "GET") {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(
+            JSON.stringify({
+              status: "ok",
+              server: SERVER_NAME,
+              version: SERVER_VERSION,
+            })
+          );
+          return;
+        }
+
+        // MCP endpoint
+        if (req.url === "/mcp" || req.url === "/") {
+          const sessionId = req.headers["mcp-session-id"] as string | undefined;
+
+          if (sessionId && sessions.has(sessionId)) {
+            const session = sessions.get(sessionId)!;
+            await session.transport.handleRequest(req, res);
+            return;
+          }
+
+          const transport = new StreamableHTTPServerTransport({
+            sessionIdGenerator: () => randomUUID(),
+            onsessioninitialized: (newSessionId: string) => {
+              sessions.set(newSessionId, { transport, server: mcpServer });
+              console.error(
+                `[${SERVER_NAME}] Session started: ${newSessionId} (${sessions.size} active)`,
+              );
+            },
+          });
+
+          const mcpServer = createMcpServer();
+          await mcpServer.connect(transport);
+
+          transport.onclose = () => {
+            const sid = transport.sessionId;
+            if (sid) {
+              sessions.delete(sid);
+              console.error(
+                `[${SERVER_NAME}] Session closed: ${sid} (${sessions.size} active)`,
+              );
+            }
+            mcpServer.close().catch(() => {});
+          };
+
+          await transport.handleRequest(req, res);
+          return;
+        }
+
+        res.writeHead(404);
+        res.end("Not found");
+      }
+    );
+
+    httpServer.listen(port, () => {
+      console.error(
+        `${SERVER_NAME} v${SERVER_VERSION} running on HTTP port ${port}`
+      );
+      console.error(`  MCP endpoint: http://localhost:${port}/mcp`);
+      console.error(`  Health check: http://localhost:${port}/health`);
+    });
   } else {
-    await startStdioTransport();
+    const server = createMcpServer();
+    const transport = new StdioServerTransport();
+    await server.connect(transport);
+    console.error(`${SERVER_NAME} v${SERVER_VERSION} running on stdio`);
   }
 }
 

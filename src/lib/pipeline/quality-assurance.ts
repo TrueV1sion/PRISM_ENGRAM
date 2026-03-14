@@ -288,13 +288,13 @@ export const DEFAULT_GATE_CONFIG: Record<GateStage, GateConfig> = {
     },
     findings: {
         enabled: true,
-        autoApproveThreshold: 80,
-        timeoutMs: 10 * 60 * 1000, // 10 minutes
+        autoApproveThreshold: 60,
+        timeoutMs: 30 * 1000, // 30 seconds — no client-side HITL UI exists yet
     },
     synthesis: {
         enabled: true,
-        autoApproveThreshold: 85,
-        timeoutMs: 10 * 60 * 1000, // 10 minutes
+        autoApproveThreshold: 60,
+        timeoutMs: 30 * 1000, // 30 seconds — no client-side HITL UI exists yet
     },
 };
 

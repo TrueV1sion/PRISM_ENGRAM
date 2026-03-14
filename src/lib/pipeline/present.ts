@@ -508,16 +508,9 @@ function extractHtml(text: string): string {
  * Count slides in the generated HTML.
  */
 function countSlides(html: string): number {
-  // Count section.slide elements or class="slide" occurrences
-  const slideMatches = html.match(/class="[^"]*slide[^"]*"/g);
-  if (!slideMatches) return 0;
-
-  // Filter to actual slide sections (not sub-components like slide-inner, slide-footer)
-  return slideMatches.filter(
-    (m) =>
-      /class="slide[\s"]/.test(m) ||
-      /class="[^"]*\bslide\b[^"]*"/.test(m),
-  ).length;
+  // Count <section> tags — each top-level section is one slide
+  const sectionMatches = html.match(/<section[\s>]/g);
+  return sectionMatches?.length ?? 0;
 }
 
 /**

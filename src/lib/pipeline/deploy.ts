@@ -67,6 +67,7 @@ function normalizeAgentOutput(data: any): void {
   if (!data || typeof data !== "object") return;
 
   // Default missing arrays
+  if (!Array.isArray(data.findings)) data.findings = [];
   if (!Array.isArray(data.minorityViews)) data.minorityViews = [];
   if (!Array.isArray(data.gaps)) data.gaps = [];
   if (!Array.isArray(data.signals)) data.signals = [];
@@ -366,10 +367,20 @@ function collectResults(
           : String(outcome.reason);
 
       console.error(`[DEPLOY] Agent "${agent.name}" failed:`, errorMsg);
+
+      // Emit as agent_progress (non-fatal) instead of error (fatal).
+      // The pipeline continues with remaining successful agents.
       emitEvent({
-        type: "error",
-        message: `Agent "${agent.name}" failed: ${errorMsg}`,
-        phase: "deploy",
+        type: "agent_progress",
+        agentName: agent.name,
+        progress: 100,
+        message: `Agent failed: ${errorMsg}`,
+      });
+      emitEvent({
+        type: "agent_complete",
+        agentName: agent.name,
+        findingCount: 0,
+        tokensUsed: 0,
       });
     }
   }

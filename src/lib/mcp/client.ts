@@ -107,11 +107,33 @@ export class MCPManager {
         this.unavailableServers.push(name);
         return;
       }
-      // Prefer StreamableHTTP (modern), fall back to SSE (legacy) if needed
+
+      const parsedUrl = new URL(url);
+
+      // Try StreamableHTTP first (modern), fall back to SSE (legacy) on connection failure
+      transport = new StreamableHTTPClientTransport(parsedUrl);
       try {
-        transport = new StreamableHTTPClientTransport(new URL(url));
+        const client = new Client(
+          { name: `prism-${name}`, version: "1.0.0" },
+          { capabilities: {} },
+        );
+        await client.connect(transport);
+        const { tools } = await client.listTools();
+        const toolInfos: MCPToolInfo[] = tools.map((tool) => ({
+          name: tool.name,
+          qualifiedName: `${name}__${tool.name}`,
+          serverName: name,
+          description: tool.description ?? "",
+          inputSchema: tool.inputSchema as Record<string, unknown>,
+        }));
+        this.servers.set(name, { client, transport, tools: toolInfos });
+        return; // StreamableHTTP succeeded
       } catch {
-        transport = new SSEClientTransport(new URL(url));
+        // StreamableHTTP connection failed — try SSE fallback
+        console.warn(
+          `[MCPManager] StreamableHTTP failed for "${name}", trying SSE fallback`,
+        );
+        transport = new SSEClientTransport(parsedUrl);
       }
     } else {
       if (!config.command) {

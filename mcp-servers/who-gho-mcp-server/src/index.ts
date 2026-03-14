@@ -14,6 +14,7 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 
 import {
@@ -33,8 +34,9 @@ import {
   MAX_RESULTS_PER_REQUEST,
 } from "./constants.js";
 
-// ─── Server Setup ────────────────────────────────────────────
+// ─── Server Factory ─────────────────────────────────────────
 
+function createMcpServer(): McpServer {
 const server = new McpServer(
   {
     name: "who-gho",
@@ -785,6 +787,9 @@ server.registerTool(
   },
 );
 
+  return server;
+}
+
 // ─── Transport & Startup ─────────────────────────────────────
 
 async function main(): Promise<void> {
@@ -806,6 +811,11 @@ async function main(): Promise<void> {
       ? parseInt(args[portArgIndex + 1], 10)
       : parseInt(process.env.PORT ?? "3017", 10);
 
+    const sessions = new Map<
+      string,
+      { transport: InstanceType<typeof StreamableHTTPServerTransport>; server: McpServer }
+    >();
+
     const httpServer = http.createServer(async (req, res) => {
       // Health check endpoint
       if (req.url === "/health" && req.method === "GET") {
@@ -818,11 +828,39 @@ async function main(): Promise<void> {
 
       // MCP endpoint
       if (req.url === "/mcp" || req.url === "/") {
-        const sessionTransport = new StreamableHTTPServerTransport({
-          sessionIdGenerator: undefined,
+        const sessionId = req.headers["mcp-session-id"] as string | undefined;
+
+        if (sessionId && sessions.has(sessionId)) {
+          const session = sessions.get(sessionId)!;
+          await session.transport.handleRequest(req, res);
+          return;
+        }
+
+        const transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: () => randomUUID(),
+          onsessioninitialized: (newSessionId: string) => {
+            sessions.set(newSessionId, { transport, server: mcpServer });
+            console.error(
+              `[who-gho-mcp] Session started: ${newSessionId} (${sessions.size} active)`,
+            );
+          },
         });
-        await server.connect(sessionTransport);
-        await sessionTransport.handleRequest(req, res);
+
+        const mcpServer = createMcpServer();
+        await mcpServer.connect(transport);
+
+        transport.onclose = () => {
+          const sid = transport.sessionId;
+          if (sid) {
+            sessions.delete(sid);
+            console.error(
+              `[who-gho-mcp] Session closed: ${sid} (${sessions.size} active)`,
+            );
+          }
+          mcpServer.close().catch(() => {});
+        };
+
+        await transport.handleRequest(req, res);
         return;
       }
 
@@ -841,6 +879,7 @@ async function main(): Promise<void> {
     });
   } else {
     // Default: stdio transport
+    const server = createMcpServer();
     const stdioTransport = new StdioServerTransport();
     await server.connect(stdioTransport);
     console.error("[who-gho-mcp] Server running on stdio transport");

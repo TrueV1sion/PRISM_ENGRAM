@@ -18,6 +18,7 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 
 import { BLSApiClient } from "./api-client.js";
@@ -134,8 +135,9 @@ function scoreCatalogEntry(entry: CatalogEntry, queryTokens: string[]): number {
   return score;
 }
 
-// ─── Server Setup ────────────────────────────────────────────
+// ─── Server Factory ─────────────────────────────────────────
 
+function createMcpServer(): McpServer {
 const server = new McpServer(
   {
     name: "bls-data-mcp-server",
@@ -688,6 +690,9 @@ server.registerTool(
   },
 );
 
+  return server;
+}
+
 // ─── Transport & Startup ─────────────────────────────────────
 
 async function main() {
@@ -700,9 +705,12 @@ async function main() {
       "@modelcontextprotocol/sdk/server/streamableHttp.js"
     );
     const { createServer } = await import("node:http");
-    const { randomUUID } = await import("node:crypto");
-
     const PORT = parseInt(process.env.PORT ?? "3002", 10);
+
+    const sessions = new Map<
+      string,
+      { transport: InstanceType<typeof StreamableHTTPServerTransport>; server: McpServer }
+    >();
 
     const httpServer = createServer(async (req, res) => {
       // Health check
@@ -720,11 +728,37 @@ async function main() {
 
       // MCP endpoint
       if (req.url === "/mcp" || req.url === "/") {
+        const sessionId = req.headers["mcp-session-id"] as string | undefined;
+
+        if (sessionId && sessions.has(sessionId)) {
+          const session = sessions.get(sessionId)!;
+          await session.transport.handleRequest(req, res);
+          return;
+        }
+
         const transport = new StreamableHTTPServerTransport({
           sessionIdGenerator: () => randomUUID(),
+          onsessioninitialized: (newSessionId: string) => {
+            sessions.set(newSessionId, { transport, server: mcpServer });
+            console.error(
+              `[bls-data-mcp-server] Session started: ${newSessionId} (${sessions.size} active)`,
+            );
+          },
         });
 
-        await server.connect(transport);
+        const mcpServer = createMcpServer();
+        await mcpServer.connect(transport);
+
+        transport.onclose = () => {
+          const sid = transport.sessionId;
+          if (sid) {
+            sessions.delete(sid);
+            console.error(
+              `[bls-data-mcp-server] Session closed: ${sid} (${sessions.size} active)`,
+            );
+          }
+          mcpServer.close().catch(() => {});
+        };
 
         await transport.handleRequest(req, res);
         return;
@@ -744,6 +778,7 @@ async function main() {
     });
   } else {
     // Default: stdio transport
+    const server = createMcpServer();
     const transport = new StdioServerTransport();
     await server.connect(transport);
 

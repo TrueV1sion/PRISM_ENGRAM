@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { think } from "./think";
 import { construct } from "./construct";
 import { deploy } from "./deploy";
@@ -24,7 +24,7 @@ import type {
   QualityReport,
   AutonomyMode,
 } from "./types";
-import { writeFileSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import {
   enrichAfterDeploy,
@@ -57,8 +57,10 @@ function buildQualityReport(
   const confDist = { high: 0, medium: 0, low: 0 };
   const tierDist = { primary: 0, secondary: 0, tertiary: 0 };
   for (const f of allFindings) {
-    confDist[f.confidence.toLowerCase() as keyof typeof confDist]++;
-    tierDist[f.sourceTier.toLowerCase() as keyof typeof tierDist]++;
+    const conf = (f.confidence ?? "medium").toLowerCase() as keyof typeof confDist;
+    if (conf in confDist) confDist[conf]++;
+    const tier = (f.sourceTier ?? "secondary").toLowerCase() as keyof typeof tierDist;
+    if (tier in tierDist) tierDist[tier]++;
   }
 
   const qualifiedEmergences = synthesis.emergentInsights.filter((e) => {
@@ -141,12 +143,15 @@ export async function executePipeline(
     const agents = construct({ blueprint });
 
     for (const agent of agents) {
-      await db.agent.updateByName(runId, agent.name, {
-        status: "active",
-        archetype: agent.archetype,
-        mandate: agent.mandate,
-        tools: JSON.stringify(agent.tools),
-        color: agent.color,
+      await prisma.agent.updateMany({
+        where: { runId, name: agent.name },
+        data: {
+          status: "active",
+          archetype: agent.archetype,
+          mandate: agent.mandate,
+          tools: JSON.stringify(agent.tools),
+          color: agent.color,
+        },
       });
     }
 
@@ -170,7 +175,7 @@ export async function executePipeline(
       totalTokens += criticResult.tokensUsed;
     }
 
-    const dbAgents = await db.agent.findMany({ runId });
+    const dbAgents = await prisma.agent.findMany({ where: { runId } });
     const agentIdMap = new Map(dbAgents.map((a) => [a.name, a.id]));
 
     const validSourceTiers = new Set(["PRIMARY", "SECONDARY", "TERTIARY"]);
@@ -193,8 +198,8 @@ export async function executePipeline(
       }));
     });
 
-    await db.agent.updateMany(runId, { status: "complete", progress: 100 });
-    await db.finding.createMany(findingsData);
+    await prisma.agent.updateMany({ where: { runId }, data: { status: "complete", progress: 100 } });
+    await prisma.finding.createMany({ data: findingsData });
 
     // Persist MemoryBus snapshot after DEPLOY phase
     await persistSnapshot(runId, memoryBus, "DEPLOY", emitEvent);
@@ -228,15 +233,15 @@ export async function executePipeline(
       { maxRetries: 2, baseDelayMs: 2000, signal, label: "SYNTHESIZE" },
     );
 
-    await db.synthesis.createMany(
-      synthesis.layers.map((layer, i) => ({
+    await prisma.synthesis.createMany({
+      data: synthesis.layers.map((layer, i) => ({
         layerName: layer.name,
         description: layer.description,
         insights: JSON.stringify(layer.insights),
-        sortOrder: i,
+        order: i,
         runId,
       })),
-    );
+    });
 
     // Persist MemoryBus snapshot after SYNTHESIZE phase
     await persistSnapshot(runId, memoryBus, "SYNTHESIZE", emitEvent);
@@ -332,7 +337,9 @@ export async function executePipeline(
       );
     }
 
-    checkAbort();
+    // NOTE: No checkAbort() after synthesis — once findings and synthesis are
+    // persisted, always finish through PRESENT so a client disconnect doesn't
+    // throw away a 20+ minute run.
 
     currentPhase = "VERIFY";
     await updateRunStatus(runId, "VERIFY");
@@ -340,15 +347,13 @@ export async function executePipeline(
 
     await verify({ synthesis, agentResults, autonomyMode, emitEvent, memoryBus });
 
-    checkAbort();
-
     currentPhase = "PRESENT";
     await updateRunStatus(runId, "PRESENT");
     emitEvent({ type: "phase_change", phase: "PRESENT", message: "Generating HTML5 presentation..." });
 
     const presentation = await withRetry(
       () => present({ synthesis, agentResults, blueprint, emitEvent, memoryBus }),
-      { maxRetries: 1, baseDelayMs: 3000, signal, label: "PRESENT" },
+      { maxRetries: 1, baseDelayMs: 3000, label: "PRESENT" },
     );
 
     const decksDir = join(process.cwd(), "public", "decks");
@@ -358,40 +363,112 @@ export async function executePipeline(
 
     let finalHtml = presentation.html;
 
-    if (!finalHtml.includes("presentation.css")) {
-      if (finalHtml.includes("</head>")) {
-        finalHtml = finalHtml.replace(
-          "</head>",
-          `  <link rel="stylesheet" href="/styles/presentation.css">\n</head>`,
-        );
+    // Inline CSS and JS so the deck is fully self-contained and shareable
+    const publicDir = join(process.cwd(), "public");
+    const cssPath = join(publicDir, "styles", "presentation.css");
+    const jsPath = join(publicDir, "js", "presentation.js");
+
+    if (!finalHtml.includes("presentation.css") && !finalHtml.includes("<style>")) {
+      try {
+        const css = readFileSync(cssPath, "utf-8");
+        if (finalHtml.includes("</head>")) {
+          finalHtml = finalHtml.replace(
+            "</head>",
+            `  <style>\n${css}\n  </style>\n</head>`,
+          );
+        }
+      } catch {
+        // Fallback to external link if CSS file not found
+        if (finalHtml.includes("</head>")) {
+          finalHtml = finalHtml.replace(
+            "</head>",
+            `  <link rel="stylesheet" href="/styles/presentation.css">\n</head>`,
+          );
+        }
       }
     }
 
     if (!finalHtml.includes("presentation.js")) {
-      if (finalHtml.includes("</body>")) {
-        finalHtml = finalHtml.replace(
-          "</body>",
-          `  <script src="/js/presentation.js" defer></script>\n</body>`,
-        );
-      } else {
-        const openSections = (finalHtml.match(/<section/g) || []).length;
-        const closedSections = (finalHtml.match(/<\/section>/g) || []).length;
-        const unclosedSections = openSections - closedSections;
-        if (unclosedSections > 0) {
-          finalHtml += `\n</div></div></section>`.repeat(unclosedSections);
+      try {
+        const js = readFileSync(jsPath, "utf-8");
+        if (finalHtml.includes("</body>")) {
+          finalHtml = finalHtml.replace(
+            "</body>",
+            `  <script>\n${js}\n  </script>\n</body>`,
+          );
         }
-        finalHtml += `\n<script src="/js/presentation.js" defer></script>\n</body>\n</html>`;
+      } catch {
+        // Fallback to external script if JS file not found
+        if (finalHtml.includes("</body>")) {
+          finalHtml = finalHtml.replace(
+            "</body>",
+            `  <script src="/js/presentation.js" defer></script>\n</body>`,
+          );
+        }
       }
+    }
+
+    // Make all animated elements visible immediately in standalone decks
+    // (In-app, the IntersectionObserver handles this; standalone files need it baked in)
+    finalHtml = finalHtml.replace(
+      /class="([^"]*\b(anim|anim-scale|anim-blur)\b[^"]*)"/g,
+      (match, classes) => {
+        if (classes.includes("visible")) return match;
+        return `class="${classes} visible"`;
+      }
+    );
+    finalHtml = finalHtml.replace(
+      /class="([^"]*\bbar-fill\b[^"]*)"/g,
+      (match, classes) => {
+        if (classes.includes("animate")) return match;
+        return `class="${classes} animate"`;
+      }
+    );
+    // Add is-visible to chart containers so CSS animations trigger
+    finalHtml = finalHtml.replace(
+      /class="([^"]*\b(bar-chart|line-chart|donut-chart|sparkline)\b[^"]*)"/g,
+      (match, classes) => {
+        if (classes.includes("is-visible")) return match;
+        return `class="${classes} is-visible"`;
+      }
+    );
+    // Bake counter target values directly into text so they show without JS animation
+    finalHtml = finalHtml.replace(
+      /(<span[^>]*class="[^"]*stat-number[^"]*"[^>]*data-target="(\d+)"[^>]*>)(\d+)(<\/span>)/g,
+      (match, openTag, target, _currentText, closeTag) => {
+        return `${openTag}${target}${closeTag}`;
+      }
+    );
+    // Also handle data-prefix and data-suffix on counters
+    finalHtml = finalHtml.replace(
+      /(<span[^>]*class="[^"]*stat-number[^"]*"[^>]*data-target="(\d+)"[^>]*(?:data-prefix="([^"]*)")?[^>]*(?:data-suffix="([^"]*)")?[^>]*>)(\d+)(<\/span>)/g,
+      (match, openTag, target, prefix, suffix, _currentText, closeTag) => {
+        const val = parseInt(target).toLocaleString();
+        return `${openTag}${prefix || ""}${val}${suffix || ""}${closeTag}`;
+      }
+    );
+
+    // Fix unclosed sections if </body> was missing
+    if (!finalHtml.includes("</body>")) {
+      const openSections = (finalHtml.match(/<section/g) || []).length;
+      const closedSections = (finalHtml.match(/<\/section>/g) || []).length;
+      const unclosedSections = openSections - closedSections;
+      if (unclosedSections > 0) {
+        finalHtml += `\n</div></div></section>`.repeat(unclosedSections);
+      }
+      finalHtml += `\n</body>\n</html>`;
     }
 
     writeFileSync(join(decksDir, filename), finalHtml, "utf-8");
 
-    await db.presentation.create({
-      title: presentation.title,
-      subtitle: presentation.subtitle,
-      htmlPath,
-      slideCount: presentation.slideCount,
-      runId,
+    await prisma.presentation.create({
+      data: {
+        title: presentation.title,
+        subtitle: presentation.subtitle,
+        htmlPath,
+        slideCount: presentation.slideCount,
+        runId,
+      },
     });
 
     const endTime = new Date().toISOString();
@@ -429,16 +506,29 @@ export async function executePipeline(
 
       // Persist to DB
       try {
-        await db.irGraph.upsert({
-          runId,
-          tier: irGraph.metadata.investigationTier,
-          graph: JSON.stringify(irGraph),
-          findingCount: irGraph.findings.length,
-          emergenceCount: irGraph.emergences.length,
-          tensionCount: irGraph.tensions.length,
-          gapCount: irGraph.gaps.length,
-          qualityGrade: irGraph.quality?.grade,
-          overallScore: irGraph.quality?.overallScore,
+        await prisma.irGraph.upsert({
+          where: { runId },
+          create: {
+            runId,
+            tier: irGraph.metadata.investigationTier,
+            graph: JSON.stringify(irGraph),
+            findingCount: irGraph.findings.length,
+            emergenceCount: irGraph.emergences.length,
+            tensionCount: irGraph.tensions.length,
+            gapCount: irGraph.gaps.length,
+            qualityGrade: irGraph.quality?.grade,
+            overallScore: irGraph.quality?.overallScore,
+          },
+          update: {
+            tier: irGraph.metadata.investigationTier,
+            graph: JSON.stringify(irGraph),
+            findingCount: irGraph.findings.length,
+            emergenceCount: irGraph.emergences.length,
+            tensionCount: irGraph.tensions.length,
+            gapCount: irGraph.gaps.length,
+            qualityGrade: irGraph.quality?.grade,
+            overallScore: irGraph.quality?.overallScore,
+          },
         });
       } catch (err) {
         console.warn(`[EXECUTOR] Failed to persist IR graph:`, err);
@@ -469,10 +559,12 @@ export async function executePipeline(
       });
     }
 
-    await db.run.update(runId, {
-      status: "COMPLETE",
-      completedAt: new Date().toISOString(),
-      manifest: manifest as unknown as Record<string, unknown>,
+    await prisma.run.update({
+      where: { id: runId },
+      data: {
+        status: "COMPLETE",
+        completedAt: new Date(),
+      },
     });
 
     emitEvent({ type: "complete", manifest });
@@ -486,7 +578,7 @@ export async function executePipeline(
     cancelApproval(runId);
 
     try {
-      await db.run.update(runId, { status: isAbort ? "CANCELLED" : "FAILED" });
+      await prisma.run.update({ where: { id: runId }, data: { status: isAbort ? "CANCELLED" : "FAILED" } });
     } catch (dbErr) {
       console.error(`[EXECUTOR] Failed to update run status:`, dbErr);
     }
@@ -505,7 +597,7 @@ export async function executePipeline(
 }
 
 async function updateRunStatus(runId: string, status: string) {
-  await db.run.update(runId, { status });
+  await prisma.run.update({ where: { id: runId }, data: { status } });
 }
 
 async function persistSnapshot(
@@ -516,14 +608,16 @@ async function persistSnapshot(
 ) {
   const status = bus.getStatus();
   try {
-    await db.memoryBusSnapshot.create({
-      runId,
-      phase,
-      snapshot: bus.export(),
-      entryCount: status.entries,
-      signalCount: status.signals,
-      conflictCount: status.openConflicts + status.resolvedConflicts,
-      openConflictCount: status.openConflicts,
+    await prisma.memoryBusSnapshot.create({
+      data: {
+        runId,
+        phase,
+        snapshot: bus.export(),
+        entryCount: status.entries,
+        signalCount: status.signals,
+        conflictCount: status.openConflicts + status.resolvedConflicts,
+        openConflictCount: status.openConflicts,
+      },
     });
   } catch (err) {
     console.warn(`[EXECUTOR] Failed to persist MemoryBus snapshot (${phase}):`, err);
@@ -538,25 +632,28 @@ async function persistSnapshot(
 }
 
 async function persistBlueprint(runId: string, blueprint: Blueprint) {
-  await db.run.update(runId, {
-    tier: blueprint.tier,
-    complexityScore: Math.round(blueprint.complexityScore.total),
-    breadth: blueprint.complexityScore.breadth,
-    depth: blueprint.complexityScore.depth,
-    interconnection: blueprint.complexityScore.interconnection,
-    estimatedTime: blueprint.estimatedTime,
+  await prisma.run.update({
+    where: { id: runId },
+    data: {
+      tier: blueprint.tier,
+      complexityScore: Math.round(blueprint.complexityScore.total),
+      breadth: blueprint.complexityScore.breadth,
+      depth: blueprint.complexityScore.depth,
+      interconnection: blueprint.complexityScore.interconnection,
+      estimatedTime: blueprint.estimatedTime,
+    },
   });
 
-  await db.dimension.createMany(
-    blueprint.dimensions.map((dim) => ({
+  await prisma.dimension.createMany({
+    data: blueprint.dimensions.map((dim) => ({
       name: dim.name,
       description: dim.description,
       runId,
     })),
-  );
+  });
 
-  await db.agent.createMany(
-    blueprint.agents.map((agent) => ({
+  await prisma.agent.createMany({
+    data: blueprint.agents.map((agent) => ({
       name: agent.name,
       archetype: agent.archetype,
       mandate: agent.mandate,
@@ -564,5 +661,5 @@ async function persistBlueprint(runId: string, blueprint: Blueprint) {
       dimension: agent.dimension,
       runId,
     })),
-  );
+  });
 }

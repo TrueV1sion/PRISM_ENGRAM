@@ -1,5 +1,5 @@
 import { executePipeline } from "@/lib/pipeline/executor";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { pipelineRateLimiter } from "@/lib/rate-limit";
 import type { PipelineEvent, AutonomyMode } from "@/lib/pipeline/types";
 
@@ -202,7 +202,11 @@ export async function GET(request: Request) {
       }
 
       try {
-        await db.run.upsert(runId, { query, status: "INITIALIZE" });
+        await prisma.run.upsert({
+          where: { id: runId },
+          create: { id: runId, query, status: "INITIALIZE" },
+          update: { query, status: "INITIALIZE" },
+        });
 
         await executePipeline({
           query,
@@ -216,7 +220,11 @@ export async function GET(request: Request) {
         send("error", { error: message, phase: "pipeline" });
       } finally {
         clearInterval(heartbeat);
-        controller.close();
+        try {
+          controller.close();
+        } catch {
+          // Stream already cancelled by client disconnect — safe to ignore
+        }
       }
     },
     cancel() {

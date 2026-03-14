@@ -14,6 +14,7 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { EdgarApiClient } from "./api-client.js";
 import {
@@ -23,8 +24,13 @@ import {
   DEFAULT_FILINGS_LIMIT,
 } from "./constants.js";
 
-// ─── Server Setup ────────────────────────────────────────────
+// ─── Shared Client ───────────────────────────────────────────
 
+const apiClient = new EdgarApiClient();
+
+// ─── Server Factory ─────────────────────────────────────────
+
+function createServer(): McpServer {
 const server = new McpServer(
   {
     name: "sec-edgar-mcp-server",
@@ -36,8 +42,6 @@ const server = new McpServer(
     },
   },
 );
-
-const apiClient = new EdgarApiClient();
 
 // ─── Tool: edgar_search_filings ──────────────────────────────
 
@@ -339,24 +343,31 @@ function errorResult(toolName: string, error: unknown) {
   };
 }
 
+  return server;
+}
+
 // ─── Transport & Startup ─────────────────────────────────────
 
 async function main() {
   const transportMode = process.env.MCP_TRANSPORT ?? "stdio";
 
   if (transportMode === "stdio") {
+    const server = createServer();
     const transport = new StdioServerTransport();
     await server.connect(transport);
     console.error("SEC EDGAR MCP Server running on stdio");
   } else if (transportMode === "http") {
-    // HTTP/SSE transport: dynamically import to avoid requiring the module
-    // when running in stdio mode
     const { StreamableHTTPServerTransport } = await import(
       "@modelcontextprotocol/sdk/server/streamableHttp.js"
     );
     const http = await import("node:http");
 
     const port = parseInt(process.env.MCP_PORT ?? "3100", 10);
+
+    const sessions = new Map<
+      string,
+      { transport: InstanceType<typeof StreamableHTTPServerTransport>; server: McpServer }
+    >();
 
     const httpServer = http.createServer(async (req, res) => {
       // Health check
@@ -368,10 +379,38 @@ async function main() {
 
       // MCP endpoint
       if (req.url === "/mcp" || req.url === "/") {
+        const sessionId = req.headers["mcp-session-id"] as string | undefined;
+
+        if (sessionId && sessions.has(sessionId)) {
+          const session = sessions.get(sessionId)!;
+          await session.transport.handleRequest(req, res);
+          return;
+        }
+
         const transport = new StreamableHTTPServerTransport({
-          sessionIdGenerator: undefined,
+          sessionIdGenerator: () => randomUUID(),
+          onsessioninitialized: (newSessionId: string) => {
+            sessions.set(newSessionId, { transport, server: mcpServer });
+            console.error(
+              `[sec-edgar-mcp] Session started: ${newSessionId} (${sessions.size} active)`,
+            );
+          },
         });
-        await server.connect(transport);
+
+        const mcpServer = createServer();
+        await mcpServer.connect(transport);
+
+        transport.onclose = () => {
+          const sid = transport.sessionId;
+          if (sid) {
+            sessions.delete(sid);
+            console.error(
+              `[sec-edgar-mcp] Session closed: ${sid} (${sessions.size} active)`,
+            );
+          }
+          mcpServer.close().catch(() => {});
+        };
+
         await transport.handleRequest(req, res);
         return;
       }

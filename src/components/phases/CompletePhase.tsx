@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Library,
   Sparkles,
+  Download,
 } from "lucide-react";
 import type { SynthesisLayer } from "@/lib/types";
 import type { StreamEmergence, QualityReport } from "@/hooks/use-research-stream";
@@ -32,6 +33,7 @@ interface CompletePhaseProps {
   emergences: StreamEmergence[];
   onNewAnalysis: () => void;
   onViewBrief: () => void;
+  onDownloadBrief: () => void;
   onBrowseLibrary: () => void;
 }
 
@@ -46,6 +48,7 @@ export default function CompletePhase({
   emergences,
   onNewAnalysis,
   onViewBrief,
+  onDownloadBrief,
   onBrowseLibrary,
 }: CompletePhaseProps) {
   return (
@@ -205,6 +208,13 @@ export default function CompletePhase({
               <Sparkles className="w-4 h-4" />
               View Cinematic Brief
               <ChevronRight className="w-4 h-4" />
+            </button>
+          )}
+
+          {!hasError && (
+            <button onClick={onDownloadBrief} className="prism-button-secondary px-5 py-2.5 text-sm">
+              <Download className="w-4 h-4" />
+              Download Brief
             </button>
           )}
 

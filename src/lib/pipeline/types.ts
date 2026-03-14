@@ -139,11 +139,11 @@ export const AgentResultSchema = z.object({
   agentName: z.string(),
   archetype: z.string(),
   dimension: z.string(),
-  findings: z.array(AgentFindingSchema),
-  gaps: z.array(z.string()),
-  signals: z.array(z.string()),
+  findings: z.array(AgentFindingSchema).default([]),
+  gaps: z.array(z.string()).default([]),
+  signals: z.array(z.string()).default([]),
   minorityViews: z.array(z.string()).default([]),
-  toolsUsed: z.array(z.string()),
+  toolsUsed: z.array(z.string()).default([]),
   tokensUsed: z.number(),
 });
 export type AgentResult = z.infer<typeof AgentResultSchema>;

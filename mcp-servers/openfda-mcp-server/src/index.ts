@@ -10,6 +10,7 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 
 import {
@@ -26,19 +27,24 @@ import {
   ADVERSE_EVENT_COUNT_FIELDS,
 } from "./constants.js";
 
-// ─── Server Setup ────────────────────────────────────────────
+// ─── Server Factory ──────────────────────────────────────────
 
-const server = new McpServer(
-  {
-    name: "openfda",
-    version: "1.0.0",
-  },
-  {
-    capabilities: {
-      tools: {},
+/**
+ * Creates a fresh McpServer instance with all tools registered.
+ * Called per-session in HTTP mode so each client gets its own server.
+ */
+function createServer(): McpServer {
+  const server = new McpServer(
+    {
+      name: "openfda",
+      version: "1.0.0",
     },
-  },
-);
+    {
+      capabilities: {
+        tools: {},
+      },
+    },
+  );
 
 // ─── Tool: Search Drug Labels ────────────────────────────────
 
@@ -875,19 +881,29 @@ server.registerTool(
   },
 );
 
+  return server;
+}
+
 // ─── Transport & Startup ─────────────────────────────────────
 
 async function main(): Promise<void> {
-  const transport = process.env.TRANSPORT?.toLowerCase();
+  const transportMode = process.env.TRANSPORT?.toLowerCase();
 
-  if (transport === "http" || transport === "streamable-http") {
-    // Dynamic import to avoid pulling in HTTP dependencies when using stdio
+  if (transportMode === "http" || transportMode === "streamable-http") {
     const { StreamableHTTPServerTransport } = await import(
       "@modelcontextprotocol/sdk/server/streamableHttp.js"
     );
     const http = await import("node:http");
 
     const port = parseInt(process.env.PORT ?? "3001", 10);
+
+    // Track active sessions so existing clients reuse their transport.
+    // Each session gets its own McpServer + Transport pair, which is the
+    // SDK-recommended pattern for multi-session HTTP servers.
+    const sessions = new Map<
+      string,
+      { transport: InstanceType<typeof StreamableHTTPServerTransport>; server: McpServer }
+    >();
 
     const httpServer = http.createServer(async (req, res) => {
       // Health check endpoint
@@ -897,13 +913,46 @@ async function main(): Promise<void> {
         return;
       }
 
-      // MCP endpoint
+      // MCP endpoint — route by session
       if (req.url === "/mcp" || req.url === "/") {
-        const sessionTransport = new StreamableHTTPServerTransport({
-          sessionIdGenerator: undefined,
+        const sessionId = req.headers["mcp-session-id"] as string | undefined;
+
+        if (sessionId && sessions.has(sessionId)) {
+          // Existing session — route to its transport
+          const session = sessions.get(sessionId)!;
+          await session.transport.handleRequest(req, res);
+          return;
+        }
+
+        // New connection — create a fresh McpServer + Transport pair.
+        // The transport validates the request is an initialize message;
+        // non-initialize requests without a valid session ID are rejected.
+        const transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: () => randomUUID(),
+          onsessioninitialized: (newSessionId: string) => {
+            sessions.set(newSessionId, { transport, server: mcpServer });
+            console.error(
+              `[openfda-mcp] Session started: ${newSessionId} (${sessions.size} active)`,
+            );
+          },
         });
-        await server.connect(sessionTransport);
-        await sessionTransport.handleRequest(req, res);
+
+        const mcpServer = createServer();
+        await mcpServer.connect(transport);
+
+        // Clean up when the session's transport closes
+        transport.onclose = () => {
+          const sid = transport.sessionId;
+          if (sid) {
+            sessions.delete(sid);
+            console.error(
+              `[openfda-mcp] Session closed: ${sid} (${sessions.size} active)`,
+            );
+          }
+          mcpServer.close().catch(() => {});
+        };
+
+        await transport.handleRequest(req, res);
         return;
       }
 
@@ -918,7 +967,8 @@ async function main(): Promise<void> {
       );
     });
   } else {
-    // Default: stdio transport
+    // Default: stdio transport (single session is fine)
+    const server = createServer();
     const stdioTransport = new StdioServerTransport();
     await server.connect(stdioTransport);
     console.error("[openfda-mcp] Server running on stdio transport");

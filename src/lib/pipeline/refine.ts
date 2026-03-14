@@ -394,8 +394,13 @@ async function deployNudgeAgent(
       return null;
     }
 
-    // Validate output
+    // Validate output — default missing arrays to prevent Zod failures
     const rawResult = toolUseBlock.input as Record<string, unknown>;
+    if (!Array.isArray(rawResult.findings)) rawResult.findings = [];
+    if (!Array.isArray(rawResult.gaps)) rawResult.gaps = [];
+    if (!Array.isArray(rawResult.signals)) rawResult.signals = [];
+    if (!Array.isArray(rawResult.minorityViews)) rawResult.minorityViews = [];
+    if (!Array.isArray(rawResult.toolsUsed)) rawResult.toolsUsed = [];
     const result = AgentResultSchema.parse({
       ...rawResult,
       agentName,

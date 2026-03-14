@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 
 export async function POST() {
-  await db.settings.upsert("default", { hasCompletedTour: true });
+  await prisma.settings.upsert({
+    where: { id: "default" },
+    update: { hasCompletedTour: true },
+    create: { id: "default", hasCompletedTour: true },
+  });
 
   return NextResponse.json({ ok: true });
 }

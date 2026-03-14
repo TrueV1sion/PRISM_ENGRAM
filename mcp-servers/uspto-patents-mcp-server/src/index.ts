@@ -33,21 +33,9 @@ import {
   HEALTHCARE_CPC_SECTIONS,
 } from "./constants.js";
 
-// ─── Initialization ─────────────────────────────────────────
+// ─── Shared Client ──────────────────────────────────────────
 
 const client = new PatentsViewClient();
-
-const server = new McpServer(
-  {
-    name: "uspto-patents-mcp-server",
-    version: "1.0.0",
-  },
-  {
-    capabilities: {
-      tools: {},
-    },
-  },
-);
 
 // ─── Helpers ────────────────────────────────────────────────
 
@@ -218,6 +206,21 @@ function formatCitations(patent: Record<string, unknown>): string {
 
   return parts.join("\n");
 }
+
+// ─── Server Factory ─────────────────────────────────────────
+
+function createMcpServer(): McpServer {
+const server = new McpServer(
+  {
+    name: "uspto-patents-mcp-server",
+    version: "1.0.0",
+  },
+  {
+    capabilities: {
+      tools: {},
+    },
+  },
+);
 
 // ─── Tool: patents_search ───────────────────────────────────
 
@@ -851,43 +854,10 @@ server.registerTool(
   },
 );
 
+  return server;
+}
+
 // ─── Transport & Startup ────────────────────────────────────
-
-async function startStdio(): Promise<void> {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error("[USPTO Patents MCP] Running on stdio transport");
-}
-
-async function startHttp(port: number): Promise<void> {
-  const httpServer = createServer(async (req, res) => {
-    // Health check endpoint
-    if (req.method === "GET" && req.url === "/health") {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ status: "ok", server: "uspto-patents-mcp-server" }));
-      return;
-    }
-
-    // MCP endpoint
-    if (req.url === "/mcp" || req.url === "/") {
-      const transport = new StreamableHTTPServerTransport({
-        sessionIdGenerator: () => randomUUID(),
-      });
-      await server.connect(transport);
-      await transport.handleRequest(req, res);
-      return;
-    }
-
-    res.writeHead(404);
-    res.end("Not found");
-  });
-
-  httpServer.listen(port, () => {
-    console.error(
-      `[USPTO Patents MCP] HTTP server listening on port ${port}`,
-    );
-  });
-}
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
@@ -897,9 +867,72 @@ async function main(): Promise<void> {
     const portIndex = args.indexOf("--port");
     const port =
       portIndex !== -1 ? parseInt(args[portIndex + 1], 10) : 3100;
-    await startHttp(port);
+
+    const sessions = new Map<
+      string,
+      { transport: InstanceType<typeof StreamableHTTPServerTransport>; server: McpServer }
+    >();
+
+    const httpServer = createServer(async (req, res) => {
+      // Health check endpoint
+      if (req.method === "GET" && req.url === "/health") {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ status: "ok", server: "uspto-patents-mcp-server" }));
+        return;
+      }
+
+      // MCP endpoint
+      if (req.url === "/mcp" || req.url === "/") {
+        const sessionId = req.headers["mcp-session-id"] as string | undefined;
+
+        if (sessionId && sessions.has(sessionId)) {
+          const session = sessions.get(sessionId)!;
+          await session.transport.handleRequest(req, res);
+          return;
+        }
+
+        const transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: () => randomUUID(),
+          onsessioninitialized: (newSessionId: string) => {
+            sessions.set(newSessionId, { transport, server: mcpServer });
+            console.error(
+              `[USPTO Patents MCP] Session started: ${newSessionId} (${sessions.size} active)`,
+            );
+          },
+        });
+
+        const mcpServer = createMcpServer();
+        await mcpServer.connect(transport);
+
+        transport.onclose = () => {
+          const sid = transport.sessionId;
+          if (sid) {
+            sessions.delete(sid);
+            console.error(
+              `[USPTO Patents MCP] Session closed: ${sid} (${sessions.size} active)`,
+            );
+          }
+          mcpServer.close().catch(() => {});
+        };
+
+        await transport.handleRequest(req, res);
+        return;
+      }
+
+      res.writeHead(404);
+      res.end("Not found");
+    });
+
+    httpServer.listen(port, () => {
+      console.error(
+        `[USPTO Patents MCP] HTTP server listening on port ${port}`,
+      );
+    });
   } else {
-    await startStdio();
+    const server = createMcpServer();
+    const transport = new StdioServerTransport();
+    await server.connect(transport);
+    console.error("[USPTO Patents MCP] Running on stdio transport");
   }
 }
 

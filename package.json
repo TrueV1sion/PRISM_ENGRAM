@@ -11,16 +11,24 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "type-check": "tsc --noEmit",
-    "ci": "npm run lint && npm run type-check && npm run test && npm run build"
+    "ci": "npm run lint && npm run type-check && npm run test && npm run build",
+    "spec:compile": "npx tsx scripts/compile-presentation-spec.ts",
+    "spec:watch": "npx tsx --watch scripts/compile-presentation-spec.ts",
+    "mcp:start": "bash scripts/start-mcp-servers.sh start",
+    "mcp:stop": "bash scripts/start-mcp-servers.sh stop",
+    "mcp:status": "bash scripts/start-mcp-servers.sh status",
+    "mcp:restart": "bash scripts/start-mcp-servers.sh restart"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
     "@modelcontextprotocol/sdk": "^1.27.1",
-    "@supabase/supabase-js": "^2.99.0",
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "^7.4.2",
     "dotenv": "^17.3.1",
     "framer-motion": "^12.34.3",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
+    "pg": "^8.20.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "zod": "^4.3.6"
@@ -40,7 +48,8 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.0.18",
-    "vitest-mock-extended": "^3.1.0"
+    "vitest-mock-extended": "^3.1.0",
+    "yaml": "^2.8.2"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

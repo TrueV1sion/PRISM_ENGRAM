@@ -14,6 +14,7 @@ import {
   Hexagon,
   FileText,
   Sparkles,
+  Download,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -230,17 +231,32 @@ export default function HistoryPage() {
                       </div>
                       <span className={`text-[10px] font-mono uppercase tracking-[0.08em] ${sc.color}`}>{sc.label}</span>
                       {run.presentation && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(run.presentation!.htmlPath, "_blank");
-                          }}
-                          className="prism-button-secondary px-3 py-1.5 text-[11px]"
-                        >
-                          <Sparkles className="w-3 h-3" />
-                          View Brief
-                          <span className="text-[9px] text-prism-sky/70">{run.presentation.slideCount} slides</span>
-                        </button>
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(run.presentation!.htmlPath, "_blank");
+                            }}
+                            className="prism-button-secondary px-3 py-1.5 text-[11px]"
+                          >
+                            <Sparkles className="w-3 h-3" />
+                            View Brief
+                            <span className="text-[9px] text-prism-sky/70">{run.presentation.slideCount} slides</span>
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const a = document.createElement("a");
+                              a.href = run.presentation!.htmlPath;
+                              a.download = run.presentation!.htmlPath.split("/").pop() || "brief.html";
+                              a.click();
+                            }}
+                            className="p-1.5 rounded-lg border border-white/10 text-prism-muted hover:text-white hover:border-white/20 hover:bg-white/5 transition-colors"
+                            title="Download brief"
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       )}
                     </div>
                   </div>

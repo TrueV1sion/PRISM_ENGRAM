@@ -1,14 +1,14 @@
 /**
  * GET /api/presentation/[runId]
- *
+ * 
  * Serves the generated HTML5 presentation for a completed run.
  * Looks up the Presentation record and reads the HTML file from public/decks/.
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { readFileSync } from "fs";
-import { resolve, sep } from "path";
+import { join } from "path";
 
 export async function GET(
     _req: NextRequest,
@@ -16,7 +16,9 @@ export async function GET(
 ) {
     const { runId } = await params;
 
-    const presentation = await db.presentation.findByRunId(runId);
+    const presentation = await prisma.presentation.findUnique({
+        where: { runId },
+    });
 
     if (!presentation) {
         return NextResponse.json(
@@ -26,14 +28,7 @@ export async function GET(
     }
 
     try {
-        const decksDir = resolve(process.cwd(), "public", "decks");
-        const filePath = resolve(process.cwd(), "public", presentation.htmlPath);
-        if (!filePath.startsWith(decksDir + sep)) {
-            return NextResponse.json(
-                { error: "Forbidden" },
-                { status: 403 },
-            );
-        }
+        const filePath = join(process.cwd(), "public", presentation.htmlPath);
         const html = readFileSync(filePath, "utf-8");
 
         return new NextResponse(html, {

@@ -1,12 +1,15 @@
+/**
+ * POST /api/pipeline/refine -- Phase 5: Refine an existing analysis.
+ *
+ * Accepts a nudge (user refinement request) and the original runId,
+ * deploys focused agents, synthesizes new findings, and optionally
+ * generates an updated presentation.
+ */
+
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { refine } from "@/lib/pipeline/refine";
 import type { IntelligenceManifest, PipelineEvent } from "@/lib/pipeline/types";
-
-function safeParseJson<T>(json: string | null, fallback: T): T {
-  try { return JSON.parse(json ?? "null") ?? fallback; }
-  catch { return fallback; }
-}
 
 export async function POST(request: Request) {
   try {
@@ -20,7 +23,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const run = await db.run.findUniqueWithRelations(runId);
+    // Load the original run with all related data
+    const run = await prisma.run.findUnique({
+      where: { id: runId },
+      include: {
+        agents: { include: { findings: true } },
+        synthesis: { orderBy: { order: "asc" } },
+        presentation: true,
+        dimensions: true,
+      },
+    });
 
     if (!run) {
       return NextResponse.json(
@@ -29,30 +41,13 @@ export async function POST(request: Request) {
       );
     }
 
-    if (run.manifest) {
-      const events: PipelineEvent[] = [];
-      const result = await refine({
-        nudge,
-        originalManifest: run.manifest as IntelligenceManifest,
-        emitEvent: (event) => events.push(event),
-      });
-
-      return NextResponse.json({
-        success: true,
-        nudgeType: result.nudgeType,
-        newFindings: result.newAgentResults.flatMap((r) => r.findings).length,
-        updatedLayers: result.updatedSynthesis.layers.length,
-      });
-    }
-
-    const dimensions = run.dimensions ?? [];
-    const agents = run.agents ?? [];
-    const synthesisList = run.synthesis ?? [];
-
+    // Reconstruct a minimal manifest from database records.
+    // The full manifest would normally be cached — this is a fallback.
+    // For v1, we pass what we have and let refine handle partial data.
     const manifest: IntelligenceManifest = {
       blueprint: {
         query: run.query,
-        dimensions: dimensions.map((d) => ({
+        dimensions: run.dimensions.map((d) => ({
           name: d.name,
           description: d.description,
           justification: "",
@@ -60,12 +55,12 @@ export async function POST(request: Request) {
           lens: "",
           signalMatch: "",
         })),
-        agents: agents.map((a) => ({
+        agents: run.agents.map((a) => ({
           name: a.name,
           archetype: a.archetype ?? "",
           dimension: a.dimension ?? "",
           mandate: a.mandate ?? "",
-          tools: safeParseJson<string[]>(a.tools, []),
+          tools: JSON.parse(a.tools ?? "[]"),
           lens: "",
           bias: "",
         })),
@@ -83,11 +78,11 @@ export async function POST(request: Request) {
         estimatedTime: run.estimatedTime ?? "",
         ethicalConcerns: [],
       },
-      agentResults: agents.map((a) => ({
+      agentResults: run.agents.map((a) => ({
         agentName: a.name,
         archetype: a.archetype ?? "",
         dimension: a.dimension ?? "",
-        findings: (a.findings ?? []).map((f) => ({
+        findings: a.findings.map((f) => ({
           statement: f.statement,
           evidence: f.evidence ?? "",
           confidence: (f.confidence as "HIGH" | "MEDIUM" | "LOW") ?? "MEDIUM",
@@ -95,19 +90,19 @@ export async function POST(request: Request) {
           evidenceType: (f.evidenceType as "direct" | "inferred" | "analogical" | "modeled") ?? "inferred",
           source: f.source ?? "",
           implication: f.implication ?? "",
-          tags: safeParseJson<string[]>(f.tags, []),
+          tags: JSON.parse(f.tags ?? "[]"),
         })),
         gaps: [],
         signals: [],
         minorityViews: [],
-        toolsUsed: safeParseJson<string[]>(a.tools, []),
+        toolsUsed: JSON.parse(a.tools ?? "[]"),
         tokensUsed: 0,
       })),
       synthesis: {
-        layers: synthesisList.map((s) => ({
+        layers: run.synthesis.map((s) => ({
           name: s.layerName as "foundation" | "convergence" | "tension" | "emergence" | "gap",
           description: s.description,
-          insights: safeParseJson<string[]>(s.insights, []),
+          insights: JSON.parse(s.insights),
         })),
         emergentInsights: [],
         tensionPoints: [],
@@ -123,7 +118,7 @@ export async function POST(request: Request) {
           }
         : { html: "", title: "", subtitle: "", slideCount: 0 },
       qualityReport: {
-        totalFindings: agents.reduce((sum, a) => sum + (a.findings ?? []).length, 0),
+        totalFindings: run.agents.reduce((sum, a) => sum + a.findings.length, 0),
         sourcedFindings: 0,
         sourceCoveragePercent: 0,
         confidenceDistribution: { high: 0, medium: 0, low: 0 },
@@ -134,8 +129,8 @@ export async function POST(request: Request) {
       },
       metadata: {
         runId,
-        startTime: run.createdAt ?? new Date().toISOString(),
-        endTime: run.completedAt ?? new Date().toISOString(),
+        startTime: run.createdAt.toISOString(),
+        endTime: run.completedAt?.toISOString() ?? new Date().toISOString(),
         totalTokens: 0,
         totalCost: 0,
       },

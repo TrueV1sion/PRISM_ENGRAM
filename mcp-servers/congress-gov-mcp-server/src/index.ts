@@ -13,8 +13,9 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createServer, IncomingMessage, ServerResponse } from "node:http";
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 
 import { CongressApiClient, CongressApiClientError } from "./api-client.js";
@@ -38,14 +39,22 @@ import {
 
 const CONGRESS_API_KEY = process.env.CONGRESS_API_KEY;
 if (!CONGRESS_API_KEY) {
-  console.error(
-    "ERROR: CONGRESS_API_KEY environment variable is required.\n" +
+  console.warn(
+    "WARNING: CONGRESS_API_KEY not set. Server will start but tools will return errors.\n" +
       "Get a free API key at https://api.congress.gov/sign-up/"
   );
-  process.exit(1);
 }
 
-const apiClient = new CongressApiClient(CONGRESS_API_KEY);
+const apiClient = CONGRESS_API_KEY ? new CongressApiClient(CONGRESS_API_KEY) : null;
+
+function requireApiClient(): CongressApiClient {
+  if (!apiClient) {
+    throw new Error(
+      "CONGRESS_API_KEY not configured. Get a free key at https://api.congress.gov/sign-up/"
+    );
+  }
+  return apiClient;
+}
 
 // ─── Helpers ────────────────────────────────────────────────
 
@@ -332,8 +341,9 @@ function formatHearing(hearing: unknown): string {
   return lines.join("\n");
 }
 
-// ─── MCP Server Setup ───────────────────────────────────────
+// ─── Server Factory ─────────────────────────────────────────
 
+function createMcpServer(): McpServer {
 const server = new McpServer(
   {
     name: SERVER_NAME,
@@ -405,7 +415,7 @@ server.registerTool(
   },
   async (args) => {
     try {
-      const data = await apiClient.searchBills({
+      const data = await requireApiClient().searchBills({
         query: args.query,
         congress: args.congress,
         billType: args.bill_type,
@@ -484,12 +494,12 @@ server.registerTool(
       // Fetch bill details and supplementary data in parallel
       const [billData, actionsData, committeesData, cosponsorsData, subjectsData, relatedData] =
         await Promise.allSettled([
-          apiClient.getBill(args.congress, args.bill_type, args.bill_number),
-          apiClient.getBillActions(args.congress, args.bill_type, args.bill_number, 10),
-          apiClient.getBillCommittees(args.congress, args.bill_type, args.bill_number),
-          apiClient.getBillCosponsors(args.congress, args.bill_type, args.bill_number),
-          apiClient.getBillSubjects(args.congress, args.bill_type, args.bill_number),
-          apiClient.getBillRelatedBills(args.congress, args.bill_type, args.bill_number),
+          requireApiClient().getBill(args.congress, args.bill_type, args.bill_number),
+          requireApiClient().getBillActions(args.congress, args.bill_type, args.bill_number, 10),
+          requireApiClient().getBillCommittees(args.congress, args.bill_type, args.bill_number),
+          requireApiClient().getBillCosponsors(args.congress, args.bill_type, args.bill_number),
+          requireApiClient().getBillSubjects(args.congress, args.bill_type, args.bill_number),
+          requireApiClient().getBillRelatedBills(args.congress, args.bill_type, args.bill_number),
         ]);
 
       if (billData.status === "rejected") {
@@ -642,7 +652,7 @@ server.registerTool(
   },
   async (args) => {
     try {
-      const data = await apiClient.getBillActions(
+      const data = await requireApiClient().getBillActions(
         args.congress,
         args.bill_type,
         args.bill_number,
@@ -721,7 +731,7 @@ server.registerTool(
   },
   async (args) => {
     try {
-      const data = await apiClient.searchMembers({
+      const data = await requireApiClient().searchMembers({
         query: args.query,
         state: args.state,
         party: args.party,
@@ -811,7 +821,7 @@ server.registerTool(
   },
   async (args) => {
     try {
-      const data = await apiClient.searchCommittees({
+      const data = await requireApiClient().searchCommittees({
         query: args.query,
         chamber: args.chamber,
         limit: args.limit,
@@ -890,7 +900,7 @@ server.registerTool(
   },
   async (args) => {
     try {
-      const data = await apiClient.searchHearings({
+      const data = await requireApiClient().searchHearings({
         query: args.query,
         congress: args.congress,
         chamber: args.chamber,
@@ -929,6 +939,9 @@ server.registerTool(
   }
 );
 
+  return server;
+}
+
 // ─── Transport Selection & Startup ──────────────────────────
 
 async function main(): Promise<void> {
@@ -936,74 +949,76 @@ async function main(): Promise<void> {
   const useHttp = args.includes("--http");
 
   if (useHttp) {
-    // HTTP/SSE transport mode
     const portFlag = args.find((a) => a.startsWith("--port="));
-    const port = portFlag ? parseInt(portFlag.split("=")[1]!, 10) : 3002;
+    const portIndex = args.indexOf("--port");
+    const port = portFlag
+      ? parseInt(portFlag.split("=")[1]!, 10)
+      : portIndex !== -1 && args[portIndex + 1]
+        ? parseInt(args[portIndex + 1], 10)
+        : 3014;
 
-    // Track active SSE transports by session ID
-    const transports = new Map<string, SSEServerTransport>();
+    const sessions = new Map<
+      string,
+      { transport: InstanceType<typeof StreamableHTTPServerTransport>; server: McpServer }
+    >();
 
     const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse) => {
-      const url = new URL(req.url ?? "/", `http://localhost:${port}`);
-
-      // CORS headers
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-      if (req.method === "OPTIONS") {
-        res.writeHead(204);
-        res.end();
-        return;
-      }
-
       // Health check
-      if (url.pathname === "/health" && req.method === "GET") {
+      if (req.url === "/health" && req.method === "GET") {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ status: "ok", server: SERVER_NAME, version: SERVER_VERSION }));
         return;
       }
 
-      // SSE endpoint - client connects here for events
-      if (url.pathname === "/sse" && req.method === "GET") {
-        const transport = new SSEServerTransport("/messages", res);
-        transports.set(transport.sessionId, transport);
+      // MCP endpoint
+      if (req.url === "/mcp" || req.url === "/") {
+        const sessionId = req.headers["mcp-session-id"] as string | undefined;
 
-        transport.onclose = () => {
-          transports.delete(transport.sessionId);
-        };
-
-        await server.connect(transport);
-        return;
-      }
-
-      // Message endpoint - client POSTs JSON-RPC messages here
-      if (url.pathname === "/messages" && req.method === "POST") {
-        const sessionId = url.searchParams.get("sessionId");
-        if (!sessionId || !transports.has(sessionId)) {
-          res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Invalid or missing sessionId" }));
+        if (sessionId && sessions.has(sessionId)) {
+          const session = sessions.get(sessionId)!;
+          await session.transport.handleRequest(req, res);
           return;
         }
 
-        const transport = transports.get(sessionId)!;
-        await transport.handlePostMessage(req, res);
+        const transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: () => randomUUID(),
+          onsessioninitialized: (newSessionId: string) => {
+            sessions.set(newSessionId, { transport, server: mcpServer });
+            console.error(
+              `[${SERVER_NAME}] Session started: ${newSessionId} (${sessions.size} active)`,
+            );
+          },
+        });
+
+        const mcpServer = createMcpServer();
+        await mcpServer.connect(transport);
+
+        transport.onclose = () => {
+          const sid = transport.sessionId;
+          if (sid) {
+            sessions.delete(sid);
+            console.error(
+              `[${SERVER_NAME}] Session closed: ${sid} (${sessions.size} active)`,
+            );
+          }
+          mcpServer.close().catch(() => {});
+        };
+
+        await transport.handleRequest(req, res);
         return;
       }
 
-      // 404 for unknown routes
-      res.writeHead(404, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: "Not found" }));
+      res.writeHead(404);
+      res.end("Not found");
     });
 
     httpServer.listen(port, () => {
       console.error(`${SERVER_NAME} v${SERVER_VERSION} running on http://localhost:${port}`);
-      console.error(`  SSE endpoint: http://localhost:${port}/sse`);
-      console.error(`  Message endpoint: http://localhost:${port}/messages`);
+      console.error(`  MCP endpoint: http://localhost:${port}/mcp`);
       console.error(`  Health check: http://localhost:${port}/health`);
     });
   } else {
-    // Stdio transport mode (default)
+    const server = createMcpServer();
     const transport = new StdioServerTransport();
     await server.connect(transport);
     console.error(`${SERVER_NAME} v${SERVER_VERSION} running on stdio`);

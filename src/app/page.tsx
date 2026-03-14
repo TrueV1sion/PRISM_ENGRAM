@@ -277,6 +277,14 @@ export default function Home() {
           alert("No presentation was generated for this analysis. Try running a new analysis.");
         }
       }}
+      onDownloadBrief={() => {
+        if (stream.completionData?.presentationPath) {
+          const a = document.createElement("a");
+          a.href = stream.completionData.presentationPath;
+          a.download = stream.completionData.presentationPath.split("/").pop() || "brief.html";
+          a.click();
+        }
+      }}
       onBrowseLibrary={() => setPhase("library")}
     />
   ) : effectivePhase === "library" ? (

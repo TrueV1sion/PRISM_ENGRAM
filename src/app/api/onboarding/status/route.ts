@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
-    const settings = await db.settings.findUnique("default");
+    const settings = await prisma.settings.findUnique({
+      where: { id: "default" },
+    });
 
     const anthropicEnv = !!process.env.ANTHROPIC_API_KEY;
     const openaiEnv = !!process.env.OPENAI_API_KEY;
@@ -12,7 +14,7 @@ export async function GET() {
     let openaiDb = false;
 
     try {
-      const keys = await db.apiKey.findMany();
+      const keys = await prisma.apiKey.findMany();
       anthropicDb = keys.some((k) => k.provider === "anthropic");
       openaiDb = keys.some((k) => k.provider === "openai");
     } catch {

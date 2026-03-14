@@ -7,16 +7,11 @@
  */
 
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { present } from "@/lib/pipeline/present";
 import type { PipelineEvent } from "@/lib/pipeline/types";
-import { writeFileSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
-
-function safeParseJson<T>(json: string | null, fallback: T): T {
-  try { return JSON.parse(json ?? "null") ?? fallback; }
-  catch { return fallback; }
-}
 
 export async function POST(request: Request) {
   try {
@@ -28,19 +23,23 @@ export async function POST(request: Request) {
     }
 
     // Load run data from database
-    const run = await db.run.findUniqueWithRelations(runId);
+    const run = await prisma.run.findUnique({
+      where: { id: runId },
+      include: {
+        agents: { include: { findings: true } },
+        synthesis: { orderBy: { order: "asc" } },
+        dimensions: true,
+      },
+    });
 
     if (!run) {
       return NextResponse.json({ error: "Run not found" }, { status: 404 });
     }
 
-    const dimensions = run.dimensions ?? [];
-    const agents = run.agents ?? [];
-    const synthesisList = run.synthesis ?? [];
-
+    // Reconstruct the data structures needed for present()
     const blueprint = {
       query: run.query,
-      dimensions: dimensions.map((d) => ({
+      dimensions: run.dimensions.map((d) => ({
         name: d.name,
         description: d.description,
         justification: "",
@@ -48,12 +47,12 @@ export async function POST(request: Request) {
         lens: "",
         signalMatch: "",
       })),
-      agents: agents.map((a) => ({
+      agents: run.agents.map((a) => ({
         name: a.name,
         archetype: a.archetype ?? "",
         dimension: a.dimension ?? "",
         mandate: a.mandate ?? "",
-        tools: safeParseJson<string[]>(a.tools, []),
+        tools: JSON.parse(a.tools ?? "[]") as string[],
         lens: "",
         bias: "",
       })),
@@ -72,11 +71,11 @@ export async function POST(request: Request) {
       ethicalConcerns: [] as string[],
     };
 
-    const agentResults = agents.map((a) => ({
+    const agentResults = run.agents.map((a) => ({
       agentName: a.name,
       archetype: a.archetype ?? "",
       dimension: a.dimension ?? "",
-      findings: (a.findings ?? []).map((f) => ({
+      findings: a.findings.map((f) => ({
         statement: f.statement,
         evidence: f.evidence ?? "",
         confidence: (f.confidence ?? "MEDIUM") as "HIGH" | "MEDIUM" | "LOW",
@@ -84,20 +83,20 @@ export async function POST(request: Request) {
         evidenceType: (f.evidenceType ?? "inferred") as "direct" | "inferred" | "analogical" | "modeled",
         source: f.source ?? "",
         implication: f.implication ?? "",
-        tags: safeParseJson<string[]>(f.tags, []),
+        tags: JSON.parse(f.tags ?? "[]") as string[],
       })),
       gaps: [] as string[],
       signals: [] as string[],
       minorityViews: [] as string[],
-      toolsUsed: safeParseJson<string[]>(a.tools, []),
+      toolsUsed: JSON.parse(a.tools ?? "[]") as string[],
       tokensUsed: 0,
     }));
 
     const synthesis = {
-      layers: synthesisList.map((s) => ({
+      layers: run.synthesis.map((s) => ({
         name: s.layerName as "foundation" | "convergence" | "tension" | "emergence" | "gap",
         description: s.description,
-        insights: safeParseJson<string[]>(s.insights, []),
+        insights: JSON.parse(s.insights) as string[],
       })),
       emergentInsights: [] as never[],
       tensionPoints: [] as never[],
@@ -113,19 +112,88 @@ export async function POST(request: Request) {
       emitEvent: (e) => events.push(e),
     });
 
-    // Save to public/decks/
+    // Save to public/decks/ with inlined CSS/JS for self-contained sharing
     const decksDir = join(process.cwd(), "public", "decks");
     mkdirSync(decksDir, { recursive: true });
     const filename = `${runId}.html`;
-    writeFileSync(join(decksDir, filename), presentation.html, "utf-8");
 
-    // Upsert presentation record
-    await db.presentation.upsertByRunId(runId, {
-      title: presentation.title,
-      subtitle: presentation.subtitle,
-      htmlPath: `/decks/${filename}`,
-      slideCount: presentation.slideCount,
-    });
+    let finalHtml = presentation.html;
+    const publicDir = join(process.cwd(), "public");
+
+    if (!finalHtml.includes("presentation.css") && !finalHtml.includes("<style>")) {
+      try {
+        const css = readFileSync(join(publicDir, "styles", "presentation.css"), "utf-8");
+        if (finalHtml.includes("</head>")) {
+          finalHtml = finalHtml.replace("</head>", `  <style>\n${css}\n  </style>\n</head>`);
+        }
+      } catch { /* skip if not found */ }
+    }
+
+    if (!finalHtml.includes("presentation.js")) {
+      try {
+        const js = readFileSync(join(publicDir, "js", "presentation.js"), "utf-8");
+        if (finalHtml.includes("</body>")) {
+          finalHtml = finalHtml.replace("</body>", `  <script>\n${js}\n  </script>\n</body>`);
+        }
+      } catch { /* skip if not found */ }
+    }
+
+    // Make all animated elements visible immediately in standalone decks
+    finalHtml = finalHtml.replace(
+      /class="([^"]*\b(anim|anim-scale|anim-blur)\b[^"]*)"/g,
+      (match, classes) => {
+        if (classes.includes("visible")) return match;
+        return `class="${classes} visible"`;
+      }
+    );
+    finalHtml = finalHtml.replace(
+      /class="([^"]*\bbar-fill\b[^"]*)"/g,
+      (match, classes) => {
+        if (classes.includes("animate")) return match;
+        return `class="${classes} animate"`;
+      }
+    );
+    // Add is-visible to chart containers so CSS animations trigger
+    finalHtml = finalHtml.replace(
+      /class="([^"]*\b(bar-chart|line-chart|donut-chart|sparkline)\b[^"]*)"/g,
+      (match, classes) => {
+        if (classes.includes("is-visible")) return match;
+        return `class="${classes} is-visible"`;
+      }
+    );
+    // Bake counter target values directly into text so they show without JS animation
+    finalHtml = finalHtml.replace(
+      /(<span[^>]*class="[^"]*stat-number[^"]*"[^>]*data-target="(\d+)"[^>]*>)(\d+)(<\/span>)/g,
+      (match, openTag, target, _currentText, closeTag) => {
+        return `${openTag}${target}${closeTag}`;
+      }
+    );
+
+    writeFileSync(join(decksDir, filename), finalHtml, "utf-8");
+
+    // Update or create presentation record
+    const existing = await prisma.presentation.findFirst({ where: { runId } });
+    if (existing) {
+      await prisma.presentation.update({
+        where: { id: existing.id },
+        data: {
+          title: presentation.title,
+          subtitle: presentation.subtitle,
+          htmlPath: `/decks/${filename}`,
+          slideCount: presentation.slideCount,
+        },
+      });
+    } else {
+      await prisma.presentation.create({
+        data: {
+          title: presentation.title,
+          subtitle: presentation.subtitle,
+          htmlPath: `/decks/${filename}`,
+          slideCount: presentation.slideCount,
+          runId,
+        },
+      });
+    }
 
     return NextResponse.json({
       success: true,
