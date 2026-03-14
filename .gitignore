@@ -50,3 +50,6 @@ mcp-servers/**/dist/
 prisma/dev.db
 prisma/dev.db-journal
 .env
+
+# worktrees
+.claude/worktrees/
