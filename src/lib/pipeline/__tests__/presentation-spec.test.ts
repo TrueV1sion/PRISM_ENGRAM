@@ -532,3 +532,21 @@ describe("CSS class coverage", () => {
     }
   });
 });
+
+// ─── Exemplar Structural Tests ───────────────────────────────
+
+describe("chart-heavy exemplar sparkline structure", () => {
+  const exemplar = readFileSync(
+    resolve(process.cwd(), "references/exemplars/chart-heavy.html"),
+    "utf-8"
+  );
+
+  it("uses <svg class='sparkline'> not <svg class='sparkline-container'>", () => {
+    expect(exemplar).not.toMatch(/svg[^>]*class="sparkline-container"/);
+    expect(exemplar).toMatch(/svg[^>]*class="sparkline"/);
+  });
+
+  it("wraps sparkline SVG in a sparkline-container div", () => {
+    expect(exemplar).toMatch(/class="sparkline-container"[^>]*>/);
+  });
+});
