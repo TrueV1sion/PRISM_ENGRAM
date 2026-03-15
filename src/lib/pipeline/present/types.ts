@@ -334,15 +334,8 @@ export interface SignalSummary {
 
 // ─── Orchestrator Input ───────────────────────────────────────
 
-export interface PresentInput {
-  runId: string;
-  synthesis: SynthesisResult;
-  agentResults: AgentResult[];
-  blueprint: Blueprint;
-  emitEvent: (event: PipelineEvent) => void;
-  memoryBus?: unknown;
-  capturedCalls?: import("./data-capture").CapturedToolCall[];
-}
+// Re-export the canonical PresentInput from present.ts to avoid duplicate definitions.
+export type { PresentInput } from "../present";
 
 // ── Renderer & Content Output Types ──
 

@@ -30,7 +30,7 @@ export function createToolCallCapture(
         } catch (err) {
           rawResponse = `ERROR: ${err instanceof Error ? err.message : String(err)}`;
           threw = true;
-          // Fire-and-forget capture even on error
+          // Capture even on error
           const captured: CapturedToolCall = {
             runId,
             agentId,
@@ -42,8 +42,7 @@ export function createToolCallCapture(
             latencyMs: Date.now() - start,
             capturedAt: new Date(),
           };
-          // Async — do not await
-          Promise.resolve().then(() => onCapture(captured));
+          onCapture(captured);
           throw err;
         }
 
@@ -58,8 +57,7 @@ export function createToolCallCapture(
           latencyMs: Date.now() - start,
           capturedAt: new Date(),
         };
-        // Fire-and-forget — do not await, do not block tool execution
-        Promise.resolve().then(() => onCapture(captured));
+        onCapture(captured);
 
         return rawResponse;
       };

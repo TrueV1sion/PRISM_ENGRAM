@@ -177,6 +177,8 @@ async function presentWithTemplates(
         // Use svgFragment for SVG-based charts, htmlFragment for counter/horizontal-bar
         const fragment = "svgFragment" in chart ? chart.svgFragment : (chart as { htmlFragment: string }).htmlFragment;
         chartMap.set(slotName, fragment);
+      } else {
+        console.warn(`[orchestrator] Chart binding references unknown dataset: ${datasetId} for slot ${slotName}`);
       }
     }
     slideCharts.set(slide.index, chartMap);
