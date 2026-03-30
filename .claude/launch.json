@@ -5,20 +5,19 @@
       "name": "next-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "autoPort": true
+      "port": 3000
     },
     {
-      "name": "next-dev-worktree",
-      "runtimeExecutable": "bash",
-      "runtimeArgs": ["-c", "cd /Users/jared.peck/Desktop/Protoprism/.claude/worktrees/platform-shell && npm run dev"],
-      "autoPort": true
+      "name": "prisma-studio",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["prisma", "studio", "--port", "5555"],
+      "port": 5555
     },
     {
       "name": "mcp-openfda",
       "runtimeExecutable": "bash",
       "runtimeArgs": ["-c", "cd mcp-servers/openfda-mcp-server && TRANSPORT=http PORT=3010 npx tsx watch src/index.ts"],
-      "port": 3010,
-      "autoPort": false
+      "port": 3010
     },
     {
       "name": "mcp-sec-edgar",
